@@ -136,11 +136,11 @@
                                 </div>
                                 <div class="product-page-options">
                                     <div class="pull-left">
-                                        <a href="shop-shopping-cart.php" title=""><img
+                                        <a href="#" title=""><img
                                                 src="{{ asset('assets/pages/img/finance/bajaj.jpg') }}" alt=""></a>
                                     </div>
                                     <div class="pull-left">
-                                        <a href="shop-shopping-cart.php" title=""><img
+                                        <a href="#" title=""><img
                                                 src="{{ asset('assets/pages/img/finance/hdb.jpg') }}" alt=""></a>
                                     </div>
                                 </div>
