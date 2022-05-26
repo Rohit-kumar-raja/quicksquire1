@@ -1,0 +1,12 @@
+[12-May-2022 23:59:27 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/sodhukno/public_html/quicksecureindia.com/database/factories/ProductFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/database/factories/ProductFactory.php on line 12
+[12-May-2022 23:59:29 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/sodhukno/public_html/quicksecureindia.com/database/factories/UserFactory.php:11
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/database/factories/UserFactory.php on line 11
+[12-May-2022 23:59:31 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/sodhukno/public_html/quicksecureindia.com/database/factories/CategoryFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/database/factories/CategoryFactory.php on line 12

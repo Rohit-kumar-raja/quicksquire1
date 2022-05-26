@@ -1,0 +1,4 @@
+[13-May-2022 04:39:14 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/sodhukno/public_html/quicksecureindia.com/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/bootstrap/app.php on line 14

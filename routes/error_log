@@ -1,0 +1,16 @@
+[13-May-2022 05:26:09 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Broadcast" not found in /home/sodhukno/public_html/quicksecureindia.com/routes/channels.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/routes/channels.php on line 16
+[13-May-2022 09:48:57 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/sodhukno/public_html/quicksecureindia.com/routes/api.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/routes/api.php on line 17
+[13-May-2022 09:48:58 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/sodhukno/public_html/quicksecureindia.com/routes/console.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/routes/console.php on line 17
+[13-May-2022 09:48:59 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/sodhukno/public_html/quicksecureindia.com/routes/web.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/routes/web.php on line 60
