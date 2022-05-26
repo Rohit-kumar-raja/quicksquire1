@@ -94,6 +94,10 @@
                                 <label class="control-label">Show:</label>
                                 <select id="item" class="form-control input-sm" onchange="filter_change()">
                                     <option value="12" selected="selected">12</option>
+                                    @if (Session::has('pagesize'))
+                                        <option value="{{ session('pagesize') }}">{{ session('pagesize') }}</option>
+                                    @endif
+                                    <option value="12">12</option>
                                     <option value="24">24</option>
                                     <option value="48">48</option>
                                     <option value="96">96</option>
@@ -103,8 +107,10 @@
                             <div class="pull-right">
                                 <label class="control-label">Sort&nbsp;By:</label>
                                 <select id="sorting" class="form-control input-sm" onchange="filter_change()">
-                                    <option value="#" selected="selected">Default sorting
-                                    </option>
+                                    @if (Session::has('sorting'))
+                                        <option value="{{ session('sorting') }}">{{ session('sorting') }}</option>
+                                    @endif
+                                    <option value="default">Default sorting </option>
                                     <!-- <option value="popularity">Sort by popularity</option>
                                     <option value="rating">Sorting by average rating</option> -->
                                     <option value="date">Sort by new</option>
@@ -242,7 +248,7 @@
         function filter_change() {
             var item = document.getElementById('item').value;
             var sorting = document.getElementById('sorting').value;
-            window.location.replace(window.location.href+'&pagesize='+item+"&sorting="+sorting)
+            window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting)
         }
     </script>
 

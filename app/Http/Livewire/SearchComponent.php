@@ -37,7 +37,6 @@ class SearchComponent extends Component
     {
         session(['search'=>$this->search,'sorting'=>$this->sorting,'pagesize'=>$this->pagesize]);
         if ($this->sorting == 'date') {
-            echo $this->sorting;
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
         } else if ($this->sorting == 'price') {
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('regular_price', 'ASC')->paginate($this->pagesize);
