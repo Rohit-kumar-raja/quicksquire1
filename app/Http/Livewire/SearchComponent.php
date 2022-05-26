@@ -36,11 +36,11 @@ class SearchComponent extends Component
     public function render()
     {
         session(['search'=>$this->search,'sorting'=>$this->sorting,'pagesize'=>$this->pagesize]);
-        if ($this->sorting == 'date') {
+        if ($this->sorting == 'new') {
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
-        } else if ($this->sorting == 'price') {
+        } else if ($this->sorting == 'low to high') {
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('regular_price', 'ASC')->paginate($this->pagesize);
-        } else if ($this->sorting == 'price-desc') {
+        } else if ($this->sorting == 'high to low') {
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('regular_price', 'DESC')->paginate($this->pagesize);
         } else {
             $products =  Product::where('name', 'like', '%' . $this->search . '%')->Where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);

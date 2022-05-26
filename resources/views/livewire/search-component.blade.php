@@ -92,7 +92,7 @@
                         <div class="col-md-10 col-sm-10">
                             <div class="pull-right">
                                 <label class="control-label">Show:</label>
-                                <select id="item" class="form-control input-sm" onchange="filter_change()">
+                                <select id="item" class="form-control input-sm text-capitalize" onchange="filter_change()">
                                     <option value="12" selected="selected">12</option>
                                     @if (Session::has('pagesize'))
                                         <option value="{{ session('pagesize') }}">{{ session('pagesize') }}</option>
@@ -106,16 +106,16 @@
                             </div>
                             <div class="pull-right">
                                 <label class="control-label">Sort&nbsp;By:</label>
-                                <select id="sorting" class="form-control input-sm" onchange="filter_change()">
+                                <select id="sorting" class="form-control input-sm text-capitalize" onchange="filter_change()">
                                     @if (Session::has('sorting'))
-                                        <option value="{{ session('sorting') }}">{{ session('sorting') }}</option>
+                                        <option value="{{ session('sorting') }}"> Sort by {{ session('sorting') }}</option>
                                     @endif
                                     <option value="default">Default sorting </option>
                                     <!-- <option value="popularity">Sort by popularity</option>
                                     <option value="rating">Sorting by average rating</option> -->
-                                    <option value="date">Sort by new</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
+                                    <option value="new">Sort by new</option>
+                                    <option value="low to high">Sort by price: low to high</option>
+                                    <option value="high to low">Sort by price: high to low</option>
 
                                 </select>
                             </div>
