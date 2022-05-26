@@ -59,11 +59,11 @@ class CategoryComponent extends Component
             $category_name = $category->name;
             $filter = "";
         }
-        echo $this->pagesize;
+         $this->pagesize;
         // $category = Category::where('slug', $this->category_slug)->first();
         // $category_id = $category->id;
         // $category_name = $category->name;
-        if ($this->sorting == 'date') {
+        if ($this->sorting == 'new') {
             $products = Product::where($filter . 'category_id', $category_id)->orderBy('created_at', 'DESC')->paginate($this->pagesize);
         } else if ($this->sorting == 'price') {
             $products = Product::where($filter . 'category_id', $category_id)->orderBy('regular_price', 'ASC')->paginate($this->pagesize);

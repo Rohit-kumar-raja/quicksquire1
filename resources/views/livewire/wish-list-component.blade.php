@@ -8,7 +8,7 @@
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             <!-- BEGIN SIDEBAR -->
-            <div class="sidebar col-md-3 col-sm-5">
+            <div class="sidebar col-md-1 col-sm-5">
 
                 <!-- <ul class="list-group margin-bottom-25 sidebar-menu">
                     <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
@@ -24,58 +24,66 @@
             <!-- END SIDEBAR -->
 
             <!-- BEGIN CONTENT -->
-            <div class="col-md-9 col-sm-7">
+            <div class="col-md-11 col-sm-7">
                 <h1>My Wish List</h1>
                 <div class="goods-page">
-                    @if(Cart::instance('wishlist')->content()->count() > 0)
-                    <div class="goods-data clearfix">
-                        @foreach(Cart::instance('wishlist')->content() as $item)
-                        <div class="table-wrapper-responsive">
-                            <table summary="Shopping cart">
-                                <tr>
-                                    <th class="goods-page-image">Image</th>
-                                    <th class="goods-page-description">Name</th>
-                                    <th class="goods-page-stock">Stock</th>
-                                    <th class="goods-page-price" colspan="2">Unit price</th>
-                                </tr>
-                                <tr>
-                                    <td class="goods-page-image">
-                                        <a href="{{route('product.details',['slug'=>$item->model->slug])}}"><img src="{{asset('assets/pages/img/products')}}/{{$item->model->image}}" alt="{{$item->model->name}}"></a>
-                                    </td>
-                                    <td class="goods-page-description">
-                                        <h5><a href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->model->name}}</a></h5>
+                    @if (Cart::instance('wishlist')->content()->count() > 0)
+                        <div class="goods-data clearfix">
+                         
+                                <div class="table-wrapper-responsive">
+                                    <table summary="Shopping cart">
+                                        <tr>
+                                            <th class="goods-page-image">Image</th>
+                                            <th class="goods-page-description">Name</th>
+                                            <th class="goods-page-stock">Stock</th>
+                                            <th class="goods-page-price" colspan="2">Unit price</th>
+                                        </tr>
+                                        @foreach (Cart::instance('wishlist')->content() as $item)
+                                        <tr>
+                                            <td class="goods-page-image">
+                                                <a
+                                                    href="{{ route('product.details', ['slug' => $item->model->slug]) }}"><img
+                                                        src="{{ asset('assets/pages/img/products') }}/{{ $item->model->image }}"
+                                                        alt="{{ $item->model->name }}"></a>
+                                            </td>
+                                            <td class="goods-page-description">
+                                                <h5><a
+                                                        href="{{ route('product.details', ['slug' => $item->model->slug]) }}">{{ $item->model->name }}</a>
+                                                </h5>
 
-                                    </td>
-                                    <td class="goods-page-stock">
-                                        {{$item->model->stock_status}}
-                                    </td>
-                                    <td class="goods-page-price">
-                                        <strong><span>$</span>{{$item->model->regular_price}}</strong>
-                                    </td>
+                                            </td>
+                                            <td class="goods-page-stock">
+                                                {{ $item->model->stock_status }}
+                                            </td>
+                                            <td class="goods-page-price">
+                                                <strong
+                                                    class="fa fa-rupee">&nbsp;{{ $item->model->sale_price }}</strong>
+                                            </td>
 
-                                    <td class="del-goods-col">
-                                        <a href="#" class="btn btn-default add2cart" wire:click.prevent="moveProductFromWishlistToCart('{{$item->rowId}}')">Move
-                                            to cart
-                                        </a>
-                                        <a class="del-goods" href="#" wire:click.prevent="removeFromWishlist({{$item->model->id}})">&nbsp;</a>
-                                        <!-- <a class="add-goods" href="javascript:;">&nbsp;</a> -->
-                                    </td>
-                                </tr>
-
-                            </table>
+                                            <td class="del-goods-col">
+                                                <a href="{{ route('wishlist.movetocart', $item->rowId) }}"
+                                                    class="btn btn-default add2cart"><i class="fas fa-cart-plus"></i>
+                                                </a>
+                                                <a class="del-goods"
+                                                    href="{{ route('wishlist.remove', $item->model->id) }}">&nbsp;</a>
+                                                <!-- <a class="add-goods" href="javascript:;">&nbsp;</a> -->
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                   
                         </div>
-                        @endforeach
-                    </div>
                     @else
-                    <div class="col-md-12">
-                        <div class="alert alert-info">
-                            <h5>Your wishlist is empty</h5>
-                        </div>
-                        @endif
-                    </div>
+                        <div class="col-md-12">
+                            <div class="alert alert-info">
+                                <h5>Your wishlist is empty</h5>
+                            </div>
+                    @endif
                 </div>
-                <!-- END CONTENT -->
             </div>
-            <!-- END SIDEBAR & CONTENT -->
+            <!-- END CONTENT -->
         </div>
+        <!-- END SIDEBAR & CONTENT -->
     </div>
+</div>

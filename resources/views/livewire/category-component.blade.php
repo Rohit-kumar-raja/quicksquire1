@@ -32,6 +32,7 @@
     }
 
 </style>
+
 <body class="ecommerce">
 
     <div class="title-wrapper">
@@ -128,11 +129,11 @@
                 <!-- BEGIN CONTENT -->
 
                 @php
-                $witems = Cart::instance('wishlist')
-                    ->content()
-                    ->pluck('id');
-                
-            @endphp
+                    $witems = Cart::instance('wishlist')
+                        ->content()
+                        ->pluck('id');
+                    
+                @endphp
                 <div class="col-md-9 col-sm-7">
                     <div class="row list-view-sorting clearfix">
                         <div class="col-md-2 col-sm-2 list-view">
@@ -140,26 +141,36 @@
                             <a href="javascript:;"><i class="fa fa-th-list"></i></a>
                         </div>
                         <div class="col-md-10 col-sm-10">
-                            <div >
+                            <div class="pull-right">
                                 <label class="control-label">Show:</label>
-                                <select class="form-control " id="number_item">
-                                    <option value="24" selected="selected">12</option>
-                                    <option value="25">16</option>
-                                    <option value="50">18</option>
-                                    <option value="75">20</option>
-                                    <option value="100">22</option>
+                                <select id="item" class="form-control input-sm text-capitalize"
+                                    onchange="filter_change()">
+                                    <option value="12" selected="selected">12</option>
+                                    @if (Session::has('pagesize'))
+                                        <option value="{{ session('pagesize') }}">{{ session('pagesize') }}
+                                        </option>
+                                    @endif
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="48">48</option>
+                                    <option value="96">96</option>
+                                    <option value="200">200</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="pull-right">
                                 <label class="control-label">Sort&nbsp;By:</label>
-                                <select class="form-control " id="sort_data" >
-                                    <option value="#" selected="selected">Default sorting
-                                    </option>
+                                <select id="sorting" class="form-control input-sm text-capitalize"
+                                    onchange="filter_change()">
+                                    @if (Session::has('sorting'))
+                                        <option value="{{ session('sorting') }}"> Sort by {{ session('sorting') }}
+                                        </option>
+                                    @endif
+                                    <option value="default">Default sorting </option>
                                     <!-- <option value="popularity">Sort by popularity</option>
-                                <option value="rating">Sorting by average rating</option> -->
-                                    <option value="date">Sort by new</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
+                                    <option value="rating">Sorting by average rating</option> -->
+                                    <option value="new">Sort by new</option>
+                                    <option value="low to high">Sort by price: low to high</option>
+                                    <option value="high to low">Sort by price: high to low</option>
 
                                 </select>
                             </div>
@@ -187,7 +198,7 @@
                                     <div class="pi-price">₨ {{ $product->sale_price }} <strike
                                             class="dull">₨ {{ $product->regular_price }}</strike></div>
 
-                                            <?php
+                                    <?php
                                     $discout = (($product->regular_price - $product->sale_price) / $product->regular_price) * 100;
                                     ?>
                                     <a href="{{ route('addcart', $product->id) }}"
@@ -250,11 +261,10 @@
     </div>
 
     <script>
-        function filter_data() {
-            sort_data = document.getElementById('sort_data').value;
-            number_item = document.getElementById('number_item').value;
-            console.log(sort_data);
-            window.location.replace('http://127.0.0.1:8000/search?search=hp')
+       function filter_change() {
+            var item = document.getElementById('item').value;
+            var sorting = document.getElementById('sorting').value;
+            window.location.replace(window.location.href + "?sorting=" + sorting + '&pagesize=' + item)
         }
     </script>
 </body>

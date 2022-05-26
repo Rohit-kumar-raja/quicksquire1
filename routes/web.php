@@ -83,8 +83,7 @@ Route::get('cart/checkout', CheckoutComponent::class)->name('cart.checkout');
 // cart end
 
 // wishlist start
-Route::get('wishlist/add/{id}', [ShopComponent::class,'add'])->name('wishlist.add');
-Route::get('wishlist/remove/{id}', [ShopComponent::class,'remove'])->name('wishlist.remove');
+
 
 // wishlist end
 
@@ -99,7 +98,13 @@ Route::get('/search', SearchComponent::class)->name('product.search');
 
 Route::get('/product-category/{category_slug}/{scategory_slug?}', CategoryComponent::class)->name('product.category');
 
+// wishlist start
+Route::get('wishlist/add/{id}', [ShopComponent::class,'add'])->name('wishlist.add');
+Route::get('wishlist/remove/{id}', [ShopComponent::class,'remove'])->name('wishlist.remove');
 Route::get('/wishlist', WishListComponent::class)->name('product.wishlist');
+Route::get('wishlist/movetocart/{id}', [WishListComponent::class,'moveProductFromWishlistToCart'])->name('wishlist.movetocart');
+// wishlist end
+
 
 Route::get('/thank-you', ThankYouComponent::class)->name('thankyou');
 Route::get('/aboutus', AboutComponent::class);
