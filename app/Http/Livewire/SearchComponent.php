@@ -46,7 +46,7 @@ class SearchComponent extends Component
         } else {
             $products =  Product::where('name', 'like', '%' . $this->search . '%')->Where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
         }
-
+// added somthig 
         $categories = Category::all();
         return view('livewire.search-component', ['products' => $products, 'categories' => $categories])->layout("layouts.base");
     
