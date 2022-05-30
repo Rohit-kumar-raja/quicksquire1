@@ -36,7 +36,7 @@
                     <div class="panel-body">
                         <table class="table bg-info">
                             <th>Order ID</th>
-                            <td>{{ $order->id }}</td>
+                            <td>ODR00000{{ $order->id }}</td>
                             <th>Order Date</th>
                             <td>{{ $order->created_at }}</td>
                             <th>Status</th>

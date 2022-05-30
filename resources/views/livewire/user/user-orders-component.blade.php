@@ -28,7 +28,7 @@
                             <tbody>
                                 @foreach($orders as $order)
                                 <tr>
-                                    <td>{{$order->id}}</td>
+                                    <td>ODR00000{{$order->id}}</td>
                                     <!-- <td>${{$order->subtotal}}</td> -->
                                     <!-- <td>${{$order->discount}}</td> -->
                                     <!-- <td>${{$order->tax}}</td> -->

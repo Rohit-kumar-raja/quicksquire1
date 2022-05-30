@@ -230,7 +230,7 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#"
                                             href="javascript:;">
-                                            My Account ({{ Auth::user()->name }})
+                                            <i class="fas fa-user-cog"></i> ({{ Auth::user()->name }})
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
@@ -261,7 +261,7 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#"
                                             href="javascript:;">
-                                            My Account ({{ Auth::user()->name }})
+                                            <i class="fas fa-user-circle"></i> ({{ Auth::user()->name }})
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
