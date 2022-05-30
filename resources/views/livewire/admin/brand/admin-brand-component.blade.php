@@ -20,7 +20,7 @@
                             {{ session()->get('message') }}
                         </div>
                         @endif
-                        <table class="table table-striped">
+                        <table class="table table-striped table-bordered dataTable no-footer">
                             <thead>
                                 <tr>
                                     <th>

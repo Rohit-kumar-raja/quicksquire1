@@ -58,6 +58,6 @@ class AdminAddBrandComponent extends Component
     public function render()
 
     {
-        return view('livewire.admin.admin-add-brand-component')->layout('layouts.dashboard');
+        return view('livewire.brand.admin.admin-add-brand-component')->layout('layouts.dashboard');
     }
 }

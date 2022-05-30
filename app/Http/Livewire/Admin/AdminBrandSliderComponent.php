@@ -17,6 +17,6 @@ class AdminBrandSliderComponent extends Component
     public function render()
     {
         $sliders = BrandSlider::all();
-        return view('livewire.admin.admin-brand-slider-component', ['sliders' => $sliders])->layout('layouts.dashboard');
+        return view('livewire.admin.brand.admin-brand-slider-component', ['sliders' => $sliders])->layout('layouts.dashboard');
     }
 }

@@ -20,6 +20,6 @@ class AdminBrandComponent extends Component
     public function render()
     {
         $brands = Brand::paginate(10);
-        return view('livewire.admin.admin-brand-component', ['brands' => $brands])->layout('layouts.dashboard');
+        return view('livewire.brand.admin.admin-brand-component', ['brands' => $brands])->layout('layouts.dashboard');
     }
 }

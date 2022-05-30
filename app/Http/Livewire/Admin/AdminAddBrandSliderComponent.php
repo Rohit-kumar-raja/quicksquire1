@@ -35,6 +35,6 @@ class AdminAddBrandSliderComponent extends Component
     }
     public function render()
     {
-        return view('livewire.admin.admin-add-brand-slider-component')->layout('layouts.dashboard');
+        return view('livewire.admin.brand.admin-add-brand-slider-component')->layout('layouts.dashboard');
     }
 }

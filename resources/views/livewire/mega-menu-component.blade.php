@@ -8,11 +8,11 @@
             <div class="header-navigation-content">
                 <div class="row">
                     @foreach ($categories as $category)
-                        <div class="col-md-4 header-navigation-col">
+                        <div class="col-md-2 header-navigation-col">
                             <h4>{{ $category->name }}</h4>
                             <ul>
                                 @if (count($category->subCategories) > 0)
-                                    @foreach ($category->subCategories->take(2) as $scategory)
+                                    @foreach ($category->subCategories->take(10) as $scategory)
                                         <li><a
                                                 href="{{ route('product.category', ['category_slug' => $category->slug, 'scategory_slug' => $scategory->slug]) }}">{{ $scategory->name }}</a>
                                         </li>

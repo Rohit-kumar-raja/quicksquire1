@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\PdfController;
 use App\Http\Livewire\Admin\AdminAddBrandComponent;
 use App\Http\Livewire\Admin\AdminEditCategoryComponent;
@@ -49,8 +50,7 @@ use App\Http\Livewire\User\UserReviewComponent;
 use App\Http\Livewire\WishListComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\WishlistController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,9 +76,9 @@ Route::get('/shop', ShopComponent::class)->name('product.shop');
 // Route::get('/shop/{sort}/{item}', ShopComponent::class)->name('product.shop');
 // cart start
 Route::get('/cart', CartComponent::class)->name('product.cart');
-Route::get('/cart/increase/{rowid}', [CartComponent::class,'increaseQuantity'])->name('product.increase');
-Route::get('/cart/decrease/{rowid}', [CartComponent::class,'decreaseQuantity'])->name('product.decrease');
-Route::get('/cart/del/{rowid}', [CartComponent::class,'del'])->name('product.del');
+Route::get('/cart/increase/{rowid}', [CartComponent::class, 'increaseQuantity'])->name('product.increase');
+Route::get('/cart/decrease/{rowid}', [CartComponent::class, 'decreaseQuantity'])->name('product.decrease');
+Route::get('/cart/del/{rowid}', [CartComponent::class, 'del'])->name('product.del');
 Route::get('cart/checkout', CheckoutComponent::class)->name('cart.checkout');
 // cart end
 
@@ -89,7 +89,7 @@ Route::get('cart/checkout', CheckoutComponent::class)->name('cart.checkout');
 
 
 Route::get('/checkout', CheckoutComponent::class)->name('checkout');
-Route::post('/checkout/placeOrder', [CheckoutComponent::class,'placeOrder'])->name('checkout.placeOrder');
+Route::post('/checkout/placeOrder', [CheckoutComponent::class, 'placeOrder'])->name('checkout.placeOrder');
 
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 
@@ -99,10 +99,10 @@ Route::get('/search', SearchComponent::class)->name('product.search');
 Route::get('/product-category/{category_slug}/{scategory_slug?}', CategoryComponent::class)->name('product.category');
 
 // wishlist start
-Route::get('wishlist/add/{id}', [ShopComponent::class,'add'])->name('wishlist.add');
-Route::get('wishlist/remove/{id}', [ShopComponent::class,'remove'])->name('wishlist.remove');
+Route::get('wishlist/add/{id}', [ShopComponent::class, 'add'])->name('wishlist.add');
+Route::get('wishlist/remove/{id}', [ShopComponent::class, 'remove'])->name('wishlist.remove');
 Route::get('/wishlist', WishListComponent::class)->name('product.wishlist');
-Route::get('wishlist/movetocart/{id}', [WishListComponent::class,'moveProductFromWishlistToCart'])->name('wishlist.movetocart');
+Route::get('wishlist/movetocart/{id}', [WishListComponent::class, 'moveProductFromWishlistToCart'])->name('wishlist.movetocart');
 // wishlist end
 
 
@@ -131,7 +131,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
     Route::get('/user/profile', UserProfileComponent::class)->name('user.profile');
     Route::get('/user/profile/edit', UserEditProfileComponent::class)->name('user.editprofile');
-    Route::post('/user/profile/update', [UserEditProfileComponent::class,'updateProfile'])->name('user.update');
+    Route::post('/user/profile/update', [UserEditProfileComponent::class, 'updateProfile'])->name('user.update');
 
     // Route::get('/get/order/{order_id}', [PdfController::class, 'getAllOrders']);
     // Route::get('/download-pdf', [PdfController::class, 'downloadPDF']);
@@ -143,16 +143,32 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 // For Admin
 Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () {
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+    // category
     Route::get('/admin/categories', AdminCategoryComponent::class)->name('admin.categories');
     Route::get('/admin/category/add', AdminAddCategoryComponent::class)->name('admin.addcategory');
+    Route::get('/admin/category/delete/{id}', [AdminCategoryComponent::class, 'deleteCategory'])->name('admin.category.delete');
+    Route::post('/admin/add/category', [AdminAddCategoryComponent::class, 'storeCategory'])->name('admin.category.add');
+
     Route::get('/admin/category/edit/{category_slug}/{scategory_slug?}/{feature_slug?}', AdminEditCategoryComponent::class)->name('admin.editcategory');
+
+    // subcategory star
+
+    Route::get('/admin/subcategories', [SubCategoryController::class, 'index'])->name('admin.subcategories');
+    Route::post('/admin/subcategory/add', [SubCategoryController::class, 'store'])->name('admin.subCategory.add');
+    Route::get('/admin/subcategory/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.SubCategory.edit');
+    Route::post('/admin/subcategory/update', [SubCategoryController::class, 'update'])->name('admin.SubCategory.update');
+    Route::get('/admin/subcategory/delete/{id}', [SubCategoryController::class, 'destroy'])->name('admin.SubCategory.delete');
+
+    // subcategory end
+
+    // product start
     Route::get('/admin/products', AdminProductComponent::class)->name('admin.products');
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
     Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
     Route::get('/admin/orders', AdminOrderComponent::class)->name('admin.order');
     Route::get('/admin/order/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orderdetails');
-
+    // product end
 
 
     // Route::get('/admin/home-slider', AdminHomeSliderComponent::class)->name('admin.homeslider');
