@@ -9,7 +9,9 @@ use App\Models\Transaction;
 use Livewire\Component;
 use illuminate\Support\Facades\Auth;
 use Cart;
+use Cartalyst\Stripe\Api\Orders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutComponent extends Component
 {
@@ -73,37 +75,55 @@ class CheckoutComponent extends Component
 
     public function placeOrder(Request $request)
     {
-        $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|email',
-            'mobile' => 'required|numeric',
-            'line1' => 'required',
-            'city' => 'required',
-            'province' => 'required',
-            'country' => 'required',
-            'zipcode' => 'required',
-            'paymentmode' => 'required',
-
-        ]);
-
         $order = new Order();
+        if (isset($request->address)) {
+            $request->validate([
+                'paymentmode' => 'required',
+            ]);
+            $get_address = DB::table('orders')->find($request->address);
+            $order->firstname = $get_address->firstname;
+            $order->lastname = $get_address->lastname;
+            $order->email = $get_address->email;
+            $order->mobile = $get_address->mobile;
+            $order->line1 = $get_address->line1;
+            $order->line2 = $get_address->line2;
+            $order->city = $get_address->city;
+            $order->province = $get_address->province;
+            $order->country = $get_address->country;
+            $order->zipcode = $get_address->zipcode;
+        } else {
+            $request->validate([
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'email' => 'required|email',
+                'mobile' => 'required|numeric',
+                'line1' => 'required',
+                'city' => 'required',
+                'province' => 'required',
+                'country' => 'required',
+                'zipcode' => 'required',
+                'paymentmode' => 'required',
+
+            ]);
+            $order->firstname = $request->firstname;
+            $order->lastname = $request->lastname;
+            $order->email = $request->email;
+            $order->mobile = $request->mobile;
+            $order->line1 = $request->line1;
+            $order->line2 = $request->line2;
+            $order->city = $request->city;
+            $order->province = $request->province;
+            $order->country = $request->country;
+            $order->zipcode = $request->zipcode;
+        }
+
         $order->user_id = Auth::user()->id;
         $order->subtotal = session()->get('checkout')['subtotal'];
         $order->discount = session()->get('checkout')['discount'];
         $order->tax = session()->get('checkout')['tax'];
         $order->total = session()->get('checkout')['total'];
 
-        $order->firstname = $request->firstname;
-        $order->lastname = $request->lastname;
-        $order->email = $request->email;
-        $order->mobile = $request->mobile;
-        $order->line1 = $request->line1;
-        $order->line2 = $request->line2;
-        $order->city = $request->city;
-        $order->province = $request->province;
-        $order->country = $request->country;
-        $order->zipcode = $request->zipcode;
+
         $order->status = 'ordered';
         $order->is_shipping_between = $request->ship_to_different ? 1 : 0;
         $order->save();
@@ -180,7 +200,10 @@ class CheckoutComponent extends Component
 
     public function render()
     {
+        $user_id = Auth::user()->id;
         $this->verifyForCheckout();
-        return view('livewire.checkout-component')->layout("layouts.base");
+        // $address = DB::table('orders')->where('user_id',$user_id)->orderBy('id', 'DESC')->take(6)->get();
+        $address = DB::table('orders')->select(['firstname', 'lastname', 'mobile', 'email', 'line1', 'line2', 'city', 'province', 'country', 'zipcode', 'user_id'])->distinct()->where('user_id', $user_id)->orderBy('id', 'DESC')->take(6)->get();
+        return view('livewire.checkout-component', ['address' => $address])->layout("layouts.base");
     }
 }

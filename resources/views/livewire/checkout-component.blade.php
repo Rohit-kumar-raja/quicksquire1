@@ -202,17 +202,12 @@
                                     <span>Cash On Delivery</span>
                                     <span class="payment-desc">Order Now Pay on Delivery.</span>
                                 </label>
-                                <label class="payment-method">
-                                    <input name="paymentmode" id="payment-method-visa" value="card" type="radio">
-                                    <span>Credit / Dedit Card</span>
-                                    <span class="payment-desc">There are many variations of passages of Lorem Ipsum
-                                        available</span>
-                                </label>
+
                                 <label class="payment-method">
                                     <input name="paymentmode" id="paypal" value="paypal" type="radio">
-                                    <span>Paypal</span>
-                                    <span class="payment-desc">You can pay with your credit</span>
-                                    <span class="payment-desc">card if you don't have a paypal account</span>
+                                    <span>Online</span>
+                                    <span class="payment-desc">You can pay with your credit Or Debit card or
+                                        UPI</span>
                                 </label>
                                 @error('paymentmode')
                                     <span class="text-danger">{{ $message }}</span>
@@ -226,9 +221,30 @@
                             <button type="submit" class="btn btn-primary">Place order now</button>
                         </div>
                         <div class="summary-item shipping-method">
-                            <h4 class="title-box f-title">Shipping method</h4>
-                            <p class="summary-info"><span class="title">Flat Rate</span></p>
-                            <p class="summary-info"><span class="title">Fixed ₨0</span></p>
+                            <h4 class="title-box f-title"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                Shipping Last Address</h4>
+                            @foreach ($address as $add)
+                                <?php $order_id = DB::table('orders')
+                                    ->where('firstname', $add->firstname)
+                                    ->where('lastname', $add->lastname)
+                                    ->where('mobile', $add->mobile)
+                                    ->where('email', $add->email)
+                                    ->where('line1', $add->line1)
+                                    ->where('line2', $add->line2)
+                                    ->where('city', $add->city)
+                                    ->where('province', $add->province)
+                                    ->where('country', $add->country)
+                                    ->where('zipcode', $add->zipcode)
+                                    ->where('user_id', $add->user_id)
+                                    ->first();
+                                     ?>
+                                <input id="address" name="address" type="radio" value="{{ $order_id->id }}">
+                                <strong>{{ $add->firstname . ' ' . $add->lastname }}</strong> - <span>
+                                    {{ $add->mobile }}</span><br>
+                                <p> &nbsp; &nbsp;
+                                    &nbsp;{{ $add->line1 . ' ' . $add->line2 . ' ' . $add->city . ', ' . $add->province . ', ' . $add->country }}-&nbsp;
+                                    &nbsp; &nbsp;{{ $add->zipcode }}</p>
+                            @endforeach
 
                         </div>
                     </div>

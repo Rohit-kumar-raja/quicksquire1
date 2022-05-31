@@ -1729,3 +1729,6 @@ select.input-sm {
     /* height: 30px; */
     line-height: 15px;
 }
+.mt-2 strong{
+	margin-left: 7px;
+}
