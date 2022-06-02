@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+
 use App\Models\Category;
 use Livewire\Component;
 use App\Models\Product;
@@ -9,6 +10,7 @@ use App\Models\Subcategory;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\DB;
 
 class AdminEditProductComponent extends Component
 {
@@ -27,7 +29,7 @@ class AdminEditProductComponent extends Component
     public $category_id;
     public $product_id;
     public $scategory_id;
-
+    public $brand;
     public $images;
     public $newimages;
 
@@ -49,6 +51,7 @@ class AdminEditProductComponent extends Component
         $this->category_id = $product->category_id;
         $this->scategory_id = $product->subcategory_id;
         $this->product_id = $product->id;
+        $this->brand=$product->brand;
     }
 
     public function generateSlug()
@@ -109,6 +112,7 @@ class AdminEditProductComponent extends Component
         $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
         $product->quantity = $this->quantity;
+        $product->brand=$this->brand;
         if ($this->newimage) {
             // unlink('assets/pages/img/products' . '/' . $product->image);
             $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
@@ -150,6 +154,7 @@ class AdminEditProductComponent extends Component
     {
         $scategories = Subcategory::where('category_id', $this->category_id)->get();
         $categories = Category::all();
-        return view('livewire.admin.products.admin-edit-product-component', ['categories' => $categories, 'scategories' => $scategories])->layout('layouts.dashboard');
+        $brand = DB::table('brands')->get();
+        return view('livewire.admin.products.admin-edit-product-component', ['categories' => $categories, 'scategories' => $scategories, 'brands' => $brand])->layout('layouts.dashboard');
     }
 }

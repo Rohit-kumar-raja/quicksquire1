@@ -11,7 +11,6 @@ use App\Models\Subcategory;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-
 class AdminAddProductComponent extends Component
 {
     use WithFileUploads;
@@ -32,19 +31,16 @@ class AdminAddProductComponent extends Component
     public $images;
     public $scategory_id;
     public $feature_id;
-
-
+    
     public function mount()
     {
         $this->stock_status = 'inStock';
         $this->featured = 0;
     }
-
     public function generateSlug()
     {
         $this->slug = Str::slug($this->name, '-');
     }
-
     public function updated($fields)
     {
         $this->validateOnly($fields, [
@@ -97,7 +93,6 @@ class AdminAddProductComponent extends Component
         $product->featured = $this->featured;
         $product->quantity = $this->quantity;
         // $product->feature_id = $this->feature_id;
-
 
         $imageName = Carbon::now()->timestamp . '_' . $this->image->extension();
         $this->image->storeAs('products', $imageName);

@@ -8,13 +8,14 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>IT-Mall - Admin</title>
+        <title>Quick Secure India PVT.Ltd - Admin</title>
 
         <!-- Custom fonts for this template-->
         <!-- Dashboard -->
         <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.css') }}">
+        
         <!-- Dashboard End -->
         @livewireStyles
 
@@ -103,6 +104,7 @@
         <!-- Page level custom scripts -->
         <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('ckeditor/ckeditor.js') }}" ></script>
         <script>
             // Call the dataTables jQuery plugin
             $(document).ready(function() {
