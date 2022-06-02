@@ -169,7 +169,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Image:</label>
                                     <div class="">
-                                        <input name="image" type="file" class="input-file" wire:model="image" />
+                                        <input name="image[]" type="file" class="input-file" wire:model="image" />
                                         @if ($image)
                                             <img src="{{ $image->temporaryUrl() }}" alt="" width="200" />
                                         @endif
@@ -181,10 +181,10 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Gallery:</label>
                                     <div class="">
-                                        <input name="images" type="file" class="input-file" wire:model="images" multiple />
+                                        <input name="images[]" type="file" class="input-file" wire:model="images" multiple />
                                         @if ($images)
                                             @foreach ($images as $image)
-                                                <img src="{{ $image->temporaryUrl() }}" alt="" width="200" />
+                                                <img src="{{ $image->temporaryUrl() }}" alt="" width="100" />
                                             @endforeach
                                         @endif
                                         @error('images')
