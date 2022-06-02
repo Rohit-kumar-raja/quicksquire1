@@ -130,6 +130,6 @@ class AdminAddProductComponent extends Component
         $scategories = Subcategory::where('category_id', $this->category_id)->get();
         $brands = Brand::all();
         $features = Feature::all();
-        return view('livewire.admin.admin-add-product-component', ['categories' => $categories, 'scategories' => $scategories, 'brands' => $brands, 'features' => $features])->layout('layouts.base');
+        return view('livewire.admin.products.admin-add-product-component', ['categories' => $categories, 'scategories' => $scategories, 'brands' => $brands, 'features' => $features])->layout('layouts.dashboard');
     }
 }

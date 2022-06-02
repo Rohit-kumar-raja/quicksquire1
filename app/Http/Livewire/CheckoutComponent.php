@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\CoinController;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Shipping;
@@ -16,7 +17,6 @@ use Illuminate\Support\Facades\DB;
 class CheckoutComponent extends Component
 {
     public $ship_to_different;
-
     public $firstname;
     public $lastname;
     public $email;
@@ -27,7 +27,6 @@ class CheckoutComponent extends Component
     public $province;
     public $country;
     public $zipcode;
-
     public $s_firstname;
     public $s_lastname;
     public $s_email;
@@ -38,11 +37,9 @@ class CheckoutComponent extends Component
     public $s_province;
     public $s_country;
     public $s_zipcode;
-
     public $paymentmode;
     public $thankyou;
-
-
+    public $total_amount;
     public function updated($fields)
     {
         $this->validateOnly($fields, [
@@ -72,7 +69,6 @@ class CheckoutComponent extends Component
             ]);
         }
     }
-
     public function placeOrder(Request $request)
     {
         $order = new Order();
@@ -122,17 +118,17 @@ class CheckoutComponent extends Component
         $order->discount = session()->get('checkout')['discount'];
         $order->tax = session()->get('checkout')['tax'];
         $order->total = session()->get('checkout')['total'];
-
-
         $order->status = 'ordered';
         $order->is_shipping_between = $request->ship_to_different ? 1 : 0;
         $order->save();
 
+        $total_amount = 0;
         foreach (Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
+            $total_amount = $total_amount + $item->price;
             $orderItem->quantity = $item->qty;
             $orderItem->save();
         }
@@ -173,6 +169,8 @@ class CheckoutComponent extends Component
             $transaction->status = 'pending';
             $transaction->save();
         }
+        $coin = new CoinController();
+        $coin->storeCoin(Auth::user()->id, $order->id, $transaction->id, $total_amount);
 
         $this->thankyou = 1;
         Cart::instance('cart')->destroy();
@@ -200,8 +198,13 @@ class CheckoutComponent extends Component
 
     public function render()
     {
-        $user_id = Auth::user()->id;
+        if (Auth::check()) {
+           $user_id= Auth::user()->id;
+        }else{
+            $user_id=0;
+        }
         $this->verifyForCheckout();
+        
         // $address = DB::table('orders')->where('user_id',$user_id)->orderBy('id', 'DESC')->take(6)->get();
         $address = DB::table('orders')->select(['firstname', 'lastname', 'mobile', 'email', 'line1', 'line2', 'city', 'province', 'country', 'zipcode', 'user_id'])->distinct()->where('user_id', $user_id)->orderBy('id', 'DESC')->take(6)->get();
         return view('livewire.checkout-component', ['address' => $address])->layout("layouts.base");

@@ -65,16 +65,16 @@
                 <div class="icon-stat">
                     <div class="row">
                         <div class="col-xs-8 text-left">
-                            <span class="icon-stat-label">Total Cost</span>
+                            <span class="icon-stat-label">Total Coin</span>
                             <span class="icon-stat-value">Rs
                                 @foreach ($totalCost as $coast)
                                     <?php $total_amount = $total_amount + (float) str_replace(',', '', $coast->total); ?>
                                 @endforeach
-                                {{ $total_amount }}
+                                {{ $total_coin }}
                             </span>
                         </div>
                         <div class="col-xs-4 text-center">
-                            <i class="fa fa-rupee icon-stat-visual bg-primary"></i>
+                            <i class="fa-solid fa-coins icon-stat-visual bg-primary"></i>  
                         </div>
                     </div>
                     <div class="icon-stat-footer">
@@ -106,7 +106,7 @@
                             <span class="icon-stat-value">{{ $totalDelivered }}</span>
                         </div>
                         <div class="col-xs-4 text-center">
-                            <i class="fa fa-rupee icon-stat-visual bg-primary"></i>
+                            <i class="fa fa-rupee icon-stat-visual bg-primary"></i> 
                         </div>
                     </div>
                     <div class="icon-stat-footer">

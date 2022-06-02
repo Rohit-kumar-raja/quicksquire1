@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class iconController extends Controller
+class CoinController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,18 +34,19 @@ class iconController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeCoin($user_id, $order_id, $transaction_id, $total_amount)
     {
-        //
+        $gain = $total_amount * 0.05;
+        DB::table('coin')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'transaction_id' => $transaction_id, 'gain' => $gain, 'use' => 0, 'created_at' => date('Y-m-d h:m:s')]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\cf  $cf
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(cf $cf)
     {
         //
     }
@@ -51,10 +54,10 @@ class iconController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\cf  $cf
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(cf $cf)
     {
         //
     }
@@ -63,10 +66,10 @@ class iconController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\cf  $cf
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, cf $cf)
     {
         //
     }
@@ -74,10 +77,10 @@ class iconController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\cf  $cf
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(cf $cf)
     {
         //
     }

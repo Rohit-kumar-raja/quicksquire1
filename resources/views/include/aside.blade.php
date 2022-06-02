@@ -49,7 +49,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-sitemap fa-cog"></i>
             <span>Products</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
@@ -64,7 +64,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseorder"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-shopping-bag fa-cog"></i> 
             <span>Orders</span>
         </a>
         <div id="collapseorder" class="collapse" aria-labelledby="headingTwo"
@@ -79,7 +79,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHC"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-sliders-h fa-cog"></i>
             <span>Manage Home Category</span>
         </a>
         <div id="collapseHC" class="collapse" aria-labelledby="headingTwo"
@@ -94,7 +94,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHB"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-sliders-h fa-cog"></i>
             <span>Manage Brands Slider</span>
         </a>
         <div id="collapseHB" class="collapse" aria-labelledby="headingTwo"
@@ -110,7 +110,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHS"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-sliders-h fa-cog"></i> 
             <span>Manage Home Slider</span>
         </a>
         <div id="collapseHS" class="collapse" aria-labelledby="headingTwo"
