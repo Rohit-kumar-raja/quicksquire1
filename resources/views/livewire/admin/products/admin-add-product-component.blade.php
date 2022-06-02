@@ -72,7 +72,7 @@
                                 <div class="form-group  col-sm-12">
                                     <label class=" control-label">Description:</label>
                                     <div class="" wire:ignore>
-                                        <textarea name="description" class="form-control input-md" id="description" placeholder="Description" wire:model="description"></textarea>
+                                        <textarea name="description" class="form-control ckeditor input-md" id="description" placeholder="Description" wire:model="description"></textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -81,7 +81,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Regular Price:</label>
                                     <div class="">
-                                        <input name="regular_price" type="text" class="form-control input-md" placeholder="Regular Price"
+                                        <input name="regular_price" type="text" class="form-control  input-md" placeholder="Regular Price"
                                             wire:model="regular_price" />
                                         @error('regular_price')
                                             <span class="text-danger">{{ $message }}</span>
