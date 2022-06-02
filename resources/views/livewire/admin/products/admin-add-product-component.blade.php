@@ -20,13 +20,14 @@
                         @if (Session::has('message'))
                             <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                         @endif
-                        <form action="" class="form-horizontal" enctype="multipart/form-data"
-                            wire:submit.prevent="addProduct">
+                        <form action="{{ route('admin.addproduct.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data"
+                            >
+                            @csrf
                             <div class="row p-3">
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Name:</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="Product Name"
+                                        <input type="text" class="form-control input-md" name="name" placeholder="Product Name"
                                             wire:model="name" wire:keyup="generateSlug" />
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -36,27 +37,42 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Slug:</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="Product Slug"
+                                        <input type="text" class="form-control input-md" placeholder="Product Slug" name="slug"
                                             wire:model="slug" />
                                         @error('slug')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group  col-sm-4">
+                                <div class="form-group col-sm-4">
+                                    <label class=" control-label">Product Brand:</label>
+                                    <div>
+                                        <select name="brand" class="form-control" wire:model="brand">
+                                            <option selected disabled>Select Brand</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->brand_slug }}">{{ $brand->brand_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-12">
                                     <label class=" control-label">Short Description:</label>
                                     <div class="" wire:ignore>
-                                        <textarea class="form-control input-md" id="short_description" placeholder="Short Description"
+                                        <textarea name="short_description" class="form-control input-md ckeditor " id="short_description" placeholder="Short Description"
                                             wire:model="short_description"></textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group  col-sm-4">
+                                <div class="form-group  col-sm-12">
                                     <label class=" control-label">Description:</label>
                                     <div class="" wire:ignore>
-                                        <textarea class="form-control input-md" id="description" placeholder="Description" wire:model="description"></textarea>
+                                        <textarea name="description" class="form-control input-md" id="description" placeholder="Description" wire:model="description"></textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -65,7 +81,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Regular Price:</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="Regular Price"
+                                        <input name="regular_price" type="text" class="form-control input-md" placeholder="Regular Price"
                                             wire:model="regular_price" />
                                         @error('regular_price')
                                             <span class="text-danger">{{ $message }}</span>
@@ -75,7 +91,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Sale Price:</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="Sale Price"
+                                        <input name="sale_price" type="text" class="form-control input-md" placeholder="Sale Price"
                                             wire:model="sale_price" />
                                         @error('sale_price')
                                             <span class="text-danger">{{ $message }}</span>
@@ -85,7 +101,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">SKU:</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="SKU"
+                                        <input name="SKU" type="text" class="form-control input-md" placeholder="SKU"
                                             wire:model="SKU" />
                                         @error('SKU')
                                             <span class="text-danger">{{ $message }}</span>
@@ -95,7 +111,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Stock Status:</label>
                                     <div class="">
-                                        <select class="form-control" wire:model="stock_status">
+                                        <select name="stock_status" class="form-control" wire:model="stock_status">
                                             <option value="instock">In Stock</option>
                                             <option value="outofstock">Out of Stock</option>
                                         </select>
@@ -108,7 +124,7 @@
                                     <label class=" control-label">GST :</label>
                                     <div class="">
                                         <!--<input type="text" class="form-control input-md" placeholder="GST" wire:model="GST" />-->
-                                        <select class="form-control" wire:model="GST">
+                                        <select name="GST" class="form-control" wire:model="GST">
                                             <option value="0">Choose GST</option>
                                             <option value="5">5%</option>
                                             <option value="12">12%</option>
@@ -123,7 +139,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">HSN No. :</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="HSN No."
+                                        <input name="HSN_No" type="text" class="form-control input-md" placeholder="HSN No."
                                             wire:model="HSN_No" />
                                         @error('HSN_No')
                                             <span class="text-danger">{{ $message }}</span>
@@ -133,7 +149,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Featured:</label>
                                     <div class="">
-                                        <select class="form-control" wire:model="featured">
+                                        <select name="featured" class="form-control" wire:model="featured">
                                             <option value="0">No</option>
                                             <option value="1">Yes</option>
                                         </select>
@@ -143,7 +159,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Quantity</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="Quantity"
+                                        <input name="quantity" type="text" class="form-control input-md" placeholder="Quantity"
                                             wire:model="quantity" />
                                         @error('quantity')
                                             <span class="text-danger">{{ $message }}</span>
@@ -153,7 +169,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Image:</label>
                                     <div class="">
-                                        <input type="file" class="input-file" wire:model="image" />
+                                        <input name="image" type="file" class="input-file" wire:model="image" />
                                         @if ($image)
                                             <img src="{{ $image->temporaryUrl() }}" alt="" width="200" />
                                         @endif
@@ -165,7 +181,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Gallery:</label>
                                     <div class="">
-                                        <input type="file" class="input-file" wire:model="images" multiple />
+                                        <input name="images" type="file" class="input-file" wire:model="images" multiple />
                                         @if ($images)
                                             @foreach ($images as $image)
                                                 <img src="{{ $image->temporaryUrl() }}" alt="" width="200" />
@@ -180,7 +196,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Category:</label>
                                     <div class="">
-                                        <select class="form-control" wire:model="category_id"
+                                        <select name="category_id" class="form-control" wire:model="category_id"
                                             wire:change="changeSubcategory">
                                             <option value="">Select Category</option>
                                             @foreach ($categories as $category)
@@ -195,7 +211,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Subategory:</label>
                                     <div class="">
-                                        <select class="form-control" wire:model="scategory_id">
+                                        <select name="scategory_id" class="form-control" wire:model="scategory_id">
                                             <option value="0">Select Subategory</option>
                                             @foreach ($scategories as $scategory)
                                                 <option value="{{ $scategory->id }}">{{ $scategory->name }}
@@ -210,7 +226,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Feature:</label>
                                     <div class="">
-                                        <select class="form-control">
+                                        <select name="featured" wire:modal="featured" class="form-control">
                                             <option value="0">Select Feature</option>
                                             @foreach ($features as $feature)
                                                 <option value="{{ $feature->id }}">{{ $feature->name }}</option>

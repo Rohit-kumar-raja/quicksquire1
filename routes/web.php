@@ -164,6 +164,8 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     // product start
     Route::get('/admin/products', AdminProductComponent::class)->name('admin.products');
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
+    Route::post('/admin/product/store',[AdminAddProductComponent::class,'store'])->name('admin.addproduct.store');
+
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
     Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
     Route::get('/admin/orders', AdminOrderComponent::class)->name('admin.order');

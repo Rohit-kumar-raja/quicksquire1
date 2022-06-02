@@ -51,7 +51,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        @error('category_id')
+                                        @error('brand')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

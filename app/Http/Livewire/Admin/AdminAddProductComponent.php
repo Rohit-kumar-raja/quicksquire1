@@ -9,8 +9,11 @@ use App\Models\Brand;
 use App\Models\Feature;
 use App\Models\Subcategory;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+
 class AdminAddProductComponent extends Component
 {
     use WithFileUploads;
@@ -31,7 +34,7 @@ class AdminAddProductComponent extends Component
     public $images;
     public $scategory_id;
     public $feature_id;
-    
+    public $brand;
     public function mount()
     {
         $this->stock_status = 'inStock';
@@ -79,28 +82,73 @@ class AdminAddProductComponent extends Component
             'category_id' => 'required',
             // 'feature_id' => 'required',
         ]);
-        $product = new Product();
-        $product->name = $this->name;
-        $product->slug = $this->slug;
-        $product->short_description = $this->short_description;
-        $product->description = $this->description;
-        $product->regular_price = $this->regular_price;
-        $product->sale_price = $this->sale_price;
-        $product->SKU = $this->SKU;
-        $product->GST = $this->GST;
-        $product->HSN_No = $this->HSN_No;
-        $product->stock_status = $this->stock_status;
-        $product->featured = $this->featured;
-        $product->quantity = $this->quantity;
-        // $product->feature_id = $this->feature_id;
+        try {
+            $product = new Product();
+            $product->name = $this->name;
+            $product->slug = $this->slug;
+            $product->short_description = $this->short_description;
+            $product->description = $this->description;
+            $product->regular_price = $this->regular_price;
+            $product->sale_price = $this->sale_price;
+            $product->SKU = $this->SKU;
+            $product->GST = $this->GST;
+            $product->HSN_No = $this->HSN_No;
+            $product->stock_status = $this->stock_status;
+            $product->featured = $this->featured;
+            $product->quantity = $this->quantity;
+            $product->brand = $this->brand;
+            // $product->feature_id = $this->feature_id;
 
-        $imageName = Carbon::now()->timestamp . '_' . $this->image->extension();
-        $this->image->storeAs('products', $imageName);
+            $imageName = Carbon::now()->timestamp . '_' . $this->image->extension();
+            $this->image->storeAs('products', $imageName);
+            $product->image = $imageName;
+
+            if ($this->images) {
+                $imagesname = '';
+                foreach ($this->images as $key => $image) {
+                    $imaName = Carbon::now()->timestamp . $key . '_' . $image->extension();
+                    $image->storeAs('products', $imaName);
+                    $imagesname = $imagesname . ',' . $imaName;
+                }
+                $product->images = $imagesname;
+            }
+
+            $product->category_id = $this->category_id;
+            if ($this->scategory_id) {
+                $product->subcategory_id = $this->scategory_id;
+            }
+            $product->save();
+            session()->flash('message', 'Product added successfully');
+        } catch (Exception $e) {
+            session()->flash('message', $e->getMessage());
+        }
+    }
+
+    public function store(Request $request){
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->slug = $request->slug;
+        $product->short_description = $request->short_description;
+        $product->description = $request->description;
+        $product->regular_price = $request->regular_price;
+        $product->sale_price = $request->sale_price;
+        $product->SKU = $request->SKU;
+        $product->GST = $request->GST;
+        $product->HSN_No = $request->HSN_No;
+        $product->stock_status = $request->stock_status;
+        $product->featured = $request->featured;
+        $product->quantity = $request->quantity;
+        $product->brand = $request->brand;
+        // $product->feature_id = $request->feature_id;
+
+        $imageName = Carbon::now()->timestamp . '_' . $request->image->extension();
+        $request->image->storeAs('products', $imageName);
         $product->image = $imageName;
 
-        if ($this->images) {
+        if ($request->images) {
             $imagesname = '';
-            foreach ($this->images as $key => $image) {
+            foreach ($request->images as $key => $image) {
                 $imaName = Carbon::now()->timestamp . $key . '_' . $image->extension();
                 $image->storeAs('products', $imaName);
                 $imagesname = $imagesname . ',' . $imaName;
@@ -108,13 +156,16 @@ class AdminAddProductComponent extends Component
             $product->images = $imagesname;
         }
 
-        $product->category_id = $this->category_id;
-        if ($this->scategory_id) {
-            $product->subcategory_id = $this->scategory_id;
+        $product->category_id = $request->category_id;
+        if ($request->scategory_id) {
+            $product->subcategory_id = $request->scategory_id;
         }
         $product->save();
         session()->flash('message', 'Product added successfully');
+        return redirect()->back();
     }
+
+    
     public function changeSubcategory()
     {
         $this->scategory_id = 0;

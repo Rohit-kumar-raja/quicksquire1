@@ -21,14 +21,14 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row p-2">
+                            <div class="col-md-10">
                                 <i class="fas fa-list"></i>
                                 All Products
                             </div>
-                            <!-- <div class="col-md-6">
-                                <a href="{{ route('admin.addproduct') }}" class="btn btn-success pull-right">Add New</a>
-                            </div> -->
+                      <div class="col-md-2">
+                                <a href="{{ route('admin.addproduct') }}" class="btn btn-primary btn-sm">Add New</a>
+                            </div> 
                         </div>
                     </div>
                     <div class="panel-body">
