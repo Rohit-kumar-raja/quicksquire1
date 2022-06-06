@@ -36,6 +36,7 @@
                 <a class="collapse-item" href="{{ route('admin.categories') }}">All Categories</a>
                 <a class="collapse-item" href="{{ route('admin.subcategories') }}">All SubCategories</a>
                 <a class="collapse-item" href="{{ route('admin.brand') }}"> Brands</a>
+                <a class="collapse-item" href="{{ route('admin.wallet') }}"> Wallet</a>
                 <a class="collapse-item" href="{{ route('admin.addfeature') }}">Add New Feature</a>
                 <a class="collapse-item" href="{{ route('admin.coupon') }}">Coupon</a>
                 <a class="collapse-item" href="{{ route('admin.banner') }}">Manage Banner</a>

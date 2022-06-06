@@ -154,7 +154,7 @@ class AdminEditProductComponent extends Component
     {
         $scategories = Subcategory::where('category_id', $this->category_id)->get();
         $categories = Category::all();
-        $brand = DB::table('brands')->get();
+        $brand = DB::table('brand_sliders')->get();
         return view('livewire.admin.products.admin-edit-product-component', ['categories' => $categories, 'scategories' => $scategories, 'brands' => $brand])->layout('layouts.dashboard');
     }
 }

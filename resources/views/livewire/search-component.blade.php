@@ -1,3 +1,10 @@
+<style>
+    .form-width {
+        width: 75px;
+    }
+
+</style>
+
 <body class="ecommerce">
 
     <div class="title-wrapper">
@@ -57,7 +64,17 @@
                         <h3>Price</h3>
                         <p>
                             <label for="amount">Range:</label>
-                            <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+                        <div class="row">
+                            <div class="col-4"> <input type="text" placeholder="Max"
+                                    class="form-control form-control-sm form-width" name="max">
+                            </div>
+                            <div class="col-4"> <input type="text" placeholder="Min"
+                                    class="form-control form-control-sm form-width" name="min"></div>
+                            <div class="col-4">
+                                <button class="btn btn-default">GO</button>
+                            </div>
+                        </div>
+
                         </p>
                         <div id="slider-range"></div>
                     </div>
@@ -92,7 +109,8 @@
                         <div class="col-md-10 col-sm-10">
                             <div class="pull-right">
                                 <label class="control-label">Show:</label>
-                                <select id="item" class="form-control input-sm text-capitalize" onchange="filter_change()">
+                                <select id="item" class="form-control input-sm text-capitalize"
+                                    onchange="filter_change()">
                                     <option value="12" selected="selected">12</option>
                                     @if (Session::has('pagesize'))
                                         <option value="{{ session('pagesize') }}">{{ session('pagesize') }}</option>
@@ -106,9 +124,11 @@
                             </div>
                             <div class="pull-right">
                                 <label class="control-label">Sort&nbsp;By:</label>
-                                <select id="sorting" class="form-control input-sm text-capitalize" onchange="filter_change()">
+                                <select id="sorting" class="form-control input-sm text-capitalize"
+                                    onchange="filter_change()">
                                     @if (Session::has('sorting'))
-                                        <option value="{{ session('sorting') }}"> Sort by {{ session('sorting') }}</option>
+                                        <option value="{{ session('sorting') }}"> Sort by {{ session('sorting') }}
+                                        </option>
                                     @endif
                                     <option value="default">Default sorting </option>
                                     <!-- <option value="popularity">Sort by popularity</option>

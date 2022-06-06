@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\PdfController;
 use App\Http\Livewire\Admin\AdminAddBrandComponent;
 use App\Http\Livewire\Admin\AdminEditCategoryComponent;
@@ -164,7 +165,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     // product start
     Route::get('/admin/products', AdminProductComponent::class)->name('admin.products');
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
-    Route::post('/admin/product/store',[AdminAddProductComponent::class,'store'])->name('admin.addproduct.store');
+    Route::post('/admin/product/store', [AdminAddProductComponent::class, 'store'])->name('admin.addproduct.store');
 
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
     Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
@@ -189,4 +190,11 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/banner', AdminHomeBannerComponent::class)->name('admin.banner');
     Route::get('/admin/banner/add', AdminAddHomeBannerComponent::class)->name('admin.addbanner');
     Route::get('/admin/banner/edit/{banner_id}', AdminEditHomeBannerComponent::class)->name('admin.editbanner');
+
+    Route::get('/admin/wallet', [WalletController::class, 'index'])->name('admin.wallet');
+    Route::post('/admin/wallet/add', [WalletController::class, 'store'])->name('admin.wallet.add');
+    Route::get('/admin/wallet/edit/{id}', [WalletController::class, 'edit'])->name('admin.wallet.edit');
+    Route::get('/admin/wallet/update', [WalletController::class, 'update'])->name('admin.wallet.update');
+    Route::get('/admin/wallet/delete/{id}', [WalletController::class, 'destroy'])->name('admin.wallet.destroy');
+    Route::get('/admin/wallet/status', [WalletController::class, 'status'])->name('admin.wallet.update');
 });

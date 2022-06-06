@@ -47,8 +47,8 @@
                                         <select class="form-control" wire:model="brand">
                                             <option selected disabled>Select Brand</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->brand_slug }}">{{ $brand->brand_name }}
-                                                </option>
+                                            <option value="{{ $brand->subtitle }}">{{ $brand->title }}
+                                            </option>
                                             @endforeach
                                         </select>
                                         @error('brand')

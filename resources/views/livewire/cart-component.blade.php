@@ -39,7 +39,7 @@
                                             <tr>
                                                 <th class="goods-page-image">Image</th>
                                                 <th class="goods-page-description">Description</th>
-                                                <th class="goods-page-ref-no">SKU</th>
+                                                {{-- <th class="goods-page-ref-no">SKU</th> --}}
                                                 <th class="goods-page-quantity">Quantity</th>
                                                 <th class="goods-page-price">Unit price</th>
                                                 <th class="goods-page-total" colspan="2">Total</th>
@@ -58,9 +58,9 @@
                                                         </h3>
 
                                                     </td>
-                                                    <td class="goods-page-ref-no">
+                                                    {{-- <td class="goods-page-ref-no">
                                                         {{ $item->model->SKU }}
-                                                    </td>
+                                                    </td> --}}
                                                     <td class="goods-page-quantity">
                                                         <div class="product-quantity">
                                                             <input id="product-quantity" type="text"

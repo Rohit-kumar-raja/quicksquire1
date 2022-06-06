@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\BrandSlider;
 use App\Models\Feature;
 use App\Models\Subcategory;
 use Carbon\Carbon;
@@ -174,7 +175,7 @@ class AdminAddProductComponent extends Component
     {
         $categories = Category::all();
         $scategories = Subcategory::where('category_id', $this->category_id)->get();
-        $brands = Brand::all();
+        $brands = BrandSlider::all();
         $features = Feature::all();
         return view('livewire.admin.products.admin-add-product-component', ['categories' => $categories, 'scategories' => $scategories, 'brands' => $brands, 'features' => $features])->layout('layouts.dashboard');
     }
