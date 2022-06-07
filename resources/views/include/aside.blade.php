@@ -45,6 +45,21 @@
         </div>
     </li>
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-users fa-cog"></i> 
+            <span>Users</span>
+        </a>
+        <div id="users" class="collapse" aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">All Users:</h6>
+                <a class="collapse-item" href="{{ route('admin.users') }}">All Users</a>
+
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-sitemap fa-cog"></i>
@@ -124,12 +139,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pincode"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-sliders-h fa-cog"></i> 
-            <span>Picode</span>
+            <span>Pincode</span>
         </a>
         <div id="pincode" class="collapse" aria-labelledby="headingTwo"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Pincopde section:</h6>
+                <h6 class="collapse-header">pincode section:</h6>
                 <a class="collapse-item" href="{{ route('admin.pincode') }}">Pincopde</a>
 
             </div>

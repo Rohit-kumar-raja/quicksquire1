@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\PdfController;
 use App\Http\Livewire\Admin\AdminAddBrandComponent;
@@ -52,7 +53,7 @@ use App\Http\Livewire\User\UserReviewComponent;
 use App\Http\Livewire\WishListComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\Admin\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,9 +181,9 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     // Route::get('/admin/home-slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.edithomeslider');
     Route::get('admin/feature/add', AdminAddFeatureCcomponent::class)->name('admin.addfeature');
     Route::get('admin/features/{feature_slug?}', AdminFeatureComponent::class)->name('admin.features');
-    Route::get('/admin/brand', AdminBrandSliderComponent::class)->name('admin.brand');
-    Route::get('/admin/brand/add', AdminAddBrandSliderComponent::class)->name('admin.addbrand');
-    Route::get('/admin/brand/edit/{brand_id}', AdminEditBrandSliderComponent::class)->name('admin.editbrand');
+    // Route::get('/admin/brand', AdminBrandSliderComponent::class)->name('admin.brand');
+    // Route::get('/admin/brand/add', AdminAddBrandSliderComponent::class)->name('admin.addbrand');
+    // Route::get('/admin/brand/edit/{brand_id}', AdminEditBrandSliderComponent::class)->name('admin.editbrand');
     Route::get('/admin/slider', AdminHomeSliderComponent::class)->name('admin.slider');
     Route::get('/admin/slider/add', AdminAddHomeSliderComponent::class)->name('admin.addslider');
     Route::get('/admin/slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.editslider');
@@ -200,15 +201,29 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/wallet/status/{id}', [WalletController::class, 'status'])->name('admin.wallet.status');
 
     // pin code start
-
-
     Route::get('/admin/pincode', [PincodeController::class, 'index'])->name('admin.pincode');
     Route::post('/admin/pincode/add', [PincodeController::class, 'store'])->name('admin.pincode.add');
     Route::get('/admin/pincode/edit/{id}', [PincodeController::class, 'edit'])->name('admin.pincode.edit');
     Route::post('/admin/pincode/update/{id}', [PincodeController::class, 'update'])->name('admin.pincode.update');
     Route::get('/admin/pincode/delete/{id}', [PincodeController::class, 'destroy'])->name('admin.pincode.destroy');
     Route::get('/admin/pincode/status/{id}', [PincodeController::class, 'status'])->name('admin.pincode.status');
-
     // pin code end
 
+    // users code start
+    Route::get('/admin/users', [UsersController::class, 'index'])->name('admin.users');
+    Route::post('/admin/users/add', [UsersController::class, 'store'])->name('admin.users.add');
+    Route::get('/admin/users/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
+    Route::post('/admin/users/update/{id}', [UsersController::class, 'update'])->name('admin.users.update');
+    Route::get('/admin/users/delete/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('/admin/users/status/{id}', [UsersController::class, 'status'])->name('admin.users.status');
+    // users code end
+
+    // brand code start
+    Route::get('/admin/brand', [BrandController::class, 'index'])->name('admin.brand');
+    Route::post('/admin/brand/add', [BrandController::class, 'store'])->name('admin.brand.add');
+    Route::get('/admin/brand/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
+    Route::post('/admin/brand/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
+    Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('admin.brand.destroy');
+    Route::get('/admin/brand/status/{id}', [BrandController::class, 'status'])->name('admin.brand.status');
+    // brand code end
 });
