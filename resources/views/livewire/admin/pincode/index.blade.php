@@ -74,22 +74,20 @@
                                             S.No
                                         </th>
                                         <th>
-                                            Category
+                                           Pincode
                                         </th>
                                         <th>
-                                            Cart Value
+                                           City
                                         </th>
                                         <th>
-                                            Coin Gain By %
+                                          District
                                         </th>
 
                                         <th>
-                                            Coin Redeem By %
+                                          State
                                         </th>
-
-                                        <th>Flat Coin Gain</th>
-                                        <th>Flat Coin Redeem</th>
-
+                                        <th>Country</th>
+                            
                                         <th>
                                             status </th>
                                         <th>
@@ -108,31 +106,29 @@
 
                                                 <td>
 
-                                                    {{ DB::table('categories')->find($pincode->category_id)->name ?? '' }}
+                                                    {{ $pincode->pincode}}
 
                                                 </td>
 
                                                 <td>
-                                                    {{ $pincode->min }} - {{ $pincode->max }}
+                                                    {{ $pincode->city}}
                                                 </td>
 
                                                 <td>
-                                                    {{ $pincode->gain_by_per }}
-                                                </td>
-
-
-                                                <td>
-                                                    {{ $pincode->redeem_by_per }}
-                                                </td>
-
-                                                <td>
-                                                    {{ $pincode->flat_gain }}
+                                                    {{ $pincode->district }}
                                                 </td>
 
 
                                                 <td>
-                                                    {{ $pincode->flat_use }}
+                                                    {{ $pincode->state}}
                                                 </td>
+
+                                                <td>
+                                                    {{ $pincode->country }}
+                                                </td>
+
+
+                                              
                                      
                                                 <td><a href="{{ route('admin.pincode.status', $pincode->id) }}"
                                                         class="btn @if ($pincode->status == 1) btn-success btn-sm @endif btn-secondary  btn-sm">

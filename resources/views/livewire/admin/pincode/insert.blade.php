@@ -12,51 +12,38 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{ route('admin.wallet.add') }}" method="POST" class="form-horizontal">
+                <form action="{{ route('admin.pincode.add') }}" method="POST" class="form-horizontal">
                     @csrf
                     <input type="hidden" name="created_at" value="{{ date('Y-m-d h:m:s') }}" id="">
                     <div class="row  p-2">
 
+
                         <div class="col-md-4">
-                            <label for="slug" class=" control-label">Parent Category</label>
-                            <select required class="form-control input-md" name="category_id">
-                                <option value="">Select Parent Category</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">
-                                        {{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                            <label for="pincode" class=" control-label">Pincode</label>
+                            <input required onkeyup="check_pincode(this.value)" placeholder="Pincode No ex- 824125" class="form-control" type="text"
+                                name="pincode" id="pincode">
                         </div>
                         <div class="col-md-4">
-                            <label for="min" class=" control-label"> Max Cart Value</label>
-                            <input required placeholder="Max ex- 10000" class="form-control" type="number" name="max"
-                                id="min">
+                            <label for="min" class=" control-label">City</label>
+                            <input required placeholder="City Name" class="form-control" type="text" name="city"
+                                id="city">
                         </div>
                         <div class="col-md-4">
-                            <label for="min" class=" control-label">Min Cart Value</label>
-                            <input required placeholder="Min ex- 20000" class="form-control" type="number" name="min"
-                                id="min">
+                            <label for="min" class=" control-label"> District</label>
+                            <input class="form-control" placeholder="District Name" type="text" name="district"
+                                id="district">
                         </div>
                         <div class="col-md-4">
-                            <label for="min" class=" control-label"> Gain By Percentage(%)</label>
-                            <input  class="form-control" placeholder="Ex - 5%" type="number"
-                                name="gain_by_per" id="min">
+                            <label for="min" class=" control-label">State</label>
+                            <input placeholder="Maximum cart coin ex - 100 " class="form-control" type="text"
+                                name="state" id="state">
                         </div>
                         <div class="col-md-4">
-                            <label for="min" class=" control-label">redeem By Percenttage(%)</label>
-                            <input  placeholder="Maximum cart coin ex - 100 " class="form-control"
-                                type="number" name="redeem_by_per" id="min">
+                            <label for="min" class=" control-label">Country</label>
+                            <input placeholder="Country Name " class="form-control" type="text" name="country"
+                                id="country">
                         </div>
-                        <div class="col-md-4">
-                            <label for="min" class=" control-label">Flat Gain Coin</label>
-                            <input  placeholder="Flat cart coin ex - 100 " class="form-control" type="number"
-                                name="flat_gain" id="min">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="min" class=" control-label">Flat Redeem Coin</label>
-                            <input  placeholder="Flat cart coin ex - 100 " class="form-control" type="number"
-                                name="flat_use" id="min">
-                        </div>
+
                         <div class="col-md-4">
                             <label for="min" class=" control-label">Status</label>
                             <select required placeholder="Flat cart coin ex - 100 " class="form-control"
@@ -82,7 +69,25 @@
 
 </div>
 <script>
-    function slug1(data) {
-        document.getElementById('slug').value = data.toLowerCase();
+    function check_pincode(pincode) {
+        console.log(pincode);
+        if (pincode.length == 6) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                data = this.responseText;
+                var data = JSON.parse(data);
+                document.getElementById('state').value = data[0].PostOffice[0].State
+                document.getElementById('city').value = data[0].PostOffice[0].Block
+                document.getElementById('country').value = data[0].PostOffice[0].Country
+                document.getElementById('district').value = data[0].PostOffice[0].District
+                document.getElementById('pincode').style.borderColor = 'green';
+            }
+            xmlhttp.open("GET", "https://api.postalpincode.in/pincode/" + pincode);
+            xmlhttp.send();
+        } else {
+            document.getElementById('state').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('pincode').style.borderColor = 'red';
+        }
     }
 </script>
