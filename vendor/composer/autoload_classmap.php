@@ -14,6 +14,7 @@ return array(
     'App\\Actions\\Jetstream\\DeleteUser' => $baseDir . '/app/Actions/Jetstream/DeleteUser.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Admin\\PincodeController' => $baseDir . '/app/Http/Controllers/Admin/PincodeController.php',
     'App\\Http\\Controllers\\Admin\\SubCategoryController' => $baseDir . '/app/Http/Controllers/Admin/SubCategoryController.php',
     'App\\Http\\Controllers\\Admin\\WalletController' => $baseDir . '/app/Http/Controllers/Admin/WalletController.php',
     'App\\Http\\Controllers\\CartController' => $baseDir . '/app/Http/Controllers/CartController.php',

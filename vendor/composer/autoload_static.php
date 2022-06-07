@@ -609,6 +609,7 @@ class ComposerStaticInitf066ab7c05ecd41dd0a81c31c602c0fa
         'App\\Actions\\Jetstream\\DeleteUser' => __DIR__ . '/../..' . '/app/Actions/Jetstream/DeleteUser.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Admin\\PincodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PincodeController.php',
         'App\\Http\\Controllers\\Admin\\SubCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SubCategoryController.php',
         'App\\Http\\Controllers\\Admin\\WalletController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/WalletController.php',
         'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',

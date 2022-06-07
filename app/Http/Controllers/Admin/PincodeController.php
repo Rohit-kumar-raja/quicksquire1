@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class WalletController extends Controller
+class PincodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class WalletController extends Controller
      */
     public function index()
     {
-        $wallet = DB::table('wallet')->get();
+        $pincode = DB::table('pincode')->get();
         $categories = DB::table('categories')->get();
-        return view('livewire.admin.wallet.index', ['wallets' => $wallet, 'categories' => $categories]);
+        return view('livewire.admin.pincode.index', ['data' => $pincode, 'categories' => $categories]);
     }
 
     /**
@@ -38,7 +38,7 @@ class WalletController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('wallet')->insert($request->except('_token'));
+        DB::table('pincode')->insert($request->except('_token'));
         return redirect()->back()->with(["success" => "Data added Successfully"]);
     }
 
@@ -55,12 +55,12 @@ class WalletController extends Controller
 
     public function status($id)
     {
-        $status =  DB::table('wallet')->find($id);
+        $status =  DB::table('pincode')->find($id);
         if ($status->status == 1) {
-            DB::table('wallet')->where('id', $id)->update(['status' => '0']);
+            DB::table('pincode')->where('id', $id)->update(['status' => '0']);
         } else {
 
-            DB::table('wallet')->where('id', $id)->update(['status' => '1']);
+            DB::table('pincode')->where('id', $id)->update(['status' => '1']);
         }
         if ($status->status == 1) {
             return redirect()->back()->with('status', 'Status Deactivated successfully');
@@ -77,9 +77,9 @@ class WalletController extends Controller
      */
     public function edit($id)
     {
-        $data = DB::table('wallet')->find($id);
+        $data = DB::table('pincode')->find($id);
         $categories = DB::table('categories')->get();
-        return view('livewire.admin.wallet.update', ['data' => $data, 'categories' => $categories]);
+        return view('livewire.admin.pincode.update', ['data' => $data, 'categories' => $categories]);
     }
 
     /**
@@ -91,10 +91,10 @@ class WalletController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result = DB::table('wallet')
+        $result = DB::table('pincode')
             ->where('id', $id)
             ->update($request->except(['_token', 'id']));
-        return redirect()->route('admin.wallet')->with('update', 'Data successfully updated');
+        return redirect()->route('admin.pincode')->with('update', 'Data successfully updated');
     }
 
     /**
@@ -105,7 +105,7 @@ class WalletController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('wallet')->delete($id);
-        return redirect()->back()->with(['delete' => 'Wallet Delete successfully']);
+        DB::table('pincode')->delete($id);
+        return redirect()->back()->with(['delete' => 'pincode Delete successfully']);
     }
 }

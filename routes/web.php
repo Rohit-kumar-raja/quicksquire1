@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\PdfController;
@@ -194,7 +195,20 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/wallet', [WalletController::class, 'index'])->name('admin.wallet');
     Route::post('/admin/wallet/add', [WalletController::class, 'store'])->name('admin.wallet.add');
     Route::get('/admin/wallet/edit/{id}', [WalletController::class, 'edit'])->name('admin.wallet.edit');
-    Route::get('/admin/wallet/update', [WalletController::class, 'update'])->name('admin.wallet.update');
+    Route::post('/admin/wallet/update/{id}', [WalletController::class, 'update'])->name('admin.wallet.update');
     Route::get('/admin/wallet/delete/{id}', [WalletController::class, 'destroy'])->name('admin.wallet.destroy');
-    Route::get('/admin/wallet/status', [WalletController::class, 'status'])->name('admin.wallet.update');
+    Route::get('/admin/wallet/status/{id}', [WalletController::class, 'status'])->name('admin.wallet.status');
+
+    // pin code start
+
+
+    Route::get('/admin/pincode', [PincodeController::class, 'index'])->name('admin.pincode');
+    Route::post('/admin/pincode/add', [PincodeController::class, 'store'])->name('admin.pincode.add');
+    Route::get('/admin/pincode/edit/{id}', [PincodeController::class, 'edit'])->name('admin.pincode.edit');
+    Route::post('/admin/pincode/update/{id}', [PincodeController::class, 'update'])->name('admin.pincode.update');
+    Route::get('/admin/pincode/delete/{id}', [PincodeController::class, 'destroy'])->name('admin.pincode.destroy');
+    Route::get('/admin/pincode/status/{id}', [PincodeController::class, 'status'])->name('admin.pincode.status');
+
+    // pin code end
+
 });
