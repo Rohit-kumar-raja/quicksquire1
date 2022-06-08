@@ -5,7 +5,6 @@
             display: none !important;
 
         }
-
     </style>
     <!-- Header END -->
 
@@ -21,9 +20,25 @@
                         <p>Holding No-2, Ramdas Bhatta, Main Road Adjecent to Brajdham Mandir, near Dhobhi Ghat</p>
                         <p> Bistupur, Jamshedpur-831001, Jharkhand.
                         </p>
-                        <p> <strong>Phone</strong>: [1800-309-7011], <strong>Website</strong>: www.quicksecureindia.com</p>
+                        <p> <strong>Phone</strong>: [1800-309-7011], <strong>Website</strong>: www.quicksecureindia.com
+                        </p>
                     </div>
-                    <h1>Shopping cart</h1>
+                    <div class="row">
+                        <div class="col-8">
+                            <h1>Shopping cart</h1>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-7"> <input type="text" id="pincode" name="pincode"
+                                        placeholder="Enter pincode" class="form-control form-control-sm"></div>
+                                <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
+                                        class="btn btn-sm btn-primary">check</button> </div>
+                            </div>
+                            <small class="text-success" id="code_data"></small>
+                        </div>
+                    </div>
+
                     <div class="goods-page">
                         <div class="goods-data clearfix">
                             <div class="table-wrapper-responsive">
@@ -131,23 +146,24 @@
                         <a class="btn btn-default" href="{{ route('product.search') }}">Continue shopping <i
                                 class="fa fa-shopping-cart"></i>
                         </a>
-                            @auth
-                                <a class="btn-primary print" onclick="print_pdf()" href="#"><img
-                                        style="width: 154px; margin-top: -15px;"
-                                        src="{{ asset('assets/pages/img/icons/pdf.png') }}" alt="">
-                                </a>
-
-                                @else
-                                <a class="btn-primary print" href="{{ route('login') }}"><img
+                        @auth
+                            <a class="btn-primary print" onclick="print_pdf()" href="#"><img
                                     style="width: 154px; margin-top: -15px;"
                                     src="{{ asset('assets/pages/img/icons/pdf.png') }}" alt="">
                             </a>
-                            @endauth
-                          
-                           
+                        @else
+                            <a class="btn-primary print" href="{{ route('login') }}"><img
+                                    style="width: 154px; margin-top: -15px;"
+                                    src="{{ asset('assets/pages/img/icons/pdf.png') }}" alt="">
+                            </a>
+                        @endauth
 
-                        <a href="{{ route('checkout') }}" class="btn btn-primary text-white">Checkout <i
-                                class="fa fa-check"></i>
+                        <a href="#" id="checkout1" onclick="checkpincode()" class="btn btn-primary text-white">Checkout
+                            <i class="fa fa-check"></i> </a>
+                        <small id="checkpincode"></small>
+
+                        <a href="{{ route('checkout') }}" style="display: none" id="checkout"
+                            class="btn btn-primary text-white">Checkout <i class="fa fa-check"></i>
                         </a>
                     </div>
                 </div>
@@ -172,7 +188,6 @@
                 content: none !important;
             }
         }
-
     </style>
     <script>
         function print_pdf() {
@@ -216,6 +231,43 @@
 
         function reload_data() {
             window.location.reload();
+        }
+
+        function btnPincode() {
+            pincode = document.getElementById('pincode').value
+            if (pincode.length == 6) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    document.getElementById('pincode').style.borderColor = 'green';
+                    if (this.responseText == 'no') {
+                        document.getElementById('code_data').innerHTML =
+                            "<span class='text-danger'>Delivery not Available in this pincode - " + pincode + "</span>";
+                        document.getElementById('checkout').style.display = "none";
+                    } else {
+                        document.getElementById('code_data').innerHTML = this.responseText;
+                        document.getElementById('checkout').style.display = "block";
+
+                    }
+                }
+                xmlhttp.open("GET", "{{ route('product.details.pincode') }}/" + pincode);
+                xmlhttp.send();
+            } else {
+                document.getElementById('pincode').style.borderColor = 'red';
+            }
+        }
+
+        function checkpincode() {
+            pincode = document.getElementById('pincode').value
+            if (pincode.length == 6) {
+                document.getElementById('checkout').style.display = "block";
+                document.getElementById('checkout1').style.display = "none";
+
+            }else{
+                document.getElementById('checkout').style.display = "none";
+                document.getElementById('checkout1').style.display = "block";
+
+
+            }
         }
     </script>
 

@@ -102,11 +102,17 @@
                                             @endforeach
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-7"> <input type="text" id="pincode" name="pincode"
+                                                placeholder="Enter pincode" class="form-control form-control-sm"></div>
+                                        <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
+                                                class="btn btn-sm btn-primary">check</button> </div>
+                                    </div>
+                                    <small class="text-success" id="code_data"></small>
                                 </div>
-                                <div class="large-7 column"></div>
 
                                 <!-- default end -->
-
                             </div>
                             <?php
                             $discout = (($product->regular_price - $product->sale_price) / $product->regular_price) * 100;
@@ -122,10 +128,6 @@
                                         <span
                                             class=" bg-success text-white p-2">{{ (int) $discout }}%&nbsp;off</span>
                                     </div>
-
-
-
-
                                     <div class="availability">
                                         Availability: <strong
                                             class=" font-bold {{ $product->stock_status == 'instock' ? 'text-success' : 'text-danger' }}">{{ $product->stock_status }}</strong>
@@ -152,8 +154,8 @@
                                                 <div class="product-quantity">
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}"
                                                         id="">
-                                                    <input id="product-quantity" name="item" type="text" value="1" min="1" readonly
-                                                        class="form-control form-control-sm ">
+                                                    <input id="product-quantity" name="item" type="text" value="1"
+                                                        min="1" readonly class="form-control form-control-sm ">
                                                 </div>
                                                 <button type="submit" class="btn btn-default add2cart">Add
                                                     to cart
@@ -167,21 +169,20 @@
                                             </a>
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <ul class="social-icons">
-                                    <li><a class="facebook" data-original-title="facebook"
+                                    <li><a id="share-fb" class="facebook" data-original-title="facebook"
                                             href="javascript:;"></a></li>
-                                    <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a>
-                                    </li>
-                                    <li><a class="googleplus" data-original-title="googleplus"
+                                    <li><a id="share-whatsapp" style="font-size: 30px;"
+                                            class="text-success FontBig fa fa-whatsapp" data-original-title="evernote"
+                                            href="javascript:;"></a></li>
+                                    <li><a id="share-twitter" class="twitter" data-original-title="twitter"
                                             href="javascript:;"></a>
                                     </li>
-                                    <li><a class="evernote" data-original-title="evernote"
-                                            href="javascript:;"></a></li>
-                                    <li><a class="tumblr" data-original-title="tumblr" href="javascript:;"></a>
+                                    <li><a id="share-email" style="font-size: 30px;"
+                                            class="text-danger FontBig fa fa-envelope-o"
+                                            data-original-title="googleplus" href="javascript:;"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -347,6 +348,8 @@
 <!-- END BODY -->
 <script src="{{ asset('js/foundation.min.js') }}"></script>
 <script src="{{ asset('js/setup.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
 <script>
     function addwith() {
         var total = 0;
@@ -354,15 +357,60 @@
         for (i = 0; i < sale_price.length; i++) {
             if (document.getElementsByClassName('product_addwith')[i].checked == true) {
                 document.getElementsByClassName('addwithproduct')[i].style.display = "block"
-
                 var total = total + Number(document.getElementsByClassName('sale_prince')[i].innerText);
             } else {
                 document.getElementsByClassName('addwithproduct')[i].style.display = "none"
-
             }
         }
         document.getElementById('total_buy').innerText = total;
     }
+
+    function btnPincode() {
+
+        pincode = document.getElementById('pincode').value
+        if (pincode.length == 6) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                document.getElementById('pincode').style.borderColor = 'green';
+                if (this.responseText == 'no') {
+                    document.getElementById('code_data').innerHTML = "<span class='text-danger'>Delivery not Available in this pincode - "+pincode+"</span>";
+                } else {
+                    document.getElementById('code_data').innerHTML = this.responseText;
+                }
+            }
+            xmlhttp.open("GET", "{{ route('product.details.pincode') }}/" + pincode);
+            xmlhttp.send();
+        } else {
+            document.getElementById('pincode').style.borderColor = 'red';
+        }
+    }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        // Uses sharer.js 
+        //  https://ellisonleao.github.io/sharer.js/#twitter  
+        var shareUrl = window.location.href;
+        var shareTitle = document.title;
+        var shareSubject = "Read this good article";
+        var shareImage = "yourTwitterUsername";
+        var shareDescription = "yourTwitterUsername";
+        //facebook
+        $('#share-fb').attr('data-url', shareUrl).attr('data-sharer', 'facebook');
+        //twitter
+        $('#share-twitter').attr('data-url', shareUrl).attr('data-title', shareTitle).attr('data-sharer',
+            'twitter');
+        //linkedin
+        $('#share-li').attr('data-url', shareUrl).attr('data-sharer', 'linkedin');
+        // google plus
+        $('#share-email').attr('data-url', shareUrl).attr('data-title', shareTitle).attr('data-sharer',
+            'email');
+        // email
+        $('#share-whatsapp').attr('data-url', shareUrl).attr('data-title', shareTitle).attr('data-subject',
+            shareSubject).attr('data-sharer', 'whatsapp');
+        window.Sharer.init();
+    });
 </script>
 
 </html>

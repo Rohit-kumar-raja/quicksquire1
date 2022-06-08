@@ -26,8 +26,8 @@
                                     <th>Zipcode</th>
                                     <th>Order Date</th>
                                     <th>status</th>
-
-                                    <th colspan="2" class="text-center">Action</th>
+                                    <th >Action</th>
+                                    <th >Action</th>
                                     
                                 </tr>
                             </thead>
@@ -73,9 +73,7 @@
                         </table>
                        
                     </div>
-                  <div class="p-2 text-right ">
-                    {{ $orders->links() }}
-                  </div>
+               
                 </div>
             </div>
         </div>

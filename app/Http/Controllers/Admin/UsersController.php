@@ -78,7 +78,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $data = DB::table('users')->find($id);
-        $details = DB::table('profiles')->where('user_id',$id)->get();
+        $details = DB::table('profiles')->where('user_id',$id)->first();
         $categories = DB::table('categories')->get();
         return view('livewire.admin.users.update', ['data' => $data, 'categories' => $categories,'details'=>$details]);
     }

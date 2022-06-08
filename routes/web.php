@@ -54,6 +54,7 @@ use App\Http\Livewire\WishListComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\ProductDetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,8 @@ Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 Route::post('/checkout/placeOrder', [CheckoutComponent::class, 'placeOrder'])->name('checkout.placeOrder');
 
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
+Route::get('product/pincode/',[ProductDetailsController::class,'pincode'])->name('product.details.pincode');
+Route::get('product/pincode/{pincode}',[ProductDetailsController::class,'pincode']);
 
 Route::get('/search', SearchComponent::class)->name('product.search');
 // Route::post('/searchproduct' ,[SearchController::class,'index'])->name('products.search');

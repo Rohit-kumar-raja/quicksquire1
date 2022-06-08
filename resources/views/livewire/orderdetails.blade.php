@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    
     <!-- for the cart details -->
     <div class="container">
         <div class="row">

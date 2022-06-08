@@ -7,12 +7,14 @@ use App\Models\Product;
 use Livewire\Component;
 use Cart;
 use App\Models\Category;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ProductDetailsController extends Controller
 {
     public $slug;
     public $qty;
-  
+
     public function mount($slug)
     {
         $this->slug = $slug;
@@ -39,7 +41,7 @@ class ProductDetailsController extends Controller
 
     public function index($slug)
     {
-        $total=0;
+        $total = 0;
         $this->slug = $slug;
         $related_products = Product::where('category_id', '30', $this->slug)->inRandomOrder()->limit(3)->get();
         $product = Product::where('slug', $this->slug)->first();
@@ -47,10 +49,25 @@ class ProductDetailsController extends Controller
         $popular_products = Product::inRandomOrder()->limit(10)->get();
         //$related_products = Product::where('category_id', $product->category_id)->inRandomOrder()->limit(3)->get();
         foreach ($related_products as $r_product) {
-            $total=  $total+$r_product->regular_price;
+            $total =  $total + $r_product->regular_price;
         }
-        
+
         $categories = Category::all();
-        return view('livewire.details-component', ['product' => $product, 'popular_products' => $popular_products, 'related_products' => $related_products, 'bestseller_products' => $bestseller_products, 'categories' => $categories,'total'=>$total])->layout('layouts.base');
+        return view('livewire.details-component', ['product' => $product, 'popular_products' => $popular_products, 'related_products' => $related_products, 'bestseller_products' => $bestseller_products, 'categories' => $categories, 'total' => $total])->layout('layouts.base');
+    }
+    function pincode($pincode)
+    {
+        try {
+            $data = DB::table('pincode')->where('pincode', $pincode)->first();
+            session(['pincode' => $pincode]);
+            $pincode_data = $data->city . " ";
+            $pincode_data .= $data->district . " ";
+            $pincode_data .= $data->state . " ,";
+            $pincode_data .= $data->country . " - ";
+            $pincode_data .= $pincode . " ";
+            echo $pincode_data;
+        } catch (Exception $e) {
+            echo "no";
+        }
     }
 }
