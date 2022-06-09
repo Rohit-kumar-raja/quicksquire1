@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UsersController;
@@ -192,9 +193,9 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.editslider');
     Route::get('/admin/coupon', HomeCouponComponent::class)->name('admin.coupon');
     Route::get('/admin/coupon/add', HomeAddCouponComponent::class)->name('admin.addcoupon');
-    Route::get('/admin/banner', AdminHomeBannerComponent::class)->name('admin.banner');
-    Route::get('/admin/banner/add', AdminAddHomeBannerComponent::class)->name('admin.addbanner');
-    Route::get('/admin/banner/edit/{banner_id}', AdminEditHomeBannerComponent::class)->name('admin.editbanner');
+    // Route::get('/admin/banner', AdminHomeBannerComponent::class)->name('admin.banner');
+    // Route::get('/admin/banner/add', AdminAddHomeBannerComponent::class)->name('admin.addbanner');
+    // Route::get('/admin/banner/edit/{banner_id}', AdminEditHomeBannerComponent::class)->name('admin.editbanner');
 
     Route::get('/admin/wallet', [WalletController::class, 'index'])->name('admin.wallet');
     Route::post('/admin/wallet/add', [WalletController::class, 'store'])->name('admin.wallet.add');
@@ -229,4 +230,14 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('admin.brand.destroy');
     Route::get('/admin/brand/status/{id}', [BrandController::class, 'status'])->name('admin.brand.status');
     // brand code end
+
+    // banner code start
+    Route::get('/admin/banner', [BannerController::class, 'index'])->name('admin.banner');
+    Route::post('/admin/banner/add', [BannerController::class, 'store'])->name('admin.banner.add');
+    Route::get('/admin/banner/edit/{id}', [BannerController::class, 'edit'])->name('admin.banner.edit');
+    Route::post('/admin/banner/update/{id}', [BannerController::class, 'update'])->name('admin.banner.update');
+    Route::get('/admin/banner/delete/{id}', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
+    Route::get('/admin/banner/status/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
+    // banner code end
+
 });

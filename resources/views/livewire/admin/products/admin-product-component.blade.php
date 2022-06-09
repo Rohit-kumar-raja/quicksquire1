@@ -45,7 +45,7 @@
                                         <td>{{ $product->stock_status }}</td>
                                         <td>{{ $product->regular_price }}</td>
                                         <td>{{ $product->sale_price }}</td>
-                                        <td>{{ $product->category->name }}</td>
+                                        <td>{{ $product->category->name ?? '' }}</td>
                                         <td>{{ $product->created_at }}</td>
                                         <td>
                                             <a href="{{ route('admin.editproduct', ['product_slug' => $product->slug]) }}"

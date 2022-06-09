@@ -19,12 +19,13 @@
                             {{Session::get('message')}}
                         </div>
                         @endif
-                        <table class="table table-striped">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>S.No</th>
                                     <th>Title</th>
                                     <th>Image</th>
+                                    <th>Link</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -32,10 +33,11 @@
                             <tbody>
                                 @foreach($banners as $banner)
                                 <tr>
-                                    <td>{{$banner->id}}</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$banner->title}}</td>
                                     <td><img src="{{asset('assets/pages/img/banners')}}/{{$banner->image}}" alt="" width="200"></td>
                                     <td>
+                                    <td>{{$banner->link}}</td>
                                         @if($banner->status == 1)
                                         <span class="label label-success">Active</span>
                                         @else
@@ -44,7 +46,7 @@
                                     </td>
                                     <td>
                                         <!-- delte banner -->
-                                        <a href="#" wire:click.prevent="deleteBanner({{$banner->id}})"><i class="fa fa-times fa-2x text-danger"></i></a>
+                                        <a class="btn btn-danger" href="#" wire:click.prevent="deleteBanner({{$banner->id}})"><i class="fas fa-trash "></i></a>
 
                                     </td>
                                 </tr>

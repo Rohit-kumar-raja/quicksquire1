@@ -127,6 +127,7 @@ class AdminAddProductComponent extends Component
 
     public function store(Request $request){
 
+        $destination='assets/pages/img/products';
         $product = new Product();
         $product->name = $request->name;
         $product->slug = $request->slug;
@@ -142,16 +143,16 @@ class AdminAddProductComponent extends Component
         $product->quantity = $request->quantity;
         $product->brand = $request->brand;
         // $product->feature_id = $request->feature_id;
-
-        $imageName = Carbon::now()->timestamp . '_' . $request->image->extension();
-        $request->image->storeAs('products', $imageName);
+// dd($request->image[0]->getClientOriginalExtension());
+        $imageName = Carbon::now()->timestamp . '_' . $request->image[0]->getClientOriginalName();
+        $request->image[0]->move($destination, $imageName);
         $product->image = $imageName;
 
         if ($request->images) {
             $imagesname = '';
             foreach ($request->images as $key => $image) {
-                $imaName = Carbon::now()->timestamp . $key . '_' . $image->extension();
-                $image->storeAs('products', $imaName);
+                $imaName = Carbon::now()->timestamp . $key . '_' . $image->getClientOriginalName();
+                $image->move($destination, $imaName);
                 $imagesname = $imagesname . ',' . $imaName;
             }
             $product->images = $imagesname;
