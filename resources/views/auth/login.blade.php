@@ -14,7 +14,6 @@
             .text-red-600 {
                 color: red;
             }
-
         </style>
 
 
@@ -109,7 +108,7 @@
 
                                 <div id="register" class="animate form">
                                     <x-jet-validation-errors class="mb-4" />
-                                    <form action="{{ route('register') }}" method="POST" autocomplete="on">
+                                    <form action="{{ route('register.otp') }}" method="POST" autocomplete="on">
                                         @csrf
                                         <h1> Sign up </h1>
                                         <p>
@@ -120,11 +119,18 @@
                                                 autofocus autocomplete="name" />
                                         </p>
                                         <p>
+                                            <label for="phone" class="phone" data-icon="ph"> 
+                                                Phone number</label>
+                                            <input id="phone" name="phone" type="text" max="12"
+                                                placeholder="Enter 10 digit mobile valid mobile number" :value="phone" />
+                                        </p>
+                                        <p>
                                             <label for="emailsignup" class="youmail" data-icon="e"> Your
                                                 email</label>
                                             <input id="emailsignup" name="email" type="email"
                                                 placeholder="mysupermail@mail.com" :value="email" />
                                         </p>
+                                      
                                         <p>
                                             <label for="passwordsignup" class="youpasswd" data-icon="p">Your
                                                 password

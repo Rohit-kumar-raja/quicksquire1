@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -57,20 +58,13 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\ProductDetailsController;
 use App\Http\Controllers\Admin\GreatOfferController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\OtpController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// authenticating with otp start
+Route::post('opt/send', [OtpController::class, 'register'])->name('register.otp');
+Route::post('opt/verify', [OtpController::class, 'verifyOtp'])->name('verify.otp');
+Route::get('create/new/user/{user}', [CreateNewUser::class, 'create'])->name('create.new.user');
+// end
 
 Route::get('/', HomeComponent::class)->name('index');
 Route::get('/cart/{product_id}', [CartController::class, 'store'])->name('addcart');
@@ -97,8 +91,8 @@ Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 Route::post('/checkout/placeOrder', [CheckoutComponent::class, 'placeOrder'])->name('checkout.placeOrder');
 
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
-Route::get('product/pincode/',[ProductDetailsController::class,'pincode'])->name('product.details.pincode');
-Route::get('product/pincode/{pincode}',[ProductDetailsController::class,'pincode']);
+Route::get('product/pincode/', [ProductDetailsController::class, 'pincode'])->name('product.details.pincode');
+Route::get('product/pincode/{pincode}', [ProductDetailsController::class, 'pincode']);
 
 Route::get('/search', SearchComponent::class)->name('product.search');
 // Route::post('/searchproduct' ,[SearchController::class,'index'])->name('products.search');
@@ -155,24 +149,20 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/category/add', AdminAddCategoryComponent::class)->name('admin.addcategory');
     Route::get('/admin/category/delete/{id}', [AdminCategoryComponent::class, 'deleteCategory'])->name('admin.category.delete');
     Route::post('/admin/add/category', [AdminAddCategoryComponent::class, 'storeCategory'])->name('admin.category.add');
-
     Route::get('/admin/category/edit/{category_slug}/{scategory_slug?}/{feature_slug?}', AdminEditCategoryComponent::class)->name('admin.editcategory');
 
     // subcategory star
-
     Route::get('/admin/subcategories', [SubCategoryController::class, 'index'])->name('admin.subcategories');
     Route::post('/admin/subcategory/add', [SubCategoryController::class, 'store'])->name('admin.subCategory.add');
     Route::get('/admin/subcategory/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.SubCategory.edit');
     Route::post('/admin/subcategory/update', [SubCategoryController::class, 'update'])->name('admin.SubCategory.update');
     Route::get('/admin/subcategory/delete/{id}', [SubCategoryController::class, 'destroy'])->name('admin.SubCategory.delete');
-
     // subcategory end
 
     // product start
     Route::get('/admin/products', AdminProductComponent::class)->name('admin.products');
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
     Route::post('/admin/product/store', [AdminAddProductComponent::class, 'store'])->name('admin.addproduct.store');
-
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
     Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
     Route::get('/admin/orders', AdminOrderComponent::class)->name('admin.order');
@@ -240,14 +230,14 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/banner/status/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
     // banner code end
 
-      // banner code start
-      Route::get('/admin/greatoffers', [GreatOfferController::class, 'index'])->name('admin.greatoffers');
-      Route::post('/admin/greatoffers/add', [GreatOfferController::class, 'store'])->name('admin.greatoffers.add');
-      Route::get('/admin/greatoffers/edit/{id}', [GreatOfferController::class, 'edit'])->name('admin.greatoffers.edit');
-      Route::post('/admin/greatoffers/update/{id}', [GreatOfferController::class, 'update'])->name('admin.greatoffers.update');
-      Route::get('/admin/greatoffers/delete/{id}', [GreatOfferController::class, 'destroy'])->name('admin.greatoffers.destroy');
-      Route::get('/admin/greatoffers/status/{id}', [GreatOfferController::class, 'status'])->name('admin.greatoffers.status');
-      // greatoffers code end
+    // banner code start
+    Route::get('/admin/greatoffers', [GreatOfferController::class, 'index'])->name('admin.greatoffers');
+    Route::post('/admin/greatoffers/add', [GreatOfferController::class, 'store'])->name('admin.greatoffers.add');
+    Route::get('/admin/greatoffers/edit/{id}', [GreatOfferController::class, 'edit'])->name('admin.greatoffers.edit');
+    Route::post('/admin/greatoffers/update/{id}', [GreatOfferController::class, 'update'])->name('admin.greatoffers.update');
+    Route::get('/admin/greatoffers/delete/{id}', [GreatOfferController::class, 'destroy'])->name('admin.greatoffers.destroy');
+    Route::get('/admin/greatoffers/status/{id}', [GreatOfferController::class, 'status'])->name('admin.greatoffers.status');
+    // greatoffers code end
 
 
 });
