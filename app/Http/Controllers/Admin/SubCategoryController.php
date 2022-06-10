@@ -103,6 +103,6 @@ class SubCategoryController extends Controller
     {
         DB::table('subcategories')->delete($id);
         session()->flash('message', 'Subcategory has been Deleted successfully');
-        return redirect()->back();
+        return redirect()->back()->with('delete', 'Data Deleted successfully');
     }
 }

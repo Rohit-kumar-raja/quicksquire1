@@ -58,17 +58,7 @@
                             </li>
                         @endforeach
 
-                        <div class="sidebar-filter margin-bottom-25">
-                            <h2>Filter</h2>
-                            <h3>Availability</h3>
-                            <div class="checkbox-list">
-                                <label><input type="checkbox"> Not Available (3)</label>
-                                <label><input type="checkbox"> In Stock (26)</label>
-                            </div>
-
-                            <h3>Price <span class="text-info"></span></h3>
-                            <div id="slider"></div>
-                        </div>
+                    
                 </div>
                 <!-- END SIDEBAR -->
 

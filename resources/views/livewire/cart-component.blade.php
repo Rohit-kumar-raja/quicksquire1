@@ -30,7 +30,7 @@
                         <div class="col-4">
                             <div class="row">
                                 <div class="col-sm-1"></div>
-                                <div class="col-sm-7"> <input type="text" id="pincode" name="pincode"
+                                <div class="col-sm-7"> <input type="text" value="{{session('pincode')}}" id="pincode" name="pincode"
                                         placeholder="Enter pincode" class="form-control form-control-sm"></div>
                                 <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
                                         class="btn btn-sm btn-primary">check</button> </div>
@@ -131,15 +131,19 @@
                                         <strong class="price"><span></span><i style="font-size:17px;">All Taxes
                                                 included</i></strong>
                                     </li>
-                                    <!-- <li>
-                                    <em>Shipping cost</em>
-                                    <strong class="price"><span>$</span>3.00</strong>
-                                </li> -->
+                                    <li class="shopping-total-price">
+                                        <em>Coin </em>
+                                        <?php
+                                        
+                                        ?>
+                                        <strong class="text-success">+{{ $coin_gain }} <i class="fas fa-coins    "></i> </strong>
+                                    </li>
                                     <li class="shopping-total-price">
                                         <em>Total</em>
                                         <strong
                                             class="price"><span>₨</span>{{ Cart::instance('cart')->subtotal() }}</strong>
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -243,9 +247,12 @@
                         document.getElementById('code_data').innerHTML =
                             "<span class='text-danger'>Delivery not Available in this pincode - " + pincode + "</span>";
                         document.getElementById('checkout').style.display = "none";
+                        document.getElementById('checkout1').style.display = "block";
+
                     } else {
                         document.getElementById('code_data').innerHTML = this.responseText;
                         document.getElementById('checkout').style.display = "block";
+                        document.getElementById('checkout1').style.display = "none";
 
                     }
                 }
@@ -254,15 +261,18 @@
             } else {
                 document.getElementById('pincode').style.borderColor = 'red';
             }
+            return this.responseText;
         }
 
         function checkpincode() {
             pincode = document.getElementById('pincode').value
-            if (pincode.length == 6) {
+            info = btnPincode(pincode)
+            if (pincode.length == 6 && info != 'no') {
                 document.getElementById('checkout').style.display = "block";
                 document.getElementById('checkout1').style.display = "none";
 
-            }else{
+            } else {
+                alert("Please Enter Pincode")
                 document.getElementById('checkout').style.display = "none";
                 document.getElementById('checkout1').style.display = "block";
 

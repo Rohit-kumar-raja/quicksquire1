@@ -108,7 +108,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHB"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-sliders-h fa-cog"></i>
-            <span>Manage Brands Slider</span>
+            <span> Brands </span>
         </a>
         <div id="collapseHB" class="collapse" aria-labelledby="headingTwo"
             data-parent="#accordionSidebar">
@@ -124,13 +124,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHS"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-sliders-h fa-cog"></i> 
-            <span>Manage Home Slider</span>
+            <span>Great Offers</span>
         </a>
         <div id="collapseHS" class="collapse" aria-labelledby="headingTwo"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="{{ route('admin.slider') }}">Manage Offer Slider</a>
+                <a class="collapse-item" href="{{ route('admin.greatoffers') }}">Great Offer Sliders</a>
 
             </div>
         </div>

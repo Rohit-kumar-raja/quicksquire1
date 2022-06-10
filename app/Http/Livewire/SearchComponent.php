@@ -17,12 +17,14 @@ class SearchComponent extends Component
     public $search;
     public $product_cat;
     public $product_cat_id;
+    public $min;
+    public $max;
 
     public function mount()
     {
         $this->sorting =  "default";
         $this->pagesize =  12;
-        $this->fill(request()->only('search', 'product_cat', 'product_cat_id','sorting','pagesize'));
+        $this->fill(request()->only('search', 'product_cat', 'product_cat_id', 'sorting', 'pagesize', 'min', 'max'));
     }
 
     public function store($product_id, $product_name, $product_price)
@@ -35,20 +37,28 @@ class SearchComponent extends Component
     use WithPagination;
     public function render()
     {
-        session(['search'=>$this->search,'sorting'=>$this->sorting,'pagesize'=>$this->pagesize]);
+        session(['search' => $this->search, 'sorting' => $this->sorting, 'pagesize' => $this->pagesize, 'min_amount' => $this->min, 'max_amount' => $this->max]);
         if ($this->sorting == 'new') {
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
         } else if ($this->sorting == 'low to high') {
-            $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('regular_price', 'ASC')->paginate($this->pagesize);
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('sale_price', 'ASC')->paginate($this->pagesize);
         } else if ($this->sorting == 'high to low') {
-            $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('regular_price', 'DESC')->paginate($this->pagesize);
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('sale_price', 'DESC')->paginate($this->pagesize);
         } else {
             $products =  Product::where('name', 'like', '%' . $this->search . '%')->Where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
         }
+
         $categories = Category::all();
-        return view('livewire.search-component', ['products' => $products, 'categories' => $categories])->layout("layouts.base");
-    
+        // getting all brand start
+        $brand = array();
+        foreach ($products as  $prod) {
+            if ($prod->brand != '')
+                array_push($brand, $prod->brand);
+        }
+        $brand =  array_unique($brand);
+        // getting brand end
+
+
+        return view('livewire.search-component', ['products' => $products, 'categories' => $categories, 'brands' => $brand])->layout("layouts.base");
     }
-
-
 }

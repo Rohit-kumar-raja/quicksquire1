@@ -2,7 +2,6 @@
     .form-width {
         width: 75px;
     }
-
 </style>
 
 <body class="ecommerce">
@@ -55,23 +54,31 @@
 
                     <div class="sidebar-filter margin-bottom-25">
                         <h2>Filter</h2>
-                        <h3>Availability</h3>
+                        <h3>Brand</h3>
                         <div class="checkbox-list">
-                            <label><input type="checkbox"> Not Available (3)</label>
-                            <label><input type="checkbox"> In Stock (26)</label>
+                            @foreach ($brands as $brand )
+                            <label><input type="checkbox"> {{ $brand}} </label>
+                            @endforeach
+
                         </div>
 
                         <h3>Price</h3>
                         <p>
                             <label for="amount">Range:</label>
+
                         <div class="row">
-                            <div class="col-4"> <input type="text" placeholder="Max"
+                            <div class="col-4">
+                                <input value="{{ session('min_amount') }}" type="text" id="min" placeholder="Min"
+                                    class="form-control form-control-sm form-width" name="min">
+                            </div>
+
+                            <div class="col-4">
+                                <input type="text" value="{{ session('max_amount') }}" id="max" placeholder="Max"
                                     class="form-control form-control-sm form-width" name="max">
                             </div>
-                            <div class="col-4"> <input type="text" placeholder="Min"
-                                    class="form-control form-control-sm form-width" name="min"></div>
+
                             <div class="col-4">
-                                <button class="btn btn-default">GO</button>
+                                <button onclick="filter_change()" class="btn btn-default">GO</button>
                             </div>
                         </div>
 
@@ -174,7 +181,6 @@
                         .wishlist-mt {
                             margin-top: -16px
                         }
-
                     </style>
                     <div class="row product-list">
                         @php
@@ -268,7 +274,10 @@
         function filter_change() {
             var item = document.getElementById('item').value;
             var sorting = document.getElementById('sorting').value;
-            window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting)
+            var min = document.getElementById('min').value;
+            var max = document.getElementById('max').value;
+            window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting + '&min=' + min +
+                '&max=' + max)
         }
     </script>
 

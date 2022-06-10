@@ -124,6 +124,6 @@ class BrandController extends Controller
             unlink(public_path('assets/pages/img/brands/' . $image_name));
         }
         DB::table('brand_sliders')->delete($id);
-        return redirect()->back()->with('status1', 'Status activated successfully');
+        return redirect()->back()->with('delete', 'Data Deleted successfully');
     }
 }

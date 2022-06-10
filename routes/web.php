@@ -56,7 +56,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\ProductDetailsController;
-
+use App\Http\Controllers\Admin\GreatOfferController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -239,5 +239,15 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/banner/delete/{id}', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
     Route::get('/admin/banner/status/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
     // banner code end
+
+      // banner code start
+      Route::get('/admin/greatoffers', [GreatOfferController::class, 'index'])->name('admin.greatoffers');
+      Route::post('/admin/greatoffers/add', [GreatOfferController::class, 'store'])->name('admin.greatoffers.add');
+      Route::get('/admin/greatoffers/edit/{id}', [GreatOfferController::class, 'edit'])->name('admin.greatoffers.edit');
+      Route::post('/admin/greatoffers/update/{id}', [GreatOfferController::class, 'update'])->name('admin.greatoffers.update');
+      Route::get('/admin/greatoffers/delete/{id}', [GreatOfferController::class, 'destroy'])->name('admin.greatoffers.destroy');
+      Route::get('/admin/greatoffers/status/{id}', [GreatOfferController::class, 'status'])->name('admin.greatoffers.status');
+      // greatoffers code end
+
 
 });

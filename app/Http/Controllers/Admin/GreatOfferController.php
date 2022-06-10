@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-class BannerController extends Controller
+class GreatOfferController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner = DB::table('home_banners')->get();
-        return view('livewire.admin.banner.index', ['data' => $banner,]);
+        $greatoffers = DB::table('home_sliders')->get();
+        return view('livewire.admin.greatoffers.index', ['data' => $greatoffers,]);
     }
 
     /**
@@ -38,15 +37,15 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $image_name = '';
-        $id =   DB::table('home_banners')->insertGetId($request->except('_token'));
+        $id =   DB::table('home_sliders')->insertGetId($request->except('_token'));
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $destinationPath = 'assets/pages/img/banners/';
+            $destinationPath = 'assets/pages/img/sliders/';
             $image_name = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $image_name);
         }
-        DB::table('home_banners')
+        DB::table('home_sliders')
             ->where('id', $id)
             ->update(['image' => $image_name]);
         return redirect()->back();
@@ -61,12 +60,12 @@ class BannerController extends Controller
      */
     public function status($id)
     {
-        $status =  DB::table('home_banners')->find($id);
+        $status =  DB::table('home_sliders')->find($id);
         if ($status->status == 1) {
-            DB::table('home_banners')->where('id', $id)->update(['status' => '0']);
+            DB::table('home_sliders')->where('id', $id)->update(['status' => '0']);
         } else {
 
-            DB::table('home_banners')->where('id', $id)->update(['status' => '1']);
+            DB::table('home_sliders')->where('id', $id)->update(['status' => '1']);
         }
         if ($status->status == 1) {
             return redirect()->back()->with('status', 'Status Deactivated successfully');
@@ -83,8 +82,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        $data = DB::table('home_banners')->find($id);
-        return view('livewire.admin.banner.update', ["data" => $data]);
+        $data = DB::table('home_sliders')->find($id);
+        return view('livewire.admin.greatoffers.update', ["data" => $data]);
     }
 
     /**
@@ -98,16 +97,16 @@ class BannerController extends Controller
     {
 
         if ($request->file('image')) {
-            $image_name = DB::table('home_banners')->find($id);
+            $image_name = DB::table('home_sliders')->find($id);
             $image_name = $image_name->image;
             $image = $request->file('image');
-            $destinationPath = 'assets/pages/img/banners/';
+            $destinationPath = 'assets/pages/img/sliders/';
             $image->move($destinationPath, $image_name);
         }
-        $result = DB::table('home_banners')
+        $result = DB::table('home_sliders')
             ->where('id', $request->id)
             ->update($request->except(['_token', 'id', 'image']));
-        return redirect()->route('admin.banner')->with('update', 'Data Update successfully');
+        return redirect()->route('admin.greatoffers')->with('update', 'Data Update successfully');
     }
 
     /**
@@ -118,12 +117,12 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $image_name = DB::table('home_banners')->find($id);
+        $image_name = DB::table('home_sliders')->find($id);
         $image_name = $image_name->image;
-        if (file_exists(public_path('assets/pages/img/banners/' . $image_name))) {
-            unlink(public_path('assets/pages/img/banners/' . $image_name));
+        if (file_exists(public_path('assets/pages/img/sliders/' . $image_name))) {
+            unlink(public_path('assets/pages/img/sliders/' . $image_name));
         }
-        DB::table('home_banners')->delete($id);
+        DB::table('home_sliders')->delete($id);
         return redirect()->back()->with('delete', 'Data Deleted successfully');
     }
 }

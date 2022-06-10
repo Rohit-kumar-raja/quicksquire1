@@ -11,7 +11,7 @@ class UserDashboardComponent extends Component
     public function render()
     {
         $total_amount=0;
-        $total_coin=DB::table('coin')->get()->sum('gain');
+        $total_coin=DB::table('coin')->where('user_id',Auth::user()->id)->get()->sum('gain');
         $orders = Order::orderBy('created_at', 'DESC')->where('user_id', Auth::user()->id)->get()->take(10);
         $totalCost = Order::where('status',  'canceled')->where('user_id', Auth::user()->id)->get();
         $totalPurchase = Order::where('user_id', Auth::user()->id)->count();

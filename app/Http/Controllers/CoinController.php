@@ -36,7 +36,7 @@ class CoinController extends Controller
      */
     public function storeCoin($user_id, $order_id, $transaction_id, $total_amount)
     {
-        $gain = $total_amount * 0.05;
+        $gain = session('coin_gain');
         DB::table('coin')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'transaction_id' => $transaction_id, 'gain' => $gain, 'use' => 0, 'created_at' => date('Y-m-d h:m:s')]);
     }
 

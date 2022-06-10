@@ -3,8 +3,6 @@
         margin-bottom: 50px;
         margin-top: -23px;
     }
-
-
     .product-wish {
         position: absolute;
         top: 2%;
@@ -35,27 +33,21 @@
     .wishlist-mt {
         margin-top: -16px
     }
-
 </style>
 <section class="home-page-slider">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 p-0 m-0">
-
                 <div class="owl-carousel owl-carousel8">
                     @foreach ($banners as $banner)
                         <div>
-                            <div class="slider-item">
+                            <a href="{{ $banner->link }}" class="slider-item">
                                 <img src="{{ asset('assets/pages/img/banners') }}/{{ $banner->image }}"
                                     alt="offer-banners" class="img-fluid">
-                            </div>
+                            </a>
                         </div>
                     @endforeach
-
-
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -140,10 +132,10 @@ $witems = Cart::instance('wishlist')
             <div class="owl-carousel owl-carousel6">
                 @foreach ($sliderss as $slid)
                     <div>
-                        <div class="banner-item">
+                        <a class="banner-item" href="{{ $slid->link }}">
                             <img src="{{ asset('assets/pages/img/sliders') }}/{{ $slid->image }}"
                                 alt="{{ $slid->title }}" class="img-fluid">
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -162,13 +154,11 @@ $witems = Cart::instance('wishlist')
             <div class="owl-carousel owl-carousel7">
                 @foreach ($coupons as $coupon)
                     <div>
-
                         <div class="banner-item">
                             <a href="{{ $coupon->link }}"><img
                                     src="{{ asset('assets/pages/img/coupons') }}/{{ $coupon->image }}"
                                     alt="{{ $coupon->title }}" class="img-fluid"></a>
                         </div>
-
                     </div>
                 @endforeach
             </div>

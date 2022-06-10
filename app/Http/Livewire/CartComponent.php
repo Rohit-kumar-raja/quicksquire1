@@ -5,20 +5,20 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Cart;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class CartComponent extends Component
 {
 
 
-    
+
     public function increaseQuantity($rowid)
     {
         $product = Cart::instance('cart')->get($rowid);
         $qty = $product->qty + 1;
         Cart::instance('cart')->update($rowid, $qty);
         $this->emit('cart-count-component', 'refreshComponent');
-      return redirect()->back();
+        return redirect()->back();
     }
     public function decreaseQuantity($rowid)
     {
@@ -26,7 +26,7 @@ class CartComponent extends Component
         $qty = $product->qty - 1;
         Cart::instance('cart')->update($rowid, $qty);
         $this->emit('cart-count-component', 'refreshComponent');
-       return redirect()->back();
+        return redirect()->back();
     }
 
     public function destroy($rowid)
@@ -81,6 +81,18 @@ class CartComponent extends Component
     public function render()
     {
         $this->setAmountForCheckout();
-        return view('livewire.cart-component')->layout('layouts.base');
+        $cart_amount = 0;
+        $cart_amount =  Cart::instance('cart')->subtotal();
+        $cart_amount = (int)str_replace(',', '', $cart_amount);
+        $coin_value =  DB::table('wallet')->where('min', '<=', $cart_amount)->where('max', '<=', $cart_amount)->orderBy('max', 'ASC')->first();
+        $coin_check =   $coin_value->gain_by_per ?? 0;
+        if ($coin_check > 0) {
+            $coin_gain =  $cart_amount *  $coin_value->gain_by_per / 100;
+        } else {
+            $coin_gain = $coin_value->flat_gain ?? 0;
+        }
+        session(['coin_gain' => $coin_gain]);
+
+        return view('livewire.cart-component', ['coin_gain' => $coin_gain])->layout('layouts.base');
     }
 }
