@@ -38,7 +38,22 @@ class SearchComponent extends Component
     public function render()
     {
         session(['search' => $this->search, 'sorting' => $this->sorting, 'pagesize' => $this->pagesize, 'min_amount' => $this->min, 'max_amount' => $this->max]);
-        if ($this->sorting == 'new') {
+
+        // Searching for max and min amount
+        if ($this->sorting == 'new' && $this->max!='' && $this->min!='') {
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->whereBetween('sale_price', [$this->min, $this->max])->orderBy('created_at', 'DESC')->paginate($this->pagesize);
+        } else if ($this->sorting == 'low to high' && $this->max!='' && $this->min!='') {
+           echo "lol 1";
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->whereBetween('sale_price', [$this->min, $this->max])->orderBy('sale_price', 'ASC')->paginate($this->pagesize);
+        } else  if ($this->sorting == 'high to low' && $this->max!='' && $this->min!='') {
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->whereBetween('sale_price', [$this->min, $this->max])->orderBy('sale_price', 'DESC')->paginate($this->pagesize);
+        } elseif ($this->max!='' && $this->min!='') {
+            $products = Product::where('name', 'like', '%' . $this->search . '%')->whereBetween('sale_price', [$this->min, $this->max])->orderBy('created_at', 'DESC')->paginate($this->pagesize);
+        }
+
+
+
+       else if ($this->sorting == 'new') {
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
         } else if ($this->sorting == 'low to high') {
             $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('sale_price', 'ASC')->paginate($this->pagesize);
