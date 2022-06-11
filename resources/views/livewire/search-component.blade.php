@@ -39,17 +39,6 @@
                             </li>
                         @endforeach
 
-                        <!-- <li class="list-group-item clearfix dropdown active">
-                            <a href="javascript:void(0);" class="collapsed">
-                                <i class="fa fa-angle-right"></i>
-                                All Category
-
-                            </a>
-                            <ul class="dropdown-menu" style="display:block;">
-                                
-                            </ul>
-                        </li> -->
-
                     </ul>
 
                     <div class="sidebar-filter margin-bottom-25">
@@ -57,15 +46,12 @@
                         <h3>Brand</h3>
                         <div class="checkbox-list">
                             @foreach ($brands as $brand )
-                            <label><input type="checkbox"> {{ $brand}} </label>
+                            <label><input  type="checkbox"> {{ $brand}} </label>
                             @endforeach
-
                         </div>
-
                         <h3>Price</h3>
                         <p>
                             <label for="amount">Range:</label>
-
                         <div class="row">
                             <div class="col-4">
                                 <input value="{{ session('min_amount') }}" type="text" id="min" placeholder="Min"
@@ -81,29 +67,9 @@
                                 <button onclick="filter_change()" class="btn btn-default">GO</button>
                             </div>
                         </div>
-
                         </p>
                         <div id="slider-range"></div>
                     </div>
-
-                    <!-- <div class="sidebar-products clearfix">
-                        <h2>Bestsellers</h2>
-                        <div class="item">
-                            <a href="shop-item.php"><img src="{{ asset('assets/pages/img/products/k1.jpg') }}" alt="Some Shoes in Animal with Cut Out"></a>
-                            <h3><a href="shop-item.php">Some Shoes in Animal with Cut Out</a></h3>
-                            <div class="price">$31.00</div>
-                        </div>
-                        <div class="item">
-                            <a href="shop-item.php"><img src="assets/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                            <h3><a href="shop-item.php">Some Shoes in Animal with Cut Out</a></h3>
-                            <div class="price">$23.00</div>
-                        </div>
-                        <div class="item">
-                            <a href="shop-item.php"><img src="assets/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                            <h3><a href="shop-item.php">Some Shoes in Animal with Cut Out</a></h3>
-                            <div class="price">$86.00</div>
-                        </div>
-                    </div> -->
                 </div>
                 <!-- END SIDEBAR -->
                 <!-- BEGIN CONTENT -->
@@ -252,15 +218,7 @@
                                     {{ $products->appends(['search' => session('search'), 'pagesize' => '12', 'sorting' => 'asc'])->links('pagination::bootstrap-4') }}
                                 </div>
                             @endif
-                            <!-- <ul class="pagination pull-right">
-                                <li><a href="javascript:;">&laquo;</a></li>
-                                <li><a href="javascript:;">1</a></li>
-                                <li><span>2</span></li>
-                                <li><a href="javascript:;">3</a></li>
-                                <li><a href="javascript:;">4</a></li>
-                                <li><a href="javascript:;">5</a></li>
-                                <li><a href="javascript:;">&raquo;</a></li>
-                            </ul> -->
+                       
                         </div>
                     </div>
                     <!-- END PAGINATOR -->
