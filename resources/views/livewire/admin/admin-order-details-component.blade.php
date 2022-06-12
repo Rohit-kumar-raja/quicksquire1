@@ -11,7 +11,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="pull-right">
-                                    <a href="{{route('admin.order')}}" class="btn btn-info btn-sm">All Orders</a>
+                                    <a href="{{route('admin.orders')}}" class="btn btn-info btn-sm">All Orders</a>
                                     @if($order->status == 'ordered')
                                     <a href="#" wire:click.prevent="cancelOrder" class="btn btn-danger pull-right">Cancel Order</a>
                                     @endif
@@ -223,20 +223,20 @@
                                 <th>Line1</th>
                                 <td>{{$order->shipping->line1}}</td>
                                 <th>Line2</th>
-                                <td>{{$order->shipping->line2}}</td>
+                                <td>{{$order->shipping->line2 ?? ''}}</td>
 
                             </tr>
                             <tr>
                                 <th>City</th>
-                                <td>{{$order->shipping->city}}</td>
+                                <td>{{$order->shipping->city ?? ''}}</td>
                                 <th>Province</th>
-                                <td>{{$order->shipping->province}}</td>
+                                <td>{{$order->shipping->province ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>Postal Code</th>
-                                <td>{{$order->shipping->zipcode}}</td>
+                                <td>{{$order->shipping->zipcode ?? ''}}</td>
                                 <th>Country</th>
-                                <td>{{$order->shipping->country}}</td>
+                                <td>{{$order->shipping->country ?? ''}}</td>
                             </tr>
                         </table>
                     </div>
@@ -255,16 +255,16 @@
                     <div class="panel-body">
                         <table class="table">
                             <tr>
-                                <th>Trasnsection Mode</th>
-                                <td>{{$order->transaction->mode}}</td>
+                                <th>Trasnsection Mode</th> 
+                                <td>{{$order->transaction->mode ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>Status</th>
-                                <td>{{$order->transaction->status}}</td>
+                                <td>{{$order->transaction->status ?? ''  }}</td>
                             </tr>
                             <tr>
                                 <th>Trasnsection Date</th>
-                                <td>{{$order->transaction->created_at}}</td>
+                                <td>{{$order->transaction->created_at ?? ''}}</td>
                             </tr>
 
                         </table>

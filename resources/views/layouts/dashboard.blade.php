@@ -7,9 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-
         <title>Quick Secure India PVT.Ltd - Admin</title>
-
         <!-- Custom fonts for this template-->
         <!-- Dashboard -->
         <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -101,7 +99,8 @@
 
         <!-- Page level plugins -->
         <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
-
+        <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
+        <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
         <!-- Page level custom scripts -->
         <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>

@@ -32,6 +32,7 @@
                                     <th>Sale Price</th>
                                     <th>Category</th>
                                     <th>Date</th>
+                                    <th>Reviews</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -47,6 +48,12 @@
                                         <td>{{ $product->sale_price }}</td>
                                         <td>{{ $product->category->name ?? '' }}</td>
                                         <td>{{ $product->created_at }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.reviews', $product->id) }}"
+                                                class="btn btn-success btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.editproduct', ['product_slug' => $product->slug]) }}"
                                                 class="btn btn-success btn-sm">
@@ -110,7 +117,7 @@
                                 // Get the search value
                                 $(this).attr('title', $(this).val());
                                 var regexr =
-                                '({search})'; //$(this).parents('th').find('select').val();
+                                    '({search})'; //$(this).parents('th').find('select').val();
 
                                 var cursorPosition = this.selectionStart;
                                 // Search the column for that value
@@ -139,6 +146,6 @@
         });
     });
     if ($(api.column(colIdx).header()).index() >= 0) {
-     $(cell).html('<input type="text" placeholder="' + title + '"/>');
-}
+        $(cell).html('<input type="text" placeholder="' + title + '"/>');
+    }
 </script>

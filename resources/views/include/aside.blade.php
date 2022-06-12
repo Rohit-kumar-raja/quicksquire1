@@ -84,12 +84,12 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="{{ route('admin.order') }}">All Orders</a>
+                <a class="collapse-item" href="{{ route('admin.orders') }}">All Orders</a>
                 {{-- <a class="collapse-item" href="#">Return Orders</a> --}}
             </div>
         </div>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHC"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-sliders-h fa-cog"></i>
@@ -103,11 +103,11 @@
 
             </div>
         </div>
-    </li>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHB"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-sliders-h fa-cog"></i>
+            <i class="fas fa-random"></i>
             <span> Brands </span>
         </a>
         <div id="collapseHB" class="collapse" aria-labelledby="headingTwo"
@@ -123,7 +123,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHS"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-sliders-h fa-cog"></i> 
+            <i class="fa fa-gift" aria-hidden="true"></i>
             <span>Great Offers</span>
         </a>
         <div id="collapseHS" class="collapse" aria-labelledby="headingTwo"
@@ -138,7 +138,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pincode"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-sliders-h fa-cog"></i> 
+            <i class="fas fa-barcode"></i>
             <span>Pincode</span>
         </a>
         <div id="pincode" class="collapse" aria-labelledby="headingTwo"

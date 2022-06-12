@@ -41,9 +41,24 @@ class AdminDashboardComponent extends Component
         $order_count = DB::table('orders')->where('status', 'ordered')->count();
         $delivered_count = DB::table('orders')->where('status', 'delivered')->count();
 
+        $month = array();
+        $orders = array();
+        $year = date('Y');
+        $type = array();
 
-
-
+        for ($i = 1; $i <= date('m'); $i++) {
+            array_push($month, date("F", mktime(0, 0, 0, $i, 10)));
+            if ($i < 10) {
+                $monthly_orders = Db::table('orders')->where('created_at', 'like', $year . '-0' . $i . '-% %:%:%')->count();
+            } else {
+                $monthly_orders = Db::table('orders')->where('created_at', 'like', $year . '-' . $i . '-% %:%:%')->count();
+            }
+            array_push($orders, $monthly_orders);
+        }
+        $cancel_count1 = DB::table('orders')->where('status', 'canceled')->where('created_at', 'like', '%' .  $year . '%')->count();
+        $order_count1 = DB::table('orders')->where('status', 'ordered')->where('created_at', 'like', '%' .  $year . '%')->count();
+        $delivered_count1 = DB::table('orders')->where('status', 'delivered')->where('created_at', 'like', '%' . $year . '%')->count();
+        $type = [$order_count1, $delivered_count1, $cancel_count1,];
         return view('livewire.admin.admin-dashboard-component', [
             'all_total' => $all_total,
             'order_amount' => $order_amount,
@@ -53,6 +68,9 @@ class AdminDashboardComponent extends Component
             'cancel_count' => $cancel_count,
             'order_count' => $order_count,
             'delivered_count' => $delivered_count,
+            'monthly' => $month,
+            'orders' => json_encode($orders),
+            'type' => json_encode($type)
         ])->layout('layouts.dashboard');
     }
 }

@@ -59,6 +59,8 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\ProductDetailsController;
 use App\Http\Controllers\Admin\GreatOfferController;
 use App\Http\Controllers\OtpController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\ReviewController;
 
 // authenticating with otp start
 Route::post('opt/send', [OtpController::class, 'register'])->name('register.otp');
@@ -239,5 +241,19 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/greatoffers/status/{id}', [GreatOfferController::class, 'status'])->name('admin.greatoffers.status');
     // greatoffers code end
 
+    // Orders start
+    Route::get('/admin/orders', [ordersController::class, 'index'])->name('admin.orders');
+    Route::get('/admin/order', [ordersController::class, 'index'])->name('admin.order');
+
+    Route::post('/admin/orders/add', [ordersController::class, 'store'])->name('admin.orders.add');
+    Route::get('/admin/orders/edit/{id}', [ordersController::class, 'edit'])->name('admin.orders.edit');
+    Route::post('/admin/orders/update/{id}', [ordersController::class, 'update'])->name('admin.orders.update');
+    Route::get('/admin/orders/delete/{id}', [ordersController::class, 'destroy'])->name('admin.orders.destroy');
+    Route::get('/admin/orders/status/{id}', [ordersController::class, 'status'])->name('admin.orders.status');
+    // Orders end
+    // reviews start
+    Route::get('/admin/reviews/{product_id}', [ReviewController::class, 'index'])->name('admin.reviews');
+    Route::get('/admin/reviews/delete/{id}', [ReviewController::class, 'destroy'])->name('admin.reviews.destroy');
+    // reviews end
 
 });

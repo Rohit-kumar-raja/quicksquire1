@@ -200,6 +200,21 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group  col-sm-4">
+                                    <label class=" control-label">Feature:</label>
+                                    <div class="">
+                                        <select multiple data-live-search="true" name="featured[]" wire:modal="featured"
+                                            class=" selectpicker form-control">
+                                            <option value="0">Select Feature</option>
+                                            @foreach ($features as $feature)
+                                                <option value="{{ $feature->id }}">{{ $feature->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('feature_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group text-center ">
                                 <label class=" control-label"></label>
@@ -215,6 +230,21 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+
+<style>
+ .form-horizontal .form-group {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.dropdown-menu {
+    min-height: 300px!important;
+    max-height: 300px !important;
+}
+</style>
 @push('scripts')
     <script>
         $(function() {

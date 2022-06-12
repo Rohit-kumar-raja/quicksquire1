@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 
 use App\Models\Category;
+use App\Models\Feature;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\Subcategory;
@@ -155,6 +156,7 @@ class AdminEditProductComponent extends Component
         $scategories = Subcategory::where('category_id', $this->category_id)->get();
         $categories = Category::all();
         $brand = DB::table('brand_sliders')->get();
-        return view('livewire.admin.products.admin-edit-product-component', ['categories' => $categories, 'scategories' => $scategories, 'brands' => $brand])->layout('layouts.dashboard');
+        $features = Feature::all();
+        return view('livewire.admin.products.admin-edit-product-component', ['categories' => $categories, 'scategories' => $scategories, 'brands' => $brand,'features'=>$features])->layout('layouts.dashboard');
     }
 }

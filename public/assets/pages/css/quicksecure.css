@@ -1,0 +1,77 @@
+
+@media(max-width:576px){
+    .additional-shop-info , .additional-nav{
+    display:none!important;
+    }
+    .pre-header{    
+     padding-top:0px!important;   
+     border: none!important;
+    }
+    .top-cart-block{
+        display:none!important;
+    }
+    
+    .ecommerce .site-logo{
+        width:55%!important;
+    }
+    }
+    .header{
+    background: linear-gradient(to right, #000530, #1445b7)!important;
+    }
+    
+    .header::before {
+     background:none!important;   
+    }
+    
+    .pre-header{background: #e7284d!important;}
+    
+    *{ font-family: revert!important;}
+    .ecommerce .header-navigation > ul > li > a{
+        padding: 30px 15px 14px!important;
+        font-size: 13px!important;
+         font-weight: 100!important;
+         font-family: revert!important;
+    }
+    
+    .list-inline{
+        margin-top: 5px!important;
+    }
+    
+    .pre-header a:hover {
+        color:#fff!important;
+    }
+    
+    .dropdown-menu{
+        background:#ededed!important
+    
+    }
+    
+    .dropdown-menu>li>a{
+            color:#fff!important;
+    }
+    
+    
+    .dropdown-menu>li>a:hover {
+        color: #262626!important;
+        background-color: #f5f5f5;
+    }
+    
+    .header-navigation-content .header-navigation-col h4{
+        color:#000!important;
+    }
+    
+    .header-navigation .header-navigation-content .header-navigation-col li > a:hover{
+        box-shadow: none!important;
+        color:#000;
+    }
+    
+    .header-navigation .dropdown-menu li > a {
+        font-size: 13px!important;
+        padding: 9px 10px!important;
+        font-weight: 300!important;
+        color: #000!important;
+    }
+    
+    .header-navigation-content{
+        min-width: 600px!important;
+    }
