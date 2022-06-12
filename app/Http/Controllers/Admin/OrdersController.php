@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class OrdersController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -18,7 +19,36 @@ class OrdersController extends Controller
 
         return view('livewire.admin.orders.index', ['data' => $orders]);
     }
+    public function canceled()
+    {
+        $orders = DB::table('orders')->where('status','canceled')->get();
+        return view('livewire.admin.orders.canceled', ['data' => $orders]);
+    }
 
+    public function delivered()
+    {
+        $orders = DB::table('orders')->where('status','delivered')->get();
+        return view('livewire.admin.orders.delivered', ['data' => $orders]);
+    }
+
+    public function padding()
+    {
+        $orders = DB::table('orders')->where('status','padding')->get();
+
+        return view('livewire.admin.orders.padding', ['data' => $orders]);
+    }
+    public function ordered()
+    {
+        $orders = DB::table('orders')->where('status','ordered')->get();
+
+        return view('livewire.admin.orders.ordered', ['data' => $orders]);
+    }
+    public function dispatched()
+    {
+        $orders = DB::table('orders')->where('status','dispatched')->get();
+
+        return view('livewire.admin.orders.dispatched', ['data' => $orders]);
+    }
     /**
      * Show the form for creating a new resource.
      *

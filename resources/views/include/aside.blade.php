@@ -85,7 +85,14 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="{{ route('admin.orders') }}">All Orders</a>
-                {{-- <a class="collapse-item" href="#">Return Orders</a> --}}
+                <a class="collapse-item" href="{{ route('admin.order.ordered') }}">New Orders</a>
+                <a class="collapse-item" href="{{ route('admin.order.dispatched') }}">Dispatched Orders</a>
+                <a class="collapse-item" href="{{ route('admin.order.delivered') }}">Delivered Orders</a>
+                <a class="collapse-item" href="{{ route('admin.order.padding') }}">Padding Orders</a>
+                <a class="collapse-item" href="{{ route('admin.order.canceled') }}">Canceled Orders</a>
+
+
+
             </div>
         </div>
     </li>

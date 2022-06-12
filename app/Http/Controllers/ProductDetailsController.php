@@ -64,7 +64,7 @@ class ProductDetailsController extends Controller
             $pincode_data .= $data->district . " ";
             $pincode_data .= $data->state . " ,";
             $pincode_data .= $data->country . " - ";
-            $pincode_data .= $pincode . " ";
+            $pincode_data .= $pincode . " (Delivery Available) ";
             echo $pincode_data;
         } catch (Exception $e) {
             echo "no";

@@ -245,6 +245,15 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/orders', [ordersController::class, 'index'])->name('admin.orders');
     Route::get('/admin/order', [ordersController::class, 'index'])->name('admin.order');
 
+    Route::get('/admin/ordered', [ordersController::class, 'ordered'])->name('admin.order.ordered');
+    Route::get('/admin/padding', [ordersController::class, 'padding'])->name('admin.order.padding');
+    Route::get('/admin/delivered', [ordersController::class, 'delivered'])->name('admin.order.delivered');
+    Route::get('/admin/canceled', [ordersController::class, 'canceled'])->name('admin.order.canceled');
+    Route::get('/admin/dispatched', [ordersController::class, 'dispatched'])->name('admin.order.dispatched');
+
+
+
+
     Route::post('/admin/orders/add', [ordersController::class, 'store'])->name('admin.orders.add');
     Route::get('/admin/orders/edit/{id}', [ordersController::class, 'edit'])->name('admin.orders.edit');
     Route::post('/admin/orders/update/{id}', [ordersController::class, 'update'])->name('admin.orders.update');
