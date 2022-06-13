@@ -15,37 +15,37 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = DB::table('orders')->get();
+        $orders = DB::table('orders')->orderByDesc('id')->get();
 
         return view('livewire.admin.orders.index', ['data' => $orders]);
     }
     public function canceled()
     {
-        $orders = DB::table('orders')->where('status','canceled')->get();
+        $orders = DB::table('orders')->where('status','canceled')->orderByDesc('id')->get();
         return view('livewire.admin.orders.canceled', ['data' => $orders]);
     }
 
     public function delivered()
     {
-        $orders = DB::table('orders')->where('status','delivered')->get();
+        $orders = DB::table('orders')->where('status','delivered')->orderByDesc('id')->get();
         return view('livewire.admin.orders.delivered', ['data' => $orders]);
     }
 
     public function padding()
     {
-        $orders = DB::table('orders')->where('status','padding')->get();
+        $orders = DB::table('orders')->where('status','padding')->orderByDesc('id')->get();
 
         return view('livewire.admin.orders.padding', ['data' => $orders]);
     }
     public function ordered()
     {
-        $orders = DB::table('orders')->where('status','ordered')->get();
+        $orders = DB::table('orders')->where('status','ordered')->orderByDesc('id')->get();
 
         return view('livewire.admin.orders.ordered', ['data' => $orders]);
     }
     public function dispatched()
     {
-        $orders = DB::table('orders')->where('status','dispatched')->get();
+        $orders = DB::table('orders')->where('status','dispatched')->orderByDesc('id')->get();
 
         return view('livewire.admin.orders.dispatched', ['data' => $orders]);
     }
@@ -107,7 +107,7 @@ class OrdersController extends Controller
     public function edit($id)
     {
         $data = DB::table('orders')->find($id);
-        $categories = DB::table('categories')->get();
+        $categories = DB::table('categories')->orderByDesc('id')->get();
         return view('livewire.admin.orders.update', ['data' => $data, 'categories' => $categories]);
     }
 

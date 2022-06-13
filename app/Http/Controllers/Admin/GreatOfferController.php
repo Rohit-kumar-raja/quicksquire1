@@ -14,7 +14,7 @@ class GreatOfferController extends Controller
      */
     public function index()
     {
-        $greatoffers = DB::table('home_sliders')->get();
+        $greatoffers = DB::table('home_sliders')->orderByDesc('id')->get();;
         return view('livewire.admin.greatoffers.index', ['data' => $greatoffers,]);
     }
 

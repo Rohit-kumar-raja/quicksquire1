@@ -15,8 +15,8 @@ class PincodeController extends Controller
      */
     public function index()
     {
-        $pincode = DB::table('pincode')->get();
-        $categories = DB::table('categories')->get();
+        $pincode = DB::table('pincode')->orderByDesc('id')->get();;
+        $categories = DB::table('categories')->orderByDesc('id')->get();;
         return view('livewire.admin.pincode.index', ['data' => $pincode, 'categories' => $categories]);
     }
 
@@ -78,7 +78,7 @@ class PincodeController extends Controller
     public function edit($id)
     {
         $data = DB::table('pincode')->find($id);
-        $categories = DB::table('categories')->get();
+        $categories = DB::table('categories')->orderByDesc('id')->orderByDesc('id')->get();;;
         return view('livewire.admin.pincode.update', ['data' => $data, 'categories' => $categories]);
     }
 

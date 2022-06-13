@@ -30,7 +30,7 @@ class AdminProductComponent extends Component
     }
     public function render()
     {
-        $products = Product::all();
+        $products = Product::orderByDesc('id')->get();
         return view('livewire.admin.products.admin-product-component', ['products' => $products])->layout('layouts.dashboard');
     }
 }

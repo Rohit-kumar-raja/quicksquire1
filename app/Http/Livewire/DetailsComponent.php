@@ -6,11 +6,16 @@ use App\Models\Product;
 use Livewire\Component;
 use Cart;
 use App\Models\Category;
+use App\Models\OrderItem;
+use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
+
 
 class DetailsComponent extends Component
 {
     public $slug;
     public $qty;
+
     public function mount($slug)
     {
         $this->slug = $slug;
@@ -37,12 +42,14 @@ class DetailsComponent extends Component
 
     public function render()
     {
+ 
         $total=0;
         $related_products = Product::where('category_id', '30', $this->slug)->inRandomOrder()->limit(3)->get();
         $product = Product::where('slug', $this->slug)->first();
         $bestseller_products = Product::inRandomOrder()->limit(4)->get();
         $popular_products = Product::inRandomOrder()->limit(10)->get();
         //$related_products = Product::where('category_id', $product->category_id)->inRandomOrder()->limit(3)->get();
+      
         foreach ($related_products as $r_product) {
             $total=  $total+$r_product->sale_price;
         }

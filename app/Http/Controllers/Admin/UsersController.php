@@ -15,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->orderByDesc('id')->get();
         $categories = DB::table('categories')->get();
         return view('livewire.admin.users.index', ['data' => $users, 'categories' => $categories]);
     }

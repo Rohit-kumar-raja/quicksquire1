@@ -15,7 +15,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner = DB::table('home_banners')->get();
+        $banner = DB::table('home_banners')->orderByDesc('id')->get();;
         return view('livewire.admin.banner.index', ['data' => $banner,]);
     }
 

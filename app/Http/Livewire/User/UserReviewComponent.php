@@ -4,6 +4,8 @@ namespace App\Http\Livewire\User;
 
 use App\Models\OrderItem;
 use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Livewire\Component;
 
 class UserReviewComponent extends Component
@@ -11,6 +13,7 @@ class UserReviewComponent extends Component
     public $order_item_id;
     public $rating;
     public $comment;
+    public $product_id;
 
     public function mount($order_item_id)
     {
@@ -24,22 +27,27 @@ class UserReviewComponent extends Component
         ]);
     }
 
-    public function addReview()
+    public function addReview( Request $request)
     {
-        $this->validate([
-            'comment' => 'required',
-            'rating' => 'required',
-        ]);
+        // $this->validate([
+        //     'comment' => 'required',
+        //     'rating' => 'required',
+        // ]);
         $review = new Review();
-        $review->rating = $this->rating;
-        $review->comment = $this->comment;
-        $review->order_item_id = $this->order_item_id;
+        $review->rating = $request->rating;
+        $review->comment = $request->comment;
+        $review->user_id = Auth::user()->id;
+        $review->product_id = $request->product_id;
+
+
+        $review->order_item_id = $request->order_item_id;
         $review->save();
 
-        $orderItem = OrderItem::find($this->order_item_id);
+        $orderItem = OrderItem::find($request->order_item_id);
         $orderItem->rstatus = true;
         $orderItem->save();
         session()->flash('success', 'Review added successfully');
+        return redirect()->back();
     }
     public function render()
     {

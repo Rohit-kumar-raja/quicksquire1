@@ -132,6 +132,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/order/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
     Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
+    Route::post('/user/review/add', [UserReviewComponent::class,'addReview'])->name('user.review.add');
+
     Route::get('/user/profile', UserProfileComponent::class)->name('user.profile');
     Route::get('/user/profile/edit', UserEditProfileComponent::class)->name('user.editprofile');
     Route::post('/user/profile/update', [UserEditProfileComponent::class, 'updateProfile'])->name('user.update');

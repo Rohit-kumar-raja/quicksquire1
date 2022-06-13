@@ -11,9 +11,9 @@ class ReviewController extends Controller
     public function index($product_id)
     {
         if ($product_id != "all") {
-            $orders = DB::table('reviews')->where('product_id', $product_id)->get();
+            $orders = DB::table('reviews')->where('product_id', $product_id)->orderByDesc('id')->get();;
         } else {
-            $orders = DB::table('reviews')->get();
+            $orders = DB::table('reviews')->orderByDesc('id')->get();;
         }
         return view('livewire.admin.products.reviews', ['data' => $orders]);
     }

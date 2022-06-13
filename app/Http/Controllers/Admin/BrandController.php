@@ -15,7 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $slider = DB::table('brand_sliders')->get();
+        $slider = DB::table('brand_sliders')->orderByDesc('id')->get();;
         return view('livewire.admin.brand.index', ['brands' => $slider,]);
     }
 
