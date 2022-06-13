@@ -46,7 +46,7 @@
                         <h3>Brand</h3>
                         <div class="checkbox-list">
                             @foreach ($brands as $brand )
-                            <label><input  type="checkbox"> {{ $brand}} </label>
+                            <label><input onclick="filter_change()" class="brands" type="checkbox"> {{ $brand}} </label>
                             @endforeach
                         </div>
                         <h3>Price</h3>
@@ -230,6 +230,14 @@
     </div>
     <script>
         function filter_change() {
+        //     var brand_name=new Array();
+        //    var brand_array= document.getElementsByClassName('brands').length
+        //    for(i=0;i<brand_array.length;i++){
+        //        if(brand_array[i].checked==true){
+
+        //        }
+        //    }
+
             var item = document.getElementById('item').value;
             var sorting = document.getElementById('sorting').value;
             var min = document.getElementById('min').value;
