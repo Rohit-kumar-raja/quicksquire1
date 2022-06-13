@@ -1,3 +1,13 @@
+    <style type="text/css">
+
+
+.fa-heart-o , .fill-heart {
+      
+        font-size: 35px !important;
+    }
+
+  
+</style>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -58,7 +68,7 @@
                             </li>
                         @endforeach
 
-                    
+
                 </div>
                 <!-- END SIDEBAR -->
 
@@ -92,14 +102,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-7"> <input type="text" id="pincode" name="pincode"
-                                                placeholder="Enter pincode" class="form-control form-control-sm"></div>
-                                        <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
-                                                class="btn btn-sm btn-primary">check</button> </div>
-                                    </div>
-                                    <small class="text-success" id="code_data"></small>
+
                                 </div>
 
                                 <!-- default end -->
@@ -152,12 +155,34 @@
                                                 </button>
                                             </form>
                                         </div>
+                                        @php
+                                            $witems = Cart::instance('wishlist')
+                                                ->content()
+                                                ->pluck('id');
+                                            
+                                        @endphp
                                         <div class="col-sm-4">
-                                            <a href="{{ route('wishlist.add', $product->id) }}"
-                                                class="btn btn-primary add2cart">Secure your
-                                                system
-                                            </a>
+
+                                            @if ($witems->contains($product->id))
+                                                <a href="{{ route('wishlist.remove', $product->id) }}"><i
+                                                        class="fa fa-heart fill-heart"></i></a>
+                                            @else
+                                                <a href="{{ route('wishlist.add', $product->id) }}"><i
+                                                        class="fa fa-heart-o"></i></a>
+                                            @endif
+
+
                                         </div>
+                                        <div class="row mt-3">
+
+                                            <div class="col-sm-7"> <input type="text" id="pincode" name="pincode"
+                                                    placeholder="Enter pincode" class="form-control form-control-sm">
+                                            </div>
+                                            <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
+                                                    class="btn btn-sm btn-primary">check</button>
+                                            </div>
+                                        </div>
+                                        <small class="text-success mt-1" id="code_data"></small>
                                     </div>
                                 </div>
 
@@ -363,7 +388,8 @@
             xmlhttp.onreadystatechange = function() {
                 document.getElementById('pincode').style.borderColor = 'green';
                 if (this.responseText == 'no') {
-                    document.getElementById('code_data').innerHTML = "<span class='text-danger'>Delivery not Available in this pincode - "+pincode+"</span>";
+                    document.getElementById('code_data').innerHTML =
+                        "<span class='text-danger'>Delivery not Available in this pincode - " + pincode + "</span>";
                 } else {
                     document.getElementById('code_data').innerHTML = this.responseText;
                 }

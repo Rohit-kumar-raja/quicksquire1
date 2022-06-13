@@ -64,6 +64,4 @@
             </div>
         </div>
     </div>
-
-
 </x-adminlayout>

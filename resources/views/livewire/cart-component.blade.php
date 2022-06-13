@@ -28,14 +28,7 @@
                             <h1>Shopping cart</h1>
                         </div>
                         <div class="col-4">
-                            <div class="row">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-7"> <input type="text" value="{{session('pincode')}}" id="pincode" name="pincode"
-                                        placeholder="Enter pincode" class="form-control form-control-sm"></div>
-                                <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
-                                        class="btn btn-sm btn-primary">check</button> </div>
-                            </div>
-                            <small class="text-success" id="code_data"></small>
+
                         </div>
                     </div>
 
@@ -136,7 +129,8 @@
                                         <?php
                                         
                                         ?>
-                                        <strong class="text-success">+{{ $coin_gain }} <i class="fas fa-coins    "></i> </strong>
+                                        <strong class="text-success">+{{ $coin_gain }} <i
+                                                class="fas fa-coins    "></i> </strong>
                                     </li>
                                     <li class="shopping-total-price">
                                         <em>Total</em>
@@ -145,8 +139,27 @@
                                     </li>
 
                                 </ul>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div id="pincode_d" class="col-6">
+                                <div class="row mb-3">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-7"> <input type="text" value="{{ session('pincode') }}"
+                                            id="pincode" name="pincode" placeholder="Enter pincode"
+                                            class="form-control form-control-sm"></div>
+                                    <div class="col-sm-2 "> <button onclick="btnPincode()"
+                                            class="btn btn-sm btn-primary">check</button> </div>
+                                </div>
+                                <small class="text-success" id="code_data"></small>
                             </div>
                         </div>
+
                         <a class="btn btn-default" href="{{ route('product.search') }}">Continue shopping <i
                                 class="fa fa-shopping-cart"></i>
                         </a>
@@ -196,12 +209,15 @@
     <script>
         function print_pdf() {
             var l = document.getElementsByClassName('increase');
-
-            console.log(l.length);
+            var btn = document.getElementsByClassName('btn');
             for (i = 0; i < l.length; i++) {
                 document.getElementsByClassName('increase')[i].style.display = "none";
                 document.getElementsByClassName('decrease')[i].style.display = "none";
-                document.getElementsByClassName('goods-page-ref-no')[i].style.display = "none";
+                document.getElementsByClassName('btn')[i].style.display = "none"
+            }
+            for (i = 0; i < btn.length; i++) {
+
+                document.getElementsByClassName('btn')[i].style.display = "none"
 
 
             }
@@ -213,23 +229,15 @@
             document.getElementsByClassName('footer')[0].style.display = "none"
             document.getElementsByClassName('print')[0].style.display = "none"
             document.getElementsByClassName('pull-right')[1].style.display = "none"
-            document.getElementsByClassName('btn')[5].style.display = "none"
-            document.getElementsByClassName('btn')[6].style.display = "none"
             document.getElementsByClassName('btn-default')[0].style.display = "none"
             document.getElementsByClassName('btn-default')[1].style.display = "none"
             document.getElementById('feedback').style.display = "none"
             document.getElementById('feedback1').style.display = "none"
+            document.getElementById('pincode_d').style.display = "none"
 
-            document.getElementsByTagName('th')[2].style.display = "none";
-            document.getElementsByTagName('td')[2].style.display = "none";
-
-
-
-
-
+            
             print();
             document.getElementById('logo').style.display = "none"
-
             window.location.reload();
         }
 
