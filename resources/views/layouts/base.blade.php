@@ -54,7 +54,7 @@
     <link href="{{ asset('assets/corporate/css/themes/red.css') }}" rel="stylesheet" id="style-color">
     <link href="{{ asset('assets/corporate/css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/corporate/css/customm.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('assets/pages/css/quicksecure.css') }}">
     <!-- Theme styles END -->
 
     <!-- product magnific -->
@@ -713,8 +713,8 @@
         <!-- Load javascripts at bottom, this will reduce page load time -->
         <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
         <!--[if lt IE 9]>
-                        <script src="assets/plugins/respond.min.js"></script>
-                        <![endif]-->
+                            <script src="assets/plugins/respond.min.js"></script>
+                            <![endif]-->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <script src="{{ asset('assets/plugins/jquery.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/plugins/jquery-migrate.min.js') }}" type="text/javascript"></script>

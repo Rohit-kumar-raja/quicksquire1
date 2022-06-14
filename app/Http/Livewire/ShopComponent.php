@@ -9,6 +9,7 @@ use Cart;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Feature;
+use Gloudemans\Shoppingcart\Facades\Cart as FacadesCart;
 use Illuminate\Support\Facades\DB;
 class ShopComponent extends Component
 {

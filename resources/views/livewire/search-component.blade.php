@@ -45,8 +45,15 @@
                         <h2>Filter</h2>
                         <h3>Brand</h3>
                         <div class="checkbox-list">
-                            @foreach ($brands as $brand )
-                            <label><input onclick="filter_change()" class="brands" type="checkbox"> {{ $brand}} </label>
+                            @foreach ($brands as $brand)
+                         
+                              
+                                <label><input onclick="filter_change()"  value="{{ $brand }}" class="brands" type="checkbox"
+                                    @if (in_array($brand, explode(',',session('brand'))))
+                                    checked
+                                    @endif
+                                    >
+                                    {{ $brand }} </label>
                             @endforeach
                         </div>
                         <h3>Price</h3>
@@ -218,7 +225,7 @@
                                     {{ $products->appends(['search' => session('search'), 'pagesize' => '12', 'sorting' => 'asc'])->links('pagination::bootstrap-4') }}
                                 </div>
                             @endif
-                       
+
                         </div>
                     </div>
                     <!-- END PAGINATOR -->
@@ -230,20 +237,20 @@
     </div>
     <script>
         function filter_change() {
-        //     var brand_name=new Array();
-        //    var brand_array= document.getElementsByClassName('brands').length
-        //    for(i=0;i<brand_array.length;i++){
-        //        if(brand_array[i].checked==true){
-
-        //        }
-        //    }
-
+            var brand_name = new Array();
+            var brand_array = document.getElementsByClassName('brands');
+            for (i = 0; i < brand_array.length; i++) {
+                if (brand_array[i].checked == true) {
+                    brand_name.push(brand_array[i].value)
+                }
+            }
+           brand_name= brand_name.join(',');
             var item = document.getElementById('item').value;
             var sorting = document.getElementById('sorting').value;
             var min = document.getElementById('min').value;
             var max = document.getElementById('max').value;
             window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting + '&min=' + min +
-                '&max=' + max)
+                '&max=' + max+"&brand="+brand_name)
         }
     </script>
 
