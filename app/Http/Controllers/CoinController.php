@@ -37,7 +37,8 @@ class CoinController extends Controller
     public function storeCoin($user_id, $order_id, $transaction_id, $total_amount)
     {
         $gain = session('coin_gain');
-        DB::table('coin')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'transaction_id' => $transaction_id, 'gain' => $gain, 'use' => 0, 'created_at' => date('Y-m-d h:m:s')]);
+        $use=session("success_use_coin");
+        DB::table('coin')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'transaction_id' => $transaction_id, 'gain' => $gain, 'use' => $use, 'created_at' => date('Y-m-d h:m:s')]);
     }
 
     /**

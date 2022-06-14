@@ -90,6 +90,8 @@ Route::get('cart/checkout', CheckoutComponent::class)->name('cart.checkout');
 
 
 Route::get('/checkout', CheckoutComponent::class)->name('checkout');
+Route::get('/checkout/coin/use', CheckoutComponent::class)->name('checkout.coin.use');
+
 Route::post('/checkout/placeOrder', [CheckoutComponent::class, 'placeOrder'])->name('checkout.placeOrder');
 
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
@@ -168,6 +170,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
     Route::post('/admin/product/store', [AdminAddProductComponent::class, 'store'])->name('admin.addproduct.store');
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
+    Route::post('/admin/product/update', [AdminEditProductComponent::class,'update'])->name('admin.edit.product.update');
     Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
     Route::get('/admin/orders', AdminOrderComponent::class)->name('admin.order');
     Route::get('/admin/order/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orderdetails');

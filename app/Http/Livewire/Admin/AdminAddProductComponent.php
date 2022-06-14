@@ -125,9 +125,10 @@ class AdminAddProductComponent extends Component
         }
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        $destination='assets/pages/img/products';
+        $destination = 'assets/pages/img/products';
         $product = new Product();
         $product->name = $request->name;
         $product->slug = $request->slug;
@@ -142,8 +143,10 @@ class AdminAddProductComponent extends Component
         $product->featured = $request->featured;
         $product->quantity = $request->quantity;
         $product->brand = $request->brand;
-        // $product->feature_id = $request->feature_id;
-// dd($request->image[0]->getClientOriginalExtension());
+        if ($request->feature_id > 0) {
+            $product->feature_id = implode(',', $request->feature_id);
+        }
+
         $imageName = Carbon::now()->timestamp . '_' . $request->image[0]->getClientOriginalName();
         $request->image[0]->move($destination, $imageName);
         $product->image = $imageName;
@@ -167,7 +170,7 @@ class AdminAddProductComponent extends Component
         return redirect()->back();
     }
 
-    
+
     public function changeSubcategory()
     {
         $this->scategory_id = 0;

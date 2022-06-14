@@ -40,6 +40,7 @@ class CheckoutComponent extends Component
     public $paymentmode;
     public $thankyou;
     public $total_amount;
+
     public function updated($fields)
     {
         $this->validateOnly($fields, [
@@ -117,7 +118,14 @@ class CheckoutComponent extends Component
         $order->subtotal = session()->get('checkout')['subtotal'];
         $order->discount = session()->get('checkout')['discount'];
         $order->tax = session()->get('checkout')['tax'];
-        $order->total = session()->get('checkout')['total'];
+        if ($request->coin_on == 'yes') {
+            $coin_use_for_product = session('coin_use');
+            session(['success_use_coin' => $coin_use_for_product]);
+
+            $order->total = str_replace(",", '', session()->get('checkout')['total']) - $coin_use_for_product;
+        } else {
+            $order->total = session()->get('checkout')['total'];
+        }
         $order->status = 'ordered';
         $order->is_shipping_between = $request->ship_to_different ? 1 : 0;
         $order->save();
@@ -195,18 +203,27 @@ class CheckoutComponent extends Component
             return redirect()->route('product.cart');
         }
     }
+    function Redeem_coin($flag)
+    {
+        if ($flag == 'yes') {
+        } else {
+        }
+    }
+
 
     public function render()
     {
         if (Auth::check()) {
-           $user_id= Auth::user()->id;
-        }else{
-            $user_id=0;
+            $user_id = Auth::user()->id;
+        } else {
+            $user_id = 0;
         }
+
+
         $this->verifyForCheckout();
-        
+        $balance_coin = DB::table('coin')->where('user_id', Auth::user()->id)->sum('gain') - DB::table('coin')->where('user_id', Auth::user()->id)->sum('use');
         // $address = DB::table('orders')->where('user_id',$user_id)->orderBy('id', 'DESC')->take(6)->get();
         $address = DB::table('orders')->select(['firstname', 'lastname', 'mobile', 'email', 'line1', 'line2', 'city', 'province', 'country', 'zipcode', 'user_id'])->distinct()->where('user_id', $user_id)->orderBy('id', 'DESC')->take(6)->get();
-        return view('livewire.checkout-component', ['address' => $address])->layout("layouts.base");
+        return view('livewire.checkout-component', ['address' => $address, 'balance_coin' => $balance_coin])->layout("layouts.base");
     }
 }

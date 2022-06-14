@@ -54,7 +54,7 @@
     <link href="{{ asset('assets/corporate/css/themes/red.css') }}" rel="stylesheet" id="style-color">
     <link href="{{ asset('assets/corporate/css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/corporate/css/customm.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/pages/css/quicksecure.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/pages/css/quicksecure.css') }}"> --}}
     <!-- Theme styles END -->
 
     <!-- product magnific -->

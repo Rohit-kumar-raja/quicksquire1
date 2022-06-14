@@ -77,7 +77,7 @@
                                                 </td>
                                                 <td>
 
-                                                    {{ DB::table('categories')->find($category->category_id)->name }}
+                                                    {{ DB::table('categories')->find($category->category_id)->name ?? '' }}
 
                                                 </td>
 

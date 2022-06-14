@@ -30,7 +30,6 @@
     .wishlist-mt {
         margin-top: -16px
     }
-
 </style>
 
 <body class="ecommerce">
@@ -93,39 +92,17 @@
                             </li>
                         @endforeach
 
-                        <div class="sidebar-filter margin-bottom-25">
+                        {{-- <div class="sidebar-filter margin-bottom-25">
                             <h2>Filter</h2>
                             <h3>Availability</h3>
-                            <div class="checkbox-list">
-                                <label><input type="checkbox"> Not Available (3)</label>
-                                <label><input type="checkbox"> In Stock (26)</label>
-                            </div>
+           
 
                             <h3>Price <span class="text-info"></span></h3>
                             <div id="slider" wire:ignore></div>
-                        </div>
+                        </div> --}}
                 </div>
 
-                <!-- <div class="sidebar-products clearfix">
-                        <h2>Bestsellers</h2>
-                        <div class="item">
-                            <a href="shop-item.php"><img src="{{ asset('assets/pages/img/products/k1.jpg') }}" alt="Some Shoes in Animal with Cut Out"></a>
-                            <h3><a href="shop-item.php">Some Shoes in Animal with Cut Out</a></h3>
-                            <div class="price">$31.00</div>
-                        </div>
-                        <div class="item">
-                            <a href="shop-item.php"><img src="assets/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                            <h3><a href="shop-item.php">Some Shoes in Animal with Cut Out</a></h3>
-                            <div class="price">$23.00</div>
-                        </div>
-                        <div class="item">
-                            <a href="shop-item.php"><img src="assets/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                            <h3><a href="shop-item.php">Some Shoes in Animal with Cut Out</a></h3>
-                            <div class="price">$86.00</div>
-                        </div>
-                    </div> -->
 
-                <!-- END SIDEBAR -->
                 <!-- BEGIN CONTENT -->
 
                 @php
@@ -261,7 +238,7 @@
     </div>
 
     <script>
-       function filter_change() {
+        function filter_change() {
             var item = document.getElementById('item').value;
             var sorting = document.getElementById('sorting').value;
             window.location.replace(window.location.href + "?sorting=" + sorting + '&pagesize=' + item)

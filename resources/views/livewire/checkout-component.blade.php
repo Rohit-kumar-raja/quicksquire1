@@ -15,6 +15,9 @@
             font-weight: 400;
         }
 
+        .border-right-2 {
+            border-right: solid 2px gray;
+        }
     </style>
     <!--main area-->
     <main id="main" class="main-site">
@@ -191,68 +194,144 @@
                         @endif
                     </div>
 
-                    <div class="summary summary-checkout">
-                        <div class="summary-item payment-method">
-                            <h4 class="title-box">Payment Method</h4>
-                            <p class="summary-info"><span class="title">Check / Money order</span></p>
-                            <p class="summary-info"><span class="title">Credit Cart (saved)</span></p>
-                            <div class="choose-payment-methods">
-                                <label class="payment-method">
-                                    <input name="paymentmode" id="payment-method-bank" value="cod" type="radio">
-                                    <span>Cash On Delivery</span>
-                                    <span class="payment-desc">Order Now Pay on Delivery.</span>
-                                </label>
+                    <div class="row ">
+                        <div class="col-sm-6 card ">
+                            <div class="summary ">
+                                <div class="summary-item payment-method">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h4 class="title-box border-right-2 p-4 ">Payment Method</h4>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <h4 class="title-box pt-4  "> <i class="fas fa-coins"></i> Redeem
+                                                        Coin <small class="text-success text-capitalize font-14 ">
+                                                            Balance - <span
+                                                                id="balance_coin">{{ $balance_coin }}</span></small>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-4"> <button type="button"
+                                                        onclick="coin_calclulator()"
+                                                        class="btn btn-primary btn-sm mt-2">Use Coin</button> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="summary-info"><span class="title"><i
+                                                class="fas fa-truck"></i> Cash On Delivery(COD)</span>
+                                    </p>
+                                    <p class="summary-info"><span class="title"><i
+                                                class="fas fa-credit-card"></i> Onlie Payment (Credit Card, Debit Card,
+                                            Upi )</span>
+                                    </p>
+                                    <div class="choose-payment-methods">
+                                        <label class="payment-method">
+                                            <input name="paymentmode" id="payment-method-bank" value="cod" type="radio">
+                                            <span>Cash On Delivery</span>
+                                            <span class="payment-desc">Order Now Pay on Delivery.</span>
+                                        </label>
 
-                                <label class="payment-method">
-                                    <input name="paymentmode" id="paypal" value="paypal" type="radio">
-                                    <span>Online</span>
-                                    <span class="payment-desc">You can pay with your credit Or Debit card or
-                                        UPI</span>
-                                </label>
-                                @error('paymentmode')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                        <label class="payment-method">
+                                            <input name="paymentmode" id="paypal" value="paypal" type="radio">
+                                            <span>Online</span>
+                                            <span class="payment-desc">You can pay with your credit Or Debit card or
+                                                UPI</span>
+                                        </label>
+                                        @error('paymentmode')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    @if (Session::has('checkout'))
+                                        <span id="coin_use" class="p-3 "> You save using coin : -<span
+                                                class="text-success"><span
+                                                    id="used_coins">{{ session('coin_use') }}</span> <i
+                                                    class="fas fa-coins"></i> </span> </span>
+                                        <p class="summary-info grand-total p-3 "><span>Grand Total</span> <span
+                                                class="grand-total-price">₨ <span
+                                                    id="total_price">{{ Session::get('checkout')['total'] }}</span>
+                                            </span>
+                                        </p>
+                                    @endif
+                                    <!-- <a href="thankyou.html" class="btn btn-primary">Place order now</a> -->
+                                    <div class="p-4">
+                                        <button type="submit" class="btn btn-primary ">Place order now</button>
+                                    </div>
+                                </div>
                             </div>
-                            @if (Session::has('checkout'))
-                                <p class="summary-info grand-total"><span>Grand Total</span> <span
-                                        class="grand-total-price">₨{{ Session::get('checkout')['total'] }}</span></p>
-                            @endif
-                            <!-- <a href="thankyou.html" class="btn btn-primary">Place order now</a> -->
-                            <button type="submit" class="btn btn-primary">Place order now</button>
                         </div>
-                        <div class="summary-item shipping-method">
-                            <h4 class="title-box f-title"> <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                                Shipping Last Address</h4>
-                            @foreach ($address as $add)
-                                <?php $order_id = DB::table('orders')
-                                    ->where('firstname', $add->firstname)
-                                    ->where('lastname', $add->lastname)
-                                    ->where('mobile', $add->mobile)
-                                    ->where('email', $add->email)
-                                    ->where('line1', $add->line1)
-                                    ->where('line2', $add->line2)
-                                    ->where('city', $add->city)
-                                    ->where('province', $add->province)
-                                    ->where('country', $add->country)
-                                    ->where('zipcode', $add->zipcode)
-                                    ->where('user_id', $add->user_id)
-                                    ->first();
-                                     ?>
-                                <input id="address" name="address" type="radio" value="{{ $order_id->id }}">
-                                <strong>{{ $add->firstname . ' ' . $add->lastname }}</strong> - <span>
-                                    {{ $add->mobile }}</span><br>
-                                <p> &nbsp; &nbsp;
-                                    &nbsp;{{ $add->line1 . ' ' . $add->line2 . ' ' . $add->city . ', ' . $add->province . ', ' . $add->country }}-&nbsp;
-                                    &nbsp; &nbsp;{{ $add->zipcode }}</p>
-                            @endforeach
+                        <div class="col-sm-6 card">
+                            <div class="summary-item shipping-method">
+                                <h4 class="title-box f-title p-4 "> <i class="fa fa-location-arrow"
+                                        aria-hidden="true"></i>
+                                    Shipping Last Address</h4>
+                                @foreach ($address as $add)
+                                    <?php $order_id = DB::table('orders')
+                                        ->where('firstname', $add->firstname)
+                                        ->where('lastname', $add->lastname)
+                                        ->where('mobile', $add->mobile)
+                                        ->where('email', $add->email)
+                                        ->where('line1', $add->line1)
+                                        ->where('line2', $add->line2)
+                                        ->where('city', $add->city)
+                                        ->where('province', $add->province)
+                                        ->where('country', $add->country)
+                                        ->where('zipcode', $add->zipcode)
+                                        ->where('user_id', $add->user_id)
+                                        ->first();
+                                    ?>
+                                    <input id="address" name="address" type="radio" value="{{ $order_id->id }}">
+                                    <input type="hidden" name="coin_on" id="coin_on">
+                                    <strong>{{ $add->firstname . ' ' . $add->lastname }}</strong> - <span>
+                                        {{ $add->mobile }}</span><br>
+                                    <p> &nbsp; &nbsp;
+                                        &nbsp;{{ $add->line1 . ' ' . $add->line2 . ' ' . $add->city . ', ' . $add->province . ', ' . $add->country }}-&nbsp;
+                                        &nbsp; &nbsp;{{ $add->zipcode }}</p>
+                                @endforeach
 
+                            </div>
                         </div>
                     </div>
-                </form>
             </div>
-            <!--end main content area-->
+            </form>
         </div>
-        <!--end container-->
-    </main>
-    <!--main area-->
+        <!--end main content area-->
 </div>
+<!--end container-->
+</main>
+<!--main area-->
+</div>
+
+<script>
+    document.getElementById('coin_use').style.display = 'none';
+    total_price = document.getElementById('total_price').innerText;
+
+    function coin_calclulator() {
+        x = document.getElementById('coin_use')
+        balance_coin = document.getElementById('balance_coin').innerText
+        used_coins = document.getElementById('used_coins').innerText;
+        var remaining_coin = Number(balance_coin) - Number(used_coins);
+        if (x.style.display === "none") {
+            total_price = total_price.replace(",", "")
+            if (remaining_coin > 0) {
+                document.getElementById('balance_coin').innerText = remaining_coin;
+                document.getElementById('total_price').innerText = Number(total_price) - Number(used_coins);
+                document.getElementById('coin_on').value="yes";
+                x.style.display = "block";
+            }
+        } else {
+
+            balance_coin = document.getElementById('balance_coin').innerText
+            used_coins = document.getElementById('used_coins').innerText
+            document.getElementById('balance_coin').innerText = Number(balance_coin) + Number(used_coins)
+            document.getElementById('total_price').innerText = total_price;
+            document.getElementById('coin_on').value="no";
+
+            x.style.display = "none";
+        }
+
+
+
+
+
+    }
+</script>
