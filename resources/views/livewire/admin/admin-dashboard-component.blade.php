@@ -30,7 +30,8 @@
                                         class="fas fa-rupee-sign    "></i> {{ $all_total }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
+
                             </div>
                         </div>
                     </div>
@@ -46,10 +47,10 @@
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Earnings (Orderd)</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"> <i
-                                        class="fas fa-rupee-sign    "></i> {{ $order_amount }}</div>
+                                        class="fas fa-rupee-sign "></i> {{ $order_amount }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -66,7 +67,7 @@
                                         class="fas fa-rupee-sign    "></i> {{ $cancel_amount }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
                                         class="fas fa-rupee-sign    "></i> {{ $delivered_amount }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -97,7 +98,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Earnings (All Total)</div>
+                                    Order (All Total)</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"> <i
                                         class="fas fa-calculator    "></i> {{ $all_total_count }}</div>
                             </div>
@@ -116,12 +117,12 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Earnings (Orderd)</div>
+                                    Order (Orderd)</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"> <i
                                         class="fas fa-calculator    "></i> {{ $order_count }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -133,12 +134,12 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                    Earnings (Canceld)</div>
+                                    Order (Canceld)</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"> <i
                                         class="fas fa-calculator    "></i> {{ $cancel_count }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -150,12 +151,12 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Earnings (Delivered)</div>
+                                    Order (Delivered)</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"> <i
                                         class="fas fa-calculator    "></i> {{ $delivered_count }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>

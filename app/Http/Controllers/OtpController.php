@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OtpController extends Controller
 {
@@ -17,11 +18,17 @@ class OtpController extends Controller
     {
         if ($request->password === $request->password_confirmation) {
             session(['login_input' => $request->input()]);
+            $details = [
+                'title' => 'Mail from quicksecureindia.com',
+            ];
             $this->optSend($request->phone);
+            Mail::to($request->email)->send(new \App\Mail\OtpSend($details));
+
             return view('auth.varify-mobile-otp');
+        } else {
+            return redirect()->back()->withErrors('Password not Matched');
         }
     }
-
     function optSend($mobileNumber)
     {
         $otp = rand('100000', '999999');
@@ -29,7 +36,7 @@ class OtpController extends Controller
         //Your authentication key
         $authKey = "14107AXVZG4hH18q5f815112P15";
         //Multiple mobiles numbers separated by comma
-        $mobileNumber = 7250634942;
+        $mobileNumber = $mobileNumber;
         //Sender ID,While usi
         $senderId = "LBSJSR";
         $country = "91";
@@ -82,8 +89,9 @@ class OtpController extends Controller
         if ($otp == session('otp')) {
 
             $input = session('login_input');
-   
-           $user=  User::create([
+        
+
+            $user =  User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'phone' => $input['phone'],

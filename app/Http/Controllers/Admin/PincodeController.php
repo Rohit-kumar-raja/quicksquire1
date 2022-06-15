@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\PinCodeImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Maatwebsite\Excel\Facades\Excel;
 class PincodeController extends Controller
 {
     /**
@@ -25,9 +26,10 @@ class PincodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function ImportPincode(Request $request)
     {
-        //
+        Excel::import(new PinCodeImport, $request->file('file'));
+        return redirect()->back()->with(['success'=>"Data Successfully Imported"]);
     }
 
     /**

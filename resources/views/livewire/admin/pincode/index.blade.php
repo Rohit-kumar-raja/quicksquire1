@@ -23,9 +23,22 @@
                         <div class="card-header">
 
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-md-5">
                                     <i class="fas fa-list"> All pincode</i>
 
+                                </div>
+                                <div class="col-5">
+                                    <form action="{{route('admin.pincode.import')}}" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                          
+                                            <div class="col-8">  <input type="file" class="form-control form-control-sm "
+                                                    name="file" id="">
+                                            </div>
+                                            <div class="col-4"> <button type="submit"
+                                                    class="btn btn-success btn-sm">submit</button> </div>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="col-md-2">
                                     <a class="btn btn-primary btn-sm" data-toggle="modal"
@@ -43,30 +56,30 @@
                                 @endif
 
                                 @if (session('store'))
-                                <div class="alert alert-success">
-                                    {{ session('store') }}
-                                </div>
-                            @endif
-                            @if (session('delete'))
-                                <div class="alert alert-danger">
-                                    {{ session('delete') }}
-                                </div>
-                            @endif
-                            @if (session('update'))
-                                <div class="alert alert-success">
-                                    {{ session('update') }}
-                                </div>
-                            @endif
-                            @if (session('status'))
-                                <div class="alert alert-secondary">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-                            @if (session('status1'))
-                                <div class="alert alert-success">
-                                    {{ session('status1') }}
-                                </div>
-                            @endif
+                                    <div class="alert alert-success">
+                                        {{ session('store') }}
+                                    </div>
+                                @endif
+                                @if (session('delete'))
+                                    <div class="alert alert-danger">
+                                        {{ session('delete') }}
+                                    </div>
+                                @endif
+                                @if (session('update'))
+                                    <div class="alert alert-success">
+                                        {{ session('update') }}
+                                    </div>
+                                @endif
+                                @if (session('status'))
+                                    <div class="alert alert-secondary">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                @if (session('status1'))
+                                    <div class="alert alert-success">
+                                        {{ session('status1') }}
+                                    </div>
+                                @endif
 
                                 <table class="table table-striped table-bordered">
                                     <thead class=" text-primary">
@@ -74,20 +87,20 @@
                                             S.No
                                         </th>
                                         <th>
-                                           Pincode
+                                            Pincode
                                         </th>
                                         <th>
-                                           City
+                                            City
                                         </th>
                                         <th>
-                                          District
+                                            District
                                         </th>
 
                                         <th>
-                                          State
+                                            State
                                         </th>
                                         <th>Country</th>
-                            
+
                                         <th>
                                             status </th>
                                         <th>
@@ -106,12 +119,12 @@
 
                                                 <td>
 
-                                                    {{ $pincode->pincode}}
+                                                    {{ $pincode->pincode }}
 
                                                 </td>
 
                                                 <td>
-                                                    {{ $pincode->city}}
+                                                    {{ $pincode->city }}
                                                 </td>
 
                                                 <td>
@@ -120,7 +133,7 @@
 
 
                                                 <td>
-                                                    {{ $pincode->state}}
+                                                    {{ $pincode->state }}
                                                 </td>
 
                                                 <td>
@@ -128,8 +141,8 @@
                                                 </td>
 
 
-                                              
-                                     
+
+
                                                 <td><a href="{{ route('admin.pincode.status', $pincode->id) }}"
                                                         class="btn @if ($pincode->status == 1) btn-success btn-sm @endif btn-secondary  btn-sm">
                                                         @if ($pincode->status == 1)
