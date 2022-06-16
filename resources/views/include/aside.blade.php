@@ -88,7 +88,7 @@
                 <a class="collapse-item" href="{{ route('admin.order.ordered') }}">New Orders</a>
                 <a class="collapse-item" href="{{ route('admin.order.dispatched') }}">Dispatched Orders</a>
                 <a class="collapse-item" href="{{ route('admin.order.delivered') }}">Delivered Orders</a>
-                <a class="collapse-item" href="{{ route('admin.order.padding') }}">Padding Orders</a>
+                <a class="collapse-item" href="{{ route('admin.order.padding') }}">Panding Orders</a>
                 <a class="collapse-item" href="{{ route('admin.order.canceled') }}">Canceled Orders</a>
 
 

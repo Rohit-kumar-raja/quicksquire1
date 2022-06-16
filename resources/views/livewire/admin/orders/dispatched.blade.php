@@ -71,6 +71,7 @@
                                 <table class="table table-striped table-bordered dataTable no-footer table-responsive ">
                                     <thead>
                                         <tr>
+                                            <th>S.NO</th>
                                             <th>OrderId</th>
                                             <!-- <th>Subtotal</th>
                                          <th>Discount</th> -->
@@ -92,6 +93,8 @@
                                     <tbody>
                                         @foreach ($data as $order)
                                             <tr>
+                                                <td>{{ $loop->iteration }}</td>
+
                                                 <td>ODR00000{{ $order->id }}</td>
                                                 <!-- <td>${{ $order->subtotal }}</td> -->
                                                 <!-- <td>${{ $order->discount }}</td> -->

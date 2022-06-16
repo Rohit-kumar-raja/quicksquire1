@@ -79,6 +79,7 @@ class CartComponent extends Component
     {
         $this->setAmountForCheckout();
         $coin_gain = 0;
+        $coin_redeem=0;
         $cart_amount = 0;
         $cart_amount =  Cart::instance('cart')->subtotal();
         $cart_amount = (int)str_replace(',', '', $cart_amount);

@@ -33,6 +33,20 @@
                                 </div>
 
                                 <div class="col-md-4">
+                                    <label for="pincode" class=" control-label"> Consigment Name </label>
+                                    <input value="{{ $data->consignment_name ?? '' }}"
+                                        placeholder="Enter Consigment Name" class="form-control" type="text"
+                                        name="consignment_name" id="consignment_name">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="pincode" class=" control-label"> Consigment Website Url  </label>
+                                    <input value="{{ $data->consignment_name ?? '' }}"
+                                        placeholder="Enter Consigment Website" class="form-control" type="text"
+                                        name="consignment_name" id="consignment_name">
+                                </div>
+
+
+                                <div class="col-md-4">
                                     <label for="min" class=" control-label">Status</label>
                                     <select required placeholder="Flat cart coin ex - 100 " class="form-control"
                                         name="status">
@@ -44,7 +58,9 @@
                                         <option value="dispatched">dispatched</option>
                                         <option value="delivered">delivered</option>
                                         <option value="canceled">canceled</option>
-                                        <option value="padding">padding</option>
+                                        <option value="pending">pending</option>
+                                        <option value="out of stock">Out Of Stock</option>
+
                                     </select>
                                 </div>
                                 <div class="col-md-4">

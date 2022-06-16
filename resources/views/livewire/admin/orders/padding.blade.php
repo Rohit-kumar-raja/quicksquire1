@@ -3,19 +3,19 @@
         <div class="container-fluid">
             <div class="row ">
                 <div class="col-sm-6">
-                    <h2>Padding Order</h2>
+                    <h2>Panding Order</h2>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active"> Padding Order</li>
+                        <li class="breadcrumb-item active"> Panding Order</li>
                     </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <div>
-        {{-- @include('livewire.admin.Padding Order.insert') --}}
+        {{-- @include('livewire.admin.Panding Order.insert') --}}
         <div class="container" style="padding:30px 0;">
             <div class="row">
                 <div class="col-md-12">
@@ -24,7 +24,7 @@
 
                             <div class="row">
                                 <div class="col-md-10">
-                                    <i class="fas fa-list"> All Padding Order</i>
+                                    <i class="fas fa-list"> All Panding Order</i>
 
                                 </div>
                                 <div class="col-md-2">
@@ -71,6 +71,7 @@
                                 <table class="table table-striped table-bordered dataTable no-footer table-responsive ">
                                     <thead>
                                         <tr>
+                                            <th>S.NO</th>
                                             <th>OrderId</th>
                                             <!-- <th>Subtotal</th>
                                          <th>Discount</th> -->
@@ -92,6 +93,8 @@
                                     <tbody>
                                         @foreach ($data as $order)
                                             <tr>
+                                                <td>{{ $loop->iteration }}</td>
+
                                                 <td>ODR00000{{ $order->id }}</td>
                                                 <!-- <td>${{ $order->subtotal }}</td> -->
                                                 <!-- <td>${{ $order->discount }}</td> -->
