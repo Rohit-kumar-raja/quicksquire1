@@ -39,40 +39,44 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 @if (Session::has('message'))
-                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}
+                                    </div>
                                 @endif
 
                                 @if (session('store'))
-                                <div class="alert alert-success">
-                                    {{ session('store') }}
-                                </div>
-                            @endif
-                            @if (session('delete'))
-                                <div class="alert alert-danger">
-                                    {{ session('delete') }}
-                                </div>
-                            @endif
-                            @if (session('update'))
-                                <div class="alert alert-success">
-                                    {{ session('update') }}
-                                </div>
-                            @endif
-                            @if (session('status'))
-                                <div class="alert alert-secondary">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-                            @if (session('status1'))
-                                <div class="alert alert-success">
-                                    {{ session('status1') }}
-                                </div>
-                            @endif
+                                    <div class="alert alert-success">
+                                        {{ session('store') }}
+                                    </div>
+                                @endif
+                                @if (session('delete'))
+                                    <div class="alert alert-danger">
+                                        {{ session('delete') }}
+                                    </div>
+                                @endif
+                                @if (session('update'))
+                                    <div class="alert alert-success">
+                                        {{ session('update') }}
+                                    </div>
+                                @endif
+                                @if (session('status'))
+                                    <div class="alert alert-secondary">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                @if (session('status1'))
+                                    <div class="alert alert-success">
+                                        {{ session('status1') }}
+                                    </div>
+                                @endif
 
                                 <table class="table table-striped table-bordered">
                                     <thead class=" text-primary">
                                         <th>
                                             S.No
                                         </th>
+                                        <th>Coupon Name</th>
+                                        <th>Link</th>
+                                        <th>Banner Image</th>
                                         <th>
                                             Category
                                         </th>
@@ -80,15 +84,11 @@
                                             Cart Value
                                         </th>
                                         <th>
-                                            Coin Gain By %
+                                            Off By %
                                         </th>
 
-                                        <th>
-                                            Coin Redeem By %
-                                        </th>
-
-                                        <th>Flat Coin Gain</th>
-                                        <th>Flat Coin Redeem</th>
+                        
+                                        <th>Flat Off</th>
 
                                         <th>
                                             status </th>
@@ -105,6 +105,16 @@
                                                 <td>
                                                     {{ $loop->iteration }}
                                                 </td>
+                                                <td>
+                                                    {{ $coupon->coupon_name ?? '' }}
+                                                </td>
+                                                <td>
+                                                    <a href=" {{ $coupon->link ?? '' }}">link</a>
+                                                </td>
+                                               <td>
+                                                <img width="120px" src="{{ asset('assets/pages/img/coupon/' . $coupon->images ?? '') }}"
+                                                alt="">
+                                               </td>
 
                                                 <td>
 
@@ -116,24 +126,19 @@
                                                     {{ $coupon->min }} - {{ $coupon->max }}
                                                 </td>
 
-                                                <td>
-                                                    {{ $coupon->gain_by_per }}
-                                                </td>
+                                        
 
 
                                                 <td>
                                                     {{ $coupon->redeem_by_per }}
                                                 </td>
 
-                                                <td>
-                                                    {{ $coupon->flat_gain }}
-                                                </td>
 
 
                                                 <td>
                                                     {{ $coupon->flat_use }}
                                                 </td>
-                                     
+
                                                 <td><a href="{{ route('admin.coupon.status', $coupon->id) }}"
                                                         class="btn @if ($coupon->status == 1) btn-success btn-sm @endif btn-secondary  btn-sm">
                                                         @if ($coupon->status == 1)

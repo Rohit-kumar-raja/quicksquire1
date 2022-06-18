@@ -12,7 +12,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{ route('admin.coupon.add') }}" method="POST" class="form-horizontal">
+                <form action="{{ route('admin.coupon.add') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                     @csrf
                     <input type="hidden" name="created_at" value="{{ date('Y-m-d h:m:s') }}" id="">
                     <div class="row  p-2">
@@ -53,23 +53,15 @@
                             <input required placeholder="Min ex- 20000" class="form-control" type="number"
                                 name="min" id="min">
                         </div>
+                      
                         <div class="col-md-4">
-                            <label for="min" class=" control-label"> Gain By Percentage(%)</label>
-                            <input class="form-control" placeholder="Ex - 5%" type="number" name="gain_by_per"
-                                id="min">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="min" class=" control-label">redeem By Percenttage(%)</label>
+                            <label for="min" class=" control-label">Off By Percenttage(%)</label>
                             <input placeholder="Maximum cart coin ex - 100 " class="form-control" type="number"
                                 name="redeem_by_per" id="min">
                         </div>
+                    
                         <div class="col-md-4">
-                            <label for="min" class=" control-label">Flat Gain Coin</label>
-                            <input placeholder="Flat cart coin ex - 100 " class="form-control" type="number"
-                                name="flat_gain" id="min">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="min" class=" control-label">Flat Redeem Coin</label>
+                            <label for="min" class=" control-label">Flat Off</label>
                             <input placeholder="Flat cart coin ex - 100 " class="form-control" type="number"
                                 name="flat_use" id="min">
                         </div>

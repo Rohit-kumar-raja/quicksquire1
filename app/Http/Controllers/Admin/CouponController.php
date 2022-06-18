@@ -95,12 +95,10 @@ class CouponController extends Controller
     {
         $result = DB::table('coupon')
             ->where('id', $id)
-            ->update($request->except(['_token', 'id']));
-
+            ->update($request->except(['_token', 'id','images']));
             if($request->file('images')){
         $this->update_images('coupon',$id,$request->file('images'),'coupon','images');
             }
-
         return redirect()->route('admin.coupon')->with('update', 'Data successfully updated');
     }
 

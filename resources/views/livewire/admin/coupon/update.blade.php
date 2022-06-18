@@ -19,9 +19,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <form action="{{ route('admin.coupon.update',$data->id) }}" method="POST" class="form-horizontal">
+                        <form action="{{ route('admin.coupon.update',$data->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                             @csrf
-                            <input type="hidden" name="created_at" value="{{ date('Y-m-d h:m:s') }}" id="">
+                            <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:m:s') }}" id="">
                             <div class="row  p-2">
 
                                 <div class="col-md-4">
@@ -65,23 +65,15 @@
                                     <input required value="{{ $data->max}}" placeholder="Max ex- 10000" class="form-control" type="number"
                                         name="max" id="min">
                                 </div>
+
                                 <div class="col-md-4">
-                                    <label for="min" class=" control-label"> Gain By Percentage(%)</label>
-                                    <input  class="form-control"  value="{{ $data->gain_by_per}}" placeholder="Ex - 5%" type="number"
-                                        name="gain_by_per" id="min">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="min" class=" control-label">redeem By Percenttage(%)</label>
+                                    <label for="min" class=" control-label">Off By Percenttage(%)</label>
                                     <input  placeholder="Maximum cart coin ex - 100 "  value="{{ $data->redeem_by_per}}" class="form-control"
                                         type="number" name="redeem_by_per" id="min">
                                 </div>
+                                
                                 <div class="col-md-4">
-                                    <label for="min" class=" control-label">Flat Gain Coin</label>
-                                    <input  placeholder="Flat cart coin ex - 100 "  value="{{ $data->flat_gain}}" class="form-control"
-                                        type="number" name="flat_gain" id="min">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="min" class=" control-label">Flat Redeem Coin</label>
+                                    <label for="min" class=" control-label">Flat Off</label>
                                     <input  placeholder="Flat cart coin ex - 100 "  value="{{ $data->flat_use}}" class="form-control"
                                         type="number" name="flat_use" id="min">
                                 </div>
