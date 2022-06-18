@@ -56,6 +56,7 @@ use App\Http\Livewire\WishListComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\ProductDetailsController;
 use App\Http\Controllers\Admin\GreatOfferController;
 use App\Http\Controllers\OtpController;
@@ -258,10 +259,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/delivered', [ordersController::class, 'delivered'])->name('admin.order.delivered');
     Route::get('/admin/canceled', [ordersController::class, 'canceled'])->name('admin.order.canceled');
     Route::get('/admin/dispatched', [ordersController::class, 'dispatched'])->name('admin.order.dispatched');
-
-
-
-
+    
     Route::post('/admin/orders/add', [ordersController::class, 'store'])->name('admin.orders.add');
     Route::get('/admin/orders/edit/{id}', [ordersController::class, 'edit'])->name('admin.orders.edit');
     Route::post('/admin/orders/update/{id}', [ordersController::class, 'update'])->name('admin.orders.update');
@@ -272,5 +270,14 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/reviews/{product_id}', [ReviewController::class, 'index'])->name('admin.reviews');
     Route::get('/admin/reviews/delete/{id}', [ReviewController::class, 'destroy'])->name('admin.reviews.destroy');
     // reviews end
+
+    // coupon
+    Route::get('/admin/coupon', [CouponController::class, 'index'])->name('admin.coupon');
+    Route::post('/admin/coupon/add', [CouponController::class, 'store'])->name('admin.coupon.add');
+    Route::get('/admin/coupon/edit/{id}', [CouponController::class, 'edit'])->name('admin.coupon.edit');
+    Route::post('/admin/coupon/update/{id}', [CouponController::class, 'update'])->name('admin.coupon.update');
+    Route::get('/admin/coupon/delete/{id}', [CouponController::class, 'destroy'])->name('admin.coupon.destroy');
+    Route::get('/admin/coupon/status/{id}', [CouponController::class, 'status'])->name('admin.coupon.status');
+    // coupon
 
 });

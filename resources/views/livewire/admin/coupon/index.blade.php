@@ -3,19 +3,19 @@
         <div class="container-fluid">
             <div class="row ">
                 <div class="col-sm-6">
-                    <h2>Wallet</h2>
+                    <h2>Coupon</h2>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active"> Wallet</li>
+                        <li class="breadcrumb-item active"> Coupon</li>
                     </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <div>
-        @include('livewire.admin.wallet.insert')
+        @include('livewire.admin.coupon.insert')
         <div class="container" style="padding:30px 0;">
             <div class="row">
                 <div class="col-md-12">
@@ -24,7 +24,7 @@
 
                             <div class="row">
                                 <div class="col-md-10">
-                                    <i class="fas fa-list"> All Wallet</i>
+                                    <i class="fas fa-list"> All Coupon</i>
 
                                 </div>
                                 <div class="col-md-2">
@@ -100,7 +100,7 @@
                                         </th>
                                     </thead>
                                     <tbody>
-                                        @foreach ($wallets as $wallet)
+                                        @foreach ($coupons as $coupon)
                                             <tr>
                                                 <td>
                                                     {{ $loop->iteration }}
@@ -108,35 +108,35 @@
 
                                                 <td>
 
-                                                    {{ DB::table('categories')->find($wallet->category_id)->name ?? '' }}
+                                                    {{ DB::table('categories')->find($coupon->category_id)->name ?? '' }}
 
                                                 </td>
 
                                                 <td>
-                                                    {{ $wallet->min }} - {{ $wallet->max }}
+                                                    {{ $coupon->min }} - {{ $coupon->max }}
                                                 </td>
 
                                                 <td>
-                                                    {{ $wallet->gain_by_per }}
-                                                </td>
-
-
-                                                <td>
-                                                    {{ $wallet->redeem_by_per }}
-                                                </td>
-
-                                                <td>
-                                                    {{ $wallet->flat_gain }}
+                                                    {{ $coupon->gain_by_per }}
                                                 </td>
 
 
                                                 <td>
-                                                    {{ $wallet->flat_use }}
+                                                    {{ $coupon->redeem_by_per }}
+                                                </td>
+
+                                                <td>
+                                                    {{ $coupon->flat_gain }}
+                                                </td>
+
+
+                                                <td>
+                                                    {{ $coupon->flat_use }}
                                                 </td>
                                      
-                                                <td><a href="{{ route('admin.wallet.status', $wallet->id) }}"
-                                                        class="btn @if ($wallet->status == 1) btn-success btn-sm @endif btn-secondary  btn-sm">
-                                                        @if ($wallet->status == 1)
+                                                <td><a href="{{ route('admin.coupon.status', $coupon->id) }}"
+                                                        class="btn @if ($coupon->status == 1) btn-success btn-sm @endif btn-secondary  btn-sm">
+                                                        @if ($coupon->status == 1)
                                                             Active
                                                         @else
                                                             Deactive
@@ -145,21 +145,21 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="{{ route('admin.wallet.edit', $wallet->id) }}"
+                                                    <a href="{{ route('admin.coupon.edit', $coupon->id) }}"
                                                         class="btn btn-success btn-sm">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="#" onclick="delete{{ $wallet->id }}()"
+                                                    <a href="#" onclick="delete{{ $coupon->id }}()"
                                                         class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
                                                 <script>
-                                                    function delete{{ $wallet->id }}() {
+                                                    function delete{{ $coupon->id }}() {
                                                         if (confirm('Are you sure, You want to delete this SubCategory?')) {
-                                                            window.location.replace("{{ route('admin.wallet.destroy', $wallet->id) }}")
+                                                            window.location.replace("{{ route('admin.coupon.destroy', $coupon->id) }}")
                                                         }
                                                     }
                                                 </script>

@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row ">
                 <div class="col-sm-6">
-                    <h2>Update Wallet</h2>
+                    <h2>Update Coupon</h2>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active"> Wallet</li>
+                        <li class="breadcrumb-item active"> Coupon</li>
                     </ol>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <form action="{{ route('admin.wallet.update',$data->id) }}" method="POST" class="form-horizontal">
+                        <form action="{{ route('admin.coupon.update',$data->id) }}" method="POST" class="form-horizontal">
                             @csrf
                             <input type="hidden" name="created_at" value="{{ date('Y-m-d h:m:s') }}" id="">
                             <div class="row  p-2">
@@ -34,6 +34,27 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label for="min" class=" control-label"> Coupon Name </label>
+                                    <input required placeholder=" Coupon Name" class="form-control" type="text"
+                                      value="{{ $data->coupon_name }}"  name="coupon_name" id="coupon_name">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="min" class=" control-label"> Link </label>
+                                    <input required placeholder="Max ex- 10000" class="form-control" type="text"
+                                    value="{{ $data->link }}"    name="link" id="link">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="min" class=" control-label"> Banner Image </label>
+                                   <div class="row">
+                                    <div class="col-6"> <input accept="image/*" class="form-control" type="file" name="images" id="min"></div>
+                                    <div class="col-6">
+                                        <img src="{{ asset('assets/pages/img/coupon/'.$data->images) }}" alt="">
+                                    </div>
+                                   </div>
+                                </div>
+
                                 <div class="col-md-4">
                                     <label for="min" class=" control-label">Min Cart Value</label>
                                     <input required  value="{{ $data->min}}" placeholder="Min ex- 20000" class="form-control" type="number"

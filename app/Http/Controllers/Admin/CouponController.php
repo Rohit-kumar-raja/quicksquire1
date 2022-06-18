@@ -14,9 +14,9 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $wallet = DB::table('wallet')->get();
+        $coupon = DB::table('coupon')->get();
         $categories = DB::table('categories')->get();
-        return view('livewire.admin.wallet.index', ['wallets' => $wallet, 'categories' => $categories]);
+        return view('livewire.admin.coupon.index', ['coupons' => $coupon, 'categories' => $categories]);
     }
 
     /**
@@ -37,7 +37,10 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('wallet')->insert($request->except('_token'));
+      $id=  DB::table('coupon')->insertGetId($request->except('_token'));
+        if($request->file('images')){
+            DB::table('coupon')->update(['images'=>$this->insert_image($request->file('images'),'coupon')]);
+        }
         return redirect()->back()->with(["success" => "Data added Successfully"]);
     }
 
@@ -54,12 +57,12 @@ class CouponController extends Controller
 
     public function status($id)
     {
-        $status =  DB::table('wallet')->find($id);
+        $status =  DB::table('coupon')->find($id);
         if ($status->status == 1) {
-            DB::table('wallet')->where('id', $id)->update(['status' => '0']);
+            DB::table('coupon')->where('id', $id)->update(['status' => '0']);
         } else {
 
-            DB::table('wallet')->where('id', $id)->update(['status' => '1']);
+            DB::table('coupon')->where('id', $id)->update(['status' => '1']);
         }
         if ($status->status == 1) {
             return redirect()->back()->with('status', 'Status Deactivated successfully');
@@ -76,9 +79,9 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        $data = DB::table('wallet')->find($id);
+        $data = DB::table('coupon')->find($id);
         $categories = DB::table('categories')->get();
-        return view('livewire.admin.wallet.update', ['data' => $data, 'categories' => $categories]);
+        return view('livewire.admin.coupon.update', ['data' => $data, 'categories' => $categories]);
     }
 
     /**
@@ -90,10 +93,15 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result = DB::table('wallet')
+        $result = DB::table('coupon')
             ->where('id', $id)
             ->update($request->except(['_token', 'id']));
-        return redirect()->route('admin.wallet')->with('update', 'Data successfully updated');
+
+            if($request->file('images')){
+        $this->update_images('coupon',$id,$request->file('images'),'coupon','images');
+            }
+
+        return redirect()->route('admin.coupon')->with('update', 'Data successfully updated');
     }
 
     /**
@@ -104,7 +112,7 @@ class CouponController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('wallet')->delete($id);
-        return redirect()->back()->with(['delete' => 'Wallet Delete successfully']);
+        DB::table('coupon')->delete($id);
+        return redirect()->back()->with(['delete' => 'Coupon Delete successfully']);
     }
 }
