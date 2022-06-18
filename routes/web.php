@@ -208,6 +208,9 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::post('/admin/pincode/update/{id}', [PincodeController::class, 'update'])->name('admin.pincode.update');
     Route::get('/admin/pincode/delete/{id}', [PincodeController::class, 'destroy'])->name('admin.pincode.destroy');
     Route::get('/admin/pincode/status/{id}', [PincodeController::class, 'status'])->name('admin.pincode.status');
+    Route::post('/admin/pincode/import', [PincodeController::class, 'import'])->name('admin.pincode.import');
+
+   
     // pin code end
 
     // users code start

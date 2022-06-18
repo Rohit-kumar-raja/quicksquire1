@@ -26,11 +26,7 @@ class PincodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ImportPincode(Request $request)
-    {
-        Excel::import(new PinCodeImport, $request->file('file'));
-        return redirect()->back()->with(['success'=>"Data Successfully Imported"]);
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -110,4 +106,14 @@ class PincodeController extends Controller
         DB::table('pincode')->delete($id);
         return redirect()->back()->with(['delete' => 'pincode Delete successfully']);
     }
+
+
+    public function import( Request $request){
+        Excel::import(new PinCodeImport, $request->file('file')->store('temp'));
+        return redirect()->back()->with(['store'=>"Data Successfully Imported"]);
+    }
+
+
+
+
 }

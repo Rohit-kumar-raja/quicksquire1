@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Imports;
-
-use App\Models\Pincode;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class PinCodeImport implements ToModel
@@ -14,13 +13,17 @@ class PinCodeImport implements ToModel
      */
     public function model(array $row)
     {
-        dd($row);
-        return new Pincode([
-            'city' => $row[0],
-            'pincode' => $row[1],
-            'district' => '',
-            'state' => '',
-            'country' => '',
-        ]);
+        error_reporting(0);
+        // echo $row[3];
+        // exit;
+        // if($row[3]=='available'){
+        //     $status=1;
+        // }else{
+        //     $status=0;
+        // }
+        $status=1;
+     DB::table('pincode')->insert(['city'=>$row[0],'pincode'=>$row[2],'status'=>$status]);
+
+       
     }
 }

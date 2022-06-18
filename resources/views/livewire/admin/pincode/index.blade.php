@@ -28,12 +28,12 @@
 
                                 </div>
                                 <div class="col-5">
-                                    <form action="{{route('admin.pincode.import')}}" method="POST">
+                                    <form action="{{ route('admin.pincode.import') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
-                                          
-                                            <div class="col-8">  <input type="file" class="form-control form-control-sm "
-                                                    name="file" id="">
+                                            <div class="col-8"> <input type="file"
+                                                    class="form-control form-control-sm " name="file" id="">
                                             </div>
                                             <div class="col-4"> <button type="submit"
                                                     class="btn btn-success btn-sm">submit</button> </div>
@@ -52,7 +52,8 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 @if (Session::has('message'))
-                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}
+                                    </div>
                                 @endif
 
                                 @if (session('store'))
