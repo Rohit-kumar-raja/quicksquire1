@@ -139,6 +139,17 @@
                                     </li>
 
                                 </ul>
+                                <hr>
+                                <div class="row mb-3">
+                                    <div class="col-8"> <input type="text" id="coupon" name="coupon"
+                                            placeholder="Enter coupon" class="form-control form-control-sm">
+                                    </div>
+
+                                    <div class="col-4 mt-1"> <button onclick="btnCoupon()"
+                                            class="btn btn-sm btn-primary">Apply</button>
+                                    </div>
+                                </div>
+                                <small class="text-success" id="coupon_error"></small>
 
                             </div>
 
@@ -175,7 +186,8 @@
                             </a>
                         @endauth
 
-                        <a href="#" id="checkout1" onclick="checkpincode()" class="btn btn-primary text-white">Checkout
+                        <a href="#" id="checkout1" onclick="checkpincode()"
+                            class="btn btn-primary text-white">Checkout
                             <i class="fa fa-check"></i> </a>
                         <small id="checkpincode"></small>
 
@@ -235,7 +247,7 @@
             document.getElementById('feedback1').style.display = "none"
             document.getElementById('pincode_d').style.display = "none"
 
-            
+
             print();
             document.getElementById('logo').style.display = "none"
             window.location.reload();
@@ -286,6 +298,28 @@
 
 
             }
+        }
+
+        // coupon checking
+
+        function btnCoupon() {
+            coupon = document.getElementById('coupon').value
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.responseText == 'no') {
+                    document.getElementById('code_data').innerHTML =
+                        "<span class='text-danger'>Delivery not Available in this coupon - " + coupon + "</span>";
+                    document.getElementById('checkout').style.display = "none";
+                    document.getElementById('checkout1').style.display = "block";
+                } else {
+                    document.getElementById('coupon').style.borderColor = 'green';
+                    document.getElementById('code_data').innerHTML = this.responseText;
+                    document.getElementById('checkout').style.display = "block";
+                    document.getElementById('checkout1').style.display = "none";
+                }
+            }
+            xmlhttp.open("GET", "{{ route('product.details.coupon') }}/" + coupon);
+            xmlhttp.send();
         }
     </script>
 

@@ -106,92 +106,98 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </p>
-                                    <p class="row-in-form fill-wife">
+                                    <p class="row-in-form ">
                                         <label class="checkbox-field">
-                                            <input name="different-add" value="1" type="checkbox">
-                                            <span>Ship to a different address?</span>
+                                            <input onclick="d_address()" class="text-primary" name="different-add"
+                                                value="1" type="checkbox">
+                                            <span class="text-dark">Ship to a different address?</span>
                                         </label>
                                     </p>
                                 </div>
                             </div>
 
                         </div>
-                        @if ($ship_to_different)
-                            <div class="col-md-12">
-                                <div class="wrap-address-billing">
-                                    <h3 class="box-title">Shipping Address</h3>
-                                    <div class="billing-address">
-                                        <p class="row-in-form">
-                                            <label for="fname">first name<span>*</span></label>
-                                            <input type="text" name="fname" placeholder="Your name">
-                                            @error('s_firstname')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="lname">last name<span>*</span></label>
-                                            <input type="text" name="lname" placeholder="Your last name">
-                                            @error('s_lastname')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="email">Email Addreess:</label>
-                                            <input type="email" name="email" placeholder="Type your email">
-                                            @error('s_email')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="phone">Phone number<span>*</span></label>
-                                            <input type="number" name="phone" placeholder="10 digits format">
-                                            @error('s_mobile')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="add">line1:</label>
-                                            <input type="text" name="add" placeholder="Street at apartment number">
-                                            @error('s_line1')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="add">line2:</label>
-                                            <input type="text" name="add" placeholder="Street at apartment number">
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="country">Country<span>*</span></label>
-                                            <input type="text" name="country" placeholder="United States">
-                                            @error('s_country')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="zip-code">Postcode / ZIP:</label>
-                                            <input type="number" name="zip-code" placeholder="Your postal code">
-                                            @error('s_zipcode')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="city">Province<span>*</span></label>
-                                            <input type="text" name="province" placeholder="Province">
-                                            @error('s_province')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p class="row-in-form">
-                                            <label for="city">Town / City<span>*</span></label>
-                                            <input type="text" name="city" placeholder="City name">
-                                            @error('s_city')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                    </div>
+
+                        <div id="d_address" style="display: none" class="col-md-12">
+                            <div class="wrap-address-billing">
+                                <h3 class="box-title">Shipping Address</h3>
+                                <div class="billing-address">
+                                    <p class="row-in-form">
+
+                                        <input type="hidden" name="" id="ship_to_different">
+
+                                        <label for="fname">first name<span>*</span></label>
+                                        <input type="text" name="fname" placeholder="Your name">
+                                        @error('s_firstname')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="lname">last name<span>*</span></label>
+                                        <input type="text" name="lname" placeholder="Your last name">
+                                        @error('s_lastname')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="email">Email Addreess:</label>
+                                        <input type="email" name="email" placeholder="Type your email">
+                                        @error('s_email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="phone">Phone number<span>*</span></label>
+                                        <input type="number" name="phone" placeholder="10 digits format">
+                                        @error('s_mobile')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="add">line1:</label>
+                                        <input type="text" name="add"
+                                            placeholder="Street at apartment number">
+                                        @error('s_line1')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="add">line2:</label>
+                                        <input type="text" name="add"
+                                            placeholder="Street at apartment number">
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="country">Country<span>*</span></label>
+                                        <input type="text" name="country" placeholder="United States">
+                                        @error('s_country')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="zip-code">Postcode / ZIP:</label>
+                                        <input type="number" name="zip-code" placeholder="Your postal code">
+                                        @error('s_zipcode')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="city">Province<span>*</span></label>
+                                        <input type="text" name="province" placeholder="Province">
+                                        @error('s_province')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <p class="row-in-form">
+                                        <label for="city">Town / City<span>*</span></label>
+                                        <input type="text" name="city" placeholder="City name">
+                                        @error('s_city')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </p>
                                 </div>
                             </div>
-                        @endif
+                        </div>
+
                     </div>
 
                     <div class="row ">
@@ -217,16 +223,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="summary-info"><span class="title"><i
-                                                class="fas fa-truck"></i> Cash On Delivery(COD)</span>
+                                    <p class="summary-info"><span class="title"><i class="fas fa-truck"></i> Cash On
+                                            Delivery(COD)</span>
                                     </p>
-                                    <p class="summary-info"><span class="title"><i
-                                                class="fas fa-credit-card"></i> Onlie Payment (Credit Card, Debit Card,
+                                    <p class="summary-info"><span class="title"><i class="fas fa-credit-card"></i>
+                                            Onlie Payment (Credit Card, Debit Card,
                                             Upi )</span>
                                     </p>
                                     <div class="choose-payment-methods">
                                         <label class="payment-method">
-                                            <input name="paymentmode" id="payment-method-bank" value="cod" type="radio">
+                                            <input name="paymentmode" id="payment-method-bank" value="cod"
+                                                type="radio">
                                             <span>Cash On Delivery</span>
                                             <span class="payment-desc">Order Now Pay on Delivery.</span>
                                         </label>
@@ -279,7 +286,8 @@
                                         ->where('user_id', $add->user_id)
                                         ->first();
                                     ?>
-                                    <input id="address" name="address" type="radio" value="{{ $order_id->id }}">
+                                    <input id="address" name="address" type="radio"
+                                        value="{{ $order_id->id }}">
                                     <input type="hidden" name="coin_on" id="coin_on">
                                     <strong>{{ $add->firstname . ' ' . $add->lastname }}</strong> - <span>
                                         {{ $add->mobile }}</span><br>
@@ -315,7 +323,7 @@
             if (remaining_coin > 0) {
                 document.getElementById('balance_coin').innerText = remaining_coin;
                 document.getElementById('total_price').innerText = Number(total_price) - Number(used_coins);
-                document.getElementById('coin_on').value="yes";
+                document.getElementById('coin_on').value = "yes";
                 x.style.display = "block";
             }
         } else {
@@ -324,14 +332,25 @@
             used_coins = document.getElementById('used_coins').innerText
             document.getElementById('balance_coin').innerText = Number(balance_coin) + Number(used_coins)
             document.getElementById('total_price').innerText = total_price;
-            document.getElementById('coin_on').value="no";
+            document.getElementById('coin_on').value = "no";
 
             x.style.display = "none";
         }
+    }
 
 
+    function d_address() {
+        var element = document.getElementById('d_address');
+        if (element.style.display == "none") {
+            element.style.display = "block"
+            document.getElementById('ship_to_different').name = "ship_to_different";
+            document.getElementById('ship_to_different').value = "1";
 
+        } else {
+            document.getElementById('ship_to_different').name = "";
+            document.getElementById('ship_to_different').value = "0";
+            element.style.display = "none"
 
-
+        }
     }
 </script>

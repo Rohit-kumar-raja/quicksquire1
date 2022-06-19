@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Pipeline;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\AttemptToAuthenticate;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
@@ -16,6 +17,9 @@ use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\DB;
+use Cart;
+use Exception;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -56,6 +60,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+
         return $this->loginPipeline($request)->then(function ($request) {
             return app(LoginResponse::class);
         });
@@ -97,6 +102,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): LogoutResponse
     {
+
+        $all_item = Cart::instance('cart')->content();
+        foreach ($all_item as $item) {
+            try {
+                DB::table('cart_product')->insert([
+                    'product_id' => $item->id,
+                    'user_id' => Auth::user()->id
+                ]);
+            } catch (Exception $e) {
+            }
+        }
+
         $this->guard->logout();
 
         $request->session()->invalidate();

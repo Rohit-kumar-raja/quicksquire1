@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Cart;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -79,11 +80,12 @@ class CartComponent extends Component
     {
         $this->setAmountForCheckout();
         $coin_gain = 0;
-        $coin_redeem=0;
+        $coin_redeem = 0;
         $cart_amount = 0;
         $cart_amount =  Cart::instance('cart')->subtotal();
         $cart_amount = (int)str_replace(',', '', $cart_amount);
         $coin_values =  DB::table('wallet')->get();
+        // coin calcultion
         foreach ($coin_values as $coin_value) {
             $coin_check =   $coin_value->gain_by_per ?? 0;
             if ($coin_check > 0) {
@@ -99,6 +101,25 @@ class CartComponent extends Component
             }
         }
         session(['coin_gain' => $coin_gain, 'coin_use' => $coin_redeem]);
+
+        // coupon show getting
+        // $coupon_values =  DB::table('coupon')->get();
+        // foreach ($coupon_values as $coupon_value) {
+        //     $coupon_check =   $coupon_value->gain_by_per ?? 0;
+        //     if ($coupon_check > 0) {
+        //         if ($cart_amount >= $coupon_value->min && $cart_amount <= $coupon_value->max) {
+        //             $coupon_gain =  $cart_amount *  $coupon_value->gain_by_per / 100;
+        //             $coupon_redeem = $cart_amount *  $coupon_value->redeem_by_per / 100;
+        //         }
+        //     } else {
+        //         if ($cart_amount >= $coupon_value->min && $cart_amount <= $coupon_value->max) {
+        //             $coupon_gain = $coupon_value->flat_gain ?? 0;
+        //             $coupon_redeem = $coupon_value->flat_use ?? 0;
+        //         }
+        //     }
+        // }
+
+
 
 
         return view('livewire.cart-component', ['coin_gain' => $coin_gain])->layout('layouts.base');

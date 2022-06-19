@@ -9,6 +9,7 @@ use Cart;
 use App\Models\Category;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ProductDetailsController extends Controller
 {
@@ -69,5 +70,22 @@ class ProductDetailsController extends Controller
         } catch (Exception $e) {
             echo "no";
         }
+    }
+
+    function coupon($coupon_name)
+    {
+        $checkout_total = Session::get('checkout')['total'];
+        $checkout_total = str_replace(',', '', $checkout_total);
+        $coupon = DB::table('coupon')->where('coupon_name', $coupon_name)->first();
+        $coupon_descount_percentage = $coupon->flat_use ?? 0;
+        $coupon_descount_flat = $coupon->redeem_by_per ?? 0;
+
+        if ($coupon_descount_percentage > 0) {
+            $total_descount = $checkout_total - $coupon_descount_percentage;
+        }
+        if ($coupon_descount_flat > 0) {
+            $total_descount = $checkout_total - $coupon_descount_flat;
+        }
+        return $coupon;
     }
 }

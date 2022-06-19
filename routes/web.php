@@ -62,11 +62,13 @@ use App\Http\Controllers\Admin\GreatOfferController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\LoginController;
 
 // authenticating with otp start
 Route::post('opt/send', [OtpController::class, 'register'])->name('register.otp');
 Route::post('opt/verify', [OtpController::class, 'verifyOtp'])->name('verify.otp');
 Route::get('create/new/user/{user}', [CreateNewUser::class, 'create'])->name('create.new.user');
+Route::post('login/verify', [LoginController::class, 'login'])->name('login.verify');
 // end
 
 Route::get('/', HomeComponent::class)->name('index');
@@ -97,7 +99,10 @@ Route::post('/checkout/placeOrder', [CheckoutComponent::class, 'placeOrder'])->n
 
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('product/pincode/', [ProductDetailsController::class, 'pincode'])->name('product.details.pincode');
+Route::get('product/coupon/', [ProductDetailsController::class, 'coupon'])->name('product.details.coupon');
+
 Route::get('product/pincode/{pincode}', [ProductDetailsController::class, 'pincode']);
+Route::get('product/coupon/{coupon}', [ProductDetailsController::class, 'coupon']);
 
 Route::get('/search', SearchComponent::class)->name('product.search');
 // Route::post('/searchproduct' ,[SearchController::class,'index'])->name('products.search');
@@ -135,7 +140,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/order/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
     Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
-    Route::post('/user/review/add', [UserReviewComponent::class,'addReview'])->name('user.review.add');
+    Route::post('/user/review/add', [UserReviewComponent::class, 'addReview'])->name('user.review.add');
 
     Route::get('/user/profile', UserProfileComponent::class)->name('user.profile');
     Route::get('/user/profile/edit', UserEditProfileComponent::class)->name('user.editprofile');
@@ -171,7 +176,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
     Route::post('/admin/product/store', [AdminAddProductComponent::class, 'store'])->name('admin.addproduct.store');
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
-    Route::post('/admin/product/update', [AdminEditProductComponent::class,'update'])->name('admin.edit.product.update');
+    Route::post('/admin/product/update', [AdminEditProductComponent::class, 'update'])->name('admin.edit.product.update');
     Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
     Route::get('/admin/orders', AdminOrderComponent::class)->name('admin.order');
     Route::get('/admin/order/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orderdetails');
@@ -211,7 +216,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/pincode/status/{id}', [PincodeController::class, 'status'])->name('admin.pincode.status');
     Route::post('/admin/pincode/import', [PincodeController::class, 'import'])->name('admin.pincode.import');
 
-   
+
     // pin code end
 
     // users code start
@@ -259,7 +264,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/delivered', [ordersController::class, 'delivered'])->name('admin.order.delivered');
     Route::get('/admin/canceled', [ordersController::class, 'canceled'])->name('admin.order.canceled');
     Route::get('/admin/dispatched', [ordersController::class, 'dispatched'])->name('admin.order.dispatched');
-    
+
     Route::post('/admin/orders/add', [ordersController::class, 'store'])->name('admin.orders.add');
     Route::get('/admin/orders/edit/{id}', [ordersController::class, 'edit'])->name('admin.orders.edit');
     Route::post('/admin/orders/update/{id}', [ordersController::class, 'update'])->name('admin.orders.update');

@@ -172,8 +172,8 @@
                                     <h3><a
                                             href="{{ route('product.details', ['slug' => $product->slug]) }}">{{ substr($product->name, 0, 40) }}</a>
                                     </h3>
-                                    <div class="pi-price">₨ {{ $product->sale_price }} <strike
-                                            class="dull">₨ {{ $product->regular_price }}</strike></div>
+                                    <div class="pi-price">₨ {{ $product->sale_price }} <strike class="dull">₨
+                                            {{ $product->regular_price }}</strike></div>
 
                                     <?php
                                     $discout = (($product->regular_price - $product->sale_price) / $product->regular_price) * 100;

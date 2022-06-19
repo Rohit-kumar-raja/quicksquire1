@@ -137,6 +137,17 @@
                                                     src="{{ asset('assets/pages/img/finance/hdb.jpg') }}" alt=""></a>
                                         </div>
                                     </div>
+                                    <div class="row mb-3">
+
+                                        <div class="col-sm-7"> <input type="text" id="pincode"
+                                                name="pincode" placeholder="Enter pincode"
+                                                class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
+                                                class="btn btn-sm btn-primary">check</button>
+                                        </div>
+                                    </div>
+                                    <small class="text-success mt-1 mb-2" id="code_data"></small>
                                     <div class="product-page-cart">
                                         <div class="row">
                                             <div class="col-sm-8">
@@ -171,17 +182,7 @@
 
 
                                             </div>
-                                            <div class="row mt-3">
-
-                                                <div class="col-sm-7"> <input type="text" id="pincode"
-                                                        name="pincode" placeholder="Enter pincode"
-                                                        class="form-control form-control-sm">
-                                                </div>
-                                                <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
-                                                        class="btn btn-sm btn-primary">check</button>
-                                                </div>
-                                            </div>
-                                            <small class="text-success mt-1" id="code_data"></small>
+                                           
                                         </div>
                                     </div>
 
@@ -241,8 +242,8 @@
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="Reviews">
-                                            <h2>{{ $product->orderItems->where('rstatus', 1)->count() }} review for
-                                                <span>{{ $product->name }}</span>
+                                            <h2>{{ $product->orderItems->where('rstatus', 1)->count() }} reviews
+                                                {{-- <span>{{ $product->name }}</span> --}}
                                             </h2>
                                             @foreach ($product->orderItems->where('rstatus', 1) as $orderItem)
                                                 <div class="review-item clearfix">
@@ -258,9 +259,6 @@
                                                                     <i class="far fa-star text-warning"></i>
                                                                 @endfor
                                                             @endif
-
-
-
                                                         </strong>
                                                         <em>{{ Carbon\Carbon::parse($orderItem->review->created_at)->format('d F Y g:i A') }}</em>
 

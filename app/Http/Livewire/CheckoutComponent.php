@@ -11,6 +11,7 @@ use Livewire\Component;
 use illuminate\Support\Facades\Auth;
 use Cart;
 use Cartalyst\Stripe\Api\Orders;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -179,6 +180,10 @@ class CheckoutComponent extends Component
         }
         $coin = new CoinController();
         $coin->storeCoin(Auth::user()->id, $order->id, $transaction->id, $total_amount);
+        try {
+            DB::table('cart_product')->where('user_id', Auth::user()->id)->delete();
+        } catch (Exception $e) {
+        }
 
         $this->thankyou = 1;
         Cart::instance('cart')->destroy();
@@ -210,7 +215,6 @@ class CheckoutComponent extends Component
         }
     }
 
-
     public function render()
     {
         if (Auth::check()) {
@@ -219,9 +223,8 @@ class CheckoutComponent extends Component
             $user_id = 0;
         }
 
-
         $this->verifyForCheckout();
-        $balance_coin = DB::table('coin')->where('user_id', Auth::user()->id)->sum('gain') - DB::table('coin')->where('user_id', Auth::user()->id)->sum('use');
+        $balance_coin = DB::table('coin')->where('user_id', $user_id)->sum('gain') - DB::table('coin')->where('user_id', $user_id)->sum('use');
         // $address = DB::table('orders')->where('user_id',$user_id)->orderBy('id', 'DESC')->take(6)->get();
         $address = DB::table('orders')->select(['firstname', 'lastname', 'mobile', 'email', 'line1', 'line2', 'city', 'province', 'country', 'zipcode', 'user_id'])->distinct()->where('user_id', $user_id)->orderBy('id', 'DESC')->take(6)->get();
         return view('livewire.checkout-component', ['address' => $address, 'balance_coin' => $balance_coin])->layout("layouts.base");

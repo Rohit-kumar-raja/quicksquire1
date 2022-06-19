@@ -63,7 +63,7 @@
                             <div id="wrapper">
                                 <div id="login" class="animate form">
                                     <x-jet-validation-errors class="mb-4" />
-                                    <form action="{{ route('login') }}" method="POST" autocomplete="on">
+                                    <form action="{{ route('login.verify') }}" method="POST" autocomplete="on">
                                         @csrf
                                         <h1>Log in to your account</h1>
                                         <p>
