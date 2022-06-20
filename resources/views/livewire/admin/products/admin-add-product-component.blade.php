@@ -99,16 +99,16 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group  col-sm-4">
+                                {{-- <div class="form-group  col-sm-4">
                                     <label class=" control-label">SKU:</label>
-                                    <div class="">
-                                        <input name="SKU" type="text" class="form-control input-md" placeholder="SKU"
+                                    <div class=""> --}}
+                                        <input name="SKU" value="0" type="hidden" class="form-control input-md" placeholder="SKU"
                                             wire:model="SKU" />
-                                        @error('SKU')
+                                        {{-- @error('SKU')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Stock Status:</label>
                                     <div class="">
@@ -199,8 +199,8 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Category:</label>
                                     <div class="">
-                                        <select name="category_id" class="form-control" wire:model="category_id"
-                                            wire:change="changeSubcategory">
+                                        <select onchange="change_subCategory(this.value)" name="category_id" class="form-control" 
+                                            >
                                             <option value="">Select Category</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -214,7 +214,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Subategory:</label>
                                     <div class="">
-                                        <select name="scategory_id" class="form-control" wire:model="scategory_id">
+                                        <select name="scategory_id" class="form-control" id="scategory_id">
                                             <option value="0">Select Subategory</option>
                                             @foreach ($scategories as $scategory)
                                                 <option value="{{ $scategory->id }}">{{ $scategory->name }}
@@ -298,3 +298,14 @@
         });
     </script>
 @endpush
+<script>
+    function change_subCategory(id){
+        var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                console.log(this.responseText);
+                document.getElementById('scategory_id').innerHTML=this.responseText;
+            }
+            xmlhttp.open("GET", "{{ route('admin.getSubCategory') }}/" + id);
+            xmlhttp.send();
+    }
+</script>

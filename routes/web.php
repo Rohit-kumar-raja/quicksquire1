@@ -73,10 +73,10 @@ Route::get('create/new/user/{user}', [CreateNewUser::class, 'create'])->name('cr
 // login routes
 Route::post('login/verify', [LoginController::class, 'login'])->name('login.verify');
 Route::post('login/with/otp', [LoginController::class, 'loginWithOtp'])->name('login.with.otp.generate');
-Route::get('login/with/otp' ,function(){
+Route::get('login/with/otp', function () {
     return view('auth.loginwith');
 })->name('login.with');
-Route::get('login/with/otp/varify' ,function(){
+Route::get('login/with/otp/varify', function () {
     return view('auth.varify-mobile-with-otp');
 })->name('login.with.verify');
 Route::post('login/with/otp/verify', [LoginController::class, 'loginWithOtpVerify'])->name('login.with.otp.verify');
@@ -151,8 +151,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/order/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
-   
-    Route::post('/user/order/cancel', [ProductDetailsController::class,'cancelOrder'])->name('user.order.cancel');
+
+    Route::post('/user/order/cancel', [ProductDetailsController::class, 'cancelOrder'])->name('user.order.cancel');
 
     Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
     Route::post('/user/review/add', [UserReviewComponent::class, 'addReview'])->name('user.review.add');
@@ -299,5 +299,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/coupon/delete/{id}', [CouponController::class, 'destroy'])->name('admin.coupon.destroy');
     Route::get('/admin/coupon/status/{id}', [CouponController::class, 'status'])->name('admin.coupon.status');
     // coupon
+    Route::get('/admin/category/getSubCategory/', [SubCategoryController::class, 'getSubCategory'])->name('admin.getSubCategory');
+    Route::get('/admin/category/getSubCategory/{id}', [SubCategoryController::class, 'getSubCategory'])->name('admin.getSubCategory.get');
 
 });

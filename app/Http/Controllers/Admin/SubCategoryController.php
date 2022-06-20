@@ -19,10 +19,10 @@ class SubCategoryController extends Controller
     public function index()
     {
 
-        $subcategories = Subcategory::orderBy('id','DESC')->get();
+        $subcategories = Subcategory::orderBy('id', 'DESC')->get();
         $categories = Category::all();
 
-        return view('livewire.admin.SubCategory.index', ['subcategories' => $subcategories,'categories'=>$categories]);
+        return view('livewire.admin.SubCategory.index', ['subcategories' => $subcategories, 'categories' => $categories]);
     }
 
     /**
@@ -104,5 +104,13 @@ class SubCategoryController extends Controller
         DB::table('subcategories')->delete($id);
         session()->flash('message', 'Subcategory has been Deleted successfully');
         return redirect()->back()->with('delete', 'Data Deleted successfully');
+    }
+
+    function getSubCategory($id)
+    {
+        $sub_category = DB::table('subcategories')->where('category_id',$id)->get();
+        foreach ($sub_category as $scategory) {
+           echo '<option value="' . $scategory->id . '"> ' . $scategory->name . '</option> ';
+        }
     }
 }

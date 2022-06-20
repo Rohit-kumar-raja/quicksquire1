@@ -101,16 +101,15 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-4">
+                                {{-- <div class="form-group col-sm-4">
                                     <label class=" control-label">SKU:</label>
-                                    <div>
-                                        <input type="text" class="form-control input-md" placeholder="SKU" name="SKU"
-                                            wire:model="SKU" />
-                                        @error('SKU')
+                                    <div> --}}
+                                <input type="hidden" class="form-control input-md" placeholder="SKU" name="SKU" />
+                                {{-- @error('SKU')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Stock Status:</label>
                                     <div>
@@ -128,12 +127,12 @@
                                     <div>
                                         <select class="form-control" name="featured" wire:model="featured">
                                             @if ($featured)
-                                            <option value="{{ $featured }}">
-                                                {{  'Yes' }}
-                                            </option>
-                                        @else
-                                            <option selected disabled> -Select-</option>
-                                        @endif
+                                                <option value="{{ $featured }}">
+                                                    {{ 'Yes' }}
+                                                </option>
+                                            @else
+                                                <option selected disabled> -Select-</option>
+                                            @endif
                                             <option value="0">No</option>
                                             <option value="1">Yes</option>
                                         </select>
@@ -151,7 +150,8 @@
                                     <div>
                                         <input name="newimage" type="file" class="input-file form-control " />
                                         @if ($newimage)
-                                            <img src="{{ $newimage->temporaryUrl() }}" alt="" width="100" />
+                                            <img src="{{ $newimage->temporaryUrl() }}" alt=""
+                                                width="100" />
                                         @else
                                             <img src="{{ asset('assets/pages/img/products') }}/{{ $image }}"
                                                 alt="" width="200" />
@@ -169,7 +169,8 @@
                                         @if ($newimages)
                                             @foreach ($newimages as $newimage)
                                                 @if ($newimage)
-                                                    <img src="{{ $newimage->temporaryUrl() }}" alt="" width="100" />
+                                                    <img src="{{ $newimage->temporaryUrl() }}" alt=""
+                                                        width="100" />
                                                 @endif
                                             @endforeach
                                         @else
@@ -187,8 +188,8 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Category:</label>
                                     <div>
-                                        <select class="form-control" name="category_id" wire:model="category_id"
-                                            wire:chnage="changeSubcategory">
+                                        <select onchange="change_subCategory(this.value)" class="form-control"
+                                            name="category_id">
 
                                             @if ($category_id)
                                                 <option value="{{ $category_id }}">
@@ -199,7 +200,8 @@
                                             @endif
 
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('category_id')
@@ -210,21 +212,19 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Subategory:</label>
                                     <div>
-                                        <select class="form-control" name="scategory_id" >
-                                          
-                                            @if ($scategory_id)
-                                                <option value="{{ $scategory_id }}">
-                                                    {{ DB::table('subcategories')->where('id', $scategory_id)->first()->name ?? '' }}
-                                                </option>
-                                            @else
-                                            <option selected disabled >Select Subategory</option>
-                                            @endif
-                                          
-                                            @foreach ($scategories as $scategory)
-                                                <option value="{{ $scategory->id }}">{{ $scategory->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        <div class="">
+
+                                            <select id="scategory_id1" class="form-control" name="scategory_id1">
+
+                                                @if ($scategory_id)
+                                                    <option value="{{ $scategory_id }}">
+                                                        {{ DB::table('subcategories')->where('id', $scategory_id)->first()->name ?? '' }}
+                                                    </option>
+                                                @endif
+
+
+                                            </select>
+                                        </div>
                                         @error('scategory_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -237,7 +237,8 @@
                                             class=" selectpicker form-control">
                                             <option value="0">Select Feature</option>
                                             @foreach ($features as $feature)
-                                                <option value="{{ $feature->name }}">{{ $feature->name }}</option>
+                                                <option value="{{ $feature->name }}">{{ $feature->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('feature_id')
@@ -279,4 +280,17 @@
 </style>
 <script>
     $('select').selectpicker();
+</script>
+
+
+<script>
+    function change_subCategory(id) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            //console.log(this.responseText);
+            document.getElementById('scategory_id1').innerHTML = this.responseText;
+        }
+        xmlhttp.open("GET", "{{ route('admin.getSubCategory') }}/" + id);
+        xmlhttp.send();
+    }
 </script>
