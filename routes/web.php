@@ -68,7 +68,19 @@ use App\Http\Controllers\LoginController;
 Route::post('opt/send', [OtpController::class, 'register'])->name('register.otp');
 Route::post('opt/verify', [OtpController::class, 'verifyOtp'])->name('verify.otp');
 Route::get('create/new/user/{user}', [CreateNewUser::class, 'create'])->name('create.new.user');
+// end
+
+// login routes
 Route::post('login/verify', [LoginController::class, 'login'])->name('login.verify');
+Route::post('login/with/otp', [LoginController::class, 'loginWithOtp'])->name('login.with.otp.generate');
+Route::get('login/with/otp' ,function(){
+    return view('auth.loginwith');
+})->name('login.with');
+Route::get('login/with/otp/varify' ,function(){
+    return view('auth.varify-mobile-with-otp');
+})->name('login.with.verify');
+Route::post('login/with/otp/verify', [LoginController::class, 'loginWithOtpVerify'])->name('login.with.otp.verify');
+
 // end
 
 Route::get('/', HomeComponent::class)->name('index');

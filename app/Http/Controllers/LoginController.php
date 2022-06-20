@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -49,7 +50,47 @@ class LoginController extends Controller
 
 
 
-    function login_otp(Request $request)
+    function loginWithOtp(Request $request)
     {
+
+
+        try {
+            if (is_numeric($request->email)) {
+                // for phone number with login
+                $user =  User::where('phone', $request->email)->first();
+            } else {
+                // for email id with login 
+                $user =  User::where('email', $request->email)->first();
+            }
+            if ($user != '') {
+                $otp_send = new OtpController();
+                try {
+                    session(['user_data'=> $user]);
+                    $otp_send->optSend($user->phone);
+                    $details = [
+                        'title' => 'Mail from quicksecureindia.com',
+                    ];
+                    Mail::to($request->email)->send(new \App\Mail\OtpSend($details));
+                    return redirect()->route('login.with.verify');
+                } catch (Exception $e) {
+                    return redirect()->back()->withErrors('Record not matched with our record');
+                }
+            } else {
+                return redirect()->back()->withErrors('Record not matched with our record');
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors('Record not matched with our record');
+        }
+    }
+
+    function loginWithOtpVerify(Request $request)
+    {
+        if (session('otp') == $request->otp) {
+            Auth::login(session('user_data'));
+            return redirect('/');
+        }else{
+            return redirect()->back()->withErrors('Please Enter correct otp');
+
+        }
     }
 }

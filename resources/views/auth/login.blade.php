@@ -41,16 +41,6 @@
                             the QSIPL App. QSIPL web site licensed under an open source license is governed solely by
                             the terms of that open source license
 
-                            <!--<h3>Investigationes demonstraverunt</h3>-->
-                            <!--<ul>-->
-                            <!--    <li>Lorem ipsum dolor sit amet</li>-->
-                            <!--    <li>Claritas est etiam processus dynamicus</li>-->
-                            <!--    <li>Duis autem vel eum iriure dolor</li>-->
-                            <!--    <li>Eodem modo typi</li>-->
-                            <!--</ul>-->
-
-
-
                         </div>
                     </div>
                     <!-- END CONTENT -->
@@ -70,8 +60,8 @@
                                             <label for="username" class="uname" data-icon="u"> Your email or
                                                 username
                                             </label>
-                                            <input id="username" name="email" required="required" type="email"
-                                                placeholder="myusername or mymail@mail.com" :value="old('email')"
+                                            <input id="username" name="email" required="required" type="text"
+                                                placeholder="phone number or mymail@mail.com" :value="old('email')"
                                                 required autofocus />
                                         </p>
                                         <p>
@@ -89,7 +79,7 @@
                                         <a href="{{ route('password.request') }}" class="">Forget
                                             Password ?</a>
 
-
+                                        <a href="{{ route('login.with') }}" class="to_register" >Login With Otp ?</a>
                                         <p class="login button">
                                             <input type="submit" value="Login" />
                                         </p>
@@ -119,10 +109,11 @@
                                                 autofocus autocomplete="name" />
                                         </p>
                                         <p>
-                                            <label for="phone" class="phone" data-icon="ph"> 
+                                            <label for="phone" class="phone" data-icon="ph">
                                                 Phone number</label>
                                             <input id="phone" name="phone" type="text" max="12"
-                                                placeholder="Enter 10 digit mobile valid mobile number" :value="phone" />
+                                                placeholder="Enter 10 digit mobile valid mobile number"
+                                                :value="phone" />
                                         </p>
                                         <p>
                                             <label for="emailsignup" class="youmail" data-icon="e"> Your
@@ -130,7 +121,6 @@
                                             <input id="emailsignup" name="email" type="email"
                                                 placeholder="mysupermail@mail.com" :value="email" />
                                         </p>
-                                      
                                         <p>
                                             <label for="passwordsignup" class="youpasswd" data-icon="p">Your
                                                 password
@@ -154,7 +144,6 @@
                                         </p>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
