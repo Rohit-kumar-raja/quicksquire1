@@ -148,10 +148,6 @@ class SearchComponent extends Component
         $feature =  array_unique($feature);
         // feature end
 
-
-
-
-
         // getting brand end
         return view('livewire.search-component', ['products' => $products, 'categories' => $categories, 'brands' => $brand, 'features' => $feature])->layout("layouts.base");
     }
