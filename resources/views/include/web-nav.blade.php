@@ -76,7 +76,7 @@
                 <ul class="list-unstyled list-inline pull-right">
                     <!-- <li><a href="#">My Account</a></li> -->
                     @livewire('wishlist-count-component')
-                    <li><a href="/checkout">Checkout</a></li>
+                    {{-- <li><a href="/checkout">Checkout</a></li> --}}
 
 
                     @if (Route::has('login'))
