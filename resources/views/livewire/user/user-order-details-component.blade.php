@@ -5,7 +5,6 @@
             color: blue !important;
             text-decoration: underline;
         }
-
     </style>
     <div class="container" style="padding: 30px 0;">
         <div class="row">
@@ -24,10 +23,43 @@
                             <div class="col-md-6">
                                 <div class="pull-right">
                                     <a href="{{ route('user.orders') }}" class="btn btn-info btn-sm">My Orders</a>
+                                    <!-- Button trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle"> Why cancel this
+                                                        product </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('user.order.cancel') }}" method="POST">
 
+                                                    <div class="modal-body">
+                                                        @csrf
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $order->id }}">
+                                                        <textarea name="remark" id="remark" cols="30" rows="10" placeholder="Add remark why cancel the product"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <button type="submit"
+                                                            class="btn btn-primary btn-sm ">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- end Modal --}}
                                     @if ($order->status == 'ordered')
-                                        <a href="#" wire:click.prevent="cancelOrder"
-                                            class="btn btn-danger btn-sm pull-right">Cancel Order</a>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModalCenter">
+                                            Cancel Order
+                                        </button>
                                     @endif
                                 </div>
                             </div>
@@ -148,27 +180,27 @@
                                             <div class="summary">
                                                 <div class="order-summary">
                                                     <h4 class="title-box">Order Summary</h4>
-                                                    <p class="summary-info"><span
-                                                            class="title">Subtotal</span> <b
+                                                    <p class="summary-info"><span class="title">Subtotal</span> <b
                                                             class="index">Rs{{ $order->subtotal }}</b>
                                                     </p>
                                                     <p class="summary-info"><span class="title">Tax</span> <b
                                                             class="index">Rs{{ $order->tax }}</b> </p>
-                                                    <p class="summary-info"><span
-                                                            class="title">Shipping</span> <b
+                                                    <p class="summary-info"><span class="title">Shipping</span> <b
                                                             class="index">Free Shipping</b> </p>
                                                     <p class="summary-info"><span class="title">Total</span>
                                                         <b class="index">Rs{{ $order->total }}</b>
                                                     </p>
                                                     <p class="summary-info text-success"><span class="title">Your
                                                             Rewards</span>
-                                                        <b class="index text-success "> +{{ $rewards->gain ?? '0'}} <i class="fas fa-coins" aria-hidden="true"></i> </b>
+                                                        <b class="index text-success "> +{{ $rewards->gain ?? '0' }}
+                                                            <i class="fas fa-coins" aria-hidden="true"></i> </b>
                                                     </p>
                                                     <p class="summary-info text-danger"><span class="title">
-                                                         You Saved Using
-                                                        Rewards</span>
-                                                    <b class="index text-danger "> -{{ $rewards->use ?? '0'}} <i class="fas fa-coins" aria-hidden="true"></i> </b>
-                                                </p>
+                                                            You Saved Using
+                                                            Rewards</span>
+                                                        <b class="index text-danger "> -{{ $rewards->use ?? '0' }}
+                                                            <i class="fas fa-coins" aria-hidden="true"></i> </b>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,19 +211,15 @@
                                 <div>
                                     <span><a class="btn-primary print" onclick="print_pdf()" href="#"><img
                                                 style="width: 154px; margin-top: -15px;float: right;margin-right: 32px;"
-                                                src="{{ asset('assets/pages/img/icons/pdf.png') }}"
-                                                alt=""></a></span>
+                                                src="{{ asset('assets/pages/img/icons/pdf.png') }}" alt="">
+                                        </a>
+                                    </span>
                                 </div>
-
                             </div>
                             </table>
                             {{-- <!-- END SIDEBAR & CONTENT --> --}}
-
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -308,10 +336,10 @@
                             <th>Trasnsection Mode</th>
                             <td>{{ $order->transaction->mode }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th>Status</th>
                             <td>{{ $order->transaction->status }}</td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <th>Trasnsection Date</th>
                             <td>{{ $order->transaction->created_at }}</td>
@@ -331,7 +359,6 @@
             content: none !important;
         }
     }
-
 </style>
 <script>
     function print_pdf() {

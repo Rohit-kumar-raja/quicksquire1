@@ -663,6 +663,7 @@ class ComposerStaticInitf066ab7c05ecd41dd0a81c31c602c0fa
         'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
         'App\\Http\\Controllers\\CoinController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoinController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\OtpController' => __DIR__ . '/../..' . '/app/Http/Controllers/OtpController.php',
         'App\\Http\\Controllers\\PayuMoneyController' => __DIR__ . '/../..' . '/app/Http/Controllers/PayuMoneyController.php',
         'App\\Http\\Controllers\\PdfController' => __DIR__ . '/../..' . '/app/Http/Controllers/PdfController.php',

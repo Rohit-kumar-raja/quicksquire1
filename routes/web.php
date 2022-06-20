@@ -139,6 +139,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/order/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
+   
+    Route::post('/user/order/cancel', [ProductDetailsController::class,'cancelOrder'])->name('user.order.cancel');
+
     Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
     Route::post('/user/review/add', [UserReviewComponent::class, 'addReview'])->name('user.review.add');
 

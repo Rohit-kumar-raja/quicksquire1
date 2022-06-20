@@ -27,6 +27,7 @@ return array(
     'App\\Http\\Controllers\\CartController' => $baseDir . '/app/Http/Controllers/CartController.php',
     'App\\Http\\Controllers\\CoinController' => $baseDir . '/app/Http/Controllers/CoinController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
     'App\\Http\\Controllers\\OtpController' => $baseDir . '/app/Http/Controllers/OtpController.php',
     'App\\Http\\Controllers\\PayuMoneyController' => $baseDir . '/app/Http/Controllers/PayuMoneyController.php',
     'App\\Http\\Controllers\\PdfController' => $baseDir . '/app/Http/Controllers/PdfController.php',

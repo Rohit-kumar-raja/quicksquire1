@@ -46,28 +46,37 @@
                         <h3>Brand</h3>
                         <div class="checkbox-list">
                             @foreach ($brands as $brand)
-                         
-                              
-                                <label><input onclick="filter_change()"  value="{{ $brand }}" class="brands" type="checkbox"
-                                    @if (in_array($brand, explode(',',session('brand'))))
-                                    checked
-                                    @endif
-                                    >
+                                <label><input onclick="filter_change()" value="{{ $brand }}" class="brands"
+                                        type="checkbox" @if (in_array($brand, explode(',', session('brand')))) checked @endif>
                                     {{ $brand }} </label>
                             @endforeach
                         </div>
+
+                        {{-- filter featur byes --}}
+
+                        <h3>Feature </h3>
+                        <div class="checkbox-list">
+                            @foreach ($features as $feature)
+                                <label><input onclick="filter_change()" value="{{ $feature }}" class="features"
+                                        type="checkbox" @if (in_array($feature, explode(',', session('feature')))) checked @endif>
+                                    {{ $feature }} </label>
+                            @endforeach
+                        </div>
+
+                        {{-- filter feature byes --}}
+
                         <h3>Price</h3>
                         <p>
                             <label for="amount">Range:</label>
                         <div class="row">
                             <div class="col-4">
-                                <input value="{{ session('min_amount') }}" type="text" id="min" placeholder="Min"
-                                    class="form-control form-control-sm form-width" name="min">
+                                <input value="{{ session('min_amount') }}" type="text" id="min"
+                                    placeholder="Min" class="form-control form-control-sm form-width" name="min">
                             </div>
 
                             <div class="col-4">
-                                <input type="text" value="{{ session('max_amount') }}" id="max" placeholder="Max"
-                                    class="form-control form-control-sm form-width" name="max">
+                                <input type="text" value="{{ session('max_amount') }}" id="max"
+                                    placeholder="Max" class="form-control form-control-sm form-width" name="max">
                             </div>
 
                             <div class="col-4">
@@ -179,8 +188,8 @@
                                     <h3><a
                                             href="{{ route('product.details', ['slug' => $product->slug]) }}">{{ substr($product->name, 0, 35) }}</a>
                                     </h3>
-                                    <div class="pi-price">₨ {{ $product->sale_price }} <strike
-                                            class="dull">₨ {{ $product->regular_price }}</strike></div>
+                                    <div class="pi-price">₨ {{ $product->sale_price }} <strike class="dull">₨
+                                            {{ $product->regular_price }}</strike></div>
                                     <?php
                                     $discout = (($product->regular_price - $product->sale_price) / $product->regular_price) * 100;
                                     ?>
@@ -238,19 +247,31 @@
     <script>
         function filter_change() {
             var brand_name = new Array();
+           var feature_name = new Array();
+
             var brand_array = document.getElementsByClassName('brands');
+             var feature_array = document.getElementsByClassName('features');
+
             for (i = 0; i < brand_array.length; i++) {
                 if (brand_array[i].checked == true) {
                     brand_name.push(brand_array[i].value)
                 }
             }
-           brand_name= brand_name.join(',');
+
+            for (j = 0; j < feature_array.length; j++) {
+                if (feature_array[j].checked == true) {
+                    feature_name.push(feature_array[j].value)
+                }
+            }
+
+            brand_name = brand_name.join(',');
+            feature_name = feature_name.join(',');
             var item = document.getElementById('item').value;
             var sorting = document.getElementById('sorting').value;
             var min = document.getElementById('min').value;
             var max = document.getElementById('max').value;
             window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting + '&min=' + min +
-                '&max=' + max+"&brand="+brand_name)
+                '&max=' + max + "&brand=" + brand_name+"&feature="+feature_name);
         }
     </script>
 

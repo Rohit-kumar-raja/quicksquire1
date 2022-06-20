@@ -88,4 +88,12 @@ class ProductDetailsController extends Controller
         }
         return $coupon;
     }
+
+
+    function cancelOrder(Request $request)
+    {
+        DB::table('orders')->where('id', $request->id)->update(['remarks'=>$request->remark,'status'=>'canceled','canceled_date'=>date('Y-m-d h:m:s')]);
+        session()->flash('success','Product canceled successfuly');
+        return redirect()->back();
+    }
 }
