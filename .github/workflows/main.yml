@@ -14,5 +14,4 @@ jobs:
         server:  ftp.computersolutionsjsr.co.in
         username:  sodhukno@quicksecureindia.com
         password: ${{ secrets.ftp_password }}
-        # port: 2221
-        # password changed
+        port: 2221
