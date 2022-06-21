@@ -1061,6 +1061,10 @@ trait HasAttributes
             ? $this->castAttributeAsEncryptedString($key, $value)
             : $value;
 
+        if ($this->isClassCastable($key)) {
+            unset($this->classCastCache[$key]);
+        }
+
         return $this;
     }
 
@@ -1943,8 +1947,8 @@ trait HasAttributes
             return $this->fromDateTime($attribute) ===
                 $this->fromDateTime($original);
         } elseif ($this->hasCast($key, ['object', 'collection'])) {
-            return $this->castAttribute($key, $attribute) ==
-                $this->castAttribute($key, $original);
+            return $this->fromJson($attribute) ===
+                $this->fromJson($original);
         } elseif ($this->hasCast($key, ['real', 'float', 'double'])) {
             if ($original === null) {
                 return false;
