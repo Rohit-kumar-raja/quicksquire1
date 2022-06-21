@@ -72,20 +72,20 @@ class Application implements ResetInterface
 {
     private array $commands = [];
     private bool $wantHelps = false;
-    private ?Command $runningCommand = null;
+    private $runningCommand = null;
     private string $name;
     private string $version;
-    private ?CommandLoaderInterface $commandLoader = null;
+    private $commandLoader = null;
     private bool $catchExceptions = true;
     private bool $autoExit = true;
-    private InputDefinition $definition;
-    private HelperSet $helperSet;
-    private ?EventDispatcherInterface $dispatcher = null;
-    private Terminal $terminal;
+    private $definition;
+    private $helperSet;
+    private $dispatcher = null;
+    private $terminal;
     private string $defaultCommand;
     private bool $singleCommand = false;
     private bool $initialized = false;
-    private SignalRegistry $signalRegistry;
+    private $signalRegistry;
     private array $signalsToDispatchEvent = [];
 
     public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
@@ -228,7 +228,7 @@ class Application implements ResetInterface
         try {
             // Makes ArgvInput::getFirstArgument() able to distinguish an option from an argument.
             $input->bind($this->getDefinition());
-        } catch (ExceptionInterface) {
+        } catch (ExceptionInterface $e) {
             // Errors must be ignored, full binding/validation happens later when the command is known.
         }
 
@@ -353,18 +353,9 @@ class Application implements ResetInterface
             CompletionInput::TYPE_ARGUMENT_VALUE === $input->getCompletionType()
             && 'command' === $input->getCompletionName()
         ) {
-            $commandNames = [];
-            foreach ($this->all() as $name => $command) {
-                // skip hidden commands and aliased commands as they already get added below
-                if ($command->isHidden() || $command->getName() !== $name) {
-                    continue;
-                }
-                $commandNames[] = $command->getName();
-                foreach ($command->getAliases() as $name) {
-                    $commandNames[] = $name;
-                }
-            }
-            $suggestions->suggestValues(array_filter($commandNames));
+            $suggestions->suggestValues(array_filter(array_map(function (Command $command) {
+                return $command->isHidden() ? null : $command->getName();
+            }, $this->all())));
 
             return;
         }
@@ -567,7 +558,7 @@ class Application implements ResetInterface
     {
         $this->init();
 
-        return isset($this->commands[$name]) || ($this->commandLoader?->has($name) && $this->add($this->commandLoader->get($name)));
+        return isset($this->commands[$name]) || ($this->commandLoader && $this->commandLoader->has($name) && $this->add($this->commandLoader->get($name)));
     }
 
     /**
@@ -1002,7 +993,7 @@ class Application implements ResetInterface
         try {
             $command->mergeApplicationDefinition();
             $input->bind($command->getDefinition());
-        } catch (ExceptionInterface) {
+        } catch (ExceptionInterface $e) {
             // ignore invalid options/arguments for now, to allow the event listeners to customize the InputDefinition
         }
 

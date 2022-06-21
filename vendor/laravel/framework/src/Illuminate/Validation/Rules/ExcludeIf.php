@@ -2,7 +2,6 @@
 
 namespace Illuminate\Validation\Rules;
 
-use Closure;
 use InvalidArgumentException;
 
 class ExcludeIf
@@ -17,14 +16,12 @@ class ExcludeIf
     /**
      * Create a new exclude validation rule based on a condition.
      *
-     * @param  \Closure|bool  $condition
+     * @param  callable|bool  $condition
      * @return void
-     *
-     * @throws \InvalidArgumentException
      */
     public function __construct($condition)
     {
-        if ($condition instanceof Closure || is_bool($condition)) {
+        if (! is_string($condition)) {
             $this->condition = $condition;
         } else {
             throw new InvalidArgumentException('The provided condition must be a callable or boolean.');

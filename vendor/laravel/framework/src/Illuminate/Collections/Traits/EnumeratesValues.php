@@ -322,22 +322,6 @@ trait EnumeratesValues
     }
 
     /**
-     * Get a single key's value from the first matching item in the collection.
-     *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @return mixed
-     */
-    public function value($key, $default = null)
-    {
-        if ($value = $this->firstWhere($key)) {
-            return data_get($value, $key, $default);
-        }
-
-        return value($default);
-    }
-
-    /**
      * Determine if the collection is not empty.
      *
      * @return bool
@@ -796,7 +780,7 @@ trait EnumeratesValues
 
             if (! is_array($result)) {
                 throw new UnexpectedValueException(sprintf(
-                    "%s::reduceSpread expects reducer to return an array, but got a '%s' instead.",
+                    "%s::reduceMany expects reducer to return an array, but got a '%s' instead.",
                     class_basename(static::class), gettype($result)
                 ));
             }

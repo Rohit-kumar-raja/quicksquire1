@@ -8,8 +8,6 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
@@ -19,8 +17,6 @@ use Throwable;
 
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
- *
- * @method $this trashed()
  */
 abstract class Factory
 {
@@ -300,7 +296,9 @@ abstract class Factory
      */
     public function lazy(array $attributes = [], ?Model $parent = null)
     {
-        return fn () => $this->create($attributes, $parent);
+        return function () use ($attributes, $parent) {
+            return $this->create($attributes, $parent);
+        };
     }
 
     /**
@@ -451,28 +449,21 @@ abstract class Factory
      */
     protected function expandAttributes(array $definition)
     {
-        return collect($definition)
-            ->map($evaluateRelations = function ($attribute) {
-                if ($attribute instanceof self) {
-                    $attribute = $attribute->create()->getKey();
-                } elseif ($attribute instanceof Model) {
-                    $attribute = $attribute->getKey();
-                }
+        return collect($definition)->map(function ($attribute, $key) use (&$definition) {
+            if (is_callable($attribute) && ! is_string($attribute) && ! is_array($attribute)) {
+                $attribute = $attribute($definition);
+            }
 
-                return $attribute;
-            })
-            ->map(function ($attribute, $key) use (&$definition, $evaluateRelations) {
-                if (is_callable($attribute) && ! is_string($attribute) && ! is_array($attribute)) {
-                    $attribute = $attribute($definition);
-                }
+            if ($attribute instanceof self) {
+                $attribute = $attribute->create()->getKey();
+            } elseif ($attribute instanceof Model) {
+                $attribute = $attribute->getKey();
+            }
 
-                $attribute = $evaluateRelations($attribute);
+            $definition[$key] = $attribute;
 
-                $definition[$key] = $attribute;
-
-                return $attribute;
-            })
-            ->all();
+            return $attribute;
+        })->all();
     }
 
     /**
@@ -490,18 +481,6 @@ abstract class Factory
                 },
             ]),
         ]);
-    }
-
-    /**
-     * Set a single model attribute.
-     *
-     * @param  string|int  $key
-     * @param  mixed  $value
-     * @return static
-     */
-    public function set($key, $value)
-    {
-        return $this->state([$key => $value]);
     }
 
     /**
@@ -841,12 +820,6 @@ abstract class Factory
     {
         if (static::hasMacro($method)) {
             return $this->macroCall($method, $parameters);
-        }
-
-        if ($method === 'trashed' && in_array(SoftDeletes::class, class_uses_recursive($this->modelName()))) {
-            return $this->state([
-                $this->newModel()->getDeletedAtColumn() => $parameters[0] ?? Carbon::now()->subDay(),
-            ]);
         }
 
         if (! Str::startsWith($method, ['for', 'has'])) {

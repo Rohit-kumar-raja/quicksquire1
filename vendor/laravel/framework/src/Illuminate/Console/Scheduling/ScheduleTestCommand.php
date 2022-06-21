@@ -5,9 +5,7 @@ namespace Illuminate\Console\Scheduling;
 use Illuminate\Console\Application;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'schedule:test')]
 class ScheduleTestCommand extends Command
 {
     /**
