@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -89,14 +90,18 @@ class OtpController extends Controller
         if ($otp == session('otp')) {
 
             $input = session('login_input');
-        
 
-            $user =  User::create([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'phone' => $input['phone'],
-                'password' => Hash::make($input['password']),
-            ]);
+            try {
+                $user =  User::create([
+                    'name' => $input['name'],
+                    'email' => $input['email'],
+                    'phone' => $input['phone'],
+                    'password' => Hash::make($input['password']),
+                ]);
+            } catch (Exception $e) {
+
+                return redirect()->back()->withErrors('Data Already exits please login ');
+            }
             Auth::login($user);
             return redirect(RouteServiceProvider::HOME);
         }
