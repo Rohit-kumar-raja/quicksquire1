@@ -89,7 +89,7 @@ class LoginController extends Controller
             Auth::login(session('user_data'));
             return redirect('/');
         }else{
-            return redirect()->back()->withErrors('Please Enter correct otp');
+            return redirect()->route('login')->withErrors('Please Enter correct otp');
 
         }
     }
