@@ -1,4 +1,3 @@
-
 @media(max-width:576px){
     .additional-shop-info , .additional-nav{
     display:none!important;
@@ -25,7 +24,7 @@
     
     .pre-header{background: #e7284d!important;}
     
-    *{ font-family: revert!important;}
+    
     .ecommerce .header-navigation > ul > li > a{
         padding: 30px 15px 14px!important;
         font-size: 13px!important;
@@ -47,7 +46,7 @@
     }
     
     .dropdown-menu>li>a{
-            color:#fff!important;
+            color:#000!important;
     }
     
     
@@ -74,4 +73,50 @@
     
     .header-navigation-content{
         min-width: 600px!important;
+    }
+    
+    
+    .price-availability-block .price strong{
+        font-size: 20px!important;
+    }
+    
+    .price-availability-block .availability{
+        width: 100%!important;
+    }
+    
+    .product-item h3 , .pi-price{
+        font-size: 20px!important;
+        width:100%;
+    }
+    
+    .product-item .add2cart{
+        font-size: 10px!important;
+        padding: 6px 15px!important;
+        margin-top: 5px!important;
+        background: #e94d1c!important;
+        color:#fff!important;
+    }
+    
+    .product-item h3 a{
+        font-size:14px!important;
+    }
+    
+    a:hover {
+        color: #575757!important;
+    }
+    
+    
+    .ecommerce h4{
+        text-transform: capitalize!important;
+    }
+    
+
+    @media(max-width:576px){
+    .steps-block,.pre-footer{
+    display:none!important;
+    }
+    .product-page-content .tab-content{
+     overflow-x:scroll!important;   
+    }
+    #feedback{display:none!important;}
     }
