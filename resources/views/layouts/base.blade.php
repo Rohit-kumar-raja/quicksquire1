@@ -69,12 +69,13 @@
     <!-- hammer plugin here -->
     <script type="text/javascript" src="{{ asset('hammer.js/1.0.5/jquery.hammer.min.js') }}"></script>
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('fancybox/source/jquery.fancybox.css') }}" />
-    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('magnific-popup/css/magnific-popup.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all"
+        href="{{ asset('fancybox/source/jquery.fancybox.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all"
+        href="{{ asset('magnific-popup/css/magnific-popup.css') }}" />
     <script type="text/javascript" src="{{ asset('fancybox/source/jquery.fancybox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('magnific-popup/js/magnific-popup.js') }}"></script>
-
-
+    <link rel="stylesheet" href="{{ asset('assets/pages/css/quicksecure.css') }}">
 
 </head>
 <!-- Head END -->
@@ -146,102 +147,102 @@
         }
     </style>
     <!-- BEGIN TOP BAR -->
-  @include('include.web-nav')
-        {{ $slot }}
+    @include('include.web-nav')
+    {{ $slot }}
 
-        <!-- BEGIN STEPS -->
-        <div class="steps-block steps-block-red">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 steps-block-col">
-                        <i class="fa fa-truck"></i>
-                        <div>
-                            <h2>Free shipping</h2>
-                            <em>Express delivery withing 3 days</em>
-                        </div>
-                        <span>&nbsp;</span>
+    <!-- BEGIN STEPS -->
+    <div class="steps-block steps-block-red">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 steps-block-col">
+                    <i class="fa fa-truck"></i>
+                    <div>
+                        <h2>Free shipping</h2>
+                        <em>Express delivery withing 3 days</em>
                     </div>
-                    <div class="col-md-4 steps-block-col">
-                        <i class="fa fa-gift"></i>
-                        <div>
-                            <h2>Daily Gifts</h2>
-                            <em>3 Gifts daily for lucky customers</em>
-                        </div>
-                        <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                </div>
+                <div class="col-md-4 steps-block-col">
+                    <i class="fa fa-gift"></i>
+                    <div>
+                        <h2>Daily Gifts</h2>
+                        <em>3 Gifts daily for lucky customers</em>
                     </div>
-                    <div class="col-md-4 steps-block-col">
-                        <i class="fa fa-phone"></i>
-                        <div>
-                            <h2>+91 9031200930</h2>
-                            <em>24/7 customer care available</em>
-                        </div>
+                    <span>&nbsp;</span>
+                </div>
+                <div class="col-md-4 steps-block-col">
+                    <i class="fa fa-phone"></i>
+                    <div>
+                        <h2>+91 9031200930</h2>
+                        <em>24/7 customer care available</em>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END STEPS -->
-        @include('include.web-footer')
+    </div>
+    <!-- END STEPS -->
+    @include('include.web-footer')
 
-      
-        <!-- Load javascripts at bottom, this will reduce page load time -->
-        <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
-        <!--[if lt IE 9]>
+
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
                             <script src="assets/plugins/respond.min.js"></script>
                             <![endif]-->
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-        <script src="{{ asset('assets/plugins/jquery.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/plugins/jquery-migrate.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/corporate/scripts/back-to-top.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript">
-        </script>
-        <!-- END CORE PLUGINS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/plugins/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/plugins/jquery-migrate.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/corporate/scripts/back-to-top.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript">
+    </script>
+    <!-- END CORE PLUGINS -->
 
-        <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-        <script src="{{ asset('assets/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script><!-- pop up -->
-        <script src="{{ asset('assets/plugins/owl.carousel/owl.carousel.min.js') }}" type="text/javascript"></script><!-- slider for products -->
-        <script src="{{ asset('assets/plugins/zoom/jquery.zoom.min.js') }}" type="text/javascript"></script><!-- product zoom -->
-        <script src="{{ asset('assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js') }}" type="text/javascript">
-        </script><!-- Quantity -->
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="{{ asset('assets/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script><!-- pop up -->
+    <script src="{{ asset('assets/plugins/owl.carousel/owl.carousel.min.js') }}" type="text/javascript"></script><!-- slider for products -->
+    <script src="{{ asset('assets/plugins/zoom/jquery.zoom.min.js') }}" type="text/javascript"></script><!-- product zoom -->
+    <script src="{{ asset('assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js') }}" type="text/javascript">
+    </script><!-- Quantity -->
 
-        <script src="{{ asset('assets/corporate/scripts/layout.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/pages/scripts/bs-carousel.js') }}" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js"
-                integrity="sha512-T5Bneq9hePRO8JR0S/0lQ7gdW+ceLThvC80UjwkMRz+8q+4DARVZ4dqKoyENC7FcYresjfJ6ubaOgIE35irf4w=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdn.tiny.cloud/1/i4y3r806hozux4iqj9ej33xdmqmlg83pe2yimkgjpzg5lvg0/tinymce/5/tinymce.min.js"
-                referrerpolicy="origin"></script>
-
-
+    <script src="{{ asset('assets/corporate/scripts/layout.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/pages/scripts/bs-carousel.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js"
+        integrity="sha512-T5Bneq9hePRO8JR0S/0lQ7gdW+ceLThvC80UjwkMRz+8q+4DARVZ4dqKoyENC7FcYresjfJ6ubaOgIE35irf4w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tiny.cloud/1/i4y3r806hozux4iqj9ej33xdmqmlg83pe2yimkgjpzg5lvg0/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
 
-        @stack('scripts')
-        <script type="text/javascript">
-            jQuery(document).ready(function() {
-                Layout.init();
-                Layout.initOWL();
-                Layout.initImageZoom();
-                Layout.initTouchspin();
-                Layout.initTwitter();
-            });
-        </script>
-        <!-- END PAGE LEVEL JAVASCRIPTS -->
 
-        <!-- google translator -->
-        <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'en'
-                }, 'google_translate_element');
-            }
-        </script>
 
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-        </script>
+    @stack('scripts')
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init();
+            Layout.initOWL();
+            Layout.initImageZoom();
+            Layout.initTouchspin();
+            Layout.initTwitter();
+        });
+    </script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
 
-        @livewireScripts
+    <!-- google translator -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+    </script>
 
-    </body>
-    <!-- END BODY -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
 
-    </html>
+    @livewireScripts
+
+</body>
+<!-- END BODY -->
+
+</html>
