@@ -98,12 +98,12 @@ class OtpController extends Controller
                     'phone' => $input['phone'],
                     'password' => Hash::make($input['password']),
                 ]);
+                Auth::login($user);
+                return redirect(RouteServiceProvider::HOME);
             } catch (Exception $e) {
 
                 return redirect()->back()->withErrors('Data Already exits please login ');
             }
-            Auth::login($user);
-            return redirect(RouteServiceProvider::HOME);
         }
     }
 }
