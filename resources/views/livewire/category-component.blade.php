@@ -80,26 +80,56 @@
 
                                     </ul>
                                 @endif
-                                <!-- <ul class="dropdown-menu" style="display:block;">
-                                    <li class="list-group-item dropdown clearfix active {{ count($category->subCategories) > 0 ? 'has-child-cate' : '' }}">
-                                        @if (count($category->subCategories) > 0)
-@foreach ($category->subCategories as $scategory)
-<a href="{{ route('product.category', ['category_slug' => $category->slug, 'scategory_slug' => $scategory->slug]) }}" class="collapsed"><i class="fa fa-angle-right"></i> {{ $scategory->name }} </a>
-@endforeach
-@endif
-                                    </li>
-                                </ul> -->
+
                             </li>
-                        @endforeach
+                    </ul>
+                    @endforeach
 
-                        {{-- <div class="sidebar-filter margin-bottom-25">
-                            <h2>Filter</h2>
-                            <h3>Availability</h3>
-           
+                    <div class="sidebar-filter margin-bottom-25">
+                        <h2>Filter</h2>
+                        <h3>Brand</h3>
+                        <div class="checkbox-list">
+                            @foreach ($brands as $brand)
+                                <label><input onclick="filter_change()" value="{{ $brand }}" class="brands"
+                                        type="checkbox" @if (in_array($brand, explode(',', session('brand')))) checked @endif>
+                                    {{ $brand }} </label>
+                            @endforeach
+                        </div>
 
-                            <h3>Price <span class="text-info"></span></h3>
-                            <div id="slider" wire:ignore></div>
-                        </div> --}}
+                        {{-- filter featur byes --}}
+
+                        <h3>Feature </h3>
+                        <div class="checkbox-list">
+                            @foreach ($features as $feature)
+                                <label><input onclick="filter_change()" value="{{ $feature }}" class="features"
+                                        type="checkbox" @if (in_array($feature, explode(',', session('feature')))) checked @endif>
+                                    {{ $feature }} </label>
+                            @endforeach
+                        </div>
+
+                        {{-- filter feature byes --}}
+
+                        <h3>Price</h3>
+                        <p>
+                            <label for="amount">Range:</label>
+                        <div class="row">
+                            <div class="col-4">
+                                <input value="{{ session('min_amount') }}" type="text" id="min"
+                                    placeholder="Min" class="form-control form-control-sm form-width" name="min">
+                            </div>
+
+                            <div class="col-4">
+                                <input type="text" value="{{ session('max_amount') }}" id="max"
+                                    placeholder="Max" class="form-control form-control-sm form-width" name="max">
+                            </div>
+
+                            <div class="col-4">
+                                <button onclick="filter_change()" class="btn btn-default">GO</button>
+                            </div>
+                        </div>
+                        </p>
+                        <div id="slider-range"></div>
+                    </div>
                 </div>
 
 
@@ -238,10 +268,33 @@
     </div>
 
     <script>
-        function filter_change() {
+       function filter_change() {
+            var brand_name = new Array();
+           var feature_name = new Array();
+
+            var brand_array = document.getElementsByClassName('brands');
+             var feature_array = document.getElementsByClassName('features');
+
+            for (i = 0; i < brand_array.length; i++) {
+                if (brand_array[i].checked == true) {
+                    brand_name.push(brand_array[i].value)
+                }
+            }
+
+            for (j = 0; j < feature_array.length; j++) {
+                if (feature_array[j].checked == true) {
+                    feature_name.push(feature_array[j].value)
+                }
+            }
+
+            brand_name = brand_name.join(',');
+            feature_name = feature_name.join(',');
             var item = document.getElementById('item').value;
             var sorting = document.getElementById('sorting').value;
-            window.location.replace(window.location.href + "?sorting=" + sorting + '&pagesize=' + item)
+            var min = document.getElementById('min').value;
+            var max = document.getElementById('max').value;
+            window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting + '&min=' + min +
+                '&max=' + max + "&brand=" + brand_name+"&feature="+feature_name);
         }
     </script>
 </body>
