@@ -16,6 +16,10 @@ use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\DB;
+use Cart;
+use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -97,6 +101,21 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): LogoutResponse
     {
+
+        
+        $all_item = Cart::instance('cart')->content();
+        foreach ($all_item as $item) {
+            try {
+                DB::table('cart_product')->insert([
+                    'product_id' => $item->id,
+                    'user_id' => Auth::user()->id
+                ]);
+            } catch (Exception $e) {
+            }
+        }
+
+
+
         $this->guard->logout();
 
         $request->session()->invalidate();
