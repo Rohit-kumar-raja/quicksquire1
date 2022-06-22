@@ -69,7 +69,6 @@ class CategoryComponent extends Component
         }
 
 
-        print_r($this);
 
 
         session(['sorting' => $this->sorting, 'pagesize' => $this->pagesize, 'min_amount' => $this->min, 'max_amount' => $this->max, 'brand' => $this->brand, 'feature' => $this->feature]);
