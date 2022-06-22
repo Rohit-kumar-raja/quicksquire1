@@ -153,10 +153,11 @@
                                 <label class="control-label">Show:</label>
                                 <select id="item" class="form-control input-sm text-capitalize"
                                     onchange="filter_change()">
-                                    <option value="12" selected="selected">12</option>
                                     @if (Session::has('pagesize'))
                                         <option value="{{ session('pagesize') }}">{{ session('pagesize') }}
                                         </option>
+                                    @else
+                                        <option value="12" selected="selected">12</option>
                                     @endif
                                     <option value="12">12</option>
                                     <option value="24">24</option>

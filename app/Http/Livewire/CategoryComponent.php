@@ -29,9 +29,11 @@ class CategoryComponent extends Component
     public function mount($category_slug, $scategory_slug = null, $feature_slug = null)
     {
         $this->sorting =  "default";
-        $this->pagesize =  12;
+        if($this->pagesize==''){
+            $this->pagesize =  12;
+        }
         $this->fill(request()->only('search', 'product_cat', 'product_cat_id', 'sorting', 'pagesize', 'min', 'max', 'brand', 'feature'));
-        $this->pagesize =  12;
+
         $this->category_slug = $category_slug;
         $this->scategory_slug = $scategory_slug;
         $this->feature_slug = $feature_slug;
@@ -52,7 +54,7 @@ class CategoryComponent extends Component
         // $feature_id = $feature->id;
         // $feature_name = $feature->name;
 
-        // dd($this);
+        // print_r($this);
         $category_name = "";
         $filter = "";
 
