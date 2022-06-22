@@ -169,15 +169,27 @@ class CategoryComponent extends Component
                 } else if ($this->sorting == 'high to low') {
                     $products = Product::where('name', 'like', '%' . $this->search . '%')->where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('sale_price', 'DESC')->paginate($this->pagesize);
                 } else {
-                    $products =  Product::where('name', 'like', '%' . $this->search . '%')->Where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
+                    $this->pagesize;
+
+                    if ($this->sorting == 'new') {
+                        $products = Product::where($filter . 'category_id', $category_id)->orderBy('created_at', 'DESC')->paginate($this->pagesize);
+                    } else if ($this->sorting == 'price') {
+                        $products = Product::where($filter . 'category_id', $category_id)->orderBy('regular_price', 'ASC')->paginate($this->pagesize);
+                    } else if ($this->sorting == 'price-desc') {
+                        $products = Product::where($filter . 'category_id', $category_id)->orderBy('regular_price', 'DESC')->paginate($this->pagesize);
+                    } else {
+                        $products = Product::where($filter . 'category_id', $category_id)->paginate($this->pagesize);
+                    }
+                    $category_id = null;
+                }
                 }
             }
-        }
+        
         $categories = Category::all();
 
 
         // getting all brand start
-        $products_brand = Product::where('name', 'like', '%' . $this->search . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
+        $products_brand = Product::Where('category_id', 'like', '%' . $this->product_cat_id . '%')->orderBy('created_at', 'DESC')->paginate($this->pagesize);
         $brand = array();
         $feature = array();
         foreach ($products_brand as  $prod) {

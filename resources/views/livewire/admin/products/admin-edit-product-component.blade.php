@@ -45,7 +45,7 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Product Brand:</label>
                                     <div>
-                                        <select class="form-control" name="brand" wire:model="brand">
+                                        <select class="form-control" name="brand" >
                                             @if ($brand != '')
                                                 <option value="{{ $brand }}">{{ $brand }}
                                                 @else
@@ -113,7 +113,7 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Stock Status:</label>
                                     <div>
-                                        <select class="form-control" name="stock_status" wire:model="stock_status">
+                                        <select class="form-control" name="stock_status" >
                                             <option value="instock">In Stock</option>
                                             <option value="outofstock">Out of Stock</option>
                                         </select>
