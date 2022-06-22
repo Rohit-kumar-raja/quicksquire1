@@ -33,13 +33,32 @@
                     <h2>All Category</h2>
                     <ul class="list-group margin-bottom-25 sidebar-menu">
                         @foreach ($categories as $category)
-                            <li class="list-group-item">
-                                <a href="{{ route('product.category', ['category_slug' => $category->slug]) }}">{{ $category->name }}
+                            <li
+                                class="list-group-item clearfix dropdown {{ count($category->subCategories) > 0 ? 'has-child-cate' : '' }} ">
+                                <a href="{{ route('product.category', ['category_slug' => $category->slug]) }}"
+                                    class="collapsed">
+                                    <i class="fa fa-angle-right"></i>
+                                    {{ $category->name }}
                                 </a>
+                                @if (count($category->subCategories) > 0)
+                                    <ul class="dropdown-menu">
+                                        @foreach ($category->subCategories as $scategory)
+                                            <li class="list-group-item clearfix dropdown">
+                                                <a
+                                                    href="{{ route('product.category', ['category_slug' => $category->slug, 'scategory_slug' => $scategory->slug]) }}">
+                                                    <i class="fa fa-angle-right"></i>
+                                                    {{ $scategory->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                @endif
+
                             </li>
                         @endforeach
-
                     </ul>
+
 
                     <div class="sidebar-filter margin-bottom-25">
                         <h2>Filter</h2>
@@ -102,7 +121,8 @@
                                     onchange="filter_change()">
                                     <option value="12" selected="selected">12</option>
                                     @if (Session::has('pagesize'))
-                                        <option value="{{ session('pagesize') }}">{{ session('pagesize') }}</option>
+                                        <option value="{{ session('pagesize') }}">{{ session('pagesize') }}
+                                        </option>
                                     @endif
                                     <option value="12">12</option>
                                     <option value="24">24</option>
@@ -247,10 +267,10 @@
     <script>
         function filter_change() {
             var brand_name = new Array();
-           var feature_name = new Array();
+            var feature_name = new Array();
 
             var brand_array = document.getElementsByClassName('brands');
-             var feature_array = document.getElementsByClassName('features');
+            var feature_array = document.getElementsByClassName('features');
 
             for (i = 0; i < brand_array.length; i++) {
                 if (brand_array[i].checked == true) {
@@ -271,7 +291,7 @@
             var min = document.getElementById('min').value;
             var max = document.getElementById('max').value;
             window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting + '&min=' + min +
-                '&max=' + max + "&brand=" + brand_name+"&feature="+feature_name);
+                '&max=' + max + "&brand=" + brand_name + "&feature=" + feature_name);
         }
     </script>
 

@@ -82,8 +82,9 @@
                                 @endif
 
                             </li>
+                            @endforeach
                     </ul>
-                    @endforeach
+                   
 
                     <div class="sidebar-filter margin-bottom-25">
                         <h2>Filter</h2>
