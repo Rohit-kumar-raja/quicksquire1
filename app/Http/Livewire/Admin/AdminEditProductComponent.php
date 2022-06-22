@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
@@ -153,24 +154,26 @@ class AdminEditProductComponent extends Component
 
     function update(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'short_description' => 'required',
-            'description' => 'required',
-            'regular_price' => 'required|numeric',
-            'sale_price' => 'required|numeric',
-            'SKU' => 'required',
-            'stock_status' => 'required',
-            'quantity' => 'required|numeric',
-            'category_id' => 'required',
-        ]);
+       
+        // $request->validate([
+        //     'name' => 'required',
+        //     'slug' => 'required',
+        //     'short_description' => 'required',
+        //     'description' => 'required',
+        //     'regular_price' => 'required|numeric',
+        //     'sale_price' => 'required|numeric',
+        //     'SKU' => 'required',
+        //     'stock_status' => 'required',
+        //     'quantity' => 'required|numeric',
+        //     'category_id' => 'required',
+        // ]);
 
         // if ($request->newimage) {
         //     $request->validate([
         //         'newimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         //     ]);
         // }
+       
         $destination = 'assets/pages/img/products';
         $product = Product::find($request->product_id);
         $product->name = $request->name;
@@ -179,11 +182,12 @@ class AdminEditProductComponent extends Component
         $product->description = $request->description;
         $product->regular_price = $request->regular_price;
         $product->sale_price = $request->sale_price;
-        $product->SKU = $request->SKU;
+        $product->SKU = 0;
         $product->stock_status = $request->stock_status;
         $product->featured = $request->featured;
         $product->quantity = $request->quantity;
         $product->brand = $request->brand;
+       
         if($request->feature_id>0){
         $product->feature_id = implode(',', $request->feature_id);
         }
