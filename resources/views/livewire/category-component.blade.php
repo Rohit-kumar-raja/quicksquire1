@@ -293,7 +293,7 @@
             var sorting = document.getElementById('sorting').value;
             var min = document.getElementById('min').value;
             var max = document.getElementById('max').value;
-            window.location.replace(window.location.href + '&pagesize=' + item + "&sorting=" + sorting + '&min=' + min +
+            window.location.replace(window.location.href + '?pagesize=' + item + "&sorting=" + sorting + '&min=' + min +
                 '&max=' + max + "&brand=" + brand_name+"&feature="+feature_name);
         }
     </script>
