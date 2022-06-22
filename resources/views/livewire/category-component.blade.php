@@ -245,7 +245,7 @@
                         <div class="col-md-8 col-sm-8 pagination pull-right">
                             @if ($products->hasPages())
                                 <div class="pagination-wrapper pagination pull-right">
-                                    {{ $products->links('pagination::bootstrap-4') }}
+                                    {{ $products->appends(['search' => session('search'), 'pagesize' => '12', 'sorting' => 'asc'])->links('pagination::bootstrap-4')  }}
                                 </div>
                             @endif
                             <!-- <ul class="pagination pull-right">
