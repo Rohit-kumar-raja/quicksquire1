@@ -27,8 +27,8 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Name:</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" name="name"
-                                            placeholder="Product Name" wire:model="name" wire:keyup="generateSlug" />
+                                        <input type="text" onkeyup="slug1(this.value)" class="form-control input-md" name="name"
+                                            placeholder="Product Name"  />
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -37,8 +37,8 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Slug:</label>
                                     <div class="">
-                                        <input type="text" class="form-control input-md" placeholder="Product Slug"
-                                            name="slug" wire:model="slug" />
+                                        <input id="slug" type="text" class="form-control input-md" placeholder="Product Slug"
+                                            name="slug" placeholder="slug" />
                                         @error('slug')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -64,7 +64,7 @@
                                     <label class=" control-label">Short Description:</label>
                                     <div class="" wire:ignore>
                                         <textarea name="short_description" class="form-control input-md ckeditor " id="short_description"
-                                            placeholder="Short Description" wire:model="short_description"></textarea>
+                                            placeholder="Short Description" placeholder="short_description"></textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -74,7 +74,7 @@
                                     <label class=" control-label">Description:</label>
                                     <div class="" wire:ignore>
                                         <textarea name="description" class="form-control ckeditor input-md" id="description" placeholder="Description"
-                                            wire:model="description"></textarea>
+                                            placeholder="description"></textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -84,7 +84,7 @@
                                     <label class=" control-label">Regular Price:</label>
                                     <div class="">
                                         <input name="regular_price" type="text" class="form-control  input-md"
-                                            placeholder="Regular Price" wire:model="regular_price" />
+                                            placeholder="Regular Price" placeholder="regular_price" />
                                         @error('regular_price')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -94,7 +94,7 @@
                                     <label class=" control-label">Sale Price:</label>
                                     <div class="">
                                         <input name="sale_price" type="text" class="form-control input-md"
-                                            placeholder="Sale Price" wire:model="sale_price" />
+                                            placeholder="Sale Price" placeholder="sale_price" />
                                         @error('sale_price')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -104,7 +104,7 @@
                                     <label class=" control-label">SKU:</label>
                                     <div class=""> --}}
                                         <input name="SKU" value="0" type="hidden" class="form-control input-md" placeholder="SKU"
-                                            wire:model="SKU" />
+                                            placeholder="SKU" />
                                         {{-- @error('SKU')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -126,8 +126,8 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">GST :</label>
                                     <div class="">
-                                        <!--<input type="text" class="form-control input-md" placeholder="GST" wire:model="GST" />-->
-                                        <select name="GST" class="form-control" wire:model="GST">
+                                        <!--<input type="text" class="form-control input-md" placeholder="GST" placeholder="GST" />-->
+                                        <select name="GST" class="form-control" placeholder="GST">
                                             <option value="0">Choose GST</option>
                                             <option value="5">5%</option>
                                             <option value="12">12%</option>
@@ -143,7 +143,7 @@
                                     <label class=" control-label">HSN No. :</label>
                                     <div class="">
                                         <input name="HSN_No" type="text" class="form-control input-md"
-                                            placeholder="HSN No." wire:model="HSN_No" />
+                                            placeholder="HSN No." placeholder="HSN_No" />
                                         @error('HSN_No')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -163,7 +163,7 @@
                                     <label class=" control-label">Quantity</label>
                                     <div class="">
                                         <input name="quantity" type="text" class="form-control input-md"
-                                            placeholder="Quantity" wire:model="quantity" />
+                                            placeholder="Quantity" placeholder="quantity" />
                                         @error('quantity')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -173,7 +173,7 @@
                                     <label class=" control-label">Product Image:</label>
                                     <div class="">
                                         <input name="image[]" type="file" class="input-file form-control "
-                                            wire:model="image" />
+                                            />
                                         @if ($image)
                                             <img src="{{ $image->temporaryUrl() }}" alt="" width="200" />
                                         @endif
@@ -186,7 +186,7 @@
                                     <label class=" control-label">Product Gallery:</label>
                                     <div class="">
                                         <input name="images[]" type="file" class="input-file form-control "
-                                            wire:model="images" multiple />
+                                             multiple />
                                         @if ($images)
                                             @foreach ($images as $image)
                                                 <img src="{{ $image->temporaryUrl() }}" alt="" width="100" />
@@ -231,11 +231,11 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Feature:</label>
                                     <div class="">
-                                        <select multiple data-live-search="true" name="featured[]" wire:modal="featured"
+                                        <select multiple data-live-search="true" name="feature_id[]" 
                                             class=" selectpicker form-control">
                                             <option value="0">Select Feature</option>
                                             @foreach ($features as $feature)
-                                                <option value="{{ $feature->id }}">{{ $feature->name }}</option>
+                                                <option value="{{ $feature->name }}">{{ $feature->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('feature_id')
@@ -309,5 +309,10 @@
             }
             xmlhttp.open("GET", "{{ route('admin.getSubCategory') }}/" + id);
             xmlhttp.send();
+    }
+</script>
+<script>
+    function slug1(data) {
+        document.getElementById('slug').value = data.toLowerCase();
     }
 </script>

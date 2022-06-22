@@ -128,46 +128,51 @@ class AdminAddProductComponent extends Component
     public function store(Request $request)
     {
 
-        $destination = 'assets/pages/img/products';
-        $product = new Product();
-        $product->name = $request->name;
-        $product->slug = $request->slug;
-        $product->short_description = $request->short_description;
-        $product->description = $request->description;
-        $product->regular_price = $request->regular_price;
-        $product->sale_price = $request->sale_price;
-        $product->SKU = $request->SKU;
-        $product->GST = $request->GST;
-        $product->HSN_No = $request->HSN_No;
-        $product->stock_status = $request->stock_status;
-        $product->featured = $request->featured;
-        $product->quantity = $request->quantity;
-        $product->brand = $request->brand;
-        if ($request->feature_id > 0) {
-            $product->feature_id = implode(',', $request->feature_id);
-        }
-
-        $imageName = Carbon::now()->timestamp . '_' . $request->image[0]->getClientOriginalName();
-        $request->image[0]->move($destination, $imageName);
-        $product->image = $imageName;
-
-        if ($request->images) {
-            $imagesname = '';
-            foreach ($request->images as $key => $image) {
-                $imaName = Carbon::now()->timestamp . $key . '_' . $image->getClientOriginalName();
-                $image->move($destination, $imaName);
-                $imagesname = $imagesname . ',' . $imaName;
+        try {
+            $destination = 'assets/pages/img/products';
+            $product = new Product();
+            $product->name = $request->name;
+            $product->slug = $request->slug;
+            $product->short_description = $request->short_description;
+            $product->description = $request->description;
+            $product->regular_price = $request->regular_price;
+            $product->sale_price = $request->sale_price;
+            $product->SKU = $request->SKU;
+            $product->GST = $request->GST;
+            $product->HSN_No = $request->HSN_No;
+            $product->stock_status = $request->stock_status;
+            $product->featured = $request->featured;
+            $product->quantity = $request->quantity;
+            $product->brand = $request->brand;
+            if ($request->feature_id > 0) {
+                $product->feature_id = implode(',', $request->feature_id);
             }
-            $product->images = $imagesname;
-        }
 
-        $product->category_id = $request->category_id;
-        if ($request->scategory_id) {
-            $product->subcategory_id = $request->scategory_id;
+            $imageName = Carbon::now()->timestamp . '_' . $request->image[0]->getClientOriginalName();
+            $request->image[0]->move($destination, $imageName);
+            $product->image = $imageName;
+
+            if ($request->images) {
+                $imagesname = '';
+                foreach ($request->images as $key => $image) {
+                    $imaName = Carbon::now()->timestamp . $key . '_' . $image->getClientOriginalName();
+                    $image->move($destination, $imaName);
+                    $imagesname = $imagesname . ',' . $imaName;
+                }
+                $product->images = $imagesname;
+            }
+
+            $product->category_id = $request->category_id;
+            if ($request->scategory_id) {
+                $product->subcategory_id = $request->scategory_id;
+            }
+            $product->save();
+            session()->flash('message', 'Product added successfully');
+            return redirect()->back();
+        } catch (Exception $e) {
+            session()->flash('message', $e->getMessage());
+            return redirect()->back();
         }
-        $product->save();
-        session()->flash('message', 'Product added successfully');
-        return redirect()->back();
     }
 
 

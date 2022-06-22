@@ -20,13 +20,15 @@
                         @endif
                         <form action="{{ route('admin.edit.product.update') }}" method="POST" class="form-horizontal"
                             enctype="multipart/form-data">@csrf
+                            <input type="hidden" name="product_id" value="{{ $product_id }}" >
+
                             <div class="row p-3">
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Product Name:</label>
-                                    <input type="hidden" name="product_id" wire:model="product_id" id="">
+                                  
                                     <div>
-                                        <input type="text" class="form-control input-md" placeholder="Product Name"
-                                            name="name" wire:model="name" wire:keyup="generateSlug" />
+                                        <input type="text" onkeyup="slug1(this.value)" class="form-control input-md" placeholder="Product Name"
+                                            name="name" value="{{ $name }}" />
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -35,8 +37,8 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Product Slug:</label>
                                     <div>
-                                        <input type="text" class="form-control input-md" placeholder="Product Slug"
-                                            name="slug" wire:model="slug" />
+                                        <input type="text" id="slug" class="form-control input-md" placeholder="Product Slug"
+                                            name="slug" value="{{ $slug }}" />
                                         @error('slug')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -45,7 +47,7 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Product Brand:</label>
                                     <div>
-                                        <select class="form-control" name="brand" >
+                                        <select class="form-control" name="brand">
                                             @if ($brand != '')
                                                 <option value="{{ $brand }}">{{ $brand }}
                                                 @else
@@ -65,7 +67,7 @@
                                     <label class=" control-label">Short Description:</label>
                                     <div wire:ignore>
                                         <textarea class="form-control input-md ckeditor" id="short_description" placeholder="Short Description"
-                                            name="short_description" wire:model="short_description"></textarea>
+                                            name="short_description">{{ $short_description }}</textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -74,8 +76,7 @@
                                 <div class="form-group col-sm-12">
                                     <label class=" control-label">Description:</label>
                                     <div wire:ignore>
-                                        <textarea class="form-control input-md ckeditor" id="description" placeholder="Description" name="description"
-                                            wire:model="description"></textarea>
+                                        <textarea class="form-control input-md ckeditor" id="description" placeholder="Description" name="description">{{ $description }}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -85,7 +86,7 @@
                                     <label class=" control-label">Regular Price:</label>
                                     <div>
                                         <input type="text" class="form-control input-md" placeholder="Regular Price"
-                                            name="regular_price" wire:model="regular_price" />
+                                            name="regular_price" value="{{ $regular_price }}" />
                                         @error('regular_price')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -95,7 +96,7 @@
                                     <label class=" control-label">Sale Price:</label>
                                     <div>
                                         <input type="text" class="form-control input-md" placeholder="Sale Price"
-                                            name="sale_price" wire:model="sale_price" />
+                                            name="sale_price" value="{{ $sale_price }}" />
                                         @error('sale_price')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -113,7 +114,7 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Stock Status:</label>
                                     <div>
-                                        <select class="form-control" name="stock_status" >
+                                        <select class="form-control" name="stock_status">
                                             <option value="instock">In Stock</option>
                                             <option value="outofstock">Out of Stock</option>
                                         </select>
@@ -125,9 +126,13 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">GST :</label>
                                     <div class="">
-                                        <!--<input type="text" class="form-control input-md" placeholder="GST" wire:model="GST" />-->
-                                        <select name="GST" class="form-control" wire:model="GST">
-                                            <option value="0">Choose GST</option>
+                                        <!--<input type="text" class="form-control input-md" placeholder="GST" value="GST" />-->
+                                        <select name="GST" class="form-control">
+                                            @if ($GST)
+                                                <option value="{{ $GST }}">{{ $GST }}%</option>
+                                            @else
+                                                <option selected disabled>Choose GST</option>
+                                            @endif
                                             <option value="5">5%</option>
                                             <option value="12">12%</option>
                                             <option value="18">18%</option>
@@ -142,7 +147,7 @@
                                     <label class=" control-label">HSN No. :</label>
                                     <div class="">
                                         <input name="HSN_No" type="text" class="form-control input-md"
-                                            placeholder="HSN No." wire:model="HSN_No" />
+                                            placeholder="HSN No." value="{{ $HSN_No }}" />
                                         @error('HSN_No')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -151,7 +156,7 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Featured:</label>
                                     <div>
-                                        <select class="form-control" name="featured" wire:model="featured">
+                                        <select class="form-control" name="featured" value="featured">
                                             @if ($featured)
                                                 <option value="{{ $featured }}">
                                                     {{ 'Yes' }}
@@ -168,7 +173,7 @@
                                     <label class=" control-label">Quantity</label>
                                     <div>
                                         <input type="text" class="form-control input-md" placeholder="Quantity"
-                                            name="quantity" wire:model="quantity" />
+                                            name="quantity" value="{{ $quantity}}" />
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
@@ -258,14 +263,14 @@
                                 </div>
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Feature:</label>
-                                  
+
                                     <div class="">
                                         <select multiple data-live-search="true" name="feature_id[]"
                                             class=" selectpicker form-control">
                                             <option value="0">Select Feature</option>
 
                                             @foreach ($features as $feature)
-                                                @if (in_array($feature->name,$feature_id))
+                                                @if (in_array($feature->name, $feature_id))
                                                     <option selected value="{{ $feature->name }}">
                                                         {{ $feature->name }}
                                                     @else
@@ -323,5 +328,10 @@
         }
         xmlhttp.open("GET", "{{ route('admin.getSubCategory') }}/" + id);
         xmlhttp.send();
+    }
+</script>
+<script>
+    function slug1(data) {
+        document.getElementById('slug').value = data.toLowerCase();
     }
 </script>
