@@ -122,6 +122,32 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group  col-sm-4">
+                                    <label class=" control-label">GST :</label>
+                                    <div class="">
+                                        <!--<input type="text" class="form-control input-md" placeholder="GST" wire:model="GST" />-->
+                                        <select name="GST" class="form-control" wire:model="GST">
+                                            <option value="0">Choose GST</option>
+                                            <option value="5">5%</option>
+                                            <option value="12">12%</option>
+                                            <option value="18">18%</option>
+                                            <option value="28">28%</option>
+                                        </select>
+                                        @error('GST')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    <label class=" control-label">HSN No. :</label>
+                                    <div class="">
+                                        <input name="HSN_No" type="text" class="form-control input-md"
+                                            placeholder="HSN No." wire:model="HSN_No" />
+                                        @error('HSN_No')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Featured:</label>
                                     <div>
