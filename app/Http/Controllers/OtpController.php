@@ -101,8 +101,7 @@ class OtpController extends Controller
                 Auth::login($user);
                 return redirect(RouteServiceProvider::HOME);
             } catch (Exception $e) {
-
-                return redirect()->back()->withErrors('Data Already exits please login ');
+               return redirect()->route('login')->withErrors('Data Already exits please login ');
             }
         }
     }
