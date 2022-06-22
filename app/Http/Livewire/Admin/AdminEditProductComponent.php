@@ -34,6 +34,7 @@ class AdminEditProductComponent extends Component
     public $brand;
     public $images;
     public $newimages;
+    public $feature_id;
 
     public function mount($product_slug)
     {
@@ -54,6 +55,8 @@ class AdminEditProductComponent extends Component
         $this->scategory_id = $product->subcategory_id;
         $this->product_id = $product->id;
         $this->brand = $product->brand;
+        $this->feature_id=explode(',',$product->feature_id);
+       
     }
 
     public function generateSlug()

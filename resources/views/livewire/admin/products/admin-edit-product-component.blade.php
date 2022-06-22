@@ -232,12 +232,20 @@
                                 </div>
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Feature:</label>
+                                  
                                     <div class="">
                                         <select multiple data-live-search="true" name="feature_id[]"
                                             class=" selectpicker form-control">
                                             <option value="0">Select Feature</option>
+
                                             @foreach ($features as $feature)
-                                                <option value="{{ $feature->name }}">{{ $feature->name }}
+                                                @if (in_array($feature->name,$feature_id))
+                                                    <option selected value="{{ $feature->name }}">
+                                                        {{ $feature->name }}
+                                                    @else
+                                                    <option value="{{ $feature->name }}">{{ $feature->name }}
+                                                @endif
+
                                                 </option>
                                             @endforeach
                                         </select>
@@ -278,9 +286,6 @@
         max-height: 300px !important;
     }
 </style>
-<script>
-    $('select').selectpicker();
-</script>
 
 
 <script>
