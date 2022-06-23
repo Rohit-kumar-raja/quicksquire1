@@ -128,7 +128,7 @@
                                     <div class="">
                                         <!--<input type="text" class="form-control input-md" placeholder="GST" value="GST" />-->
                                         <select name="GST" class="form-control">
-                                            @if ($GST)
+                                            @if ($GST!='')
                                                 <option value="{{ $GST }}">{{ $GST }}%</option>
                                             @else
                                                 <option selected disabled>Choose GST</option>
