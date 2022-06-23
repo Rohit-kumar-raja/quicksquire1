@@ -332,6 +332,6 @@
 </script>
 <script>
     function slug1(data) {
-        document.getElementById('slug').value = data.toLowerCase();
+        document.getElementById('slug').value = data.toLowerCase().replaceAll(' ','-');
     }
 </script>
