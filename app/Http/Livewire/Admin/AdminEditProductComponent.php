@@ -36,7 +36,8 @@ class AdminEditProductComponent extends Component
     public $images;
     public $newimages;
     public $feature_id;
-
+    public $GST;
+    public $HSN_No;
     public function mount($product_slug)
     {
         $product = Product::where('slug', $product_slug)->first();
@@ -56,8 +57,9 @@ class AdminEditProductComponent extends Component
         $this->scategory_id = $product->subcategory_id;
         $this->product_id = $product->id;
         $this->brand = $product->brand;
-        $this->feature_id=explode(',',$product->feature_id);
-       
+        $this->GST = $product->GST;
+        $this->HSN_No = $product->HSN_No;
+        $this->feature_id = explode(',', $product->feature_id);
     }
 
     public function generateSlug()
@@ -154,7 +156,7 @@ class AdminEditProductComponent extends Component
 
     function update(Request $request)
     {
-       
+
         // $request->validate([
         //     'name' => 'required',
         //     'slug' => 'required',
@@ -173,7 +175,7 @@ class AdminEditProductComponent extends Component
         //         'newimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         //     ]);
         // }
-       
+
         $destination = 'assets/pages/img/products';
         $product = Product::find($request->product_id);
         $product->name = $request->name;
@@ -187,11 +189,13 @@ class AdminEditProductComponent extends Component
         $product->featured = $request->featured;
         $product->quantity = $request->quantity;
         $product->brand = $request->brand;
-       
-        if($request->feature_id>0){
-        $product->feature_id = implode(',', $request->feature_id);
+        $product->GST = $request->GST;
+        $product->HSN_No = $request->HSN_No;
+
+        if ($request->feature_id > 0) {
+            $product->feature_id = implode(',', $request->feature_id);
         }
-        if ($request->newimage!='') {
+        if ($request->newimage != '') {
 
             // unlink('assets/pages/img/products' . '/' . $product->image);
             // $imageName = Carbon::now()->timestamp . '.' . $request->newimage->extension();
@@ -202,10 +206,9 @@ class AdminEditProductComponent extends Component
             $imageName = Carbon::now()->timestamp . '.' . $request->newimage->getClientOriginalName();
             $request->newimage->move($destination, $imageName);
             $product->image = $imageName;
-
         }
 
-        if ($request->newimages >0) {
+        if ($request->newimages > 0) {
             if ($product->images) {
                 $images = explode(",", $product->images);
                 foreach ($images as $image) {
