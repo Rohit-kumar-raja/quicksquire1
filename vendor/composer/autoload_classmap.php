@@ -113,6 +113,7 @@ return array(
     'App\\Models\\Pincode' => $baseDir . '/app/Models/Pincode.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Profile' => $baseDir . '/app/Models/Profile.php',
+    'App\\Models\\Rent' => $baseDir . '/app/Models/Rent.php',
     'App\\Models\\Review' => $baseDir . '/app/Models/Review.php',
     'App\\Models\\Shipping' => $baseDir . '/app/Models/Shipping.php',
     'App\\Models\\Subcategory' => $baseDir . '/app/Models/Subcategory.php',

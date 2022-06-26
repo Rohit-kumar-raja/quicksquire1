@@ -23,14 +23,34 @@
                         <div class="card-header">
 
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-md-4">
                                     <i class="fas fa-list"> All order</i>
 
                                 </div>
+                                <form action="{{ route('admin.order.filter.data') }}" method="POST">
+                                    @csrf
+                                    <div class="row">
+
+
+                                        <input type="hidden" name="type" value="all" class="form-control">
+
+                                        <div class="col-md-4">
+                                            <input name="from" value="{{ session('from') }}" type="date"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input name="to" value="{{ session('to') }}" to type="date"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-4 mt-1">
+                                            <button class="btn btn-success btn-sm">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <div class="col-md-2">
-                                    <a class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#exampleModal">Add New
-                                    </a>
+                                    <a href="{{ route('export.orders', 'all') }}"
+                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-download fa-sm text-white-50"></i> Report</a>
 
                                 </div>
                             </div>
@@ -39,7 +59,8 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 @if (Session::has('message'))
-                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}
+                                    </div>
                                 @endif
 
                                 @if (session('store'))
@@ -111,7 +132,7 @@
                                                     <a href="{{ route('admin.orderdetails', ['order_id' => $order->id]) }}"
                                                         class="btn btn-info btn-sm">Details</a>
                                                 </td>
-                                              
+
 
                                                 <td>
                                                     <a href="{{ route('admin.orders.edit', $order->id) }}"

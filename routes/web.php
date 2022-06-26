@@ -63,6 +63,7 @@ use App\Http\Controllers\OtpController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RentController;
 
 // authenticating with otp start
 Route::post('opt/send', [OtpController::class, 'register'])->name('register.otp');
@@ -136,7 +137,7 @@ Route::get('/returnpolicy', ReturnPolicyComponent::class);
 Route::get('/shippingpolicy', ShippingPolicyComponent::class);
 Route::get('/privacypolicy', PrivacyPolicyComponent::class);
 Route::get('/termuse', TermuseComponent::class);
-
+Route::get('/rent/form', [RentController::class, 'index'])->name('rent');
 // Route::get('/download-pdf', [PdfController::class, 'downloadPDF']);
 
 
@@ -273,6 +274,9 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     // Orders start
     Route::get('/admin/orders', [ordersController::class, 'index'])->name('admin.orders');
     Route::get('/admin/order', [ordersController::class, 'index'])->name('admin.order');
+    Route::post('/admin/order/filter', [ordersController::class, 'dateFilter'])->name('admin.order.filter.data');
+
+   
 
     Route::get('/admin/ordered', [ordersController::class, 'ordered'])->name('admin.order.ordered');
     Route::get('/admin/padding', [ordersController::class, 'padding'])->name('admin.order.padding');
@@ -285,6 +289,10 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::post('/admin/orders/update/{id}', [ordersController::class, 'update'])->name('admin.orders.update');
     Route::get('/admin/orders/delete/{id}', [ordersController::class, 'destroy'])->name('admin.orders.destroy');
     Route::get('/admin/orders/status/{id}', [ordersController::class, 'status'])->name('admin.orders.status');
+
+    // order export
+    Route::get('/admin/orders/export/{type}', [OrdersController::class, 'exportOrders'])->name('export.orders');
+
     // Orders end
     // reviews start
     Route::get('/admin/reviews/{product_id}', [ReviewController::class, 'index'])->name('admin.reviews');
@@ -301,5 +309,4 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     // coupon
     Route::get('/admin/category/getSubCategory/', [SubCategoryController::class, 'getSubCategory'])->name('admin.getSubCategory');
     Route::get('/admin/category/getSubCategory/{id}', [SubCategoryController::class, 'getSubCategory'])->name('admin.getSubCategory.get');
-
 });

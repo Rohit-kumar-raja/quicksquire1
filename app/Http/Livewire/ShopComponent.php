@@ -48,6 +48,10 @@ class ShopComponent extends Component
     }
     public function remove($product_id)
     {
+        try {
+            DB::table('wishlist_product')->where('product_id',$product_id)->delete();
+        } catch (Exception $e) {
+        }
         foreach (Cart::instance('wishlist')->content() as $witem) {
             if ($witem->id == $product_id) {
                 Cart::instance('wishlist')->remove($witem->rowId);

@@ -174,7 +174,7 @@
                         @livewire('mega-menu-component')
                     </li>
                     <li><a href="#">AMC'S</a></li>
-                    <li><a href="#">Rent</a></li>
+                    <li><a href="{{ route('rent') }}">Rent</a></li>
                     <li><a href="https://quicksecureindia.com/product-category/peripherals">Accessories</a></li>
                     <!--<li class="dropdown dropdown100 nav-catalogue">-->
                     <!--    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">-->

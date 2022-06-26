@@ -39,7 +39,7 @@ class CouponController extends Controller
     {
       $id=  DB::table('coupon')->insertGetId($request->except('_token'));
         if($request->file('images')){
-            DB::table('coupon')->update(['images'=>$this->insert_image($request->file('images'),'coupon')]);
+            DB::table('coupon')->where('id',$id)->update(['images'=>$this->insert_image($request->file('images'),'coupon')]);
         }
         return redirect()->back()->with(["success" => "Data added Successfully"]);
     }

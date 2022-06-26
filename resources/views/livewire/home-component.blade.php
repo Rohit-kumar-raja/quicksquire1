@@ -147,25 +147,25 @@ $witems = Cart::instance('wishlist')
 
 
 <!-- starting offer cards -->
-<div class="container">
-    <div class="row margin-bottom-40">
+    <div class="row margin-bottom-40 p-5">
+        <h2>Find the best Offers</h2>
         <div class="col-md-12 sale-product">
-            <h2>Find the best Offers</h2>
+       
             <div class="owl-carousel owl-carousel7">
                 @foreach ($coupons as $coupon)
                     <div>
                         <div class="banner-item">
                             <a href="{{ $coupon->link }}"><img
-                                    src="{{ asset('assets/pages/img/coupons') }}/{{ $coupon->image }}"
-                                    alt="{{ $coupon->title }}" class="img-fluid"></a>
+                                    src="{{ asset('assets/pages/img/coupon') }}/{{ $coupon->images }}"
+                                    alt="{{ $coupon->coupon_name }}" class="img-fluid"></a>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
     </div>
-</div>
-</div>
+
+
 <!-- end offer cards -->
 
 <!-- Begin shop by category tabs area -->

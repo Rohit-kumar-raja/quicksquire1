@@ -11,7 +11,7 @@ use App\Models\HomeSlider;
 use App\Models\HomeCoupon;
 use Livewire\Component;
 use Cart;
-
+use Illuminate\Support\Facades\DB;
 class HomeComponent extends Component
 {
 
@@ -24,7 +24,7 @@ class HomeComponent extends Component
     public function render()
     {
         $banners = HomeBanner::where('status', 1)->get();
-        $coupons =  HomeCoupon::where('status', 1)->get();
+        $coupons =  DB::table('coupon')->where('status', 1)->get();
         $sliderss = HomeSlider::where('status', 1)->get();
         $sliders = BrandSlider::where('status', 1)->get();
         $lproducts = Product::orderBy('created_at', 'DESC')->get()->take(8);

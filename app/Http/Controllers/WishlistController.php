@@ -21,8 +21,6 @@ class WishlistController extends Controller
         $product_name = $product->name;
         $product_price = $product->sale_price;
         Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
-    
-
         $this->emit('wishlist-count-component', 'refreshComponent');
         return redirect()->back();
     }

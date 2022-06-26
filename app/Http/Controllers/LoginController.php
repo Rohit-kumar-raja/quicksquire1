@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\ShopComponent;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Exception;
@@ -37,6 +38,13 @@ class LoginController extends Controller
                     foreach ($product_id as $pro) {
                         $cart_controller->store($pro->product_id);
                     }
+
+                    $product_wishlist_id = DB::table('wishlist_product')->where('user_id', $user->id)->get();
+                    $wishlist_controller = new ShopComponent();
+                    foreach ($product_wishlist_id as $pro) {
+                        $wishlist_controller->add($pro->product_id);
+                    }
+
 
                     return redirect()->route(RouteServiceProvider::HOME);
                 }

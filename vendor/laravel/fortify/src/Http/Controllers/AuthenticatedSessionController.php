@@ -114,6 +114,18 @@ class AuthenticatedSessionController extends Controller
             }
         }
 
+        $all_item1 = Cart::instance('wishlist')->content();
+
+        foreach ($all_item1 as $item) {
+            try {
+                DB::table('wishlist_product')->insert([
+                    'product_id' => $item->id,
+                    'user_id' => Auth::user()->id
+                ]);
+            } catch (Exception $e) {
+            }
+        }
+
 
 
         $this->guard->logout();
