@@ -100,16 +100,26 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="form-group  col-sm-4">
-                                    <label class=" control-label">SKU:</label>
-                                    <div class=""> --}}
-                                        <input name="SKU" value="0" type="hidden" class="form-control input-md" placeholder="SKU"
+                                <div class="form-group  col-sm-4">
+                                    <label class=" control-label"> Bajaj Image </label>
+                                    <div class=""> 
+                                        <input name="SKU" value="0" type="file" class="form-control input-md" placeholder="SKU"
                                             placeholder="SKU" />
-                                        {{-- @error('SKU')
+                                       @error('SKU')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div> --}}
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    <label class=" control-label"> Bajaj Link </label>
+                                    <div class=""> 
+                                        <input name="featured" value="0" type="text" class="form-control input-md" placeholder=" Bajaj link"
+                                            placeholder="featured" />
+                                       @error('featured')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Stock Status:</label>
                                     <div class="">
@@ -149,16 +159,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group  col-sm-4">
-                                    <label class=" control-label">Featured:</label>
-                                    <div class="">
-                                        <select name="featured" class="form-control" >
-                                            <option value="0">No</option>
-                                            <option value="1">Yes</option>
-                                        </select>
-
-                                    </div>
-                                </div>
+                              
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Quantity</label>
                                     <div class="">

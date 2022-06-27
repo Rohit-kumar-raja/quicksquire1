@@ -63,6 +63,7 @@ use App\Http\Controllers\OtpController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\RentController;
 
 // authenticating with otp start
@@ -138,7 +139,8 @@ Route::get('/shippingpolicy', ShippingPolicyComponent::class);
 Route::get('/privacypolicy', PrivacyPolicyComponent::class);
 Route::get('/termuse', TermuseComponent::class);
 Route::get('/rent/form', [RentController::class, 'index'])->name('rent');
-// Route::get('/download-pdf', [PdfController::class, 'downloadPDF']);
+Route::get('amc/packages', [PackageController::class, 'index'])->name('amc.package');
+Route::get('amc/packages/details/buy/{id}', [PackageController::class, 'details'])->name('amc.package.details');
 
 
 
@@ -276,7 +278,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/order', [ordersController::class, 'index'])->name('admin.order');
     Route::post('/admin/order/filter', [ordersController::class, 'dateFilter'])->name('admin.order.filter.data');
 
-   
+
 
     Route::get('/admin/ordered', [ordersController::class, 'ordered'])->name('admin.order.ordered');
     Route::get('/admin/padding', [ordersController::class, 'padding'])->name('admin.order.padding');
