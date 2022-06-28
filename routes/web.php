@@ -141,6 +141,7 @@ Route::get('/termuse', TermuseComponent::class);
 Route::get('/rent/form', [RentController::class, 'index'])->name('rent');
 Route::get('amc/packages', [PackageController::class, 'index'])->name('amc.package');
 Route::get('amc/packages/details/buy/{id}', [PackageController::class, 'details'])->name('amc.package.details');
+Route::post('amc/packages/details/buy/', [PackageController::class, 'buy'])->name('amc.package.buy');
 
 
 

@@ -130,6 +130,7 @@ class AdminAddProductComponent extends Component
 
         try {
             $destination = 'assets/pages/img/products';
+
             $product = new Product();
             $product->name = $request->name;
             $product->slug = $request->slug;
@@ -137,7 +138,7 @@ class AdminAddProductComponent extends Component
             $product->description = $request->description;
             $product->regular_price = $request->regular_price;
             $product->sale_price = $request->sale_price;
-            $product->SKU = $request->SKU;
+      
             $product->GST = $request->GST;
             $product->HSN_No = $request->HSN_No;
             $product->stock_status = $request->stock_status;
@@ -147,10 +148,14 @@ class AdminAddProductComponent extends Component
             if ($request->feature_id > 0) {
                 $product->feature_id = implode(',', $request->feature_id);
             }
-
+            
             $imageName = Carbon::now()->timestamp . '_' . $request->image[0]->getClientOriginalName();
             $request->image[0]->move($destination, $imageName);
             $product->image = $imageName;
+
+            $imageName_bajaj = Carbon::now()->timestamp . '_' . $request->SKU->getClientOriginalName();
+            $request->SKU->move($destination, $imageName_bajaj);
+            $product->SKU = $imageName_bajaj;
 
             if ($request->images) {
                 $imagesname = '';

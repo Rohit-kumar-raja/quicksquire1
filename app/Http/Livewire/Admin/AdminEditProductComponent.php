@@ -128,6 +128,14 @@ class AdminEditProductComponent extends Component
             $product->image = $imageName;
         }
 
+        if ($this->newimage) {
+            // unlink('assets/pages/img/products' . '/' . $product->image);
+            $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
+            $this->newimage->storeAs('products', $imageName);
+            $product->image = $imageName;
+        }
+
+
         if ($this->newimages) {
             if ($product->images) {
                 $images = explode(",", $product->images);
@@ -156,6 +164,7 @@ class AdminEditProductComponent extends Component
 
     function update(Request $request)
     {
+        try{
 
         // $request->validate([
         //     'name' => 'required',
@@ -184,7 +193,6 @@ class AdminEditProductComponent extends Component
         $product->description = $request->description;
         $product->regular_price = $request->regular_price;
         $product->sale_price = $request->sale_price;
-        $product->SKU = 0;
         $product->stock_status = $request->stock_status;
         $product->featured = $request->featured;
         $product->quantity = $request->quantity;
@@ -206,6 +214,11 @@ class AdminEditProductComponent extends Component
             $imageName = Carbon::now()->timestamp . '.' . $request->newimage->getClientOriginalName();
             $request->newimage->move($destination, $imageName);
             $product->image = $imageName;
+        }
+        if ($request->SKU != '') {
+            $imageName_bajaj = Carbon::now()->timestamp . '_' . $request->SKU->getClientOriginalName();
+            $request->SKU->move($destination, $imageName_bajaj);
+            $product->SKU = $imageName_bajaj;
         }
 
         if ($request->newimages > 0) {
@@ -233,6 +246,10 @@ class AdminEditProductComponent extends Component
         $product->save();
         session()->flash('message', 'Product updated successfully');
         return redirect()->back();
+    }catch(Exception $e){
+        session()->flash('message', $e->getMessage() );
+        return redirect()->back();
+    }
     }
 
 

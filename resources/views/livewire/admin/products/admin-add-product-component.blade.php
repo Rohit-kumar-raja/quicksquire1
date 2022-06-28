@@ -103,8 +103,12 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label"> Bajaj Image </label>
                                     <div class=""> 
-                                        <input name="SKU" value="0" type="file" class="form-control input-md" placeholder="SKU"
+                                        <input name="SKU" accept="image/*" type="file" class="form-control input-md" placeholder="SKU"
                                             placeholder="SKU" />
+                                          
+                                        @error('images')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                        @error('SKU')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -113,7 +117,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label"> Bajaj Link </label>
                                     <div class=""> 
-                                        <input name="featured" value="0" type="text" class="form-control input-md" placeholder=" Bajaj link"
+                                        <input name="featured"  type="text" class="form-control input-md" placeholder=" Bajaj link"
                                             placeholder="featured" />
                                        @error('featured')
                                             <span class="text-danger">{{ $message }}</span>
@@ -173,7 +177,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Image:</label>
                                     <div class="">
-                                        <input name="image[]" type="file" class="input-file form-control "
+                                        <input name="image[]" accept="image/*" type="file" class="input-file form-control "
                                             />
                                         @if ($image)
                                             <img src="{{ $image->temporaryUrl() }}" alt="" width="200" />
@@ -186,7 +190,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label">Product Gallery:</label>
                                     <div class="">
-                                        <input name="images[]" type="file" class="input-file form-control "
+                                        <input name="images[]" accept="image/*" type="file" class="input-file form-control "
                                              multiple />
                                         @if ($images)
                                             @foreach ($images as $image)

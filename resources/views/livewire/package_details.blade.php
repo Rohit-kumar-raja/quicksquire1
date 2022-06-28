@@ -67,41 +67,38 @@
 
 
                         <div class="card p-3">
-                            <form role="form" method="POST" action="insert-amc-data.php" name="frmForm"
+                            <form method="POST" action="{{ route('amc.package.buy') }}" name="frmForm"
                                 id="frmForm">
-
-                                <input type="hidden" name="txtDealerName" id="txtDealerName" value="18">
+                                @csrf
+                                <input required type="hidden" name="dealer_name" id="txtDealerName" value="web">
+                                <input required type="hidden" name="staffid" id="txtDealerName" value="prince range {{ $data->price_from }} -  {{ $data->proce_to }}">
 
                                 <div class="card un-color">
                                     <h5 class="card-title ml-5  text-white"> Basic Details for package buy </h5>
                                 </div>
-
-
-
-
                                 <div class="row">
 
                                     <div class="col-sm-4">
                                         <label for="txtPackageName">Package Name</label>
-                                        <input type="text" value="{{ $data->package_name }}" class="form-control"
-                                            name="txtPackageName" readonly required>
+                                        <input required type="text" value="{{ $data->package_name }}"
+                                            class="form-control" name="package_name" readonly required>
                                     </div>
 
 
 
                                     <div class="col-sm-4">
                                         <label for="txtPriceRange">Price Range</label>
-                                        <input type="text" class="form-control"
+                                        <input  type="text" class="form-control"
                                             value="{{ $data->price_from }} -  {{ $data->proce_to }}"
-                                            id="txtPriceRange" name="txtPriceRange" value="" readonly="">
+                                            id="txtPriceRange"  value="" readonly="">
                                     </div>
 
 
 
                                     <div class="col-sm-4">
                                         <label for="txtDate">Date</label>
-                                        <input readonly type="date" value="{{ date('Y-m-d') }}"
-                                            class="form-control " id="txtDate" name="txtDate" value="27-06-2022"
+                                        <input required readonly type="date" value="{{ date('Y-m-d') }}"
+                                            class="form-control " id="txtDate" name="sale_dt" value="27-06-2022"
                                             autocomplete="off">
                                     </div>
 
@@ -111,7 +108,7 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtItemType">Item Type</label>
-                                        <select class="form-control" name="txtItemType" id="txtItemType">
+                                        <select class="form-control" name="item_type" id="txtItemType">
                                             <option value="-" selected="">--Select--</option>
                                             <option value="New">New</option>
                                             <option value="Old">Old</option>
@@ -122,12 +119,12 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtPurchaseYear">Purchase Year</label>
-                                        <input type="date" class="form-control" id="txtPurchaseYear"
-                                            name="txtPurchaseYear" autocomplete="off">
+                                        <input required type="date" class="form-control" id="txtPurchaseYear"
+                                            name="purchase_year" autocomplete="off">
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="txtItemCategory">Item Category</label>
-                                        <select class="form-control" name="txtItemCategory" id="txtItemCategory">
+                                        <select class="form-control" name="item_category" id="txtItemCategory">
                                             <option value="-" selected="">--Select--</option>
                                             <option value="Laptop">Laptop</option>
                                             <option value="Desktop">Desktop</option>
@@ -138,30 +135,26 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtBrandName">Brand Name</label>
-                                        <select class="form-control" name="" id="txtBrandName">
+                                        <select class="form-control" name="brand_name" id="txtBrandName">
                                             <option value="NA">- Select -</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}">{{ $brand->brandname }}</option>
+                                                <option value="{{ $brand->brandname }}">{{ $brand->brandname }}</option>
                                             @endforeach
 
                                         </select>
                                     </div>
-
-
-
-
                                     <div class="col-sm-4">
                                         <label for="txtItemDescription">Item
                                             Description</label>
-                                        <textarea class="form-control " id="txtItemDescription" name="txtItemDescription" rows="3"></textarea>
+                                        <textarea class="form-control " id="txtItemDescription" name="item_description" rows="3"></textarea>
                                     </div>
 
 
 
                                     <div class="col-sm-4">
                                         <label for="txtYrofAMC">Year of AMC</label>
-                                        <select class="form-control" name="txtYrofAMC" id="txtYrofAMC">
-                                            <option value="-" selected="">--Select--</option>
+                                        <select class="form-control" name="no_year" id="txtYrofAMC">
+                                            <option disabled selected="">--Select--</option>
                                             <option value="1">1 Yr</option>
                                             <option value="2">2 Yr</option>
                                             <option value="3">3 Yr</option>
@@ -177,16 +170,16 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtQTY">QTY</label>
-                                        <input type="text" class="form-control " id="txtQTY" name="txtQTY"
-                                            onchange="calcu()">
+                                        <input required type="text" class="form-control " id="txtQTY"
+                                            name="qty" onkeyup="calcu()">
                                     </div>
 
 
                                     <div class="col-sm-4">
                                         <label for="txtPrice">Price</label>
-                                        <input value="{{ $data->basic_price }}" type="text"
-                                            class="form-control " id="txtPrice" name="txtPrice" onchange="calcu()"
-                                            value="" readonly="">
+                                        <input required value="{{ $data->basic_price }}" type="text"
+                                            class="form-control " id="txtPrice" name="basic_price"
+                                            onchange="calcu()" value="" readonly="">
                                     </div>
 
 
@@ -197,23 +190,24 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtGST">GST</label>
-                                        <input type="text" class="form-control " value="18" id="txtGST"
-                                            name="txtGST" onchange="calcu()" value="" readonly="">
+                                        <input required type="text" class="form-control " value="18"
+                                            id="txtGST" name="gst" onchange="calcu()" value=""
+                                            readonly="">
                                     </div>
 
 
                                     <div class="col-sm-4">
                                         <label for="txtGSTAmt">GST Amount</label>
-                                        <input type="text" class="form-control"
+                                        <input required type="text" class="form-control"
                                             value="{{ $data->total_price - $data->basic_price }}" id="txtGSTAmt"
-                                            name="txtGSTAmt" readonly="">
+                                            name="gstamt" readonly="">
                                     </div>
 
 
                                     <div class="col-sm-4">
                                         <label for="txtTotAmt">Total Amt</label>
-                                        <input type="text" class="form-control " id="txtTotAmt" name="txtTotAmt"
-                                            readonly="">
+                                        <input required type="text" class="form-control " id="txtTotAmt"
+                                            name="tot_amt" readonly="">
                                     </div>
 
 
@@ -224,7 +218,7 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtRemarks">Remarks</label>
-                                        <textarea class="form-control " id="txtRemarks" name="txtRemarks" rows="3"></textarea>
+                                        <textarea class="form-control " id="txtRemarks" name="remarks" rows="3"></textarea>
                                     </div>
 
 
@@ -236,63 +230,58 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtCustomerName">Customer Name</label>
-                                        <input type="text" class="form-control " id="txtCustomerName"
-                                            name="txtCustomerName">
+                                        <input required type="text" class="form-control " id="txtCustomerName"
+                                            name="customer_name">
                                     </div>
 
 
 
                                     <div class="col-sm-4">
                                         <label for="txtMobileNo">Mobile No.</label>
-                                        <input type="text" class="form-control " id="txtMobileNo"
-                                            name="txtMobileNo">
+                                        <input required type="text" class="form-control " id="txtMobileNo"
+                                            name="mob_no">
                                     </div>
-
-
-
-
 
                                     <div class="col-sm-4">
                                         <label for="txtEMail">E-Mail</label>
-                                        <input type="email" class="form-control " id="txtEMail" name="txtEMail">
+                                        <input required type="email" class="form-control " id="txtEMail"
+                                            name="email">
                                     </div>
 
 
 
                                     <div class="col-sm-4">
                                         <label for="txtAddress">Address</label>
-                                        <input type="text" class="form-control " id="txtAddress"
-                                            name="txtAddress">
+                                        <input required type="text" class="form-control " id="txtAddress"
+                                            name="address">
                                     </div>
-
-
-
-
-
 
                                     <div class="col-sm-4">
                                         <label for="txtPinCode">Pin Code</label>
-                                        <input type="text" class="form-control " id="txtPinCode"
-                                            name="txtPinCode">
+                                        <input required type="text" class="form-control " id="pin_code"
+                                            name="pin_code">
                                     </div>
 
 
 
                                     <div class="col-sm-4">
                                         <label for="txtCity">City</label>
-                                        <input type="text" class="form-control " id="txtCity" name="txtCity">
+                                        <input required type="text" class="form-control " id="txtCity"
+                                            name="city1">
                                     </div>
 
 
                                     <div class="col-sm-4">
                                         <label for="txtState">State</label>
-                                        <input type="text" class="form-control " id="txtState" name="txtState">
+                                        <input required type="text" class="form-control " id="txtState"
+                                            name="state1">
                                     </div>
 
                                 </div>
                                 <div class="col-md-12 mt-5 ">
                                     <label for="terms">
-                                        <input type="checkbox" name="" id="terms" required=""> &nbsp;
+                                        <input required type="checkbox" name="" id="terms"
+                                            required=""> &nbsp;
                                         Accept our all <a href="" class="text-un" data-toggle="modal"
                                             data-target="#exampleModal">Terms &amp; Conditions</a>
                                     </label>
@@ -300,13 +289,13 @@
                                 <div class=" text-center">
 
 
-                                    <button type="submit" name="submit" class="btn btn-success">&nbsp; &nbsp;
+                                    <button type="submit"  class="btn btn-success">&nbsp; &nbsp;
                                         Submit
                                         &nbsp; &nbsp;</button>
-        
+
                                 </div>
                         </div>
-                       
+
                     </div>
                     </form>
                 </div>

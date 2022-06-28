@@ -20,15 +20,15 @@
                         @endif
                         <form action="{{ route('admin.edit.product.update') }}" method="POST" class="form-horizontal"
                             enctype="multipart/form-data">@csrf
-                            <input type="hidden" name="product_id" value="{{ $product_id }}" >
+                            <input type="hidden" name="product_id" value="{{ $product_id }}">
 
                             <div class="row p-3">
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Product Name:</label>
-                                  
+
                                     <div>
-                                        <input type="text" onkeyup="slug1(this.value)" class="form-control input-md" placeholder="Product Name"
-                                            name="name" value="{{ $name }}" />
+                                        <input type="text" onkeyup="slug1(this.value)" class="form-control input-md"
+                                            placeholder="Product Name" name="name" value="{{ $name }}" />
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -37,8 +37,8 @@
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Product Slug:</label>
                                     <div>
-                                        <input type="text" id="slug" class="form-control input-md" placeholder="Product Slug"
-                                            name="slug" value="{{ $slug }}" />
+                                        <input type="text" id="slug" class="form-control input-md"
+                                            placeholder="Product Slug" name="slug" value="{{ $slug }}" />
                                         @error('slug')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -102,15 +102,39 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="form-group col-sm-4">
-                                    <label class=" control-label">SKU:</label>
-                                    <div> --}}
-                                <input type="hidden" class="form-control input-md" placeholder="SKU" name="SKU" />
-                                {{-- @error('SKU')
+                                <div class="form-group  col-sm-4">
+                                    <label class=" control-label"> Bajaj Image </label>
+                                    <div class="">
+                                        <div class="row">
+                                            <div class="col-6"> <input name="SKU" accept="image/*" type="file"
+                                                    class="form-control input-md" />
+                                            </div>
+                                            <div class="col-6">
+                                                @if ($SKU)
+                                                    <img src="{{ asset('assets/pages/img/products') . '/' . $SKU }}"
+                                                        alt="{{ $SKU }}" width="100" />
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        @error('images')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        @error('SKU')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div> --}}
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    <label class=" control-label"> Bajaj Link </label>
+                                    <div class="">
+                                        <input name="featured" type="text" class="form-control input-md"
+                                            placeholder=" Bajaj link" placeholder="featured" />
+                                        @error('featured')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Stock Status:</label>
                                     <div>
@@ -128,7 +152,7 @@
                                     <div class="">
                                         <!--<input type="text" class="form-control input-md" placeholder="GST" value="GST" />-->
                                         <select name="GST" class="form-control">
-                                            @if ($GST!='')
+                                            @if ($GST != '')
                                                 <option value="{{ $GST }}">{{ $GST }}%</option>
                                             @else
                                                 <option selected disabled>Choose GST</option>
@@ -173,7 +197,7 @@
                                     <label class=" control-label">Quantity</label>
                                     <div>
                                         <input type="text" class="form-control input-md" placeholder="Quantity"
-                                            name="quantity" value="{{ $quantity}}" />
+                                            name="quantity" value="{{ $quantity }}" />
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
@@ -332,6 +356,6 @@
 </script>
 <script>
     function slug1(data) {
-        document.getElementById('slug').value = data.toLowerCase().replaceAll(' ','-');
+        document.getElementById('slug').value = data.toLowerCase().replaceAll(' ', '-');
     }
 </script>
