@@ -255,14 +255,24 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/brand/status/{id}', [BrandController::class, 'status'])->name('admin.brand.status');
     // brand code end
 
-      // rent code start
-      Route::get('/admin/rent', [RentController::class, 'show'])->name('admin.rent');
-      Route::post('/admin/rent/add', [RentController::class, 'store'])->name('admin.rent.add');
-      Route::get('/admin/rent/edit/{id}', [RentController::class, 'edit'])->name('admin.rent.edit');
-      Route::post('/admin/rent/update/{id}', [RentController::class, 'update'])->name('admin.rent.update');
-      Route::get('/admin/rent/delete/{id}', [RentController::class, 'destroy'])->name('admin.rent.destroy');
-      Route::get('/admin/rent/status/{id}', [RentController::class, 'status'])->name('admin.rent.status');
-      // rent code end
+    // rent code start
+    Route::get('/admin/rent', [RentController::class, 'show'])->name('admin.rent');
+    Route::post('/admin/rent/add', [RentController::class, 'store'])->name('admin.rent.add');
+    Route::get('/admin/rent/edit/{id}', [RentController::class, 'edit'])->name('admin.rent.edit');
+    Route::post('/admin/rent/update/{id}', [RentController::class, 'update'])->name('admin.rent.update');
+    Route::get('/admin/rent/delete/{id}', [RentController::class, 'destroy'])->name('admin.rent.destroy');
+    Route::get('/admin/rent/status/{id}', [RentController::class, 'status'])->name('admin.rent.status');
+    // rent code end
+
+    // amc code start
+    Route::get('/admin/amc', [PackageController::class, 'show'])->name('admin.amc');
+    Route::post('/admin/amc/add', [PackageController::class, 'store'])->name('admin.amc.add');
+    Route::get('/admin/amc/edit/{id}', [PackageController::class, 'edit'])->name('admin.amc.edit');
+    Route::post('/admin/amc/update/{id}', [PackageController::class, 'update'])->name('admin.amc.update');
+    Route::get('/admin/amc/delete/{id}', [PackageController::class, 'destroy'])->name('admin.amc.destroy');
+    Route::get('/admin/amc/status/{id}', [PackageController::class, 'status'])->name('admin.amc.status');
+    // amc code end
+
 
     // banner code start
     Route::get('/admin/banner', [BannerController::class, 'index'])->name('admin.banner');

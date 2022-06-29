@@ -183,7 +183,7 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Amc section:</h6>
-                <a class="collapse-item" href="{{ route('admin.rent') }}">Amc</a>
+                <a class="collapse-item" href="{{ route('admin.amc') }}">Amc</a>
 
             </div>
         </div>

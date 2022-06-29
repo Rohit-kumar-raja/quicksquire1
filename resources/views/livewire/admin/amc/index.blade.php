@@ -3,19 +3,19 @@
         <div class="container-fluid">
             <div class="row ">
                 <div class="col-sm-6">
-                    <h2>rent</h2>
+                    <h2>amc</h2>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active"> Rent</li>
+                        <li class="breadcrumb-item active"> Amc</li>
                     </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <div>
-        @include('livewire.admin.rent.insert')
+        @include('livewire.admin.amc.insert')
         <div class="container" style="padding:30px 0;">
             <div class="row">
                 <div class="col-md-12">
@@ -24,7 +24,7 @@
 
                             <div class="row">
                                 <div class="col-md-10">
-                                    <i class="fas fa-list"> All Rent</i>
+                                    <i class="fas fa-list"> All Amc</i>
 
                                 </div>
                             
@@ -67,22 +67,28 @@
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
+                                            <th>Dealar name</th>
                                             <th>Duration</th>
-                                            <th>Ram</th>
-                                            <th>Storage Type</th>
-                                            <th>Storage</th>
-                                            <th>Os Type</th>
                                             <th>Date</th>
+                                            <th>item_type</th>
+                                            <th>purchase_year</th>
+                                            <th>item_category</th>
+                                            <th>brand_name</th>
+                                            <th>package_name</th>
+                                            <th>qty</th>
+                                            <th>basic_price</th>
+                                            <th>gst</th>
+                                            <th>tot_amt</th>
                                             <th>Address/Others</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $rent)
+                                        @foreach ($data as $amc)
                                             <!-- Button trigger modal -->
 
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalCenter{{ $rent->id }}"
+                                            <div class="modal fade" id="exampleModalCenter{{ $amc->id }}"
                                                 tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                 aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -96,22 +102,20 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            PinCode : {{ $rent->pincode }}
+                                                            PinCode : {{ $amc->pin_code }}
                                                             <hr>
-                                                            City : {{ $rent->city }}
+                                                            City : {{ $amc->city1 }}
+                                                          <hr>
+                                                            State : {{ $amc->state1 }}
                                                             <hr>
-                                                            District : {{ $rent->district }}
-                                                            <hr>
-                                                            State : {{ $rent->state }}
-                                                            <hr>
-                                                            Address : {{ $rent->address }}
+                                                            Address : {{ $amc->address }}
                                                         </div>
                                                         <div class="modal-body">
-                                                            <h5>Others Details</h5>
+                                                            <h5>Payment Details</h5>
                                                             <hr>
-                                                            Mouse : {{ $rent->mouse }}
+                                                            Payment Option : {{ $amc->payment_option }}
                                                             <hr>
-                                                            Keyboard : {{ $rent->keyboard }}
+                                                            Payment Remarks : {{ $amc->payment_remarks }}
                                                             <hr>
                                                          
                                                         </div>
@@ -124,19 +128,27 @@
 
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><img src="{{ asset('assets/pages/img/rents') }}/{{ $rent->image }}"
-                                                        width="50"></td>
-                                                <td>{{ $rent->name }}</td>
-                                                <td>{{ $rent->phone }}</td>
-                                                <td>{{ $rent->email }}</td>
-                                                <td>{{ $rent->duration }} days</td>
-                                                <td>{{ $rent->ram_size }} GB</td>
-                                                <td>{{ $rent->storage_type }}</td>
-                                                <td>{{ $rent->storage_size }} GB</td>
-                                                <td>{{ $rent->system_type }}</td>
-                                                <td>{{ $rent->created_at }}</td>
+                                                <td><iframe src="{{ asset('assets/pages/img/amcs') }}/{{ $amc->image }}"
+                                                        width="100"> </iframe></td>
+                                                <td>{{ $amc->customer_name }}</td>
+                                                <td>{{ $amc->mob_no }}</td>
+                                                <td>{{ $amc->email }}</td>
+                                                <td>{{ $amc->dealer_name }} </td>
+                                                <td>{{ $amc->no_year }} Year</td>
+                                                <td>{{ $amc->sale_dt }}</td>
+
+                                                <td>{{ $amc->item_type }}</td>
+                                                <td>{{ $amc->purchase_year }}</td>
+                                                <td>{{ $amc->item_category }}</td>
+                                                <td>{{ $amc->brand_name }}</td>
+                                                <td>{{ $amc->package_name }}</td>
+                                                <td>{{ $amc->qty }}</td>
+                                                <td>{{ $amc->basic_price }}</td>
+                                                <td>{{ $amc->gstamt }}</td>
+                                                <td>{{ $amc->tot_amt }}</td>
+
                                                 <td><button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModalCenter{{ $rent->id }}">
+                                                        data-target="#exampleModalCenter{{ $amc->id }}">
                                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                                     </button></td>
 

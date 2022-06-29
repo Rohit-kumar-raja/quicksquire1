@@ -29,4 +29,10 @@ class PackageController extends Controller
 
     DB::connection('mysql1')->table('tbl_amc_sale')->insert($request->except('_token'));
   }
+
+  public function show(){
+    $data=DB::connection('mysql1')->table('tbl_amc_sale')->get();
+    return view('livewire.admin.amc.index',['data'=>$data]);
+  }
+
 }
