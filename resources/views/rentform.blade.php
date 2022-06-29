@@ -77,7 +77,7 @@
 
                                         <div id="board_name" class="col-sm-4   mt-3">
                                             <b>Full Name * </b>
-                                            <input id="form_no" type="text" name="board_name" class="form-control"
+                                            <input id="form_no" type="text" name="name" class="form-control"
                                                 placeholder="Full Name*">
                                         </div>
 
@@ -89,8 +89,8 @@
 
                                         <div class="col-sm-4  mt-3">
                                             <b>Mobile Number * :</b>
-                                            <input type="text" name="department" class="form-control" value=""
-                                                placeholder="विभाग">
+                                            <input type="text" name="phone" class="form-control" value=""
+                                                placeholder="Phone Number">
                                         </div>
 
                                   
@@ -98,7 +98,7 @@
                                         <div class="col-sm-4  mt-3">
                                             <b> Rental Duration* :</b>
                                             <input required="" type="number"
-                                            name="pincode" placeholder=" Duration in day" class="form-control">
+                                            name="duration" placeholder=" Duration in day" class="form-control">
                                         </div>
 
 

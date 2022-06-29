@@ -111,8 +111,7 @@
                                     <h4>{{ $product->name }}</h4>
                                     <div class="price-availability-block clearfix">
                                         <div class="price">
-                                            <strong><span>₨</span>{{ $product->sale_price }} <strike
-                                                    class="dull1">₨
+                                            <strong><span>₨</span>{{ $product->sale_price }} <strike class="dull1">₨
                                                     {{ $product->regular_price }}</strike> </strong>
                                             <!-- <em>$<span>{{ $product->regular_price }}</span></em> -->
                                             <span
@@ -127,21 +126,26 @@
                                         <p>{!! $product->short_description !!}</p>
                                     </div>
                                     <div class="product-page-options">
-                                        <div class="pull-left">
-                                            <a href="#" title=""><img
-                                                    src="{{ asset('assets/pages/img/finance/bajaj.jpg') }}"
-                                                    alt=""></a>
-                                        </div>
-                                        <div class="pull-left">
-                                            <a href="#" title=""><img
-                                                    src="{{ asset('assets/pages/img/finance/hdb.jpg') }}" alt=""></a>
-                                        </div>
+                                        @if ( Str::length($product->SKU)>5)
+                                            <div class="pull-left">
+                                                <a href="{{ $product->featured }}" title=""><img width="100px"
+                                                        src="{{ asset('assets/pages/img/products') . '/' . $product->SKU }}"
+                                                        alt=""></a>
+                                            </div>
+                                        @else
+                                            <div class="pull-left">
+                                                <a href="{{ $product->featured }}" title=""><img
+                                                        src="{{ asset('assets/pages/img/finance/bajaj.jpg') }}"
+                                                        alt=""></a>
+                                            </div>
+                                        @endif
+
+
                                     </div>
                                     <div class="row mb-3">
 
-                                        <div class="col-sm-7"> <input type="text" id="pincode"
-                                                name="pincode" placeholder="Enter pincode"
-                                                class="form-control form-control-sm">
+                                        <div class="col-sm-7"> <input type="text" id="pincode" name="pincode"
+                                                placeholder="Enter pincode" class="form-control form-control-sm">
                                         </div>
                                         <div class="col-sm-2 mt-1"> <button onclick="btnPincode()"
                                                 class="btn btn-sm btn-primary">check</button>
@@ -156,8 +160,9 @@
                                                     <div class="product-quantity">
                                                         <input type="hidden" name="product_id"
                                                             value="{{ $product->id }}" id="">
-                                                        <input id="product-quantity" name="item" type="text" value="1"
-                                                            min="1" readonly class="form-control form-control-sm ">
+                                                        <input id="product-quantity" name="item" type="text"
+                                                            value="1" min="1" readonly
+                                                            class="form-control form-control-sm ">
                                                     </div>
                                                     <button type="submit" class="btn btn-default add2cart">Add
                                                         to cart
@@ -182,7 +187,7 @@
 
 
                                             </div>
-                                           
+
                                         </div>
                                     </div>
 
@@ -204,8 +209,7 @@
 
                                 <div class="product-page-content">
                                     <ul id="myTab" class="nav nav-tabs">
-                                        <li class="active"><a href="#Description"
-                                                data-toggle="tab">Description</a>
+                                        <li class="active"><a href="#Description" data-toggle="tab">Description</a>
                                         </li>
                                         <!-- <li><a href="#Information" data-toggle="tab">Information</a></li> -->
                                         <li><a href="#Reviews" data-toggle="tab">Reviews</a></li>
@@ -280,7 +284,7 @@
                                                     // dd($all_reviews);
                                                 @endphp
                                                 <!-- BEGIN FORM-->
-                                                @if ( $all_reviews == '' && $orderItem!='')
+                                                @if ($all_reviews == '' && $orderItem != '')
                                                     @if (session()->has('success'))
                                                         <div class="alert alert-success">
                                                             {{ session()->get('success') }}
@@ -303,7 +307,8 @@
                                                                 name="order_item_id">
                                                             <input type="hidden" value="{{ $product->id }}"
                                                                 name="product_id">
-                                                            <input type="hidden" value="" id="start_total" name="rating">
+                                                            <input type="hidden" value="" id="start_total"
+                                                                name="rating">
                                                             <div class="font-20 text-warning">
                                                                 <label class="text-success" for="email">Rating</label>
                                                                 <i onclick="star(1)" class="far fa-star rate"></i>
@@ -387,7 +392,8 @@
                                         <input type="hidden" name="product_addwith[]" value="{{ $product->id }}">
                                         @foreach ($related_products as $r_product)
                                             <label><input name="product_addwith[]" class="product_addwith" checked
-                                                    onclick="addwith()" value="{{ $r_product->id }}" type="checkbox">
+                                                    onclick="addwith()" value="{{ $r_product->id }}"
+                                                    type="checkbox">
                                                 {{ $r_product->name }}</label>
                                         @endforeach
                                     </div>
@@ -418,8 +424,8 @@
                                     </div>
                                     <h3><a href="{{ route('product.details', ['slug' => $p_product->slug]) }}">{{ substr($p_product->name, 0, 35) }}
                                         </a></h3>
-                                    <div class="pi-price">₨ {{ $p_product->sale_price }} <strike
-                                            class="dull">₨ {{ $product->regular_price }}</strike></div>
+                                    <div class="pi-price">₨ {{ $p_product->sale_price }} <strike class="dull">₨
+                                            {{ $product->regular_price }}</strike></div>
                                     <a class="btn btn-default add2cart"
                                         href="{{ route('addcart', $product->id) }}">Add
                                         to cart

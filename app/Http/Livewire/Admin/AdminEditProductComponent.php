@@ -164,6 +164,7 @@ class AdminEditProductComponent extends Component
 
     function update(Request $request)
     {
+       
         try{
 
         // $request->validate([

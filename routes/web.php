@@ -143,9 +143,6 @@ Route::get('amc/packages', [PackageController::class, 'index'])->name('amc.packa
 Route::get('amc/packages/details/buy/{id}', [PackageController::class, 'details'])->name('amc.package.details');
 Route::post('amc/packages/details/buy/', [PackageController::class, 'buy'])->name('amc.package.buy');
 
-
-
-
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');

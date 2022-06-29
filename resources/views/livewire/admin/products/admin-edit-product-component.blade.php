@@ -128,7 +128,7 @@
                                 <div class="form-group  col-sm-4">
                                     <label class=" control-label"> Bajaj Link </label>
                                     <div class="">
-                                        <input name="featured" type="text" class="form-control input-md"
+                                        <input name="featured" type="text" value="{{ $featured }}" class="form-control input-md"
                                             placeholder=" Bajaj link" placeholder="featured" />
                                         @error('featured')
                                             <span class="text-danger">{{ $message }}</span>
@@ -177,22 +177,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label class=" control-label">Featured:</label>
-                                    <div>
-                                        <select class="form-control" name="featured" value="featured">
-                                            @if ($featured)
-                                                <option value="{{ $featured }}">
-                                                    {{ 'Yes' }}
-                                                </option>
-                                            @else
-                                                <option selected disabled> -Select-</option>
-                                            @endif
-                                            <option value="0">No</option>
-                                            <option value="1">Yes</option>
-                                        </select>
-                                    </div>
-                                </div>
+                              
                                 <div class="form-group col-sm-4">
                                     <label class=" control-label">Quantity</label>
                                     <div>
