@@ -139,6 +139,8 @@ Route::get('/shippingpolicy', ShippingPolicyComponent::class);
 Route::get('/privacypolicy', PrivacyPolicyComponent::class);
 Route::get('/termuse', TermuseComponent::class);
 Route::get('/rent/form', [RentController::class, 'index'])->name('rent');
+Route::post('/rent/form/sale', [RentController::class, 'store'])->name('rent.sale');
+
 Route::get('amc/packages', [PackageController::class, 'index'])->name('amc.package');
 Route::get('amc/packages/details/buy/{id}', [PackageController::class, 'details'])->name('amc.package.details');
 Route::post('amc/packages/details/buy/', [PackageController::class, 'buy'])->name('amc.package.buy');
@@ -252,6 +254,15 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('admin.brand.destroy');
     Route::get('/admin/brand/status/{id}', [BrandController::class, 'status'])->name('admin.brand.status');
     // brand code end
+
+      // rent code start
+      Route::get('/admin/rent', [RentController::class, 'show'])->name('admin.rent');
+      Route::post('/admin/rent/add', [RentController::class, 'store'])->name('admin.rent.add');
+      Route::get('/admin/rent/edit/{id}', [RentController::class, 'edit'])->name('admin.rent.edit');
+      Route::post('/admin/rent/update/{id}', [RentController::class, 'update'])->name('admin.rent.update');
+      Route::get('/admin/rent/delete/{id}', [RentController::class, 'destroy'])->name('admin.rent.destroy');
+      Route::get('/admin/rent/status/{id}', [RentController::class, 'status'])->name('admin.rent.status');
+      // rent code end
 
     // banner code start
     Route::get('/admin/banner', [BannerController::class, 'index'])->name('admin.banner');

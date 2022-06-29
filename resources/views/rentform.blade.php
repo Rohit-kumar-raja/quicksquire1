@@ -60,10 +60,15 @@
                     <div class="col-lg-12">
 
                         <x-jet-validation-errors class="mb-4" />
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @endif
+                        <form action="{{ route('rent.sale') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="card card-default p-2">
-
-
                                 <div class="card un-color">
                                     <h5 class="card-title ml-5  text-white"> 1.Basic Details </h5>
                                 </div>
@@ -83,8 +88,8 @@
 
                                         <div class="col-sm-4  mt-3">
                                             <b> E-mail :</b>
-                                            <input required="" type="email" name="email" placeholder="ई-मेल"
-                                                class="form-control">
+                                            <input required="" type="email" name="email"
+                                                placeholder=" Email Address " class="form-control">
                                         </div>
 
                                         <div class="col-sm-4  mt-3">
@@ -93,41 +98,41 @@
                                                 placeholder="Phone Number">
                                         </div>
 
-                                  
+
 
                                         <div class="col-sm-4  mt-3">
                                             <b> Rental Duration* :</b>
-                                            <input required="" type="number"
-                                            name="duration" placeholder=" Duration in day" class="form-control">
+                                            <input required="" type="number" name="duration"
+                                                placeholder=" Duration in day" class="form-control">
                                         </div>
 
 
                                         <div class="col-sm-4  mt-3">
                                             <b> Pin code :</b>
                                             <input required="" onkeyup="pin(this.value)" type="text"
-                                                name="pincode" placeholder="पिन कोड" class="form-control">
+                                                name="pincode" placeholder=" Pin code" class="form-control">
                                         </div>
-                                     
+
                                         <div class="col-sm-4  mt-3">
                                             <b> State :</b>
-                                            <input readonly="" id="state" type="text" name="state"
-                                                placeholder="राज्य " class="form-control">
+                                            <input id="state" type="text" name="state" placeholder=" State  "
+                                                class="form-control">
                                         </div>
                                         <div class="col-sm-4  mt-3">
                                             <b> District :</b>
-                                            <input readonly="" id="district" type="text" name="district"
-                                                placeholder="जिला" class="form-control">
+                                            <input id="district" type="text" name="district"
+                                                placeholder=" District " class="form-control">
                                         </div>
 
                                         <div class="col-sm-4  mt-3">
                                             <b> City :</b>
-                                            <input id="city" type="text" name="city" placeholder="शहर"
+                                            <input id="city" type="text" name="city" placeholder="City "
                                                 class="form-control">
                                         </div>
 
                                         <div class="col-sm-8  mt-3">
-                                            <b> Address - 1 :</b>
-                                            <textarea type="text" name="address1" placeholder="Address - 1" class="form-control"> </textarea>
+                                            <b> Address :</b>
+                                            <textarea type="text" name="address" placeholder=" Full Address " class="form-control"> </textarea>
                                         </div>
 
 
@@ -175,7 +180,7 @@
                                     <div class="row">
                                         <div class="col-sm-4  mt-3">
                                             <b> Storage Type :</b>
-                                            <select name="ram_type" class="form-control">
+                                            <select name="storage_type" class="form-control">
                                                 <option selected disabled> Select-</option>
                                                 <option value="hdd">HDD</option>
                                                 <option value="sdd">SDD</option>
@@ -183,7 +188,7 @@
                                         </div>
                                         <div class="col-sm-4  mt-3">
                                             <b> Size of Storage :</b>
-                                            <input id="city" type="number" name="ram_size"
+                                            <input id="city" type="number" name="storage_size"
                                                 placeholder=" Storage Size in GB" class="form-control">
                                             </select>
                                         </div>
@@ -237,8 +242,8 @@
 
 
 
-                                  <!-- here to started the representetives Detailss -->
-                                  <div class="card un-color">
+                                <!-- here to started the representetives Detailss -->
+                                <div class="card un-color">
                                     <h5 class="card-title ml-5  text-white"> 4. Others Details </h5>
                                 </div>
 
@@ -247,8 +252,8 @@
 
                                     <div class="row">
                                         <div class="col-sm-4  mt-3">
-                                            <b> System  Type :</b>
-                                            <select name="ram_type" class="form-control">
+                                            <b> System Type :</b>
+                                            <select name="system_type" class="form-control">
                                                 <option selected disabled> Select-</option>
                                                 <option value="desktop">Desktop</option>
                                                 <option value="laptop">Laptop</option>
@@ -257,16 +262,16 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4  mt-3">
-                                            <b> Mouse  :</b>
-                                            <select name="ram_type" class="form-control">
+                                            <b> Mouse :</b>
+                                            <select name="mouse" class="form-control">
                                                 <option selected disabled> Select-</option>
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-4  mt-3">
-                                            <b> Keyboard  :</b>
-                                            <select name="ram_type" class="form-control">
+                                            <b> Keyboard :</b>
+                                            <select name="keyboard" class="form-control">
                                                 <option selected disabled> Select-</option>
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
@@ -275,8 +280,8 @@
 
 
                                         <div class="col-sm-12  mt-3">
-                                            <b> Description  :</b>
-                                            <textarea name="description" id="" cols="30" rows="10" class="form-control mt-3" ></textarea>
+                                            <b> Description :</b>
+                                            <textarea name="description" id="" cols="30" rows="10" class="form-control mt-3"></textarea>
                                         </div>
 
                                     </div>
@@ -289,15 +294,15 @@
                             <div class="col-md-12 mt-5 ">
                                 <label for="">
                                     <input type="checkbox" name="" id="" required=""> &nbsp;
-                                    Accept our all  <a href="" class="text-un"
-                                        data-toggle="modal" data-target="#exampleModal">Terms &amp; Conditions</a>
+                                    Accept our all <a href="" class="text-un" data-toggle="modal"
+                                        data-target="#exampleModal">Terms &amp; Conditions</a>
                                 </label>
                             </div>
 
                             <div class=" text-center">
 
 
-                                <button type="submit" name="submit" class="btn btn-success">&nbsp; &nbsp; Submit
+                                <button type="submit"  class="btn btn-success">&nbsp; &nbsp; Submit
                                     &nbsp; &nbsp;</button>
 
                             </div>

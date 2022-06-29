@@ -18,19 +18,20 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-            $table->string('raja');
-
+            $table->string('duration');
+            $table->string('pincode');
+            $table->string('state');
+            $table->string('district');
+            $table->string('city');
+            $table->string('address');
+            $table->string('ram_type');
+            $table->string('ram_size');
+            $table->string('storage_type');
+            $table->string('storage_size');
+            $table->string('system_type');
+            $table->string('mouse');
+            $table->string('keyboard');
+            $table->string('description');
             $table->timestamps();
         });
     }
