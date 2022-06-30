@@ -109,6 +109,8 @@
                                                         <div class="modal-body">
                                                             <h5>Others Details</h5>
                                                             <hr>
+                                                
+                                                          
                                                             Mouse : {{ $rent->mouse }}
                                                             <hr>
                                                             Keyboard : {{ $rent->keyboard }}
