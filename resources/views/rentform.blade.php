@@ -61,10 +61,10 @@
 
                         <x-jet-validation-errors class="mb-4" />
                         @if ($message = Session::get('success'))
-                        <div class="alert alert-success alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ $message }}</strong>
-                        </div>
+                            <div class="alert alert-success alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{{ $message }}</strong>
+                            </div>
                         @endif
                         <form action="{{ route('rent.sale') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -197,59 +197,62 @@
                                 </div>
 
                                 <!-- here to started the representetives Detailss -->
-                                {{-- <div class="card un-color">
+                                <div class="card un-color">
                                     <h5 class="card-title ml-5  text-white"> 4. processor </h5>
-                                </div> --}}
-
-
-                                {{-- <div class="card-body">
-
+                                </div>
+                                <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-4  mt-3">
-                                            <b> Processor Brand :</b>
-                                            <select name="ram_type" class="form-control">
-                                                <option selected disabled> Select-</option>
-                                                <option value="amd">Amd</option>
-                                                <option value="intel">Intel</option>
-                                            </select>
+                                            <b> Processor Name :</b>
+                                            <input name="prosessor" placeholder="Processor Name ex - inter core i3"
+                                                class="form-control">
                                         </div>
                                         <div class="col-sm-4  mt-3">
-                                            <b> Number of core :</b>
-                                            <select name="ram_type" class="form-control">
-                                                <option selected disabled> Select-</option>
-                                                @for ($i = 1; $i < 32; $i++)
-                                                    <option value="{{ $i }}">{{ $i }} core
-                                                    </option>
-                                                @endfor
-
-                                            </select>
+                                            <b> Processor generation :</b>
+                                            <input name="prosessor_generation"
+                                                placeholder="Processor Generation ex - 3rd genration"
+                                                class="form-control">
                                         </div>
-
-                                        <div class="col-sm-4  mt-3">
-                                            <b> Clock speed :</b>
-                                            <select name="ram_type" class="form-control">
-                                                <option selected disabled> Select-</option>
-                                                @for ($i = 1; $i < 5; $i++)
-                                                    <option value="{{ $i . '-' . $i+1 }}">{{ $i . '-' . $i+1 }} GHZ</option>
-                                                @endfor
-
-                                            </select>
-                                        </div>
-
                                     </div>
-
-                                </div> --}}
-
-
-
+                                </div>
                                 <!-- here to started the representetives Detailss -->
                                 <div class="card un-color">
-                                    <h5 class="card-title ml-5  text-white"> 4. Others Details </h5>
+                                    <h5 class="card-title ml-5  text-white"> 5. Software Requirment </h5>
                                 </div>
 
 
                                 <div class="card-body">
 
+                                    <div class="row">
+                                        <div class="col-sm-4  mt-3">
+                                            <b> Windows Type :</b>
+                                            <input name="win_type" placeholder="Window type ex - window 10"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-sm-4  mt-3">
+                                            <b> MS Office :</b>
+                                            <select name="office" class="form-control">
+                                                <option selected disabled> Select-</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4  mt-3">
+                                            <b> Antivirus :</b>
+                                            <select name="antivirus" class="form-control">
+                                                <option selected disabled> Select-</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- here to started the representetives Detailss -->
+                                <div class="card un-color">
+                                    <h5 class="card-title ml-5  text-white"> 4. Others Details </h5>
+                                </div>
+                                <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-4  mt-3">
                                             <b> System Type :</b>
@@ -258,8 +261,25 @@
                                                 <option value="desktop">Desktop</option>
                                                 <option value="laptop">Laptop</option>
                                                 <option value="others">Others</option>
-
                                             </select>
+                                        </div>
+                                        <div class="col-sm-4  mt-3">
+                                            <b> Screen Type :</b>
+                                            <select name="screen_type" class="form-control">
+                                                <option selected disabled> Select-</option>
+                                                <option value="led">Led</option>
+                                                <option value="lcd">Lcd</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4  mt-3">
+                                            <b> Screen Size :</b>
+                                            <input name="screen_size" placeholder='Screen Size ex- 16.5" '
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-sm-4  mt-3">
+                                            <b> Graphics card Size (if applicaple) :</b>
+                                            <input type="number" name="graphics" placeholder=" Graphic card in GB ex - 1 "
+                                                class="form-control">
                                         </div>
                                         <div class="col-sm-4  mt-3">
                                             <b> Mouse :</b>
@@ -278,19 +298,20 @@
                                             </select>
                                         </div>
 
+                                        <div class="col-sm-4  mt-3">
+                                            <b> Images :</b>
+                                            <input  accept="image/*" type="file" name="image" 
+                                                class="form-control">
+                                        </div>
+
 
                                         <div class="col-sm-12  mt-3">
                                             <b> Description :</b>
                                             <textarea name="description" id="" cols="30" rows="10" class="form-control mt-3"></textarea>
                                         </div>
-
                                     </div>
-
                                 </div>
-
-
                             </div>
-
                             <div class="col-md-12 mt-5 ">
                                 <label for="">
                                     <input type="checkbox" name="" id="" required=""> &nbsp;
@@ -298,23 +319,16 @@
                                         data-target="#exampleModal">Terms &amp; Conditions</a>
                                 </label>
                             </div>
-
                             <div class=" text-center">
-
-
-                                <button type="submit"  class="btn btn-success">&nbsp; &nbsp; Submit
+                                <button type="submit" class="btn btn-success">&nbsp; &nbsp; Submit
                                     &nbsp; &nbsp;</button>
-
                             </div>
                         </form>
                     </div>
-
-
                     <!-- end form -->
                 </div>
             </div>
         </section>
-
     </body>
     <!-- END BODY -->
 </x-guest-layout>

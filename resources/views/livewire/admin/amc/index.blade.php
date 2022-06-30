@@ -128,7 +128,7 @@
 
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><iframe src="{{ asset('assets/pages/img/amcs') }}/{{ $amc->image }}"
+                                                <td><iframe src="{{ asset('assets/pages/img/amc') }}/{{ $amc->image }}"
                                                         width="100"> </iframe></td>
                                                 <td>{{ $amc->customer_name }}</td>
                                                 <td>{{ $amc->mob_no }}</td>

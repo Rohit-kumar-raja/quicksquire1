@@ -28,10 +28,19 @@ return new class extends Migration
             $table->string('ram_size');
             $table->string('storage_type');
             $table->string('storage_size');
+            $table->string('prosessor');
+            $table->string('prosessor_generation');
+            $table->string('win_type');
+            $table->string('office');
+            $table->string('antivirus');
             $table->string('system_type');
+            $table->string('screen_type');
+            $table->string('screen_size');
+            $table->string('graphics');
             $table->string('mouse');
             $table->string('keyboard');
             $table->string('description');
+            $table->string('image');
             $table->timestamps();
         });
     }

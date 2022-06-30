@@ -67,7 +67,7 @@
 
 
                         <div class="card p-3">
-                            <form method="POST" action="{{ route('amc.package.buy') }}" name="frmForm"
+                            <form method="POST" action="{{ route('amc.package.buy') }}" name="frmForm" enctype="multipart/form-data"
                                 id="frmForm">
                                 @csrf
                                 <input required type="hidden" name="dealer_name" id="txtDealerName" value="web">
@@ -275,6 +275,11 @@
                                         <label for="txtState">State</label>
                                         <input required type="text" class="form-control " id="txtState"
                                             name="state1">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="txtState">Orignal  Bill </label>
+                                        <input accept="application/pdf" required type="file" title="Product orignal bill" class="form-control " id="txtState"
+                                            name="image">
                                     </div>
 
                                 </div>

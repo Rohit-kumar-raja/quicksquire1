@@ -11,7 +11,7 @@
             <li class="plan-feature"> Product Range {{ $data->price_from}} to {{ $data->proce_to }}</li>
             <li class="plan-feature">{{ $data->item }}</li>
             <li class="plan-feature"><a href="{{ route('amc.package.details',$data->id) }}" class="btn btn-primary btn-plan-select"><i
-                        class="icon-white icon-ok"></i> Select</a></li>
+                        class="icon-white icon-ok"></i> Buy Now </a></li>
         </ul>
     </div>
       @endforeach
