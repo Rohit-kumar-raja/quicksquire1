@@ -58,9 +58,6 @@
     <!-- Theme styles END -->
 
     <!-- product magnific -->
-    <link rel="stylesheet" href="{{ asset('css1/normalize.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css1/foundation.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css1/demo.css') }}" />
     <script src="{{ asset('js/vendor/modernizr.js') }}"></script>
     <script src="{{ asset('js/vendor/jquery.js') }}"></script>
     <!-- xzoom plugin here -->
@@ -86,10 +83,10 @@
 
 <!-- animation -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.css"
     integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
 @livewireStyles
 </head>
 <!-- Head END -->
@@ -207,11 +204,11 @@
 
     <script src="{{ asset('assets/corporate/scripts/layout.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/pages/scripts/bs-carousel.js') }}" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js"
         integrity="sha512-T5Bneq9hePRO8JR0S/0lQ7gdW+ceLThvC80UjwkMRz+8q+4DARVZ4dqKoyENC7FcYresjfJ6ubaOgIE35irf4w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.tiny.cloud/1/i4y3r806hozux4iqj9ej33xdmqmlg83pe2yimkgjpzg5lvg0/tinymce/5/tinymce.min.js"
-        referrerpolicy="origin"></script>
+        referrerpolicy="origin"></script> --}}
 
 
 
@@ -239,7 +236,13 @@
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
-
+    <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
     @livewireScripts
 
 </body>

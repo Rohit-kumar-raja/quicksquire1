@@ -125,7 +125,7 @@
                                                 included</i></strong>
                                     </li>
                                     <li class="shopping-total-price">
-                                        <em>Coin </em>
+                                        <em>Earn Coin </em>
                                         <?php
                                         
                                         ?>

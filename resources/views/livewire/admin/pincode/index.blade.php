@@ -23,9 +23,13 @@
                         <div class="card-header">
 
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-2">
                                     <i class="fas fa-list"> All pincode</i>
 
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="text-danger" href="{{ asset('assets/format.xls') }}">Pincode Format
+                                    </a>
                                 </div>
                                 <div class="col-5">
                                     <form action="{{ route('admin.pincode.import') }}" method="POST"
@@ -114,10 +118,9 @@
                                     <tbody>
                                         @foreach ($data as $pincode)
                                             <tr>
-                                                <td>
-                                                    {{ $loop->iteration }}
-                                                </td>
 
+                                                <td> {{ $loop->iteration + $data->firstItem() - 1 }}
+                                                </td>
                                                 <td>
 
                                                     {{ $pincode->pincode }}
@@ -177,6 +180,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="float-right">
+                                    {{ $data->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -184,6 +190,10 @@
             </div>
         </div>
     </div>
-
+<style>
+    .paging_simple_numbers{
+        display: none;
+    }
+</style>
 
 </x-adminlayout>

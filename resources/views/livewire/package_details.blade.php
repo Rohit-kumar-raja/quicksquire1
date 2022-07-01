@@ -67,11 +67,12 @@
 
 
                         <div class="card p-3">
-                            <form method="POST" action="{{ route('amc.package.buy') }}" name="frmForm" enctype="multipart/form-data"
-                                id="frmForm">
+                            <form method="POST" action="{{ route('amc.package.buy') }}" name="frmForm"
+                                enctype="multipart/form-data" id="frmForm">
                                 @csrf
                                 <input required type="hidden" name="dealer_name" id="txtDealerName" value="web">
-                                <input required type="hidden" name="staffid" id="txtDealerName" value="prince range {{ $data->price_from }} -  {{ $data->proce_to }}">
+                                <input required type="hidden" name="staffid" id="txtDealerName"
+                                    value="prince range {{ $data->price_from }} -  {{ $data->proce_to }}">
 
                                 <div class="card un-color">
                                     <h5 class="card-title ml-5  text-white"> Basic Details for package buy </h5>
@@ -84,16 +85,12 @@
                                             class="form-control" name="package_name" readonly required>
                                     </div>
 
-
-
                                     <div class="col-sm-4">
                                         <label for="txtPriceRange">Price Range</label>
-                                        <input  type="text" class="form-control"
+                                        <input type="text" class="form-control"
                                             value="{{ $data->price_from }} -  {{ $data->proce_to }}"
-                                            id="txtPriceRange"  value="" readonly="">
+                                            id="txtPriceRange" value="" readonly="">
                                     </div>
-
-
 
                                     <div class="col-sm-4">
                                         <label for="txtDate">Date</label>
@@ -101,10 +98,6 @@
                                             class="form-control " id="txtDate" name="sale_dt" value="27-06-2022"
                                             autocomplete="off">
                                     </div>
-
-
-
-
 
                                     <div class="col-sm-4">
                                         <label for="txtItemType">Item Type</label>
@@ -115,7 +108,11 @@
                                         </select>
                                     </div>
 
-
+                                    <div class="col-sm-4">
+                                        <label for="orderid">Order id</label>
+                                        <input required type="text" class="form-control" id="orderid"
+                                            name="orderid" placeholder="Enter your product order id"  autocomplete="off">
+                                    </div>
 
                                     <div class="col-sm-4">
                                         <label for="txtPurchaseYear">Purchase Year</label>
@@ -138,7 +135,8 @@
                                         <select class="form-control" name="brand_name" id="txtBrandName">
                                             <option value="NA">- Select -</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->brandname }}">{{ $brand->brandname }}</option>
+                                                <option value="{{ $brand->brandname }}">{{ $brand->brandname }}
+                                                </option>
                                             @endforeach
 
                                         </select>
@@ -148,8 +146,6 @@
                                             Description</label>
                                         <textarea class="form-control " id="txtItemDescription" name="item_description" rows="3"></textarea>
                                     </div>
-
-
 
                                     <div class="col-sm-4">
                                         <label for="txtYrofAMC">Year of AMC</label>
@@ -161,19 +157,11 @@
                                             <option value="5">5 Yr</option>
                                         </select>
                                     </div>
-
-
-
-
-
-
-
                                     <div class="col-sm-4">
                                         <label for="txtQTY">QTY</label>
                                         <input required type="text" class="form-control " id="txtQTY"
                                             name="qty" onkeyup="calcu()">
                                     </div>
-
 
                                     <div class="col-sm-4">
                                         <label for="txtPrice">Price</label>
@@ -181,13 +169,6 @@
                                             class="form-control " id="txtPrice" name="basic_price"
                                             onchange="calcu()" value="" readonly="">
                                     </div>
-
-
-
-
-
-
-
                                     <div class="col-sm-4">
                                         <label for="txtGST">GST</label>
                                         <input required type="text" class="form-control " value="18"
@@ -210,31 +191,16 @@
                                             name="tot_amt" readonly="">
                                     </div>
 
-
-
-
-
-
-
                                     <div class="col-sm-4">
                                         <label for="txtRemarks">Remarks</label>
                                         <textarea class="form-control " id="txtRemarks" name="remarks" rows="3"></textarea>
                                     </div>
-
-
-
-
-
-
-
 
                                     <div class="col-sm-4">
                                         <label for="txtCustomerName">Customer Name</label>
                                         <input required type="text" class="form-control " id="txtCustomerName"
                                             name="customer_name">
                                     </div>
-
-
 
                                     <div class="col-sm-4">
                                         <label for="txtMobileNo">Mobile No.</label>
@@ -248,8 +214,6 @@
                                             name="email">
                                     </div>
 
-
-
                                     <div class="col-sm-4">
                                         <label for="txtAddress">Address</label>
                                         <input required type="text" class="form-control " id="txtAddress"
@@ -262,14 +226,11 @@
                                             name="pin_code">
                                     </div>
 
-
-
                                     <div class="col-sm-4">
                                         <label for="txtCity">City</label>
                                         <input required type="text" class="form-control " id="txtCity"
                                             name="city1">
                                     </div>
-
 
                                     <div class="col-sm-4">
                                         <label for="txtState">State</label>
@@ -277,8 +238,9 @@
                                             name="state1">
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="txtState">Orignal  Bill </label>
-                                        <input accept="application/pdf" required type="file" title="Product orignal bill" class="form-control " id="txtState"
+                                        <label for="txtState">Orignal Bill </label>
+                                        <input accept="application/pdf" required type="file"
+                                            title="Product orignal bill" class="form-control " id="txtState"
                                             name="image">
                                     </div>
 
@@ -294,7 +256,7 @@
                                 <div class=" text-center">
 
 
-                                    <button type="submit"  class="btn btn-success">&nbsp; &nbsp;
+                                    <button type="submit" class="btn btn-success">&nbsp; &nbsp;
                                         Submit
                                         &nbsp; &nbsp;</button>
 

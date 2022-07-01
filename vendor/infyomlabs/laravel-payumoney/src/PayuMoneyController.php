@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
  */
 class PayuMoneyController extends Controller
 {
-    const TEST_URL = 'https://sandboxsecure.payu.in';
+    const TEST_URL = 'https://test.payu.in/_payment';
     const PRODUCTION_URL = 'https://secure.payu.in';
     
     /**

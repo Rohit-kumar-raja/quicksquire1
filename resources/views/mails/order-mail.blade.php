@@ -9,7 +9,13 @@
 </head>
 
 <body>
-    <p>Hi {{$order->firstname}} {{$order->lastname}}</p>
+    @php
+        $order = DB::table('orders')->find(session('order_id'));
+        $orderItems = DB::table('order_items')
+            ->where('order_id', session('order_id'))
+            ->get();
+    @endphp
+    <p>Hi {{ $order->firstname }} {{ $order->lastname }}</p>
     <p>Your order has been successfully placed.</p>
     <br />
 
@@ -23,21 +29,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($order->orderItems as $item)
-            <tr>
-                <td><img src="{{asset('assets/images/products')}}/{{$item->product->image}}" width="100" height="100" alt=""></td>
-                <td>{{$item->product->name}}</td>
-                <td>{{$item->quantity}}</td>
-                <td>{{$item->price* $item->quantity}}</td>
-            </tr>
+            @foreach ($orderItems as $item)
+                <tr>
+                  
+                    <td>{{ DB::table('products')->find($item->product_id)->name }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td>{{ $item->price * $item->quantity }}</td>
+                </tr>
             @endforeach
             <tr>
                 <td colspan="3" style="text-align:right;border-top:1px solid #ccc;">Total</td>
-                <td style="font-size: 15px;font-weight:bold;border-top:1px solid #ccc;">Subtotal : Rs{{$order->subtotal}}</td>
+                <td style="font-size: 15px;font-weight:bold;border-top:1px solid #ccc;">Subtotal :
+                    Rs{{ $order->subtotal }}</td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align:right">Total</td>
-                <td style="font-size: 15px;font-weight:bold;">Tax : {{$order->tax}}</td>
+                <td style="font-size: 15px;font-weight:bold;">Tax : {{ $order->tax }}</td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align:right">Total</td>
@@ -45,7 +52,7 @@
             </tr>
             <tr>
                 <td colspan="3" style="text-align:right">Total</td>
-                <td style="font-size: 15px;font-weight:bold;">Total : Rs{{$order->total}}</td>
+                <td style="font-size: 15px;font-weight:bold;">Total : Rs{{ $order->total }}</td>
             </tr>
         </tbody>
 

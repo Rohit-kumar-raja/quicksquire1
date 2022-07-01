@@ -1,3 +1,4 @@
+
 <div class="content">
     <style>
         .content {
@@ -57,7 +58,6 @@
             font-size: 12px;
             border-top: 1px solid #eee;
         }
-
     </style>
     <div class="container">
         <div class="row">
@@ -74,7 +74,7 @@
                             </span>
                         </div>
                         <div class="col-xs-4 text-center">
-                            <i class="fa-solid fa-coins icon-stat-visual bg-primary"></i>  
+                            <i class="fa-solid fa-coins icon-stat-visual bg-primary"></i>
                         </div>
                     </div>
                     <div class="icon-stat-footer">
@@ -106,7 +106,7 @@
                             <span class="icon-stat-value">{{ $totalDelivered }}</span>
                         </div>
                         <div class="col-xs-4 text-center">
-                            <i class="fa fa-rupee icon-stat-visual bg-primary"></i> 
+                            <i class="fa fa-rupee icon-stat-visual bg-primary"></i>
                         </div>
                     </div>
                     <div class="icon-stat-footer">
@@ -140,7 +140,7 @@
                 <h2>Latest Order</h2>
             </div>
             <div class="panel-body">
-                <table class="table table-striped">
+                <table class="table table-striped" id="example">
                     <thead>
                         <tr>
                             <th>OrderId</th>
@@ -187,3 +187,4 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">

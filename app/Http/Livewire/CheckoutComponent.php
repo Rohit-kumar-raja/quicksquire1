@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Http\Controllers\CoinController;
+use App\Http\Controllers\OtpController;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Shipping;
@@ -14,6 +15,7 @@ use Cartalyst\Stripe\Api\Orders;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutComponent extends Component
 {
@@ -178,9 +180,19 @@ class CheckoutComponent extends Component
             $transaction->status = 'pending';
             $transaction->save();
         }
+        session(['order_id' => $order->id]);
         $coin = new CoinController();
         $coin->storeCoin(Auth::user()->id, $order->id, $transaction->id, $total_amount);
         try {
+            if ($request->paymentmode == 'cod') {
+
+                $details = [
+                    'title' => 'Order Confirmation Mail from quicksecureindia.com',
+                ];
+                $message = new OtpController();
+                  $message->orderMassage($request->phone,$order->id);
+                //     Mail::to($request->email)->send(new \App\Mail\Ordermail($details));
+            }
             DB::table('cart_product')->where('user_id', Auth::user()->id)->delete();
         } catch (Exception $e) {
         }

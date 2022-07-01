@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Imports;
+
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 
@@ -21,9 +22,7 @@ class PinCodeImport implements ToModel
         // }else{
         //     $status=0;
         // }
-        $status=1;
-     DB::table('pincode')->insert(['city'=>$row[0],'pincode'=>$row[2],'status'=>$status]);
-
-       
+        $status = 1;
+        DB::table('pincode')->insert(['city' => $row[1], 'pincode' => $row[0], 'status' => $status, 'state' => $row[2], 'district' => $row[3]]);
     }
 }

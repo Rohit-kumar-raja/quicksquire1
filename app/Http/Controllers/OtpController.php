@@ -35,15 +35,69 @@ class OtpController extends Controller
         $otp = rand('100000', '999999');
         session(['otp' => $otp]);
         //Your authentication key
-        $authKey = "14107AXVZG4hH18q5f815112P15";
+        $authKey = "19992Amzkw2mj0T624fe79bP15";
         //Multiple mobiles numbers separated by comma
         $mobileNumber = $mobileNumber;
         //Sender ID,While usi
-        $senderId = "LBSJSR";
+        $senderId = "QCKSPT";
         $country = "91";
-        $DLT_TE_ID = "1207163497526511297";
+        $DLT_TE_ID = "1207164984352850388";
         //Your message to send, Add URL encoding here.
-        $message = 'Your LABES login OTP code is'  . $otp;
+        $message = 'Your Quick Secure login OTP is'  . $otp;
+        //Define route 
+        $route = "4";
+        //Prepare you post parameters
+        $postData = array(
+            'authkey' => $authKey,
+            'country' => $country,
+            'mobiles' => $mobileNumber,
+            'message' => $message,
+            'sender' => $senderId,
+            'DLT_TE_ID' => $DLT_TE_ID,
+            'route' => $route
+        );
+        //API URL
+        $url = "http://bulksms.insightinfosystem.com/api/sendhttp.php";
+        // init the resource
+        $ch = curl_init();
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postData
+            //,CURLOPT_FOLLOWLOCATION => true
+        ));
+
+
+        //Ignore SSL certificate verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        //get response
+        $output = curl_exec($ch);
+
+        //Print error if any
+        if (curl_errno($ch)) {
+            echo 'error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        //	echo "<script>window.location.href='verify.php'</script>"; 
+
+
+    }
+    function orderMassage($mobileNumber,$order_id)
+    {
+        $otp = rand('100000', '999999');
+        session(['otp' => $otp]);
+        //Your authentication key
+        $authKey = "19992Amzkw2mj0T624fe79bP15";
+        //Multiple mobiles numbers separated by comma
+        $mobileNumber = $mobileNumber;
+        //Sender ID,While usi
+        $senderId = "QCKSPT";
+        $country = "91";
+        $DLT_TE_ID = "1207164984377894053";
+        //Your message to send, Add URL encoding here.
+        $message = 'Thank you ! your order '.$order_id.' is placed successfully. You can track your order and find current status, please log in  Quick secure India account  https://bit.ly/3E7uCbE';
         //Define route 
         $route = "4";
         //Prepare you post parameters
@@ -84,6 +138,7 @@ class OtpController extends Controller
 
     }
 
+
     function verifyOtp(Request $request)
     {
         $otp = $request->otp;
@@ -101,7 +156,7 @@ class OtpController extends Controller
                 Auth::login($user);
                 return redirect(RouteServiceProvider::HOME);
             } catch (Exception $e) {
-               return redirect()->route('login')->withErrors('Data Already exits please login ');
+                return redirect()->route('login')->withErrors('Data Already exits please login ');
             }
         }
     }
