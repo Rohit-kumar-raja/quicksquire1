@@ -41,7 +41,7 @@ class PackageController extends Controller
       'amount' => $request->tot_amt,
       'hash' => null,
       'key' => env('PAYU_MERCHANT_KEY'),
-      'productinfo' => $id,
+      'productinfo' => $request->package_name .'|'.$id,
       'email' => $request->email,
       'phone'=>$request->mob_no,
       'service_provider'=>'payu_paisa',

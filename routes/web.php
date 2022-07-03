@@ -335,4 +335,5 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
 
 
 Route::any('/payu/payment', [PayuMoneyController::class, 'intiate_payment'])->name('payu.pay');
-
+// Route::any('/payu/amc/payment/success', [PayuMoneyController::class, 'paymentSuccessAmc'])->name('payumoney-success-amc');
+// Route::any('/payu/amc/payment/cancel', [PayuMoneyController::class, 'paymentCancelAmc'])->name('payumoney-cancel-amc');

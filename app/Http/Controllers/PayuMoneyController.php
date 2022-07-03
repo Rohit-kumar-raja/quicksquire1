@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Rent;
 use Illuminate\Http\Request;
 
 /**
@@ -13,19 +14,10 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
     const TEST_URL = 'https://test.payu.in/_payment';
     const PRODUCTION_URL = 'https://secure.payu.in';
 
-    public function intiate_payment(){
-        $data = array( "_token" => null,
-        'firstname' => session('firstname'),
-        'amount' => session('amount'),
-        'hash' => null,
-        'key' => env('PAYU_MERCHANT_KEY'),
-        'productinfo' => session('productinfo'),
-        'email' => session('email'),
-        'phone'=>session('phone'),
-        'service_provider'=>'payu_paisa',
-        'furl'=>route('payumoney-cancel'),
-        'surl'=>route('payumoney-success'),
-        );
+    public function intiate_payment(Request $request)
+    {
+        $data = $request->all();
+        $data['amount'] = session('amount');
         $MERCHANT_KEY = config('payu.merchant_key');
         $SALT = config('payu.salt_key');
 
@@ -49,22 +41,7 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
         $hash = '';
         // Hash Sequence
         $hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
-        $hashVarsSeq = explode('|', $hashSequence);
-                $hash_string = '';
-                foreach ($hashVarsSeq as $hash_var) {
-                    $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
-                    $hash_string .= '|';
-                }
-
-                $hash_string .= $SALT;
-
-
-               echo  $posted['hash'] = strtolower(hash('sha512', $hash_string));
-               echo $posted
-// dd($data);
-      
         if (empty($posted['hash']) && sizeof($posted) > 0) {
-
             if (
                 empty($posted['key'])
                 || empty($posted['txnid'])
@@ -92,17 +69,16 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
 
                 $hash = strtolower(hash('sha512', $hash_string));
                 $action = $PAYU_BASE_URL . '/_payment';
-
             }
         } elseif (!empty($posted['hash'])) {
             $hash = $posted['hash'];
             $action = $PAYU_BASE_URL . '/_payment';
         }
 
-        // return view(
-        //     'payumoney.pay',
-        //     compact('hash', 'action', 'MERCHANT_KEY', 'formError', 'txnid', 'posted', 'SALT')
-        // );
+        return view(
+            'payumoney.pay',
+            compact('hash', 'action', 'MERCHANT_KEY', 'formError', 'txnid', 'posted', 'SALT')
+        );
     }
 
 
@@ -115,12 +91,12 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
         die;
         // your code here
     }
-    
+
     public function paymentSuccess(Request $request)
     {
         $data = $request->all();
         $validHash = $this->checkHasValidHas($data);
-        
+
         if (!$validHash) {
             echo "Invalid Transaction. Please try again";
         } else {

@@ -37,7 +37,7 @@
         <br/>
         @if($formError)
 
-            <span style="color:red">Please fill all mandatory fields.</span>
+            {{-- <span style="color:red">Please fill all mandatory fields.</span> --}}
             <br/>
             <br/>
         @endif
@@ -50,10 +50,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group mb-3 position-relative">
-                            <input readonly type="text" class="input-box form-control w-100" placeholder="Name *"
+                             <input readonly   type="text" class="input-box form-control w-100" placeholder="Name *"
                                    aria-label="Recipient's username"
                                    aria-describedby="button-addon2" name="firstname"
-                                   value="{{!empty($posted['firstname']) ? $posted['firstname'] : ''}}">
+                                   value="{{!empty($posted['firstname']) ? $posted['firstname'] : session('firstname')}}">
                             <div class="icon-group-append">
                                 <i class="fas fa-user"></i>
                             </div>
@@ -61,8 +61,8 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group mb-3 position-relative">
-                            <input readonly class="input-box form-control w-100" placeholder="Email *" type="email" name="email"
-                                   value="{{!empty($posted['email']) ? $posted['email'] : ''}}">
+                             <input readonly   class="input-box form-control w-100" placeholder="Email *" type="email" name="email"
+                                   value="{{!empty($posted['email']) ? $posted['email'] : session('email') }}">
                             <div class="icon-group-append">
                                 <i class="fas fa-envelope"></i>
                             </div>
@@ -70,8 +70,8 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group mb-3 position-relative">
-                            <input readonly class="input-box form-control w-100" placeholder="Phone *" type="number" name="phone"
-                                   value="{{!empty($posted['phone']) ? $posted['phone'] : ''}}">
+                             <input readonly   class="input-box form-control w-100" placeholder="Phone *" type="number" name="phone"
+                                   value="{{!empty($posted['phone']) ? $posted['phone'] : session('phone') }}">
                             <div class="icon-group-append">
                                 <i class="fas fa-phone-alt"></i>
                             </div>
@@ -79,8 +79,8 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group mb-3 position-relative">
-                            <input readonly class="input-box form-control w-100" placeholder="Amount *" type="text" name="amount"
-                                   value="{{!empty($posted['amount']) ? $posted['amount'] : ''}}">
+                             <input readonly   class="input-box form-control w-100" placeholder="Amount *" type="text" name="amount"
+                                   value="{{!empty($posted['amount']) ? $posted['amount'] : session('amount')}}">
                             <div class="icon-group-append">
                                 <i class="fas fa-tag"></i>
                             </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group mb-3 position-relative">
-                            <textarea class="input-box form-control w-100" placeholder="Note *" name="productinfo">{{!empty($posted['productinfo']) ? $posted['productinfo'] : ''}}</textarea>
+                            <textarea readonly class="input-box form-control w-100" placeholder="Note *" name="productinfo">{{!empty($posted['productinfo']) ? $posted['productinfo'] : session('productinfo') }}</textarea>
                             <div class="icon-group-append">
                                 <i class="fas fa-pencil-alt"></i>
                             </div>

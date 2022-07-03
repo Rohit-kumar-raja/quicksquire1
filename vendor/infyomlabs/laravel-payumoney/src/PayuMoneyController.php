@@ -4,7 +4,7 @@ namespace InfyOm\Payu;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 /**
  * Class PayuMoneyController
  */
@@ -104,6 +104,8 @@ class PayuMoneyController extends Controller
 
     public function redirectToPayU(Request $request)
     {
+        //dd(Session::all());
+
         $data = $request->all();
         $MERCHANT_KEY = config('payu.merchant_key');
         $SALT = config('payu.salt_key');
