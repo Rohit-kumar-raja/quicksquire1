@@ -73,7 +73,7 @@
                                         </label>
 
                                         <label class="payment-method">
-                                            <input name="paymentmode" id="paypal" value="paypal" type="radio">
+                                            <input name="paymentmode" id="paypal" value="online" type="radio">
                                             <span>Online</span>
                                             <span class="payment-desc">You can pay with your credit Or Debit card or
                                                 UPI</span>

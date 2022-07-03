@@ -117,6 +117,12 @@ class CheckoutComponent extends Component
             $order->zipcode = $request->zipcode;
         }
 
+
+
+
+
+
+
         $order->user_id = Auth::user()->id;
         $order->subtotal = session()->get('checkout')['subtotal'];
         $order->discount = session()->get('checkout')['discount'];
@@ -179,6 +185,23 @@ class CheckoutComponent extends Component
             $transaction->mode = 'cod';
             $transaction->status = 'pending';
             $transaction->save();
+        } else {
+            // for online payment
+            session([
+                "_token" => null,
+                'firstname' => Auth::user()->name,
+                'amount' => str_replace(',','',$order->total) ,
+                'hash' => null,
+                'key' => env('PAYU_MERCHANT_KEY'),
+                'productinfo' => $order->id.'|'. Auth::user()->id,
+                'email' => Auth::user()->email,
+                'phone'=>Auth::user()->phone,
+                'service_provider'=>'payu_paisa',
+                'furl'=>route('payumoney-cancel'),
+                'surl'=>route('payumoney-success')
+              ]);
+              return  redirect()->route('payu.pay');
+
         }
         session(['order_id' => $order->id]);
         $coin = new CoinController();
@@ -190,7 +213,7 @@ class CheckoutComponent extends Component
                     'title' => 'Order Confirmation Mail from quicksecureindia.com',
                 ];
                 $message = new OtpController();
-                  $message->orderMassage($request->phone,$order->id);
+                $message->orderMassage($request->phone, $order->id);
                 //     Mail::to($request->email)->send(new \App\Mail\Ordermail($details));
             }
             DB::table('cart_product')->where('user_id', Auth::user()->id)->delete();
@@ -202,7 +225,7 @@ class CheckoutComponent extends Component
         session()->forget('checkout');
         session()->forget('final_amount_after_coupon');
 
-        
+
 
         if (!Auth::check()) {
             return redirect()->route('login');

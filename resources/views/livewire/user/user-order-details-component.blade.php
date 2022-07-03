@@ -81,6 +81,13 @@
                                 <td><span class="bg-danger">{{ $order->canceled_date }}</span></td>
                             @endif
                         </table>
+                        @if ($order->traking_id!='')
+                           <p> Tranking Id : {{$order->traking_id}}</p>
+                           <p> Consignment Name  : {{$order->consignment_name}}</p>
+                           <p> Consignment Url : {{$order->consignment_url }}</p>
+
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -194,10 +201,10 @@
                                                         <b class="index text-danger "> -{{ $rewards->use ?? '0' }}
                                                             <i class="fas fa-coins" aria-hidden="true"></i> </b>
                                                     </p>
-                                                    @if ($rewards->coupon_discount > 0)
+                                                    @if ($rewards->coupon_discount ?? 0 > 0)
                                                         <p class="summary-info text-danger">Copoun<span
                                                                 class="title text-primary">
-                                                                {{ $rewards->coupon_name }}</span>
+                                                                {{ $rewards->coupon_name ?? '' }}</span>
                                                             <b class="index text-danger ">
                                                                 -{{ $rewards->coupon_discount ?? '0' }}
                                                                 <i class="fas fa-gift"></i> </b>
@@ -346,15 +353,15 @@
                     <table class="table">
                         <tr>
                             <th>Trasnsection Mode</th>
-                            <td>{{ $order->transaction->mode }}</td>
+                            <td>{{ $order->transaction->mode ?? 'online' }}</td>
                         </tr>
-                        {{-- <tr>
+                        <tr>
                             <th>Status</th>
-                            <td>{{ $order->transaction->status }}</td>
-                        </tr> --}}
+                            <td>{{ $order->transaction->status ?? 'faild' }}</td>
+                        </tr>
                         <tr>
                             <th>Trasnsection Date</th>
-                            <td>{{ $order->transaction->created_at }}</td>
+                            <td>{{ $order->transaction->created_at ?? '' }}</td>
                         </tr>
 
                     </table>
