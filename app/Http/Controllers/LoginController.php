@@ -60,19 +60,17 @@ class LoginController extends Controller
 
     function loginWithOtp(Request $request)
     {
-
-
         try {
             if (is_numeric($request->email)) {
                 // for phone number with login
-                $user =  User::where('phone', $request->email)->first();
+                $user =  User::where('phone', $request->email)->where('status','1')->first();
             } else {
                 // for email id with login 
-                $user =  User::where('email', $request->email)->first();
+                $user =  User::where('email', $request->email)->where('status','1')->first();
             }
             if ($user != '') {
-                $otp_send = new OtpController();
                 try {
+                    $otp_send = new OtpController();
                     session(['user_data'=> $user]);
                     $otp_send->optSend($user->phone);
                     $details = [

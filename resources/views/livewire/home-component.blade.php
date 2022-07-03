@@ -3,6 +3,7 @@
         margin-bottom: 50px;
         margin-top: -23px;
     }
+
     .product-wish {
         position: absolute;
         top: 2%;
@@ -147,23 +148,23 @@ $witems = Cart::instance('wishlist')
 
 
 <!-- starting offer cards -->
-    <div class="row margin-bottom-40 p-5">
-        <h2>Find the best Offers</h2>
-        <div class="col-md-12 sale-product">
-       
-            <div class="owl-carousel owl-carousel7">
-                @foreach ($coupons as $coupon)
-                    <div>
-                        <div class="banner-item">
-                            <a href="{{ $coupon->link }}"><img
-                                    src="{{ asset('assets/pages/img/coupon') }}/{{ $coupon->images }}"
-                                    alt="{{ $coupon->coupon_name }}" class="img-fluid"></a>
-                        </div>
+<div class="row margin-bottom-40 p-5">
+    <h2>Find the best Offers</h2>
+    <div class="col-md-12 sale-product">
+
+        <div class="owl-carousel owl-carousel7">
+            @foreach ($coupons as $coupon)
+                <div>
+                    <div class="banner-item">
+                        <a href="{{ $coupon->link }}"><img
+                                src="{{ asset('assets/pages/img/coupon') }}/{{ $coupon->images }}"
+                                alt="{{ $coupon->coupon_name }}" class="img-fluid"></a>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
+</div>
 
 
 <!-- end offer cards -->
@@ -176,7 +177,8 @@ $witems = Cart::instance('wishlist')
                 <div class="product-tab-page-content">
                     <ul id="myTab" class="nav nav-tabs-home sc5">
                         @foreach ($categories as $key => $category)
-                            <li class="{{ $key == 0 ? 'active' : '' }}"><a class="single-tab"
+                            <li id="li{{$category->id}}" class="{{ $key == 0 ? 'active' : '' }}"><a class="single-tab"
+                                    id="{{ $category->id }}" onclick="tab_control(this.id)"
                                     href="#category_{{ $category->id }}"
                                     data-toggle="tab">{{ $category->name }}</a>
                             </li>
@@ -235,15 +237,17 @@ $witems = Cart::instance('wishlist')
                                                                         class=" bg-success text-white p-2">{{ (int) $discout }}%&nbsp;off</strong>
                                                                 </div>
                                                             </div>
-                                
+
                                                             <div class="col-9 wishlist-mt">
-                                
+
                                                             </div>
                                                             @if ($witems->contains($c_product->id))
-                                                                <a href="{{ route('wishlist.remove', $c_product->id) }}"><i
+                                                                <a
+                                                                    href="{{ route('wishlist.remove', $c_product->id) }}"><i
                                                                         class="fa fa-heart fill-heart"></i></a>
                                                             @else
-                                                                <a href="{{ route('wishlist.add', $c_product->id) }}"><i
+                                                                <a
+                                                                    href="{{ route('wishlist.add', $c_product->id) }}"><i
                                                                         class="fa fa-heart-o"></i></a>
                                                             @endif
                                                         </div>
@@ -271,7 +275,8 @@ $witems = Cart::instance('wishlist')
 
             <div class="owl-carousel owl-carousel6-brands">
                 @foreach ($sliders as $slide)
-                    <a href="/search?search={{ $slide->title }}"><img src="{{ asset('assets/pages/img/brands') }}/{{ $slide->image }}"
+                    <a href="/search?search={{ $slide->title }}"><img
+                            src="{{ asset('assets/pages/img/brands') }}/{{ $slide->image }}"
                             alt="{{ $slide->title }}" title="{{ $slide->title }}"></a>
                 @endforeach
             </div>
@@ -284,3 +289,32 @@ $witems = Cart::instance('wishlist')
 
 
 </div>
+
+<script>
+    function tab_control(data) {
+        //console.log(data);
+        sessionStorage.setItem("tab_id", data);
+    }
+
+    var single_tab = document.getElementsByClassName('single-tab');
+    for (i = 0; i < single_tab.length; i++) {
+
+       if (single_tab[i].id == sessionStorage.getItem('tab_id')) {
+            console.log(single_tab[i].id);
+
+           document.getElementsByClassName('single-tab')[i].setAttribute("aria-expanded",'true');
+           
+           document.getElementById('li'+single_tab[i].id).classList.add("active");
+           document.getElementById('category_'+single_tab[i].id).classList.add("active");
+           document.getElementById('category_'+single_tab[i].id).classList.add("in");
+
+           
+        }else{
+           document.getElementById('li'+single_tab[i].id).classList.remove("active");
+           document.getElementsByClassName('single-tab')[i].setAttribute("aria-expanded", 'false');
+           document.getElementById('category_'+single_tab[i].id).classList.remove("active");
+           document.getElementById('category_'+single_tab[i].id).classList.remove("in");
+
+     }
+    }
+</script>
