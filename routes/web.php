@@ -64,6 +64,7 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PayuMoneyController;
 use App\Http\Controllers\RentController;
 
 // authenticating with otp start
@@ -331,3 +332,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/category/getSubCategory/', [SubCategoryController::class, 'getSubCategory'])->name('admin.getSubCategory');
     Route::get('/admin/category/getSubCategory/{id}', [SubCategoryController::class, 'getSubCategory'])->name('admin.getSubCategory.get');
 });
+
+
+Route::any('/payu/payment', [PayuMoneyController::class, 'intiate_payment'])->name('payu.pay');
+

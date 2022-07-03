@@ -89,7 +89,7 @@
                                                     class="fas fa-coins"></i> </span> </span>
                                         <p class="summary-info grand-total p-3 "><span>Grand Total</span> <span
                                                 class="grand-total-price">₨ <span
-                                                    id="total_price">{{ Session::get('checkout')['total'] }}</span>
+                                                    id="total_price">{{ Session::get('final_amount_after_coupon') ??  Session::get('checkout')['total'] }}</span>
                                             </span>
                                         </p>
                                     @endif

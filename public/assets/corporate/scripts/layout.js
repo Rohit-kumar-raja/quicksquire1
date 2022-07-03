@@ -435,16 +435,17 @@ var Layout = (function () {
                 navigation: true,
                 items: 6,
                 addClassActive: true,
-                itemsCustom: [
-                    [0, 1],
-                    [320, 1],
-                    [480, 2],
-                    [700, 3],
-                    [975, 5],
-                    [1200, 6],
-                    [1400, 6],
-                    [1600, 6],
-                ],
+                responsive: {
+                    0: {
+                        items: 4,
+                    },
+                    600: {
+                        items: 5,
+                    },
+                    1000: {
+                        items: 8,
+                    },
+                },
             });
 
             $(".owl-carousel6").owlCarousel({

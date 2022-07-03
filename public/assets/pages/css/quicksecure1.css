@@ -41,7 +41,7 @@
     }
     
     .dropdown-menu{
-        background:#fbfbfb!important;
+        background:#ededed!important
     
     }
     
@@ -62,7 +62,6 @@
     .header-navigation .header-navigation-content .header-navigation-col li > a:hover{
         box-shadow: none!important;
         color:#000;
-        font-weight: 600 !important;
     }
     
     .header-navigation .dropdown-menu li > a {
@@ -86,7 +85,7 @@
     }
     
     .product-item h3 , .pi-price{
-        font-size: 20px;
+        font-size: 20px!important;
         width:100%;
     }
     
@@ -94,7 +93,7 @@
         font-size: 10px!important;
         padding: 6px 15px!important;
         margin-top: 5px!important;
-        background: #082976!important;
+        background: #e94d1c!important;
         color:#fff!important;
     }
     
@@ -102,46 +101,8 @@
         font-size:14px!important;
     }
     
-    
-@media screen and (max-width: 992px) {
-  .product-item h3 a{
-        font-size:12px!important;
-    }
-    .product-item h3, .pi-price {
-    font-size: 15px;
-    width: 100%;
-}
-.brands .owl-carousel {
-    margin-bottom: 0px;
-    padding: 0 5px;
-    background: #fff;
-}
-}
-
-.ecommerce .header-navigation > ul > li > a:hover {
-    padding: 30px 15px 14px!important;
-    font-size: 13px!important;
-    font-weight: 600 !important;
-    font-family: revert!important;
-}
-
-@media screen and (max-width: 600px) {
-  .product-item h3 a{
-        font-size:12px!important;
-    }
-    .product-item h3, .pi-price {
-    font-size: 15px;
-    width: 100%;
-}
-.brands .owl-carousel {
-    margin-bottom: 0px;
-    padding: 0 5px;
-    background: #fff;
-}
-}
-    
     a:hover {
-        color: #ffffff!important;
+        color: #575757!important;
     }
     
     
@@ -159,11 +120,3 @@
     }
     #feedback{display:none!important;}
     }
-    
-    
-    
-    
-    .product-wish .fa {
-    color: #cf2828 !important;
-    font-size: 26px !important;
-}

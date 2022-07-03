@@ -525,8 +525,8 @@ body.page-header-fixed {
 .header-navigation ul > li.open > a,
 .header-navigation ul > li.open > a:hover,
 .header-navigation ul > li.open > a:focus {
-	color: #fff;
-	background: transparent;
+	color: #e02222;
+	background: rgba(231, 40, 77, 1);
 	text-decoration: none;
 }
 .header-navigation ul > li.active > a {
@@ -865,7 +865,7 @@ body.page-header-fixed {
 
 /*  */
 .product-list .product-item {
-	margin-bottom: 0px;
+	margin-bottom: 30px;
 }
 
 /***
@@ -1130,36 +1130,6 @@ steps block and steps block elements
 	width: 100%;
 	overflow: hidden;
 }
-
-@media screen and (max-width: 992px) {
-  .title-wrapper {
-	margin: -23px 0 23px;
-	position: relative;
-	overflow: hidden;
-	background: #72c2ff url(../../pages/img/title-bg/man.jpg) no-repeat 100% 100%;
-	min-height: 280px;
-	padding-top: 79px;
-	width: 100%;
-	display:none;
-	overflow: hidden;
-}
-}
-
-/* On screens that are 600px or less, set the background color to olive */
-@media screen and (max-width: 600px) {
-  .title-wrapper {
-	margin: -23px 0 23px;
-	position: relative;
-	overflow: hidden;
-	background: #72c2ff url(../../pages/img/title-bg/man.jpg) no-repeat 100% 100%;
-	min-height: 280px;
-	padding-top: 79px;
-	width: 100%;
-	display:none;
-	overflow: hidden;
-}
-}
-
 .title-wrapper .container-inner {
 	float: left;
 }

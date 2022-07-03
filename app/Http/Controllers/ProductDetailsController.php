@@ -8,6 +8,7 @@ use Livewire\Component;
 use Cart;
 use App\Models\Category;
 use Exception;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -74,26 +75,40 @@ class ProductDetailsController extends Controller
 
     function coupon($coupon_name)
     {
+        $total_descount = 0;
         $checkout_total = Session::get('checkout')['total'];
         $checkout_total = str_replace(',', '', $checkout_total);
         $coupon = DB::table('coupon')->where('coupon_name', $coupon_name)->first();
-        $coupon_descount_percentage = $coupon->flat_use ?? 0;
-        $coupon_descount_flat = $coupon->redeem_by_per ?? 0;
+        $coupon_descount_percentage = $coupon->redeem_by_per ?? 0;
+        $coupon_descount_flat = $coupon->flat_use ?? 0;
+        if ($coupon != '') {
+            if ($coupon->max >= $checkout_total && $coupon->min <= $checkout_total) {
+                if ($coupon_descount_percentage > 0) {
+                    $total_descount =  ($coupon_descount_percentage * $checkout_total) / 100;
+                } elseif ($coupon_descount_flat > 0) {
+                    $total_descount = $coupon_descount_flat;
+                }
+            } else {
+                return  "<p class='text-danger' > This Coupon not Applicable on this amount </p>";
+            }
+        } else {
+            return  "<p class='text-danger' >Invaild Coupon  code please check </p>";
+        }
 
-        if ($coupon_descount_percentage > 0) {
-            $total_descount = $checkout_total - $coupon_descount_percentage;
-        }
-        if ($coupon_descount_flat > 0) {
-            $total_descount = $checkout_total - $coupon_descount_flat;
-        }
-        return $coupon;
+        session(['final_amount_after_coupon' => (int)$checkout_total - $total_descount]);
+
+        session(["coupon_name" => $coupon_name, 'coupon_discount' => $total_descount]);
+        $coupon_discount = session("coupon_discount");
+
+
+        return $total_descount;
     }
 
 
     function cancelOrder(Request $request)
     {
-        DB::table('orders')->where('id', $request->id)->update(['remarks'=>$request->remark,'status'=>'canceled','canceled_date'=>date('Y-m-d h:m:s')]);
-        session()->flash('success','Product canceled successfuly');
+        DB::table('orders')->where('id', $request->id)->update(['remarks' => $request->remark, 'status' => 'canceled', 'canceled_date' => date('Y-m-d h:m:s')]);
+        session()->flash('success', 'Product canceled successfuly');
         return redirect()->back();
     }
 }

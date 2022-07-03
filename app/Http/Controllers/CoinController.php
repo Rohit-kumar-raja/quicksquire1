@@ -38,7 +38,16 @@ class CoinController extends Controller
     {
         $gain = session('coin_gain');
         $use=session("success_use_coin");
-        DB::table('coin')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'transaction_id' => $transaction_id, 'gain' => $gain, 'use' => $use, 'created_at' => date('Y-m-d h:m:s')]);
+        $coupon_name=session("coupon_name");
+        $coupon_discount=session("coupon_discount");
+
+        DB::table('coin')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'transaction_id' => $transaction_id, 'gain' => $gain, 'use' => $use,'coupon_name'=>$coupon_name,'coupon_discount'=>$coupon_discount, 'created_at' => date('Y-m-d h:m:s')]);
+        session(['coin_gain'=>0]);
+        session(['success_use_coin'=>0]);
+        session()->forget('coupon_name');
+        session()->forget('coupon_discount');
+
+
     }
 
     /**

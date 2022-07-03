@@ -116,7 +116,7 @@
                                     <li>
                                         <em>Sub total</em>
                                         <strong
-                                            class="price"><span>₨</span>{{ Cart::instance('cart')->subtotal() }}</strong>
+                                            class="price"><span>₨ </span>{{ Cart::instance('cart')->subtotal() }}</strong>
                                     </li>
                                     <li>
                                         <em>Tax</em>
@@ -134,8 +134,8 @@
                                     </li>
                                     <li class="shopping-total-price">
                                         <em>Total</em>
-                                        <strong
-                                            class="price"><span>₨</span>{{ Cart::instance('cart')->subtotal() }}</strong>
+                                        <strong class="price">₨ <span
+                                                id="cart_amount">{{ Cart::instance('cart')->subtotal() }}</span></strong>
                                     </li>
 
                                 </ul>
@@ -244,7 +244,6 @@
             document.getElementsByClassName('btn-default')[0].style.display = "none"
             document.getElementsByClassName('btn-default')[1].style.display = "none"
             document.getElementById('feedback').style.display = "none"
-            document.getElementById('feedback1').style.display = "none"
             document.getElementById('pincode_d').style.display = "none"
 
 
@@ -306,16 +305,23 @@
             coupon = document.getElementById('coupon').value
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
-                if (this.responseText == 'no') {
-                    document.getElementById('code_data').innerHTML =
-                        "<span class='text-danger'>Delivery not Available in this coupon - " + coupon + "</span>";
-                    document.getElementById('checkout').style.display = "none";
-                    document.getElementById('checkout1').style.display = "block";
+                if (Number(this.responseText) > 0) {
+
+                    document.getElementById('coupon').style.borderColor = 'green';
+                    document.getElementById('coupon_error').innerHTML =
+                        "<span class='text-success'>Coupon Successfully Applied  - ₹" + this.responseText +
+                        "</span>";
+                    document.getElementById('coupon_error').style.display = "block";
+
+                    total_amount = '{{ Cart::instance('cart')->subtotal() }}';
+                    total_amount = total_amount.replace(',', '');
+                    document.getElementById('cart_amount').innerHTML = Number(total_amount) - Number(this.responseText);
+
+
                 } else {
                     document.getElementById('coupon').style.borderColor = 'green';
-                    document.getElementById('code_data').innerHTML = this.responseText;
-                    document.getElementById('checkout').style.display = "block";
-                    document.getElementById('checkout1').style.display = "none";
+                    document.getElementById('coupon_error').innerHTML = this.responseText;
+                    document.getElementById('coupon_error').style.display = "block";
                 }
             }
             xmlhttp.open("GET", "{{ route('product.details.coupon') }}/" + coupon);

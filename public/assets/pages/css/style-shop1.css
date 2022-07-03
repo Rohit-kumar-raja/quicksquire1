@@ -335,45 +335,13 @@ Header and header elements
 	border-radius: 10px !important;
 }
 .product-item {
-	padding: 5px 5px 6px;
+	padding: 12px 12px 16px;
 	background: #ffffff;
 	position: relative;
 	margin: 7px 0;
 	/*height: 350px;*/
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
-
-@media screen and (max-width: 992px) {
-  .product-item {
-    padding: 5px 5px 6px;
-    background: #ffffff;
-    position: relative;
-    margin: 7px 0;
-    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
-    border-radius: 5px !important;
-}
-.product-item:hover {
-   box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px !important;
-    transition: 0.3s;
-}
-}
-
-/* On screens that are 600px or less, set the background color to olive */
-@media screen and (max-width: 600px) {
-  .product-item {
-    padding: 5px 5px 6px;
-    background: #ffffff;
-    position: relative;
-    margin: 7px 0;
-    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
-    border-radius: 5px !important;
-}
-.product-item:hover {
-    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px !important;
-    transition: 0.3s;
-}
-}
-
 .owl-item.active .product-item {
 	margin-right: 10px;
 }
@@ -1418,12 +1386,12 @@ Shop Stype Buttons
 @media screen and (max-width: 600px) {
   .col-xs-6 {
     width: 50%;
-    padding: 5px !important;
+    padding: 0 !important;
 }
 }
 
 .product-tab-page-content .tab-content {
-    padding: 15px 0px;
+    padding: 20px 15px;
     background: rgb(247, 248, 255);
 }
 
@@ -1762,10 +1730,7 @@ select.input-sm {
     line-height: 15px;
 }
 .mt-2 strong{
-	margin-left: 10px;
-	border-radius: 5px;
-  margin-top: 41px !important;
-  background: #00a5ad !important;
+	margin-left: 7px;
 }
 .font-20{
 	font-size: 20px;

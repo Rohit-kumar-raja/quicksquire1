@@ -204,7 +204,7 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtMobileNo">Mobile No.</label>
-                                        <input required type="text" class="form-control " id="txtMobileNo"
+                                        <input required type="text" class="form-control " maxlength="10" id="txtMobileNo"
                                             name="mob_no">
                                     </div>
 

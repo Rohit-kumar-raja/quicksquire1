@@ -125,9 +125,9 @@ class CheckoutComponent extends Component
             $coin_use_for_product = session('coin_use');
             session(['success_use_coin' => $coin_use_for_product]);
 
-            $order->total = str_replace(",", '', session()->get('checkout')['total']) - $coin_use_for_product;
+            $order->total = str_replace(",", '', session('final_amount_after_coupon') ?? session()->get('checkout')['total']) - $coin_use_for_product;
         } else {
-            $order->total = session()->get('checkout')['total'];
+            $order->total = session('final_amount_after_coupon') ?? session()->get('checkout')['total'];
         }
         $order->status = 'ordered';
         $order->is_shipping_between = $request->ship_to_different ? 1 : 0;
@@ -200,6 +200,9 @@ class CheckoutComponent extends Component
         $this->thankyou = 1;
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
+        session()->forget('final_amount_after_coupon');
+
+        
 
         if (!Auth::check()) {
             return redirect()->route('login');

@@ -275,7 +275,7 @@
         <a href="https://partners.quicksecureindia.com/new-reg/dealer-login.php">Dealer Login</a>
     </div>
 
-    <div id="feedback1" style="margin-top:200px;">
+    <div id="feedback" style="margin-top:200px;">
         <a href="https://partners.quicksecureindia.com/new-reg/staff-login.php">AMC Login</a>
     </div>
 

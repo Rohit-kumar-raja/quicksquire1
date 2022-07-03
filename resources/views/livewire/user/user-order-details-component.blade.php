@@ -187,6 +187,22 @@
                                                             class="index">Rs{{ $order->tax }}</b> </p>
                                                     <p class="summary-info"><span class="title">Shipping</span> <b
                                                             class="index">Free Shipping</b> </p>
+                                                 
+                                                    <p class="summary-info text-danger"><span class="title">
+                                                            You Saved Using
+                                                            Rewards</span>
+                                                        <b class="index text-danger "> -{{ $rewards->use ?? '0' }}
+                                                            <i class="fas fa-coins" aria-hidden="true"></i> </b>
+                                                    </p>
+                                                    @if ($rewards->coupon_discount > 0)
+                                                        <p class="summary-info text-danger">Copoun<span
+                                                                class="title text-primary">
+                                                                {{ $rewards->coupon_name }}</span>
+                                                            <b class="index text-danger ">
+                                                                -{{ $rewards->coupon_discount ?? '0' }}
+                                                                <i class="fas fa-gift"></i> </b>
+                                                        </p>
+                                                    @endif
                                                     <p class="summary-info"><span class="title">Total</span>
                                                         <b class="index">Rs{{ $order->total }}</b>
                                                     </p>
@@ -195,12 +211,8 @@
                                                         <b class="index text-success "> +{{ $rewards->gain ?? '0' }}
                                                             <i class="fas fa-coins" aria-hidden="true"></i> </b>
                                                     </p>
-                                                    <p class="summary-info text-danger"><span class="title">
-                                                            You Saved Using
-                                                            Rewards</span>
-                                                        <b class="index text-danger "> -{{ $rewards->use ?? '0' }}
-                                                            <i class="fas fa-coins" aria-hidden="true"></i> </b>
-                                                    </p>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -371,7 +383,8 @@
         document.getElementsByClassName('print')[0].style.display = "none"
         document.getElementsByClassName('pull-right')[1].style.display = "none"
         document.getElementById('feedback').style.display = "none"
-        document.getElementById('feedback1').style.display = "none"
+        document.getElementById('topcontrol').style.display = "none"
+
 
 
         print();
