@@ -26,7 +26,7 @@ class RentController extends Controller
 
     public function show()
     {
-        $rent = DB::table('rents')->get();
+        $rent = DB::table('rents')->orderByDesc('id')->get();
         return view('livewire.admin.rent.index', ['data' => $rent]);
     }
 }

@@ -55,7 +55,7 @@ class PackageController extends Controller
 
   public function show()
   {
-    $data = DB::connection('mysql1')->table('tbl_amc_sale')->get();
+    $data = DB::connection('mysql1')->table('tbl_amc_sale')->orderByDesc('id')->get();
     return view('livewire.admin.amc.index', ['data' => $data]);
   }
 }
