@@ -79,7 +79,7 @@ class LoginController extends Controller
                     $details = [
                         'title' => 'Mail from quicksecureindia.com',
                     ];
-                    Mail::to($request->email)->send(new \App\Mail\OtpSend($details));
+                    Mail::to($user->email)->send(new \App\Mail\OtpSend($details));
                     return redirect()->route('login.with.verify');
                 } catch (Exception $e) {
                     return redirect()->back()->withErrors('Record not matched with our record');
