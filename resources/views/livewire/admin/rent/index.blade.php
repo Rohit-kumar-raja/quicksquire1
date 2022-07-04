@@ -59,8 +59,8 @@
                                         {{ session('status1') }}
                                     </div>
                                 @endif
-                                <table class="table table-striped table-bordered">
-                                    <thead class=" text-primary">
+                                <table class="table table-striped table-bordered" id="example">
+                                    <thead class=" text-primary" >
                                         <tr>
                                             <th>S.NO</th>
                                             <th>Bill</th>
@@ -71,7 +71,15 @@
                                             <th>Ram</th>
                                             <th>Storage Type</th>
                                             <th>Storage</th>
-                                            <th>Os Type</th>
+                                            <th>prosessor</th>
+                                            <th>prosessor generation</th>
+                                            <th>win type</th>
+                                            <th>office</th>
+                                            <th>antivirus</th>
+                                            <th>system Type</th>
+                                            <th>screen type</th>
+                                            <th>screen size</th>
+                                            <th>graphics</th>
                                             <th>Date</th>
                                             <th>Address/Others</th>
                                         </tr>
@@ -79,12 +87,11 @@
                                     <tbody>
                                         @foreach ($data as $rent)
                                             <!-- Button trigger modal -->
-
-
+            
+            
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalCenter{{ $rent->id }}"
-                                                tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                                aria-hidden="true">
+                                            <div class="modal fade" id="exampleModalCenter{{ $rent->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -109,21 +116,21 @@
                                                         <div class="modal-body">
                                                             <h5>Others Details</h5>
                                                             <hr>
-                                                
-                                                          
+            
+            
                                                             Mouse : {{ $rent->mouse }}
                                                             <hr>
                                                             Keyboard : {{ $rent->keyboard }}
                                                             <hr>
-                                                         
+            
                                                         </div>
-                                                       
+            
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
+            
+            
+            
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td><img src="{{ asset('assets/pages/img/rents') }}/{{ $rent->image }}"
@@ -132,17 +139,27 @@
                                                 <td>{{ $rent->phone }}</td>
                                                 <td>{{ $rent->email }}</td>
                                                 <td>{{ $rent->duration }} days</td>
-                                                <td>{{ $rent->ram_size }} GB</td>
+                                                <td>{{ $rent->ram_size }} GB</td>                                
                                                 <td>{{ $rent->storage_type }}</td>
                                                 <td>{{ $rent->storage_size }} GB</td>
+                                                <td>{{ $rent->prosessor }}</td>
+                                                <td>{{ $rent->prosessor_generation }}</td>
+                                                <td>{{ $rent->win_type }}</td>
+                                                <td>{{ $rent->office }}</td>
+                                                <td>{{ $rent->antivirus }}</td>
+                                        
                                                 <td>{{ $rent->system_type }}</td>
+                                                <td>{{ $rent->screen_type }}</td>
+                                                <td>{{ $rent->screen_size }}</td>
+                                                <td>{{ $rent->graphics }}</td>
+                                        
                                                 <td>{{ $rent->created_at }}</td>
                                                 <td><button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                         data-target="#exampleModalCenter{{ $rent->id }}">
                                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                                     </button></td>
-
-
+            
+            
                                             </tr>
                                         @endforeach
                                     </tbody>

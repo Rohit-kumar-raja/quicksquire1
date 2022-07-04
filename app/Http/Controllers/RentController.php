@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class RentController extends Controller
 {
     function index()
@@ -29,4 +29,11 @@ class RentController extends Controller
         $rent = DB::table('rents')->orderByDesc('id')->get();
         return view('livewire.admin.rent.index', ['data' => $rent]);
     }
+
+    public function rentHistoryForUser(){
+        $rent = DB::table('rents')->where('email',Auth::user()->email)->where('phone',Auth::user()->phone)->orderByDesc('id')->get();
+        return view('livewire.user.user-rent-orders',['data'=>$rent]);
+    }
+
+
 }

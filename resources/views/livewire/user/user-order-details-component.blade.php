@@ -81,11 +81,10 @@
                                 <td><span class="bg-danger">{{ $order->canceled_date }}</span></td>
                             @endif
                         </table>
-                        @if ($order->traking_id!='')
-                           <p> Tranking Id : {{$order->traking_id}}</p>
-                           <p> Consignment Name  : {{$order->consignment_name}}</p>
-                           <p> Consignment Url : {{$order->consignment_url }}</p>
-
+                        @if ($order->traking_id != '')
+                            <p> Tranking Id : {{ $order->traking_id }}</p>
+                            <p> Consignment Name : {{ $order->consignment_name }}</p>
+                            <p> Consignment Url : {{ $order->consignment_url }}</p>
                         @endif
 
                     </div>
@@ -194,7 +193,7 @@
                                                             class="index">Rs{{ $order->tax }}</b> </p>
                                                     <p class="summary-info"><span class="title">Shipping</span> <b
                                                             class="index">Free Shipping</b> </p>
-                                                 
+
                                                     <p class="summary-info text-danger"><span class="title">
                                                             You Saved Using
                                                             Rewards</span>
@@ -294,7 +293,12 @@
     </div>
 </div>
 
-@if ($order->is_shipping_different)
+@php
+$shipping = DB::table('shippings')
+    ->where('order_id', $order->id)
+    ->first();
+@endphp
+@if ($shipping ?? '' != '')
     <div class="container" style="padding: 30px 0;">
         <div class="row">
             <div class="col-md-12">
@@ -306,34 +310,34 @@
                         <table class="table">
                             <tr>
                                 <th>Firstname</th>
-                                <td>{{ $order->shipping->firstname }}</td>
+                                <td>{{ $shipping->firstname }}</td>
                                 <th>Lastname</th>
-                                <td>{{ $order->shipping->lastname }}</td>
+                                <td>{{ $shipping->lastname }}</td>
                             </tr>
                             <tr>
                                 <th>Phone</th>
-                                <td>{{ $order->shipping->mobile }}</td>
+                                <td>{{ $shipping->mobile }}</td>
                                 <th>Email</th>
-                                <td>{{ $order->shipping->email }}</td>
+                                <td>{{ $shipping->email }}</td>
                             </tr>
                             <tr>
                                 <th>Line1</th>
-                                <td>{{ $order->shipping->line1 }}</td>
+                                <td>{{ $shipping->line1 }}</td>
                                 <th>Line2</th>
-                                <td>{{ $order->shipping->line2 }}</td>
+                                <td>{{ $shipping->line2 }}</td>
 
                             </tr>
                             <tr>
                                 <th>City</th>
-                                <td>{{ $order->shipping->city }}</td>
+                                <td>{{ $shipping->city }}</td>
                                 <th>Province</th>
-                                <td>{{ $order->shipping->province }}</td>
+                                <td>{{ $shipping->province }}</td>
                             </tr>
                             <tr>
                                 <th>Postal Code</th>
-                                <td>{{ $order->shipping->zipcode }}</td>
+                                <td>{{ $shipping->zipcode }}</td>
                                 <th>Country</th>
-                                <td>{{ $order->shipping->country }}</td>
+                                <td>{{ $shipping->country }}</td>
                             </tr>
                         </table>
                     </div>

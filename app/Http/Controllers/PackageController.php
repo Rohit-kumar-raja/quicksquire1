@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rent;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class PackageController extends Controller
 
@@ -41,21 +40,25 @@ class PackageController extends Controller
       'amount' => $request->tot_amt,
       'hash' => null,
       'key' => env('PAYU_MERCHANT_KEY'),
-      'productinfo' => $request->package_name .'|'.$id,
+      'productinfo' => $request->package_name . '|' . $id,
       'email' => $request->email,
-      'phone'=>$request->mob_no,
-      'service_provider'=>'payu_paisa',
-      'furl'=>route('payumoney-cancel'),
-      'surl'=>route('payumoney-success')
+      'phone' => $request->mob_no,
+      'service_provider' => 'payu_paisa',
+      'furl' => route('payumoney-cancel'),
+      'surl' => route('payumoney-success')
     ]);
     return  redirect()->route('payu.pay');
-    
-  
   }
 
   public function show()
   {
     $data = DB::connection('mysql1')->table('tbl_amc_sale')->orderByDesc('id')->get();
     return view('livewire.admin.amc.index', ['data' => $data]);
+  }
+
+  public function packagetHistoryForUser()
+  {
+    $amc = DB::connection('mysql1')->table('tbl_amc_sale')->where('email', Auth::user()->email)->where('mob_no', Auth::user()->phone)->orderByDesc('id')->get();
+    return view('livewire.user.user-amc-orders', ['data' => $amc]);
   }
 }

@@ -198,19 +198,19 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtCustomerName">Customer Name</label>
-                                        <input required type="text" class="form-control " id="txtCustomerName"
+                                        <input required readonly value="{{ Auth::user()->name }}" type="text" class="form-control " id="txtCustomerName"
                                             name="customer_name">
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label for="txtMobileNo">Mobile No.</label>
-                                        <input required type="text" class="form-control " maxlength="10" id="txtMobileNo"
+                                        <input required readonly value="{{ Auth::user()->phone }}" type="text" class="form-control " maxlength="10" id="txtMobileNo"
                                             name="mob_no">
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label for="txtEMail">E-Mail</label>
-                                        <input required type="email" class="form-control " id="txtEMail"
+                                        <input required  readonly value="{{ Auth::user()->email }}" type="email" class="form-control " id="txtEMail"
                                             name="email">
                                     </div>
 

@@ -139,13 +139,7 @@ Route::get('/returnpolicy', ReturnPolicyComponent::class);
 Route::get('/shippingpolicy', ShippingPolicyComponent::class);
 Route::get('/privacypolicy', PrivacyPolicyComponent::class);
 Route::get('/termuse', TermuseComponent::class);
-Route::get('/rent/form', [RentController::class, 'index'])->name('rent');
-Route::post('/rent/form/sale', [RentController::class, 'store'])->name('rent.sale');
-
 Route::get('amc/packages', [PackageController::class, 'index'])->name('amc.package');
-Route::get('amc/packages/details/buy/{id}', [PackageController::class, 'details'])->name('amc.package.details');
-Route::post('amc/packages/details/buy/', [PackageController::class, 'buy'])->name('amc.package.buy');
-
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
@@ -155,12 +149,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/order/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
-
     Route::post('/user/order/cancel', [ProductDetailsController::class, 'cancelOrder'])->name('user.order.cancel');
-
     Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
     Route::post('/user/review/add', [UserReviewComponent::class, 'addReview'])->name('user.review.add');
-
     Route::get('/user/profile', UserProfileComponent::class)->name('user.profile');
     Route::get('/user/profile/edit', UserEditProfileComponent::class)->name('user.editprofile');
     Route::post('/user/profile/update', [UserEditProfileComponent::class, 'updateProfile'])->name('user.update');
@@ -169,6 +160,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::get('/download-pdf', [PdfController::class, 'downloadPDF']);
     Route::get('/getor', [PdfController::class, 'viewCart']);
     Route::get('/download-pdf', [PdfController::class, 'printCart'])->name('download-pdf');
+    // rent section start
+    Route::get('/rent/form', [RentController::class, 'index'])->name('rent');
+    Route::post('/rent/form/sale', [RentController::class, 'store'])->name('rent.sale');
+    Route::get('/rent/history', [RentController::class, 'rentHistoryForUser'])->name('rent.user.history');
+
+    // rent end
+
+    // amc package start
+    Route::get('amc/packages/details/buy/{id}', [PackageController::class, 'details'])->name('amc.package.details');
+    Route::post('amc/packages/details/buy/', [PackageController::class, 'buy'])->name('amc.package.buy');
+    Route::get('amc/packages/history', [PackageController::class, 'packagetHistoryForUser'])->name('amc.package.user.history');
+
+    // amc packges end
 });
 
 

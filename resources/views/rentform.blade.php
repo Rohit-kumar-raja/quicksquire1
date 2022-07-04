@@ -82,19 +82,19 @@
 
                                         <div id="board_name" class="col-sm-4   mt-3">
                                             <b>Full Name * </b>
-                                            <input id="form_no" type="text" name="name" class="form-control"
+                                            <input id="form_no" readonly value="{{ Auth::user()->name }}" type="text" name="name" class="form-control"
                                                 placeholder="Full Name*">
                                         </div>
 
                                         <div class="col-sm-4  mt-3">
                                             <b> E-mail :</b>
-                                            <input required="" type="email" name="email"
+                                            <input readonly required="" value="{{ Auth::user()->email }}" type="email" name="email"
                                                 placeholder=" Email Address " class="form-control">
                                         </div>
 
                                         <div class="col-sm-4  mt-3">
                                             <b>Mobile Number * :</b>
-                                            <input type="text" name="phone" class="form-control" value=""
+                                            <input readonly type="text" value="{{ Auth::user()->phone }}" name="phone" class="form-control" value=""
                                                 placeholder="Phone Number">
                                         </div>
 
