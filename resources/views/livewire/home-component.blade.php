@@ -177,8 +177,8 @@ $witems = Cart::instance('wishlist')
                 <div class="product-tab-page-content">
                     <ul id="myTab" class="nav nav-tabs-home sc5">
                         @foreach ($categories as $key => $category)
-                            <li id="li{{$category->id}}" class="{{ $key == 0 ? 'active' : '' }}"><a class="single-tab"
-                                    id="{{ $category->id }}" onclick="tab_control(this.id)"
+                            <li id="li{{ $category->id }}" class="{{ $key == 0 ? 'active' : '' }}"><a
+                                    class="single-tab" id="{{ $category->id }}" onclick="tab_control(this.id)"
                                     href="#category_{{ $category->id }}"
                                     data-toggle="tab">{{ $category->name }}</a>
                             </li>
@@ -299,22 +299,30 @@ $witems = Cart::instance('wishlist')
     var single_tab = document.getElementsByClassName('single-tab');
     for (i = 0; i < single_tab.length; i++) {
 
-       if (single_tab[i].id == sessionStorage.getItem('tab_id')) {
+        if (single_tab[i].id == sessionStorage.getItem('tab_id')) {
             console.log(single_tab[i].id);
 
-           document.getElementsByClassName('single-tab')[i].setAttribute("aria-expanded",'true');
-           
-           document.getElementById('li'+single_tab[i].id).classList.add("active");
-           document.getElementById('category_'+single_tab[i].id).classList.add("active");
-           document.getElementById('category_'+single_tab[i].id).classList.add("in");
+            document.getElementsByClassName('single-tab')[i].setAttribute("aria-expanded", 'true');
 
-           
-        }else{
-           document.getElementById('li'+single_tab[i].id).classList.remove("active");
-           document.getElementsByClassName('single-tab')[i].setAttribute("aria-expanded", 'false');
-           document.getElementById('category_'+single_tab[i].id).classList.remove("active");
-           document.getElementById('category_'+single_tab[i].id).classList.remove("in");
+            document.getElementById('li' + single_tab[i].id).classList.add("active");
+            document.getElementById('category_' + single_tab[i].id).classList.add("active");
+            document.getElementById('category_' + single_tab[i].id).classList.add("in");
 
-     }
+
+        } else {
+            document.getElementById('li' + single_tab[i].id).classList.remove("active");
+            document.getElementsByClassName('single-tab')[i].setAttribute("aria-expanded", 'false');
+            document.getElementById('category_' + single_tab[i].id).classList.remove("active");
+            document.getElementById('category_' + single_tab[i].id).classList.remove("in");
+
+        }
+    }
+    if (sessionStorage.getItem('tab_id') == null) {
+        document.getElementsByClassName('single-tab')[0].setAttribute("aria-expanded", 'true');
+
+        document.getElementById('li' + single_tab[0].id).classList.add("active");
+        document.getElementById('category_' + single_tab[0].id).classList.add("active");
+        document.getElementById('category_' + single_tab[0].id).classList.add("in");
+
     }
 </script>
