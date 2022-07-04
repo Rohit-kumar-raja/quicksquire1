@@ -60,7 +60,7 @@ class ProductDetailsController extends Controller
     function pincode($pincode)
     {
         try {
-            $data = DB::table('pincode')->where('pincode', $pincode)->first();
+            $data = DB::table('pincode')->where('pincode', $pincode)->where('status','1')->first();
             session(['pincode' => $pincode]);
             $pincode_data = $data->city . " ";
             $pincode_data .= $data->district . " ";

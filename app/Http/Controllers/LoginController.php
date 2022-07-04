@@ -62,11 +62,14 @@ class LoginController extends Controller
     {
         try {
             if (is_numeric($request->email)) {
+
                 // for phone number with login
                 $user =  User::where('phone', $request->email)->where('status','1')->first();
+
             } else {
                 // for email id with login 
                 $user =  User::where('email', $request->email)->where('status','1')->first();
+
             }
             if ($user != '') {
                 try {
