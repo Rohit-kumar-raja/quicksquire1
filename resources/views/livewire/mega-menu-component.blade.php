@@ -18,7 +18,8 @@
                                         </li>
                                     @endforeach
                                 @endif
-
+                                <a class="text-link p-3" href="/product-category/{{ strtolower($category->name)  }}"> See all 
+                                 </a> 
 
                             </ul>
                         </div>
