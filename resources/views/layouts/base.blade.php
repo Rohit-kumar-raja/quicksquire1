@@ -54,7 +54,7 @@
     <link href="{{ asset('assets/corporate/css/themes/red.css') }}" rel="stylesheet" id="style-color">
     <link href="{{ asset('assets/corporate/css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/corporate/css/customm.css') }}" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/pages/css/quicksecure.css') }}"> --}}
+     <!--<link rel="stylesheet" href="{{ asset('assets/pages/css/quicksecure.css') }}"> -->
     <!-- Theme styles END -->
 
     <!-- product magnific -->
@@ -170,7 +170,7 @@
                 <div class="col-md-4 steps-block-col">
                     <i class="fa fa-phone"></i>
                     <div>
-                        <h2>+91 9031200930</h2>
+                        <h2>18003097011</h2>
                         <em>24/7 customer care available</em>
                     </div>
                 </div>
@@ -248,4 +248,27 @@
 </body>
 <!-- END BODY -->
 
+<!--footer menu-->
+<nav class="nav_footer">
+        <a href="https://quicksecureindia.com/" class="nav__link nav__link--active">
+            <i class="fa fa-home nav__icon"></i>
+            <span class="nav__text">Home</span>
+        </a>
+        <a href="https://quicksecureindia.com/cart" class="nav__link">
+            <i class="fa fa-shopping-cart nav__icon"></i>
+            <span class="nav__text">Cart</span>
+        </a>
+            <a href="https://quicksecureindia.com/wishlist" class="nav__link">
+            <i class="fa fa-heart-o nav__icon"></i>
+            <span class="nav__text">Wishlist</span>
+        </a>
+        <a id="" class="nav__link" href="https://quicksecureindia.com/user/profile">
+            <i class="fa fa-user nav__icon"></i>
+             <span class="nav__text">Profile</span>
+        </a>
+    </nav>
+    
+    <!--footer menu end-->
+
+    
 </html>
