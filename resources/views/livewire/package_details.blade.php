@@ -98,20 +98,22 @@
                                             class="form-control " id="txtDate" name="sale_dt" value="27-06-2022"
                                             autocomplete="off">
                                     </div>
+                                    @if (count($orders) > 0)
+                                        <div class="col-sm-4">
+                                            <label for="txtItemType"> Select Product </label>
+                                            <select class="form-control" name="item_type" id="txtItemType">
+                                                <option disabled selected="">--Select--</option>
+                                                @foreach ($orders as $order)
+                                                    <option value="{{ $order->id }}">{{ $order->firstname }}</option>
+                                                @endforeach
 
-                                    <div class="col-sm-4">
-                                        <label for="txtItemType">Item Type</label>
-                                        <select class="form-control" name="item_type" id="txtItemType">
-                                            <option value="-" selected="">--Select--</option>
-                                            <option value="New">New</option>
-                                            <option value="Old">Old</option>
-                                        </select>
-                                    </div>
-
+                                            </select>
+                                        </div>
+                                    @endif
                                     <div class="col-sm-4">
                                         <label for="orderid">Order id</label>
                                         <input required type="text" class="form-control" id="orderid"
-                                            name="orderid" placeholder="Enter your product order id"  autocomplete="off">
+                                            name="orderid" placeholder="Enter your product order id" autocomplete="off">
                                     </div>
 
                                     <div class="col-sm-4">
@@ -198,20 +200,20 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtCustomerName">Customer Name</label>
-                                        <input required readonly value="{{ Auth::user()->name }}" type="text" class="form-control " id="txtCustomerName"
-                                            name="customer_name">
+                                        <input required readonly value="{{ Auth::user()->name }}" type="text"
+                                            class="form-control " id="txtCustomerName" name="customer_name">
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label for="txtMobileNo">Mobile No.</label>
-                                        <input required readonly value="{{ Auth::user()->phone }}" type="text" class="form-control " maxlength="10" id="txtMobileNo"
-                                            name="mob_no">
+                                        <input required readonly value="{{ Auth::user()->phone }}" type="text"
+                                            class="form-control " maxlength="10" id="txtMobileNo" name="mob_no">
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label for="txtEMail">E-Mail</label>
-                                        <input required  readonly value="{{ Auth::user()->email }}" type="email" class="form-control " id="txtEMail"
-                                            name="email">
+                                        <input required readonly value="{{ Auth::user()->email }}" type="email"
+                                            class="form-control " id="txtEMail" name="email">
                                     </div>
 
                                     <div class="col-sm-4">

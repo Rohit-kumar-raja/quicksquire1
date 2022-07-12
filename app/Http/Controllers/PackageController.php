@@ -21,8 +21,9 @@ class PackageController extends Controller
 
     $package = DB::connection('mysql1')->table('tbl_amc')->find($id);
     $brand = DB::connection('mysql1')->table('tbl_brand')->get();
+    $all_orders=DB::table('orders')->where('user_id',Auth::user()->id)->get();
 
-    return view('livewire.package_details', ['data' => $package, 'brands' => $brand]);
+    return view('livewire.package_details', ['data' => $package, 'brands' => $brand,'orders'=>$all_orders]);
   }
 
   function buy(Request $request)
