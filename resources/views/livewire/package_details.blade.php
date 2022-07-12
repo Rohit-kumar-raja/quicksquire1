@@ -104,9 +104,21 @@
                                             <select class="form-control" name="item_type" id="txtItemType">
                                                 <option disabled selected="">--Select--</option>
                                                 @foreach ($orders as $order)
-                                                    <option value="{{ $order->id }}">{{ $order->firstname }}</option>
+                                                    @php
+                                                        $order_item = DB::table('order_items')
+                                                            ->where('order_id', $order->id)
+                                                            ->get();
+                                                    @endphp
+                                                    @foreach ($order_item as $item)
+                                                        @php
+                                                            $order_item_p = DB::table('products')->find($item->product_id);
+                                                        @endphp
+                                                        <option value="{{ $order->id }}">
+                                                            {{ $order_item_p->name }}
+                                                    @endforeach
+                                                    </option>
                                                 @endforeach
-
+                                                <option value="others">Others</option>
                                             </select>
                                         </div>
                                     @endif

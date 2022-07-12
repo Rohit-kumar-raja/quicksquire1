@@ -62,4 +62,11 @@ class PackageController extends Controller
     $amc = DB::connection('mysql1')->table('tbl_amc_sale')->where('email', Auth::user()->email)->where('mob_no', Auth::user()->phone)->orderByDesc('id')->get();
     return view('livewire.user.user-amc-orders', ['data' => $amc]);
   }
+
+  public function getOrderDetails($id){
+    $all_orders=DB::table('orders')->where('user_id',Auth::user()->id)->where('id',$id)->first();
+    return $all_orders;
+  }
+
+
 }
