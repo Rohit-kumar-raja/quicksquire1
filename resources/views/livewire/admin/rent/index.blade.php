@@ -138,7 +138,7 @@
                                                 <td>{{ $rent->name }}</td>
                                                 <td>{{ $rent->phone }}</td>
                                                 <td>{{ $rent->email }}</td>
-                                                <td>{{ $rent->duration }} days</td>
+                                                <td>{{ $rent->duration }} days </td>
                                                 <td>{{ $rent->ram_size }} GB</td>                                
                                                 <td>{{ $rent->storage_type }}</td>
                                                 <td>{{ $rent->storage_size }} GB</td>

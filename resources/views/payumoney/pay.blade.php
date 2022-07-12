@@ -103,7 +103,7 @@
             @endif
             <input name="surl" value="{{route('payumoney-success')}}" hidden/>
             <input name="furl" value="{{route('payumoney-cancel')}}" hidden/>
-            <input type="hidden" name="service_provider" value="payu_paisa"/>
+            {{-- <input type="hidden" name="service_provider" value="payu_paisa"/> --}}
         </form>
     </div>
 </div>
