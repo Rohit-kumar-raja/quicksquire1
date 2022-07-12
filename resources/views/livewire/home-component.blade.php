@@ -54,6 +54,8 @@
     </div>
 </section>
 
+@include('livewire.offers')
+
 @php
 $witems = Cart::instance('wishlist')
     ->content()
@@ -258,7 +260,9 @@ $witems = Cart::instance('wishlist')
                                         @endforeach
 
                                     </div>
-                                    <div class="p-4 text-center "> <a class="btn btn-primary " href="/product-category/{{ strtolower($category->name) }}"> See all Products </a> </div>
+                                    <div class="p-4 text-center "> <a class="btn btn-primary "
+                                            href="/product-category/{{ strtolower($category->name) }}"> See all
+                                            Products </a> </div>
                                 </div>
                             </div>
                         @endforeach

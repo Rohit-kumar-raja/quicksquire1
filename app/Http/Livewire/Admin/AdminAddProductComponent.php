@@ -153,10 +153,12 @@ class AdminAddProductComponent extends Component
             $request->image[0]->move($destination, $imageName);
             $product->image = $imageName;
 
+            if($request->SKU!=''){
             $imageName_bajaj = Carbon::now()->timestamp . '_' . $request->SKU->getClientOriginalName();
             $request->SKU->move($destination, $imageName_bajaj);
             $product->SKU = $imageName_bajaj;
 
+            }
             if ($request->images) {
                 $imagesname = '';
                 foreach ($request->images as $key => $image) {

@@ -44,14 +44,14 @@
                                         </div>
                                         <div class="col-8">
                                             <div class="row">
-                                                <div class="col-8">
+                                                <div class="col-7">
                                                     <h4 class="title-box pt-4  "> <i class="fas fa-coins"></i> Redeem
                                                         Coin <small class="text-success text-capitalize font-14 ">
                                                             Balance - <span
                                                                 id="balance_coin">{{ $balance_coin }}</span></small>
                                                     </h4>
                                                 </div>
-                                                <div class="col-4"> <button type="button"
+                                                <div class="col-5"> <button type="button"
                                                         onclick="coin_calclulator()"
                                                         class="btn btn-primary btn-sm mt-2">Use Coin</button> </div>
                                             </div>

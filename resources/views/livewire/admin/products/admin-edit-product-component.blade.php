@@ -254,7 +254,7 @@
                                     <div>
                                         <div class="">
 
-                                            <select id="scategory_id1" class="form-control" name="scategory_id1">
+                                            <select id="scategory_id1" class="form-control" name="scategory_id">
 
                                                 @if ($scategory_id)
                                                     <option value="{{ $scategory_id }}">

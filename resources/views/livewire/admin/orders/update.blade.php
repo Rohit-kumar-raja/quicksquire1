@@ -55,10 +55,11 @@
                                         @else
                                             <option selected disabled> - Select Status - </option>
                                         @endif
-                                        <option value="dispatched">dispatched</option>
-                                        <option value="delivered">delivered</option>
-                                        <option value="canceled">canceled</option>
-                                        <option value="pending">pending</option>
+                                        <option value="dispatched">Dispatched</option>
+                                        <option value="out for delivery">Out For Delivery</option>
+                                        <option value="delivered">Delivered</option>
+                                        <option value="canceled">Canceled</option>
+                                        <option value="pending">Pending</option>
                                         <option value="out of stock">Out Of Stock</option>
 
                                     </select>

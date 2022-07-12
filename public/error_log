@@ -1,0 +1,56 @@
+[05-Jul-2022 08:24:33 UTC] PHP Warning:  require(/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php): Failed to open stream: No such file or directory in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php(61): composerRequiref066ab7c05ecd41dd0a81c31c602c0fa()
+#1 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/autoload.php(7): ComposerAutoloaderInitf066ab7c05ecd41dd0a81c31c602c0fa::getLoader()
+#2 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/public/index.php(34): require('/home/sodhukno/...')
+#3 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:35 UTC] PHP Warning:  require(/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php): Failed to open stream: No such file or directory in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php(61): composerRequiref066ab7c05ecd41dd0a81c31c602c0fa()
+#1 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/autoload.php(7): ComposerAutoloaderInitf066ab7c05ecd41dd0a81c31c602c0fa::getLoader()
+#2 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/public/index.php(34): require('/home/sodhukno/...')
+#3 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:36 UTC] PHP Warning:  require(/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php): Failed to open stream: No such file or directory in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:36 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php(61): composerRequiref066ab7c05ecd41dd0a81c31c602c0fa()
+#1 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/autoload.php(7): ComposerAutoloaderInitf066ab7c05ecd41dd0a81c31c602c0fa::getLoader()
+#2 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/public/index.php(34): require('/home/sodhukno/...')
+#3 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:38 UTC] PHP Warning:  require(/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php): Failed to open stream: No such file or directory in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php(61): composerRequiref066ab7c05ecd41dd0a81c31c602c0fa()
+#1 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/autoload.php(7): ComposerAutoloaderInitf066ab7c05ecd41dd0a81c31c602c0fa::getLoader()
+#2 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/public/index.php(34): require('/home/sodhukno/...')
+#3 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:45 UTC] PHP Warning:  require(/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php): Failed to open stream: No such file or directory in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php(61): composerRequiref066ab7c05ecd41dd0a81c31c602c0fa()
+#1 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/autoload.php(7): ComposerAutoloaderInitf066ab7c05ecd41dd0a81c31c602c0fa::getLoader()
+#2 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/public/index.php(34): require('/home/sodhukno/...')
+#3 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:46 UTC] PHP Warning:  require(/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php): Failed to open stream: No such file or directory in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../phpunit/phpunit/src/Framework/Assert/Functions.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php(61): composerRequiref066ab7c05ecd41dd0a81c31c602c0fa()
+#1 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/autoload.php(7): ComposerAutoloaderInitf066ab7c05ecd41dd0a81c31c602c0fa::getLoader()
+#2 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/public/index.php(34): require('/home/sodhukno/...')
+#3 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:49 UTC] PHP Warning:  require(/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../symfony/polyfill-mbstring/bootstrap.php): Failed to open stream: No such file or directory in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
+[05-Jul-2022 08:24:50 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/../symfony/polyfill-mbstring/bootstrap.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php(61): composerRequiref066ab7c05ecd41dd0a81c31c602c0fa()
+#1 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/autoload.php(7): ComposerAutoloaderInitf066ab7c05ecd41dd0a81c31c602c0fa::getLoader()
+#2 /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/public/index.php(34): require('/home/sodhukno/...')
+#3 {main}
+  thrown in /home/sodhukno/public_html/quicksecureindia.com/quicksquire1/vendor/composer/autoload_real.php on line 71
