@@ -98,30 +98,29 @@
                                             class="form-control " id="txtDate" name="sale_dt" value="27-06-2022"
                                             autocomplete="off">
                                     </div>
-                                    @if (count($orders) > 0)
-                                        <div class="col-sm-4">
-                                            <label for="txtItemType"> Select Product </label>
-                                            <select class="form-control" name="item_type" id="txtItemType">
-                                                <option disabled selected="">--Select--</option>
-                                                @foreach ($orders as $order)
+                                    <div class="col-sm-4">
+                                        <label for="txtItemType"> Select Product </label>
+                                        <select onchange="chengeOrder(this.value)" class="form-control" name="item_type"
+                                            id="txtItemType">
+                                            <option disabled selected="">--Select--</option>
+                                            @foreach ($orders as $order)
+                                                @php
+                                                    $order_item = DB::table('order_items')
+                                                        ->where('order_id', $order->id ?? '')
+                                                        ->get();
+                                                @endphp
+                                                @foreach ($order_item as $item)
                                                     @php
-                                                        $order_item = DB::table('order_items')
-                                                            ->where('order_id', $order->id)
-                                                            ->get();
+                                                        $order_item_p = DB::table('products')->find($item->product_id ?? '');
                                                     @endphp
-                                                    @foreach ($order_item as $item)
-                                                        @php
-                                                            $order_item_p = DB::table('products')->find($item->product_id);
-                                                        @endphp
-                                                        <option value="{{ $order->id }}">
-                                                            {{ $order_item_p->name }}
-                                                    @endforeach
-                                                    </option>
+                                                    <option value="{{ $order->id ?? '' }}">
+                                                        {{ $order_item_p->name ?? ''  }}
                                                 @endforeach
-                                                <option value="others">Others</option>
-                                            </select>
-                                        </div>
-                                    @endif
+                                                </option>
+                                            @endforeach
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
                                     <div class="col-sm-4">
                                         <label for="orderid">Order id</label>
                                         <input required type="text" class="form-control" id="orderid"
@@ -129,14 +128,14 @@
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <label for="txtPurchaseYear">Purchase Year</label>
-                                        <input required type="date" class="form-control" id="txtPurchaseYear"
+                                        <label for="purchase_year">Purchase Year</label>
+                                        <input required type="date" class="form-control" id="purchase_year"
                                             name="purchase_year" autocomplete="off">
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="txtItemCategory">Item Category</label>
-                                        <select class="form-control" name="item_category" id="txtItemCategory">
-                                            <option value="-" selected="">--Select--</option>
+                                        <label for="cat_name">Item Category</label>
+                                        <select  class="form-control" name="item_category" id="cat_name">
+                                            <option disabled>--Select--</option>
                                             <option value="Laptop">Laptop</option>
                                             <option value="Desktop">Desktop</option>
                                             <option value="Assembled Pc">Assembled Pc</option>
@@ -145,9 +144,9 @@
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <label for="txtBrandName">Brand Name</label>
-                                        <select class="form-control" name="brand_name" id="txtBrandName">
-                                            <option value="NA">- Select -</option>
+                                        <label for="brand_name">Brand Name</label>
+                                        <select class="form-control" name="brand_name" id="brand_name">
+                                            <option disabled >- Select -</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->brandname }}">{{ $brand->brandname }}
                                                 </option>
@@ -303,6 +302,33 @@
 
                 document.getElementById("txtGSTAmt").value = gstamt;
                 document.getElementById("txtTotAmt").value = (+amt) + (+gstamt);
+            }
+
+            function chengeOrder(data) {
+                if (data != 'others') {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        var object_data = JSON.parse(this.responseText)
+
+                        document.getElementById('orderid').value = 'ORD00000' + object_data.id
+                        document.getElementById('orderid').setAttribute('readonly', true);
+                        document.getElementById('purchase_year').value = object_data.created_at;
+                        document.getElementById('purchase_year').setAttribute('readonly', true);
+                        document.getElementById('cat_name').getElementsByTagName('option')[0].value = object_data.cat_name
+                        document.getElementById('cat_name').setAttribute('readonly', true);
+                        document.getElementById('brand_name').getElementsByTagName('option')[0].value = object_data.brand
+                        document.getElementById('brand_name').setAttribute('readonly', true);
+
+                    }
+                    xmlhttp.open("GET", "/amc/packages/order/" + data);
+                    xmlhttp.send();
+                } else {
+                    document.getElementById('orderid').removeAttribute('readonly', true);
+                    document.getElementById('purchase_year').removeAttribute('readonly', true);
+                    document.getElementById('cat_name').removeAttribute('readonly', true);
+                    document.getElementById('brand_name').removeAttribute('readonly', true);
+
+                }
             }
         </script>
     </body>

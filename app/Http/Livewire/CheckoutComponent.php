@@ -190,18 +190,17 @@ class CheckoutComponent extends Component
             session([
                 "_token" => null,
                 'firstname' => Auth::user()->name,
-                'amount' => str_replace(',','',$order->total) ,
+                'amount' => str_replace(',', '', $order->total),
                 'hash' => null,
                 'key' => env('PAYU_MERCHANT_KEY'),
-                'productinfo' => $order->id.'|'. Auth::user()->id,
+                'productinfo' => $order->id . '|' . Auth::user()->id,
                 'email' => Auth::user()->email,
-                'phone'=>Auth::user()->phone,
-                'service_provider'=>'payu_paisa',
-                'furl'=>route('payumoney-cancel'),
-                'surl'=>route('payumoney-success')
-              ]);
-              return  redirect()->route('payu.pay');
-
+                'phone' => Auth::user()->phone,
+                'service_provider' => 'payu_paisa',
+                'furl' => route('payumoney-cancel'),
+                'surl' => route('payumoney-success')
+            ]);
+            return  redirect()->route('payu.pay');
         }
         session(['order_id' => $order->id]);
         $coin = new CoinController();
@@ -266,5 +265,13 @@ class CheckoutComponent extends Component
         // $address = DB::table('orders')->where('user_id',$user_id)->orderBy('id', 'DESC')->take(6)->get();
         $address = DB::table('orders')->select(['firstname', 'lastname', 'mobile', 'email', 'line1', 'line2', 'city', 'province', 'country', 'zipcode', 'user_id'])->distinct()->where('user_id', $user_id)->orderBy('id', 'DESC')->take(6)->get();
         return view('livewire.checkout-component', ['address' => $address, 'balance_coin' => $balance_coin])->layout("layouts.base");
+    }
+
+
+    public function edit_address($id)
+    {
+        $order= DB::table('orders')->find($id);
+
+        return $order;
     }
 }

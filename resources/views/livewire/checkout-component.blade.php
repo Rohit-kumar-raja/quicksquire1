@@ -51,8 +51,7 @@
                                                                 id="balance_coin">{{ $balance_coin }}</span></small>
                                                     </h4>
                                                 </div>
-                                                <div class="col-5"> <button type="button"
-                                                        onclick="coin_calclulator()"
+                                                <div class="col-5"> <button type="button" onclick="coin_calclulator()"
                                                         class="btn btn-primary btn-sm mt-2">Use Coin</button> </div>
                                             </div>
                                         </div>
@@ -89,14 +88,12 @@
                                                     class="fas fa-coins"></i> </span> </span>
                                         <p class="summary-info grand-total p-3 "><span>Grand Total</span> <span
                                                 class="grand-total-price">₨ <span
-                                                    id="total_price">{{ Session::get('final_amount_after_coupon') ??  Session::get('checkout')['total'] }}</span>
+                                                    id="total_price">{{ Session::get('final_amount_after_coupon') ?? Session::get('checkout')['total'] }}</span>
                                             </span>
                                         </p>
                                     @endif
                                     <!-- <a href="thankyou.html" class="btn btn-primary">Place order now</a> -->
-                                    <div class="p-4">
-                                        <button type="submit" class="btn btn-primary ">Place order now</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -120,21 +117,20 @@
                                         ->where('user_id', $add->user_id)
                                         ->first();
                                     ?>
-                                    <input id="address" name="address" type="radio"
-                                        value="{{ $order_id->id }}">
+                                    <input id="address" name="address" type="radio" value="{{ $order_id->id }}">
                                     <input type="hidden" name="coin_on" id="coin_on">
                                     <strong>{{ $add->firstname . ' ' . $add->lastname }}</strong> - <span>
                                         {{ $add->mobile }}</span><br>
                                     <p> &nbsp; &nbsp;
                                         &nbsp;{{ $add->line1 . ' ' . $add->line2 . ' ' . $add->city . ', ' . $add->province . ', ' . $add->country }}-&nbsp;
-                                        &nbsp; &nbsp;{{ $add->zipcode }}</p>
+                                        &nbsp; &nbsp;{{ $add->zipcode }} <a class="font-16" href="#address" onclick="edit_address({{$order_id->id}})" >edit</a></p> 
                                 @endforeach
 
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" id="address">
                         <div class="col-md-12">
                             <div class="wrap-address-billing">
                                 <h3 class="box-title">Billing Address</h3>
@@ -169,14 +165,16 @@
                                     </p>
                                     <p class="row-in-form">
                                         <label for="add">line1:</label>
-                                        <input type="text" name="line1" placeholder="Street at apartment number">
+                                        <input type="text" name="line1"
+                                            placeholder="Street at apartment number">
                                         @error('line1')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </p>
                                     <p class="row-in-form">
                                         <label for="add">line2:</label>
-                                        <input type="text" name="add" placeholder="Street at apartment number">
+                                        <input type="text" name="add"
+                                            placeholder="Street at apartment number">
                                     </p>
                                     <p class="row-in-form">
                                         <label for="country">Country<span>*</span></label>
@@ -299,8 +297,10 @@
                         </div>
 
                     </div>
+                    <div class="p-4">
+                        <button type="submit" class="btn btn-primary ">Place order now</button>
+                    </div>
 
-                 
             </div>
             </form>
         </div>
@@ -312,7 +312,7 @@
 </div>
 
 <script>
-   document.getElementById('coin_use').style.display = 'none';
+    document.getElementById('coin_use').style.display = 'none';
     total_price = document.getElementById('total_price').innerText;
 
     function coin_calclulator() {
@@ -353,5 +353,28 @@
             element.style.display = "none"
 
         }
+    }
+
+
+    function edit_address(data) {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            var object_data = JSON.parse(this.responseText)
+            console.log(object_data.email);
+            document.getElementsByName('email')[2].value=object_data.email
+            document.getElementsByName('firstname')[0].value=object_data.firstname
+            document.getElementsByName('lastname')[0].value=object_data.lastname
+            document.getElementsByName('mobile')[0].value=object_data.mobile
+            document.getElementsByName('line1')[0].value=object_data.line1
+            document.getElementsByName('add')[0].value=object_data.line2
+            document.getElementsByName('city')[0].value=object_data.city
+            document.getElementsByName('province')[0].value=object_data.province
+            document.getElementsByName('country')[0].value=object_data.country
+            document.getElementsByName('zipcode')[0].value=object_data.zipcode
+        
+        }
+        xmlhttp.open("GET", "/checkout/order/edit/" + data);
+        xmlhttp.send();
     }
 </script>

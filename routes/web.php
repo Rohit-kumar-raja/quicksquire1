@@ -111,6 +111,9 @@ Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 Route::get('/checkout/coin/use', CheckoutComponent::class)->name('checkout.coin.use');
 
 Route::post('/checkout/placeOrder', [CheckoutComponent::class, 'placeOrder'])->name('checkout.placeOrder');
+Route::get('/checkout/order/edit/{id}', [CheckoutComponent::class, 'edit_address'])->name('checkout.edit.address');
+
+
 
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('product/pincode/', [ProductDetailsController::class, 'pincode'])->name('product.details.pincode');

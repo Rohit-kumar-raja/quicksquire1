@@ -65,6 +65,13 @@ class PackageController extends Controller
 
   public function getOrderDetails($id){
     $all_orders=DB::table('orders')->where('user_id',Auth::user()->id)->where('id',$id)->first();
+    $product_id=DB::table('order_items')->where('order_id',$all_orders->id)->first()->product_id;
+    $product_info = DB::table('products')->find($product_id);
+    $category_name=DB::table('categories')->find($product_info->category_id)->name;
+
+    $all_orders->cat_name=$category_name;
+    $all_orders->created_at= date('Y-m-d',strtotime($all_orders->created_at)) ;
+    $all_orders->brand=$product_info->brand;
     return $all_orders;
   }
 
