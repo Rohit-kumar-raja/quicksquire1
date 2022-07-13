@@ -194,7 +194,6 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
 
     public function productFaild($user_id, $order_id)
     {
-        dd($user_id);
     }
     
 }

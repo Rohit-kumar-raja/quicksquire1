@@ -5,7 +5,7 @@
       <div class="plan col-sm-3 col-lg-3 mb-4">
         <div class="plan-name-bronze" style="background-color:#{{ rand(100,999) }}">
             <h2>{{ $data->package_name }}</h2>
-            <span>₹ {{ $data->basic_price }} for {{ $data->duration }} Year</span> <br> <small>(inclusive all taxes)</small>
+            <span>₹ {{ $data->basic_price }} for {{ $data->duration }} Year</span> <br> <small>(Exclusive all taxes)</small>
         </div>
         <ul>
             <li class="plan-feature"> Product Range {{ $data->price_from}} to {{ $data->proce_to }}</li>

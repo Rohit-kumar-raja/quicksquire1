@@ -111,12 +111,17 @@
                                                 @endphp
                                                 @foreach ($order_item as $item)
                                                     @php
-                                                        $order_item_p = DB::table('products')->find($item->product_id ?? '');
+                                                        $order_item_p = DB::table('products')
+                                                            ->where('sale_price', '>', '10000')
+                                                            ->find($item->product_id ?? '');
                                                     @endphp
-                                                    <option value="{{ $order->id ?? '' }}">
-                                                        {{ $order_item_p->name ?? ''  }}
+                                                    @if ($order_item_p != '')
+                                                        <option value="{{ $order->id ?? '' }}">
+                                                            {{ $order_item_p->name ?? '' }}
+                                                    </option>
+                                                @endif
                                                 @endforeach
-                                                </option>
+
                                             @endforeach
                                             <option value="others">Others</option>
                                         </select>
@@ -134,7 +139,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="cat_name">Item Category</label>
-                                        <select  class="form-control" name="item_category" id="cat_name">
+                                        <select class="form-control" name="item_category" id="cat_name">
                                             <option disabled>--Select--</option>
                                             <option value="Laptop">Laptop</option>
                                             <option value="Desktop">Desktop</option>
@@ -146,7 +151,7 @@
                                     <div class="col-sm-4">
                                         <label for="brand_name">Brand Name</label>
                                         <select class="form-control" name="brand_name" id="brand_name">
-                                            <option disabled >- Select -</option>
+                                            <option disabled>- Select -</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->brandname }}">{{ $brand->brandname }}
                                                 </option>
@@ -162,15 +167,17 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtYrofAMC">Year of AMC</label>
-                                        <select aria-readonly="true" class="form-control" name="no_year" id="txtYrofAMC">
-                                            <option value="{{ $data->duration}}">{{ $data->duration}} Year</option>
-                                         
+                                        <select aria-readonly="true" class="form-control" name="no_year"
+                                            id="txtYrofAMC">
+                                            <option value="{{ $data->duration }}">{{ $data->duration }} Year
+                                            </option>
+
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="txtQTY">QTY</label>
-                                        <input readonly  required value="1" type="text" class="form-control " id="txtQTY"
-                                            name="qty" onkeyup="calcu()">
+                                        <input readonly required value="1" type="text" class="form-control "
+                                            id="txtQTY" name="qty" onkeyup="calcu()">
                                     </div>
 
                                     <div class="col-sm-4">
@@ -280,25 +287,25 @@
         </section>
 
         <script type="text/javascript">
-                var price1 = document.getElementById("txtPrice").value;
-                var gstper = document.getElementById("txtGST").value;
+            var price1 = document.getElementById("txtPrice").value;
+            var gstper = document.getElementById("txtGST").value;
 
-                var qt = document.getElementById("txtQTY").value;
+            var qt = document.getElementById("txtQTY").value;
 
-                if (document.getElementById("txtQTY").value == "") {
-                    qt = 0;
-                }
+            if (document.getElementById("txtQTY").value == "") {
+                qt = 0;
+            }
 
-                if (document.getElementById("txtGST").value == "") {
-                    gstper = 0;
-                }
+            if (document.getElementById("txtGST").value == "") {
+                gstper = 0;
+            }
 
-                var amt = price1 * qt;
-                var gstamt = (amt * gstper) / 100;
+            var amt = price1 * qt;
+            var gstamt = (amt * gstper) / 100;
 
-                document.getElementById("txtGSTAmt").value = gstamt;
-                document.getElementById("txtTotAmt").value = (+amt) + (+gstamt);
-            
+            document.getElementById("txtGSTAmt").value = gstamt;
+            document.getElementById("txtTotAmt").value = (+amt) + (+gstamt);
+
 
             function chengeOrder(data) {
                 if (data != 'others') {
