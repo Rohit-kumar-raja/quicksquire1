@@ -150,6 +150,7 @@ $witems = Cart::instance('wishlist')
 
 
 <!-- starting offer cards -->
+<div class="container-fluid">
 <div class="row margin-bottom-40 p-5">
     <h2>Find the best Offers</h2>
     <div class="col-md-12 sale-product">
@@ -167,7 +168,7 @@ $witems = Cart::instance('wishlist')
         </div>
     </div>
 </div>
-
+</div>
 
 <!-- end offer cards -->
 

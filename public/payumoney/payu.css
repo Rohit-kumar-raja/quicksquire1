@@ -1,7 +1,7 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .payfrom {
@@ -12,8 +12,8 @@
 }
 
 .payfrom .form-grp {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .payfrom .logo {
@@ -25,7 +25,7 @@
 
 .payfrom .main-form {
     width: calc(100% - 100px);
-    max-width: 400px;
+    max-width: 824px;
     margin: auto;
     background: #fff;
     box-shadow: 0 0 15px 0 rgb(156 156 156 / 30%);
@@ -40,15 +40,15 @@
 }
 
 .payfrom .input-box::placeholder {
-  color: #9e9e9e;
+    color: #9e9e9e;
 }
 
 .payfrom .input-box:focus {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .payfrom .form-label {
-  width: 120px;
+    width: 120px;
 }
 
 .payfrom .main-form .form-group {
@@ -57,11 +57,11 @@
 }
 
 .payfrom .main-form .form-group textarea {
-  height: 80px;
+    height: 80px;
 }
 
 .continue-pay-btn {
-    background: transparent linear-gradient(270deg,#4facfe,#1ed7fe) 0 0 no-repeat padding-box;
+    background: transparent linear-gradient(270deg, #4facfe, #1ed7fe) 0 0 no-repeat padding-box;
     border: none;
     border-radius: 0;
     padding: 15px
@@ -96,44 +96,39 @@
 }
 
 .required {
-  color: red;
+    color: red;
 }
 
 
 @media (max-width: 575px) {
-  .payfrom .main-form {
-    max-width: 350px;
+    .payfrom .main-form {
+        max-width: 824px;
         width: calc(100% - 90px);
-  }
+    }
 
-  .payfrom .logo {
-    width: 120px;
-    margin-top: -30px;
-  }
+    .payfrom .logo {
+        width: 120px;
+        margin-top: -30px;
+    }
 
-  .infyom-logo {
-  top: 30px;
-    left: -35px;
-    width: 60px;
-    height: 60px;
-  }
+    .infyom-logo {
+        top: 30px;
+        left: -35px;
+        width: 60px;
+        height: 60px;
+    }
 
-  .infyom-logo img {
-    max-width: 50px;
-  }
+    .infyom-logo img {
+        max-width: 50px;
+    }
 
-  .payfrom .main-form form .form-block {
+    .payfrom .main-form form .form-block {
         padding-left: 20px !important;
-    padding-right: 20px !important;
-    padding-bottom: 20px !important;
-  }
+        padding-right: 20px !important;
+        padding-bottom: 20px !important;
+    }
 
-  .grp-logo {
-    margin-bottom: 0 !important
-  }
+    .grp-logo {
+        margin-bottom: 0 !important
+    }
 }
-
-
-
-
-

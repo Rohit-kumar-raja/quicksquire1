@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-fluid">
     <!-- The Modal -->
     <div class="modal fade" id="myModal32">
-        <div class="modal-dialog modal-md">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
 
                 <!-- Modal Header -->

@@ -140,8 +140,10 @@ class CheckoutComponent extends Component
         $order->save();
 
         $total_amount = 0;
+        $productinfo=array();
         foreach (Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();
+            array_push($productinfo,$item->name);
             $orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
@@ -193,7 +195,9 @@ class CheckoutComponent extends Component
                 'amount' => str_replace(',', '', $order->total),
                 'hash' => null,
                 'key' => env('PAYU_MERCHANT_KEY'),
-                'productinfo' => $order->id . '|' . Auth::user()->id,
+                'productinfo' => implode('and', $productinfo),
+                'udf1'=> $order->id . '|' . Auth::user()->id,
+                'udf2'=> 'product',
                 'email' => Auth::user()->email,
                 'phone' => Auth::user()->phone,
                 'service_provider' => 'payu_paisa',

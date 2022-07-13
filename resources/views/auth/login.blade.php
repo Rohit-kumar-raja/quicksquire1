@@ -17,36 +17,21 @@
         </style>
 
 
-        <section>
+        <section style="
+   margin-top: -23px;
+    background-image: url(https://craftindustryalliance.org/CIAJune/ecommercelede.png);
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+">
             <div class="container">
                 <div class="row margin-bottom-40">
-                    <div class="col-md-6 col-sm-9 mb-5">
-                        <h1>Terms & Conditions</h1>
-                        <div class="content-page">
-                            <p><img src="{{ asset('assets/pages/img/img1.jpg') }}" alt="About us"
-                                    class="img-responsive">
-                            </p>
-
-
-                            <h2>QSIPL SERVICE</h2>
-
-                            <p>a. Use of QSIPL Services on a Product. To use certain QSIPL Services on a Product, you
-                                must have your own QSIPL.in account, be logged in to your account on the Product, and
-                                have a valid payment method associated with your account. </p>
-                            <br>
-                            b. Use of the QSIPL Site. Except as provided in this section, you may use the QSIPL website
-                            only on your Product. For additional terms that apply to the QSIPL web site, see the
-                            Additional QSIPL terms contained in the quicksecureindia.com Conditions of Use and the terms
-                            contained in the Legal section of the Settings menu of the QSIPL Services on your Product or
-                            the QSIPL App. QSIPL web site licensed under an open source license is governed solely by
-                            the terms of that open source license
-
-                        </div>
-                    </div>
+                    
                     <!-- END CONTENT -->
                     <!-- starting form -->
-                    <div class="col-lg-6">
-                        <div id="container_demo" style="margin-top: 5em;">
+                    <div class="col-lg-6 m-auto">
+                        <div id="container_demo" >
                             <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
                             <a class="hiddenanchor" id="toregister"></a>
                             <a class="hiddenanchor" id="tologin"></a>
@@ -81,12 +66,12 @@
 
                                         <a href="{{ route('login.with') }}" class="to_register" >Login With Otp ?</a>
                                         <p class="login button">
-                                            <input type="submit" value="Login" />
+                                            <input type="submit" value="Login" class="join-us" style="text-align: center;"/>
+                                            
                                         </p>
-                                        <p class="change_link">
-                                            Not a member yet ?
-                                            <a href="#toregister" class="to_register">Join us</a>
-                                        </p>
+                                        <p style="float: right;"><span class="join-us">Not a member yet ? <a href="#toregister" class="to_reg">Signup</a></span></p>
+                                        <!--<p class="change_link">-->
+                                        <!--</p>-->
                                         <!-- <p class="change_link">
                                             Forget Password ?
                                             <a href="{{ route('password.request') }}" class="to_register">Forget
@@ -135,13 +120,14 @@
                                             <input id="passwordsignup_confirmation" name="password_confirmation"
                                                 type="password" placeholder="eg. X8df!90EO" />
                                         </p>
-                                        <p class="signin button">
-                                            <input type="submit" value="register" name="register" />
+                                        <p class="signin button ">
+                                            <input type="submit" value="Signup" name="register" /></p>
+                                            <p class="join-us" style="text-align: right;">Already a member ?
+                                            <a href="#tologin" class="to_reg"> Login </a>
                                         </p>
-                                        <p class="change_link">
-                                            Already a member ?
-                                            <a href="#tologin" class="to_register"> Go and log in </a>
-                                        </p>
+                                        <!--<p class="change_link">-->
+                                            
+                                        <!--</p>-->
                                     </form>
                                 </div>
                             </div>

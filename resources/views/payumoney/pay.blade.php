@@ -1,116 +1,156 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-          crossorigin="anonymous"/>
-    <link rel="stylesheet" href="{{asset('payumoney/payu.css')}}">
-    <title>Paymoney</title>
+<x-layout>
+    <link rel="stylesheet" href="{{ asset('payumoney/payu.css') }}">
 
-    <script>
-        var hash = '{{$hash}}';
+    <div class="payfrom card">
+        <div class="main-form position-relative  ">
+            <div class="infyom-logo">
+                <img src="{{ asset('payumoney/infyom-logo.png') }}" alt="infyom logo">
+            </div>
+            <div class="text-center mb-4 grp-logo">
+                <img src="https://sboxcheckout-static.citruspay.com/web/images/payuBanrding.png" alt="paymoney logo"
+                    class="logo">
+            </div>
+            <br />
 
-        function submitPayuForm() {
-            if (hash == '') {
-                return;
-            }
-            var payuForm = document.forms.payuForm;
-            payuForm.submit();
-        }
-    </script>
-</head>
-<body onload="submitPayuForm()">
-<div class="payfrom">
-    <div class="main-form position-relative">
-        <div class="infyom-logo">
-            <img src="{{asset('payumoney/infyom-logo.png')}}" alt="infyom logo">
-        </div>
-        <div class="text-center mb-4 grp-logo">
-            <img src="https://sboxcheckout-static.citruspay.com/web/images/payuBanrding.png" alt="paymoney logo"
-                 class="logo">
-        </div>
-        <br/>
-        @if($formError)
+            <form action="{{ route('payu.pay') }}" id="payment_form" method="post">
+                @csrf
+                <div class="row p-5">
+                    <!-- Contains information of integration type. Consult to PayU for more details.//-->
+                    <input class="form-control" type="hidden" id="udf5" name="udf5" value="PayUBiz_PHP7_Kit" />
 
-            {{-- <span style="color:red">Please fill all mandatory fields.</span> --}}
-            <br/>
-            <br/>
-        @endif
-        <form action="{{$action}}" method="post" name="payuForm" class="pb-0">
-            @csrf
-            <input type="hidden" name="key" value="{{$MERCHANT_KEY}}"/>
-            <input type="hidden" name="hash" value="{{$hash}}"/>
-            <input type="hidden" name="txnid" value="{{$txnid}}"/>
-            <div class="px-5 pt-4 pb-5 form-block">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group mb-3 position-relative">
-                             <input readonly   type="text" class="input-box form-control w-100" placeholder="Name *"
-                                   aria-label="Recipient's username"
-                                   aria-describedby="button-addon2" name="firstname"
-                                   value="{{!empty($posted['firstname']) ? $posted['firstname'] : session('firstname')}}">
-                            <div class="icon-group-append">
-                                <i class="fas fa-user"></i>
-                            </div>
-                        </div>
+                    <div class="dv col-sm-4">
+                        <span class="text"><label>Transaction/Order ID:</label></span>
+                        <span>
+                            <!-- Required - Unique transaction id or order id to identify and match
+                   payment with local invoicing. Datatype is Varchar with a limit of 25 char. //-->
+                            <input readonly class="form-control" type="text" id="txnid" name="txnid"
+                                placeholder="Transaction ID" value="<?php echo 'Txn' . rand(1000000000, 9999999999); ?>" />
+                        </span>
                     </div>
-                    <div class="col-12">
-                        <div class="form-group mb-3 position-relative">
-                             <input readonly   class="input-box form-control w-100" placeholder="Email *" type="email" name="email"
-                                   value="{{!empty($posted['email']) ? $posted['email'] : session('email') }}">
-                            <div class="icon-group-append">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
+
+                    <div class="dv col-sm-4">
+                        <span class="text"><label>Amount:</label></span>
+                        <span>
+                            <!-- Required - Transaction amount of float type. //-->
+                            <input readonly class="form-control" type="text" id="amount" name="amount"
+                                placeholder="Amount" value="{{ session('amount') }}" />
+                        </span>
                     </div>
-                    <div class="col-12">
-                        <div class="form-group mb-3 position-relative">
-                             <input readonly   class="input-box form-control w-100" placeholder="Phone *" type="number" name="phone"
-                                   value="{{!empty($posted['phone']) ? $posted['phone'] : session('phone') }}">
-                            <div class="icon-group-append">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                        </div>
+
+
+
+                    <div class="dv col-sm-4">
+                        <span class="text"><label>First Name:</label></span>
+                        <span>
+                            <!-- Required - Should contain first name of the consumer. Datatype is Varchar with 60 char limit. //-->
+                            <input readonly class="form-control" type="text" id="firstname" name="firstname"
+                                placeholder="First Name" value="{{ session('firstname') }}" />
+                        </span>
                     </div>
-                    <div class="col-12">
-                        <div class="form-group mb-3 position-relative">
-                             <input readonly   class="input-box form-control w-100" placeholder="Amount *" type="text" name="amount"
-                                   value="{{!empty($posted['amount']) ? $posted['amount'] : session('amount')}}">
-                            <div class="icon-group-append">
-                                <i class="fas fa-tag"></i>
-                            </div>
-                        </div>
+
+                    <div class="dv col-sm-4">
+                        <span class="text"><label>Last Name:</label></span>
+                        <span>
+                            <!-- Should contain last name of the consumer. Datatype is Varchar with 50 char limit. //-->
+                            <input readonly class="form-control" type="text" id="Lastname" name="Lastname"
+                                placeholder="Last Name" value="{{ session('lastname') }}" />
+                        </span>
                     </div>
-                    <div class="col-12">
-                        <div class="form-group mb-3 position-relative">
-                            <textarea readonly class="input-box form-control w-100" placeholder="Note *" name="productinfo">{{!empty($posted['productinfo']) ? $posted['productinfo'] : session('productinfo') }}</textarea>
-                            <div class="icon-group-append">
-                                <i class="fas fa-pencil-alt"></i>
-                            </div>
-                        </div>
+
+                    <div class="dv col-sm-4 d-none ">
+                        <span class="text"><label>Zip Code:</label></span>
+                        <span>
+                            <!-- Datatype is Varchar with 20 char limit only 0-9. //-->
+                            <input readonly class="form-control" type="text" id="Zipcode" name="Zipcode"
+                                placeholder="Zip Code" value="824125" />
+                        </span>
                     </div>
+
+                    <div class="dv col-sm-4">
+                        <span class="text"><label>Email ID:</label></span>
+                        <span>
+                            <!-- Required - An email id in valid email format has to be posted. Datatype is Varchar with 50 char limit. //-->
+                            <input readonly class="form-control" type="text" id="email" name="email"
+                                placeholder="Email ID" value="{{ session('email') }}" />
+                        </span>
+                    </div>
+
+                    <div class="dv col-sm-4">
+                        <span class="text"><label>Mobile/Cell Number:</label></span>
+                        <span>
+                            <!-- Required - Datatype is Varchar with 50 char limit and must contain chars 0 to 9 only.
+                   This parameter may be used for land line or mobile number as per requirement of the application. //-->
+                            <input readonly class="form-control" type="text" id="phone" name="phone"
+                                placeholder="Mobile/Cell Number" value="{{ session('phone') }}" />
+                        </span>
+                    </div>
+
+                    <div class="dv col-sm-4 d-none">
+                        <span class="text"><label>Address1:</label></span>
+                        <span>
+                            <input readonly class="form-control" type="text" id="address1" name="address1"
+                                placeholder="Address1" value="{{session('udf2')}}" /></span>
+                    </div>
+
+                    <div class="dv col-sm-4 d-none">
+                        <span class="text"><label>Address2:</label></span>
+                        <span>
+                            <input class="form-control" type="text" id="address2" name="address2"
+                                placeholder="Address2" value="product2" /></span>
+                    </div>
+
+                    <div class="dv col-sm-4 d-none ">
+                        <span class="text"><label>City:</label></span>
+                        <span>
+                            <input class="form-control" type="text" id="city" name="city" placeholder="City"
+                                value="" /></span>
+                    </div>
+
+                    <div class="dv col-sm-4 d-none">
+                        <span class="text"><label>State:</label></span>
+                        <span><input class="form-control" type="text" id="state" name="state"
+                                placeholder="State" value="" /></span>
+                    </div>
+
+                    <div class="dv col-sm-4 d-none">
+                        <span class="text"><label>Country:</label></span>
+                        <span><input class="form-control" type="text" id="country" name="country"
+                                placeholder="Country" value="" /></span>
+                    </div>
+
+                    <div class="dv col-sm-4 d-none">
+                        <span class="text"><label>PG:</label></span>
+                        <span>
+                            <!-- Not mandatory but fixed code can be passed to Payment Gateway to show default payment
+                   option tab. e.g. NB, CC, DC, CASH, EMI. Refer PDF for more details. //-->
+                            <input class="form-control" type="text" id="Pg" name="Pg"
+                                placeholder="PG" value="{{session('udf2')}}" />
+                        </span>
+                    </div>
+
+                    <div class="dv col-sm-12">
+                        <span class="text"><label>Product Info:</label></span>
+                        <span>
+                            <!-- Required - Purchased product/item description or SKUs for future reference.
+                   Datatype is Varchar with 100 char limit. //-->
+                            <input class="form-control" type="hidden" id="productinfo" name="productinfo"
+                                placeholder="Product Info" value="{{session('udf1')}}" />
+                            <textarea readonly class="form-control" rows="5" type="text" placeholder="Product Info">{{ session('productinfo') }}</textarea>
+                        </span>
+                    </div>
+
                 </div>
-            </div>
-           @if(!$hash)
-            <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary w-100 continue-pay-btn">Continue to pay</button>
-            </div>
-            @endif
-            <input name="surl" value="{{route('payumoney-success')}}" hidden/>
-            <input name="furl" value="{{route('payumoney-cancel')}}" hidden/>
-            {{-- <input type="hidden" name="service_provider" value="payu_paisa"/> --}}
-        </form>
+
+                <div class="text-center p-3"><input class="btn btn-primary" type="submit" id="btnsubmit"
+                        name="btnsubmit" value="Pay" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+    <style>
+        label {
+            margin-top: 10px;
+        }
+    </style>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+</x-layout>

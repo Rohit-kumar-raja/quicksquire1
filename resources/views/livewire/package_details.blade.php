@@ -39,12 +39,12 @@
             <div class="container">
                 <div class="row margin-bottom-40">
                     <div class="col-md-12">
-                        <h1>Terms & Conditions</h1>
+                        <h1>Buy AMC Now</h1>
                         <div class="content-page">
-                            <p><img src="{{ asset('assets/pages/img/img1.jpg') }}" alt="About us"
-                                    class="img-responsive">
-                            </p>
-                            <h2>QSIPL SERVICE</h2>
+                            <!--<p><img src="{{ asset('assets/pages/img/img1.jpg') }}" alt="About us"-->
+                            <!--        class="img-responsive">-->
+                            <!--</p>-->
+                            <h2>QSIPL Terms of use</h2>
 
                             <p>a. Use of QSIPL Services on a Product. To use certain QSIPL Services on a Product, you
                                 must have your own QSIPL.in account, be logged in to your account on the Product, and
@@ -163,7 +163,7 @@
                                     <div class="col-sm-4">
                                         <label for="txtYrofAMC">Year of AMC</label>
                                         <select aria-readonly="true" class="form-control" name="no_year" id="txtYrofAMC">
-                                            <option value="{{ $data->duration}}">{{ $data->duration}} Yearr</option>
+                                            <option value="{{ $data->duration}}">{{ $data->duration}} Year</option>
                                          
                                         </select>
                                     </div>

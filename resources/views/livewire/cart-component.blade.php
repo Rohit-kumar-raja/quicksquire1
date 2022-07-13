@@ -192,7 +192,9 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row" style="
+    margin-bottom: 45px;
+">
                              <div class="col-6 col-lg-6 col-xs-12"></div>
                              
                             <div class="col-6 col-lg-6 col-xs-12">
