@@ -38,6 +38,7 @@ class AdminEditProductComponent extends Component
     public $feature_id;
     public $GST;
     public $HSN_No;
+    public $keyword;
     public function mount($product_slug)
     {
         $product = Product::where('slug', $product_slug)->first();
@@ -60,6 +61,7 @@ class AdminEditProductComponent extends Component
         $this->GST = $product->GST;
         $this->HSN_No = $product->HSN_No;
         $this->feature_id = explode(',', $product->feature_id);
+        $this->keyword=$product->keyword;
     }
 
     public function generateSlug()
@@ -121,6 +123,7 @@ class AdminEditProductComponent extends Component
         $product->featured = $this->featured;
         $product->quantity = $this->quantity;
         $product->brand = $this->brand;
+
         if ($this->newimage) {
             // unlink('assets/pages/img/products' . '/' . $product->image);
             $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
@@ -164,93 +167,94 @@ class AdminEditProductComponent extends Component
 
     function update(Request $request)
     {
-       
-        try{
 
-        // $request->validate([
-        //     'name' => 'required',
-        //     'slug' => 'required',
-        //     'short_description' => 'required',
-        //     'description' => 'required',
-        //     'regular_price' => 'required|numeric',
-        //     'sale_price' => 'required|numeric',
-        //     'SKU' => 'required',
-        //     'stock_status' => 'required',
-        //     'quantity' => 'required|numeric',
-        //     'category_id' => 'required',
-        // ]);
+        try {
 
-        // if ($request->newimage) {
-        //     $request->validate([
-        //         'newimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     ]);
-        // }
+            // $request->validate([
+            //     'name' => 'required',
+            //     'slug' => 'required',
+            //     'short_description' => 'required',
+            //     'description' => 'required',
+            //     'regular_price' => 'required|numeric',
+            //     'sale_price' => 'required|numeric',
+            //     'SKU' => 'required',
+            //     'stock_status' => 'required',
+            //     'quantity' => 'required|numeric',
+            //     'category_id' => 'required',
+            // ]);
 
-        $destination = 'assets/pages/img/products';
-        $product = Product::find($request->product_id);
-        $product->name = $request->name;
-        $product->slug = $request->slug;
-        $product->short_description = $request->short_description;
-        $product->description = $request->description;
-        $product->regular_price = $request->regular_price;
-        $product->sale_price = $request->sale_price;
-        $product->stock_status = $request->stock_status;
-        $product->featured = $request->featured;
-        $product->quantity = $request->quantity;
-        $product->brand = $request->brand;
-        $product->GST = $request->GST;
-        $product->HSN_No = $request->HSN_No;
+            // if ($request->newimage) {
+            //     $request->validate([
+            //         'newimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //     ]);
+            // }
 
-        if ($request->feature_id > 0) {
-            $product->feature_id = implode(',', $request->feature_id);
-        }
-        if ($request->newimage != '') {
+            $destination = 'assets/pages/img/products';
+            $product = Product::find($request->product_id);
+            $product->name = $request->name;
+            $product->slug = $request->slug;
+            $product->short_description = $request->short_description;
+            $product->description = $request->description;
+            $product->regular_price = $request->regular_price;
+            $product->sale_price = $request->sale_price;
+            $product->stock_status = $request->stock_status;
+            $product->featured = $request->featured;
+            $product->quantity = $request->quantity;
+            $product->brand = $request->brand;
+            $product->GST = $request->GST;
+            $product->HSN_No = $request->HSN_No;
+            $product->keyword = $request->keyword;
 
-            // unlink('assets/pages/img/products' . '/' . $product->image);
-            // $imageName = Carbon::now()->timestamp . '.' . $request->newimage->extension();
-            // $request->newimage->storeAs('products', $imageName);
-            // $product->image = $imageName;
+            if ($request->feature_id > 0) {
+                $product->feature_id = implode(',', $request->feature_id);
+            }
+            if ($request->newimage != '') {
+
+                // unlink('assets/pages/img/products' . '/' . $product->image);
+                // $imageName = Carbon::now()->timestamp . '.' . $request->newimage->extension();
+                // $request->newimage->storeAs('products', $imageName);
+                // $product->image = $imageName;
 
 
-            $imageName = Carbon::now()->timestamp . '.' . $request->newimage->getClientOriginalName();
-            $request->newimage->move($destination, $imageName);
-            $product->image = $imageName;
-        }
-        if ($request->SKU != '') {
-            $imageName_bajaj = Carbon::now()->timestamp . '_' . $request->SKU->getClientOriginalName();
-            $request->SKU->move($destination, $imageName_bajaj);
-            $product->SKU = $imageName_bajaj;
-        }
+                $imageName = Carbon::now()->timestamp . '.' . $request->newimage->getClientOriginalName();
+                $request->newimage->move($destination, $imageName);
+                $product->image = $imageName;
+            }
+            if ($request->SKU != '') {
+                $imageName_bajaj = Carbon::now()->timestamp . '_' . $request->SKU->getClientOriginalName();
+                $request->SKU->move($destination, $imageName_bajaj);
+                $product->SKU = $imageName_bajaj;
+            }
 
-        if ($request->newimages > 0) {
-            if ($product->images) {
-                $images = explode(",", $product->images);
-                foreach ($images as $image) {
-                    if ($image) {
-                        // unlink('assets/pages/img/products' . '/' . $image);
+            if ($request->newimages > 0) {
+                if ($product->images) {
+                    $images = explode(",", $product->images);
+                    foreach ($images as $image) {
+                        if ($image) {
+                            // unlink('assets/pages/img/products' . '/' . $image);
+                        }
                     }
                 }
+                $imagesname = '';
+                foreach ($request->newimages as $key => $image) {
+                    $imaName = Carbon::now()->timestamp . $key . '_' . $image->getClientOriginalName();
+                    $image->move($destination, $imaName);
+                    $imagesname = $imagesname . ',' . $imaName;
+                }
+                $product->images = $imagesname;
             }
-            $imagesname = '';
-            foreach ($request->newimages as $key => $image) {
-                $imaName = Carbon::now()->timestamp . $key . '_' . $image->getClientOriginalName();
-                $image->move($destination, $imaName);
-                $imagesname = $imagesname . ',' . $imaName;
-            }
-            $product->images = $imagesname;
-        }
 
-        $product->category_id = $request->category_id;
-        if ($request->scategory_id) {
-            $product->subcategory_id = $request->scategory_id;
+            $product->category_id = $request->category_id;
+            if ($request->scategory_id) {
+                $product->subcategory_id = $request->scategory_id;
+            }
+            $product->save();
+            session()->flash('message', 'Product updated successfully');
+            return redirect()->back();
+        } catch (Exception $e) {
+            session()->flash('message', $e->getMessage());
+            return redirect()->back();
         }
-        $product->save();
-        session()->flash('message', 'Product updated successfully');
-        return redirect()->back();
-    }catch(Exception $e){
-        session()->flash('message', $e->getMessage() );
-        return redirect()->back();
-    }
     }
 
 

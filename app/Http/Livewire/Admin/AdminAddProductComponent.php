@@ -36,6 +36,7 @@ class AdminAddProductComponent extends Component
     public $scategory_id;
     public $feature_id;
     public $brand;
+    public $keyword;
     public function mount()
     {
         $this->stock_status = 'inStock';
@@ -98,6 +99,7 @@ class AdminAddProductComponent extends Component
             $product->featured = $this->featured;
             $product->quantity = $this->quantity;
             $product->brand = $this->brand;
+
             // $product->feature_id = $this->feature_id;
 
             $imageName = Carbon::now()->timestamp . '_' . $this->image->extension();
@@ -145,6 +147,9 @@ class AdminAddProductComponent extends Component
             $product->featured = $request->featured;
             $product->quantity = $request->quantity;
             $product->brand = $request->brand;
+            $product->keyword = $request->keyword;
+
+
             if ($request->feature_id > 0) {
                 $product->feature_id = implode(',', $request->feature_id);
             }

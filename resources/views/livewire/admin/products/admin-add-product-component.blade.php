@@ -248,6 +248,18 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="form-group  col-sm-12">
+                                    <label class=" control-label"> Keyword :</label>
+                                    <div class="">
+                                        <textarea name="keyword" class="form-control input-md  " id="keyword"
+                                            placeholder=" keyword ex - 'best laptop , brand name laptop etc' " placeholder="keyword"></textarea>
+                                        @error('keyword')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="form-group  col-sm-4">
                                 <label class=" control-label"></label>
