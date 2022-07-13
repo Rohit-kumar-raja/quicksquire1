@@ -115,7 +115,17 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
                 //tampered or failed
 
                 // return  redirect()->route('payu.pay');
-                dd($postdata);
+
+                $order_details =  explode(' ', $postdata['productinfo']);
+                $order_id = $order_details[0];
+                $user_id = $order_details[1];
+
+                if ($postdata['address1'] == 'product') {
+                    // call faild product fucntion
+                    $this->productFaild($user_id, $order_id);
+                } else if ($postdata['address1'] == 'amc') {
+                    $this->amcfaild($user_id, $order_id);
+                }
 
                 $msg = "Payment failed for Hash not verified...";
             }
@@ -172,7 +182,7 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
     }
 
     // to varifining the payment and updating data
-    public function amcSuccess($user_id, $order_id, $status)
+    public function amcSuccess($user_id, $order_id)
     {
     }
     public function productSuccess($user_id, $order_id)
@@ -184,5 +194,7 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
 
     public function productFaild($user_id, $order_id)
     {
+        dd($user_id);
     }
+    
 }

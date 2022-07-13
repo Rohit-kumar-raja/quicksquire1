@@ -41,9 +41,11 @@ class PackageController extends Controller
       'amount' => $request->tot_amt,
       'hash' => null,
       'key' => env('PAYU_MERCHANT_KEY'),
-      'productinfo' => $request->package_name . '|' . $id,
+      'productinfo' => $request->package_name ,
       'email' => $request->email,
       'phone' => $request->mob_no,
+      'udf1'=> $id . '|' . Auth::user()->id,
+      'udf2'=> 'amc',
       'service_provider' => 'payu_paisa',
       'furl' => route('payumoney-cancel'),
       'surl' => route('payumoney-success')
