@@ -162,17 +162,14 @@
 
                                     <div class="col-sm-4">
                                         <label for="txtYrofAMC">Year of AMC</label>
-                                        <select class="form-control" name="no_year" id="txtYrofAMC">
-                                            <option disabled selected="">--Select--</option>
-                                            <option value="1">1 Yr</option>
-                                            <option value="2">2 Yr</option>
-                                            <option value="3">3 Yr</option>
-                                            <option value="5">5 Yr</option>
+                                        <select aria-readonly="true" class="form-control" name="no_year" id="txtYrofAMC">
+                                            <option value="{{ $data->duration}}">{{ $data->duration}} Yearr</option>
+                                         
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="txtQTY">QTY</label>
-                                        <input required type="text" class="form-control " id="txtQTY"
+                                        <input readonly  required value="1" type="text" class="form-control " id="txtQTY"
                                             name="qty" onkeyup="calcu()">
                                     </div>
 
@@ -283,7 +280,6 @@
         </section>
 
         <script type="text/javascript">
-            function calcu() {
                 var price1 = document.getElementById("txtPrice").value;
                 var gstper = document.getElementById("txtGST").value;
 
@@ -302,7 +298,7 @@
 
                 document.getElementById("txtGSTAmt").value = gstamt;
                 document.getElementById("txtTotAmt").value = (+amt) + (+gstamt);
-            }
+            
 
             function chengeOrder(data) {
                 if (data != 'others') {
