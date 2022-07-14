@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rent;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PayuMoneyController
@@ -22,7 +25,7 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
 
         $action = 'https://secure.payu.in/_payment';
         $html = '';
-
+        session(['amount' => 1.0]);
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') == 0) {
 
             $hash = hash('sha512', $key . '|' . $_POST['txnid'] . '|' . $_POST['amount'] . '|' . $_POST['productinfo'] . '|' . $_POST['firstname'] . '|' . $_POST['email'] . '|||||' . $_POST['udf5'] . '||||||' . $salt);
@@ -103,14 +106,34 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
             }
             //Comapre status and hash. Hash verification is mandatory.
             if ($status == 'success'  && $resphash == $CalcHashString) {
+
+
+                $order_details =  explode(' ', $postdata['productinfo']);
+                $order_id = $order_details[0];
+                $user_id = $order_details[1];
+
+                $user = User::find($user_id);
+                Auth::login($user);
+
+                if ($postdata['address1'] == 'product') {
+                    // call faild product fucntion
+                    $this->productSuccess($user_id, $order_id, $postdata);
+                    return redirect()->route('user.orders');
+                } else if ($postdata['address1'] == 'amc') {
+                    $this->amcSuccess($user_id, $order_id, $postdata);
+                       return redirect()->route('amc.package.user.history');
+                }
+
+
+
                 $msg = "Transaction Successful, Hash Verified...<br />";
 
                 //Do success order processing here...
                 //Additional step - Use verify payment api to double check payment.
-                if ($this->verifyPayment($key, $salt, $txnid, $status))
-                    $msg = "Transaction Successful, Hash Verified...Payment Verified...";
-                else
-                    $msg = "Transaction Successful, Hash Verified...Payment Verification failed...";
+                // if ($this->verifyPayment($key, $salt, $txnid, $status))
+                //     $msg = "Transaction Successful, Hash Verified...Payment Verified...";
+                // else
+                //     $msg = "Transaction Successful, Hash Verified...Payment Verification failed...";
             } else {
                 //tampered or failed
 
@@ -119,13 +142,18 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
                 $order_details =  explode(' ', $postdata['productinfo']);
                 $order_id = $order_details[0];
                 $user_id = $order_details[1];
+                $user = User::find($user_id);
+                Auth::login($user);
 
                 if ($postdata['address1'] == 'product') {
                     // call faild product fucntion
                     $this->productFaild($user_id, $order_id);
+                    return redirect()->route('user.orders');
                 } else if ($postdata['address1'] == 'amc') {
                     $this->amcfaild($user_id, $order_id);
+                    return redirect()->route('amc.package.user.history');
                 }
+
 
                 $msg = "Payment failed for Hash not verified...";
             }
@@ -182,18 +210,33 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
     }
 
     // to varifining the payment and updating data
-    public function amcSuccess($user_id, $order_id)
+    public function amcSuccess($user_id, $order_id, $postdata)
     {
+
+            DB::connection('mysql1')->table('tbl_amc_sale')
+                ->where('id', $order_id)
+                ->where('email', $postdata['email'])
+                ->update(['payment_option' => "Online", 'payment_remarks' => $postdata['mihpayid'],'order_status'=>'Successfull' , 'payment_attachment' => json_encode($postdata)]);
+       
+          
+        
+
     }
-    public function productSuccess($user_id, $order_id)
+    public function productSuccess($user_id, $order_id, $postdata)
     {
+        try {
+            DB::table('transactions')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'mode' => "Online", 'status' => $postdata['status'], 'payu_id' => $postdata['mihpayid'], 'transation_id' => $postdata['txnid'], 'payment_mode' => $postdata['mode']]);
+        } catch (Exception $e) {
+        }
     }
     public function amcfaild($user_id, $order_id)
     {
+        DB::connection('mysql1')->table('orders')->where('user_id', $user_id)->delete($order_id);
     }
 
     public function productFaild($user_id, $order_id)
     {
+
+        DB::table('orders')->where('user_id', $user_id)->delete($order_id);
     }
-    
 }
