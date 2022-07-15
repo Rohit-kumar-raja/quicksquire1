@@ -31,7 +31,9 @@ class PackageController extends Controller
 
     try {
       $id =  DB::connection('mysql1')->table('tbl_amc_sale')->insertGetId($request->except('_token'));
+      if($request->file('image')){
       DB::connection('mysql1')->table('tbl_amc_sale')->where('id', $id)->update(['image' => $this->insert_image($request->file('image'), 'amc')]);
+      }
     } catch (Exception $e) {
       return back()->withErrors($e->getMessage());
     }

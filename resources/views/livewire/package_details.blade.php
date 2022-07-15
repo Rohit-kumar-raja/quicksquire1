@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="orderid">Order id</label>
-                                        <input required type="text" class="form-control" id="orderid"
+                                        <input  type="text" class="form-control" id="orderid"
                                             name="orderid" placeholder="Enter your product order id" autocomplete="off">
                                     </div>
 
@@ -257,7 +257,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="txtState">Orignal Bill </label>
-                                        <input accept="application/pdf" required type="file"
+                                        <input accept="application/pdf"  type="file"
                                             title="Product orignal bill" class="form-control " id="txtState"
                                             name="image">
                                     </div>
