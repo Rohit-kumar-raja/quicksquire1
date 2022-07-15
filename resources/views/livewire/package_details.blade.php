@@ -109,6 +109,7 @@
                                                         ->where('order_id', $order->id ?? '')
                                                         ->get();
                                                 @endphp
+                                                
                                                 @foreach ($order_item as $item)
                                                     @php
                                                         $order_item_p = DB::table('products')
