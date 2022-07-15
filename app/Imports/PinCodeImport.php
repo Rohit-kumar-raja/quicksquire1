@@ -23,6 +23,6 @@ class PinCodeImport implements ToModel
         //     $status=0;
         // }
         $status = 1;
-        DB::table('pincode')->insert(['city' => $row[1], 'pincode' => $row[0], 'status' => $status, 'state' => $row[2], 'district' => $row[3]]);
+        DB::table('pincode')->insert(['pincode' => $row[0],'country' => $row[1],'city' => $row[2],   'district' => $row[3], 'state' => $row[4], 'status' => $status]);
     }
 }

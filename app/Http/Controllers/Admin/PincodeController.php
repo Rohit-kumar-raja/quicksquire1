@@ -7,6 +7,7 @@ use App\Imports\PinCodeImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+
 class PincodeController extends Controller
 {
     /**
@@ -108,12 +109,24 @@ class PincodeController extends Controller
     }
 
 
-    public function import( Request $request){
+    public function import(Request $request)
+    {
         Excel::import(new PinCodeImport, $request->file('file')->store('temp'));
-        return redirect()->back()->with(['store'=>"Data Successfully Imported"]);
+        return redirect()->back()->with(['store' => "Data Successfully Imported"]);
     }
-
-
-
-
+    public function search(Request $request)
+    {
+        if($request->query('pincode')!=''){
+        session(['pincode_id'=>$request->query('pincode')]);
+        }
+        $pincode_id=session('pincode_id');
+        $pincode = DB::table('pincode')->where('pincode', 'LIKE',"%".$pincode_id."%")
+        ->orWhere('city', 'LIKE',"%".$pincode_id."%")
+        ->orWhere('state', 'LIKE',"%".$pincode_id."%")
+        ->orWhere('district', 'LIKE',"%".$pincode_id."%")
+        ->orWhere('country', 'LIKE',"%".$pincode_id."%")
+        ->orderByDesc('id')->paginate(10);
+        $categories = DB::table('categories')->orderByDesc('id')->get();;
+        return view('livewire.admin.pincode.index', ['data' => $pincode, 'categories' => $categories]);
+    }
 }

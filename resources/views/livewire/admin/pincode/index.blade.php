@@ -53,7 +53,25 @@
                             </div>
                             </h4>
                         </div>
+
                         <div class="card-body">
+                            <form action="{{ route('admin.pincode.search') }}" method="GET" >
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-6"></div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <input type="text" class="form-control form-control-sm" placeholder="Enter pincode" value="{{ session('pincode_id') ?? '' }}" name="pincode"
+                                                    id="">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-info btn-sm" type="submit">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="table-responsive">
                                 @if (Session::has('message'))
                                     <div class="alert alert-success" role="alert">{{ Session::get('message') }}
@@ -104,7 +122,7 @@
                                         <th>
                                             State
                                         </th>
-                                        <th>Country</th>
+                                        <th>Area </th>
 
                                         <th>
                                             status </th>
@@ -190,10 +208,14 @@
             </div>
         </div>
     </div>
-<style>
-    .paging_simple_numbers{
-        display: none;
-    }
-</style>
+    <style>
+        .paging_simple_numbers {
+            display: none;
+        }
+
+        #DataTables_Table_0_wrapper .row:first-child {
+            display: none;
+        }
+    </style>
 
 </x-adminlayout>

@@ -2,10 +2,10 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row ">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h2>amc</h2>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item active"> Amc</li>
@@ -27,7 +27,7 @@
                                     <i class="fas fa-list"> All Amc</i>
 
                                 </div>
-                            
+
                             </div>
                             </h4>
                         </div>
@@ -67,6 +67,7 @@
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
+                                            <th>Order id</th>
                                             <th>Dealar name</th>
                                             <th>Duration</th>
                                             <th>Date</th>
@@ -91,7 +92,8 @@
                                             <div class="modal fade" id="exampleModalCenter{{ $amc->id }}"
                                                 tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                 aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg"
+                                                    role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLongTitle">
@@ -101,25 +103,58 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            PinCode : {{ $amc->pin_code }}
-                                                            <hr>
-                                                            City : {{ $amc->city1 }}
-                                                          <hr>
-                                                            State : {{ $amc->state1 }}
-                                                            <hr>
-                                                            Address : {{ $amc->address }}
+                                                        <div class="modal-body ">
+                                                            <div class="row">
+                                                                <div class="col-sm-4 ">
+                                                                    PinCode : {{ $amc->pin_code }}
+                                                                </div>
+                                                                <div class="col-sm-4 ">
+                                                                    City : {{ $amc->city1 }}
+                                                                </div>
+                                                                <hr>
+                                                                <div class="col-sm-4">
+                                                                    State : {{ $amc->state1 }}
+                                                                </div>
+                                                                <div class="col-sm-4 ">
+                                                                    Address : {{ $amc->address }}
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                         <div class="modal-body">
                                                             <h5>Payment Details</h5>
                                                             <hr>
-                                                            Payment Option : {{ $amc->payment_option }}
-                                                            <hr>
-                                                            Payment Remarks : {{ $amc->payment_remarks }}
-                                                            <hr>
-                                                         
+                                                            <div class="row">
+
+                                                                <div class="col-sm-4">
+                                                                    Payment Option : {{ $amc->payment_option }}
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    Payment Remarks : {{ $amc->payment_remarks }}
+                                                                </div>
+                                                                <hr>
+
+
+                                                                <hr>
+                                                                <?php $pay = (object) json_decode($amc->payment_attachment); ?>
+                                                                <div class="col-sm-4">
+                                                                    payu id : {{ $pay->mihpayid ?? '' }}
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    mode : {{ $pay->mode ?? '' }}
+
+                                                                </div>
+
+                                                                <div class="col-sm-4">
+                                                                    payment status : {{ $pay->status ?? '' }}
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    Transation id : {{ $pay->txnid ?? '' }}
+
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                      
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,11 +163,14 @@
 
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><iframe src="{{ asset('assets/pages/img/amc') }}/{{ $amc->image }}"
+                                                <td><iframe
+                                                        src="{{ asset('assets/pages/img/amc') }}/{{ $amc->image }}"
                                                         width="100"> </iframe></td>
                                                 <td>{{ $amc->customer_name }}</td>
                                                 <td>{{ $amc->mob_no }}</td>
                                                 <td>{{ $amc->email }}</td>
+                                                <td>{{ $amc->orderid ?? '' }}</td>
+
                                                 <td>{{ $amc->dealer_name }} </td>
                                                 <td>{{ $amc->no_year }} Year</td>
                                                 <td>{{ $amc->sale_dt }}</td>
@@ -147,7 +185,8 @@
                                                 <td>{{ $amc->gstamt }}</td>
                                                 <td>{{ $amc->tot_amt }}</td>
 
-                                                <td><button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                                <td><button type="button" class="btn btn-info btn-sm"
+                                                        data-toggle="modal"
                                                         data-target="#exampleModalCenter{{ $amc->id }}">
                                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                                     </button></td>

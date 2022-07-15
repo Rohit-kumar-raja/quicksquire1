@@ -243,6 +243,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/pincode/delete/{id}', [PincodeController::class, 'destroy'])->name('admin.pincode.destroy');
     Route::get('/admin/pincode/status/{id}', [PincodeController::class, 'status'])->name('admin.pincode.status');
     Route::post('/admin/pincode/import', [PincodeController::class, 'import'])->name('admin.pincode.import');
+    Route::get('/admin/pincode/search', [PincodeController::class, 'search'])->name('admin.pincode.search');
 
 
     // pin code end
