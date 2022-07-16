@@ -231,7 +231,12 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
     }
     public function amcfaild($user_id, $order_id)
     {
-        DB::connection('mysql1')->table('orders')->where('user_id', $user_id)->delete($order_id);
+        try{
+            DB::connection('mysql1')->table('tbl_amc_sale')->delete($order_id);
+
+        }catch(Exception $e){
+
+        }
     }
 
     public function productFaild($user_id, $order_id)
