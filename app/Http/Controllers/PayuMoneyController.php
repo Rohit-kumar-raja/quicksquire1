@@ -25,7 +25,7 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
 
         $action = 'https://secure.payu.in/_payment';
         $html = '';
-        session(['amount' => 1.0]);
+        // session(['amount' => 1.0]);
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') == 0) {
 
             $hash = hash('sha512', $key . '|' . $_POST['txnid'] . '|' . $_POST['amount'] . '|' . $_POST['productinfo'] . '|' . $_POST['firstname'] . '|' . $_POST['email'] . '|||||' . $_POST['udf5'] . '||||||' . $salt);
