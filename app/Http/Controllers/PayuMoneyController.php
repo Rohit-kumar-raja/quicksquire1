@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\OtpController;
 /**
  * Class PayuMoneyController
  */
@@ -121,7 +121,7 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
                     return redirect()->route('user.orders');
                 } else if ($postdata['address1'] == 'amc') {
                     $this->amcSuccess($user_id, $order_id, $postdata);
-                       return redirect()->route('amc.package.user.history');
+                    return redirect()->route('amc.package.user.history');
                 }
 
 
@@ -212,30 +212,27 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
     // to varifining the payment and updating data
     public function amcSuccess($user_id, $order_id, $postdata)
     {
-
-            DB::connection('mysql1')->table('tbl_amc_sale')
-                ->where('id', $order_id)
-                ->where('email', $postdata['email'])
-                ->update(['payment_option' => "Online", 'payment_remarks' => $postdata['mihpayid'],'order_status'=>'Successfull' , 'payment_attachment' => json_encode($postdata)]);
-       
-          
-        
-
+        DB::connection('mysql1')->table('tbl_amc_sale')
+            ->where('id', $order_id)
+            ->where('email', $postdata['email'])
+            ->update(['payment_option' => "Online", 'payment_remarks' => $postdata['mihpayid'], 'order_status' => 'Successfull', 'payment_attachment' => json_encode($postdata)]);
     }
     public function productSuccess($user_id, $order_id, $postdata)
     {
         try {
             DB::table('transactions')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'mode' => "Online", 'status' => $postdata['status'], 'payu_id' => $postdata['mihpayid'], 'transation_id' => $postdata['txnid'], 'payment_mode' => $postdata['mode']]);
+
+            $message = new OtpController();
+
+            $message->orderMassage($postdata['phone'], $order_id);
         } catch (Exception $e) {
         }
     }
     public function amcfaild($user_id, $order_id)
     {
-        try{
+        try {
             DB::connection('mysql1')->table('tbl_amc_sale')->delete($order_id);
-
-        }catch(Exception $e){
-
+        } catch (Exception $e) {
         }
     }
 

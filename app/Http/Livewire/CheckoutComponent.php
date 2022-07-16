@@ -91,6 +91,7 @@ class CheckoutComponent extends Component
             $order->province = $get_address->province;
             $order->country = $get_address->country;
             $order->zipcode = $get_address->zipcode;
+            $this->mobile = $get_address->mobile;
         } else {
             $request->validate([
                 'firstname' => 'required',
@@ -109,6 +110,7 @@ class CheckoutComponent extends Component
             $order->lastname = $request->lastname;
             $order->email = $request->email;
             $order->mobile = $request->mobile;
+            $this->mobile = $request->mobile;
             $order->line1 = $request->line1;
             $order->line2 = $request->line2;
             $order->city = $request->city;
@@ -168,7 +170,7 @@ class CheckoutComponent extends Component
             $shipping = new Shipping();
             $shipping->order_id = $order->id;
             $shipping->firstname = $request->s_firstname;
-            $shipping->lastname = $request->s_lastname;
+             $shipping->lastname = $request->s_lastname;
             $shipping->email = $request->s_email;
             $shipping->mobile = $request->s_mobile;
             $shipping->line1 = $request->s_line1;
@@ -216,8 +218,13 @@ class CheckoutComponent extends Component
                     'title' => 'Order Confirmation Mail from quicksecureindia.com',
                 ];
                 $message = new OtpController();
-                $message->orderMassage($request->phone, $order->id);
-                //     Mail::to($request->email)->send(new \App\Mail\Ordermail($details));
+                 $order->phone;
+                 $message->orderMassage($this->mobile, $order->id);
+                 try{
+                    Mail::to($request->email)->send(new \App\Mail\Ordermail($details));
+                 }catch(Exception $e){
+                    
+                 }
             }
             DB::table('cart_product')->where('user_id', Auth::user()->id)->delete();
         } catch (Exception $e) {

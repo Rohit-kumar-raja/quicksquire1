@@ -21,9 +21,9 @@ class PackageController extends Controller
 
     $package = DB::connection('mysql1')->table('tbl_amc')->find($id);
     $brand = DB::connection('mysql1')->table('tbl_brand')->get();
-    $all_orders=DB::table('orders')->where('user_id',Auth::user()->id)->get();
+    $all_orders = DB::table('orders')->where('user_id', Auth::user()->id)->get();
 
-    return view('livewire.package_details', ['data' => $package, 'brands' => $brand,'orders'=>$all_orders]);
+    return view('livewire.package_details', ['data' => $package, 'brands' => $brand, 'orders' => $all_orders]);
   }
 
   function buy(Request $request)
@@ -31,8 +31,8 @@ class PackageController extends Controller
 
     try {
       $id =  DB::connection('mysql1')->table('tbl_amc_sale')->insertGetId($request->except('_token'));
-      if($request->file('image')){
-      DB::connection('mysql1')->table('tbl_amc_sale')->where('id', $id)->update(['image' => $this->insert_image($request->file('image'), 'amc')]);
+      if ($request->file('image')) {
+        DB::connection('mysql1')->table('tbl_amc_sale')->where('id', $id)->update(['image' => $this->insert_image($request->file('image'), 'amc')]);
       }
     } catch (Exception $e) {
       return back()->withErrors($e->getMessage());
@@ -43,11 +43,11 @@ class PackageController extends Controller
       'amount' => $request->tot_amt,
       'hash' => null,
       'key' => env('PAYU_MERCHANT_KEY'),
-      'productinfo' => $request->package_name ,
+      'productinfo' => $request->package_name,
       'email' => $request->email,
       'phone' => $request->mob_no,
-      'udf1'=> $id . '|' . Auth::user()->id,
-      'udf2'=> 'amc',
+      'udf1' => $id . '|' . Auth::user()->id,
+      'udf2' => 'amc',
       'service_provider' => 'payu_paisa',
       'furl' => route('payumoney-cancel'),
       'surl' => route('payumoney-success')
@@ -57,7 +57,7 @@ class PackageController extends Controller
 
   public function show()
   {
-    $data = DB::connection('mysql1')->table('tbl_amc_sale')->orderByDesc('id')->get();
+    $data = DB::connection('mysql1')->table('tbl_amc_sale')->where('dealer_name','web')->orderByDesc('id')->get();
     return view('livewire.admin.amc.index', ['data' => $data]);
   }
 
@@ -67,19 +67,24 @@ class PackageController extends Controller
     return view('livewire.user.user-amc-orders', ['data' => $amc]);
   }
 
-  public function getOrderDetails($id){
-    $all_orders=DB::table('orders')->where('user_id',Auth::user()->id)->where('id',$id)->first();
+  public function getOrderDetails($id)
+  {
+    $all_orders = DB::table('orders')->where('user_id', Auth::user()->id)->where('id', $id)->first();
 
 
-    $product_id=DB::table('order_items')->where('order_id',$all_orders->id)->first()->product_id;
+    $product_id = DB::table('order_items')->where('order_id', $all_orders->id)->first()->product_id;
     $product_info = DB::table('products')->find($product_id);
-    $category_name=DB::table('categories')->find($product_info->category_id)->name;
+    $category_name = DB::table('categories')->find($product_info->category_id)->name;
 
-    $all_orders->cat_name=$category_name;
-    $all_orders->created_at= date('Y-m-d',strtotime($all_orders->created_at)) ;
-    $all_orders->brand=$product_info->brand;
+    $all_orders->cat_name = $category_name;
+    $all_orders->created_at = date('Y-m-d', strtotime($all_orders->created_at));
+    $all_orders->brand = $product_info->brand;
     return $all_orders;
   }
-
+  
+  public function invoice($id){
+    $amc = DB::connection('mysql1')->table('tbl_amc_sale')->where('email', Auth::user()->email)->where('mob_no', Auth::user()->phone)->where('id',$id)->orderByDesc('id')->first();
+    return view('livewire.user.amc-invoice-component', ['data' => $amc]);
+  }
 
 }

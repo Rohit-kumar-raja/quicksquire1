@@ -278,7 +278,7 @@
                                         </div>
                                         <div class="col-sm-4  mt-3">
                                             <b> Graphics card Size (if applicaple) :</b>
-                                            <input type="number" name="graphics" placeholder=" Graphic card in GB ex - 1 "
+                                            <input type="text" name="graphics" placeholder=" Graphic card in GB ex - 1 "
                                                 class="form-control">
                                         </div>
                                         <div class="col-sm-4  mt-3">

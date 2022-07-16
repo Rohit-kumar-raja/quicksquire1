@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="panel panel-heading">
                 <div class="panel-heading">
-                    <h2>All amc's <i class="fas fa-history"></i></h2>
+                    <h2>All Rent's <i class="fas fa-history"></i></h2>
                 </div>
                 <div class="panel-body table-responsive">
                     <table class="table table-striped table-bordered" id="example">

@@ -170,7 +170,7 @@
                                 <td>{{ $order->created_at }}</td>
                                 <td>{{ $transation_details->status ?? '' }}</td>
                                 <td>{{ $transation_details->transation_id ?? '' }}</td>
-                                <td>{{ $order->traking_id }}</td>
+                                <td> <a href="{{ $order->consigment_url ?? '' }}">{{ $order->traking_id }}</a></td>
                                 <td>{{ $order->consignment_name }}</td>
                                 <td>{{ $order->consigment_url }}</td>
 

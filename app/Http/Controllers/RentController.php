@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 class RentController extends Controller
 {
     function index()
@@ -16,8 +17,9 @@ class RentController extends Controller
     {
         try {
             $id = DB::table('rents')->insertGetId($request->except('_token'));
-            DB::table('rents')->where('id', $id)->update(['image' => $this->insert_image($request->file('image'), 'rents')]);
-
+            if ($request->file('image')) {
+                DB::table('rents')->where('id', $id)->update(['image' => $this->insert_image($request->file('image'), 'rents')]);
+            }
             return back()->with('success', 'Your Request successfully sent we are conneting soon');
         } catch (Exception $e) {
             return back()->withErrors($e->getMessage());
@@ -30,10 +32,9 @@ class RentController extends Controller
         return view('livewire.admin.rent.index', ['data' => $rent]);
     }
 
-    public function rentHistoryForUser(){
-        $rent = DB::table('rents')->where('email',Auth::user()->email)->where('phone',Auth::user()->phone)->orderByDesc('id')->get();
-        return view('livewire.user.user-rent-orders',['data'=>$rent]);
+    public function rentHistoryForUser()
+    {
+        $rent = DB::table('rents')->where('email', Auth::user()->email)->where('phone', Auth::user()->phone)->orderByDesc('id')->get();
+        return view('livewire.user.user-rent-orders', ['data' => $rent]);
     }
-
-
 }

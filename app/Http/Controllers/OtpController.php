@@ -86,8 +86,8 @@ class OtpController extends Controller
     }
     function orderMassage($mobileNumber,$order_id)
     {
-        $otp = rand('100000', '999999');
-        session(['otp' => $otp]);
+
+          $order_id='ORD00000'.$order_id;
         //Your authentication key
         $authKey = "19992Amzkw2mj0T624fe79bP15";
         //Multiple mobiles numbers separated by comma

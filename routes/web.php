@@ -176,6 +176,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('amc/packages/history', [PackageController::class, 'packagetHistoryForUser'])->name('amc.package.user.history');
    
     Route::get('amc/packages/order/{id}', [PackageController::class, 'getOrderDetails'])->name('amc.package.user.order');
+    Route::get('amc/packages/invoice/{id}', [PackageController::class, 'invoice'])->name('amc.package.user.invoice');
 
     // amc packges end
 });
