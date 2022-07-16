@@ -29,7 +29,7 @@
 
                                         <td><strong>AMC Order id </strong></td>
                                         <td><strong>:</strong></td>
-                                        <td valign='center'>AMCORD0000{{ $data->id }}</td>
+                                        <td valign='center'>AMCORD00000{{ $data->id }}</td>
 
                                         <td><strong>Date </strong></td>
                                         <td><strong>:</strong></td>

@@ -216,14 +216,20 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
             ->where('id', $order_id)
             ->where('email', $postdata['email'])
             ->update(['payment_option' => "Online", 'payment_remarks' => $postdata['mihpayid'], 'order_status' => 'Successfull', 'payment_attachment' => json_encode($postdata)]);
-    }
+    
+            $message = new OtpController();
+         
+            $order_id='AMCORD00000'.$order_id;
+            $message->orderMassage($postdata['phone'], $order_id);
+    
+        }
     public function productSuccess($user_id, $order_id, $postdata)
     {
         try {
             DB::table('transactions')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'mode' => "Online", 'status' => $postdata['status'], 'payu_id' => $postdata['mihpayid'], 'transation_id' => $postdata['txnid'], 'payment_mode' => $postdata['mode']]);
 
             $message = new OtpController();
-
+            $order_id='ORD00000'.$order_id;
             $message->orderMassage($postdata['phone'], $order_id);
         } catch (Exception $e) {
         }

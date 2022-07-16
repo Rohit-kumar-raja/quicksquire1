@@ -86,19 +86,19 @@ class OtpController extends Controller
     }
     function orderMassage($mobileNumber,$order_id)
     {
-
-          $order_id='ORD00000'.$order_id;
+  
         //Your authentication key
         $authKey = "19992Amzkw2mj0T624fe79bP15";
         //Multiple mobiles numbers separated by comma
-        $mobileNumber = $mobileNumber;
+         $mobileNumber = $mobileNumber;
         //Sender ID,While usi
         $senderId = "QCKSPT";
         $country = "91";
         $DLT_TE_ID = "1207164984377894053";
         //Your message to send, Add URL encoding here.
-        $message = 'Thank you ! your order '.$order_id.' is placed successfully. You can track your order and find current status, please log in  Quick secure India account  https://bit.ly/3E7uCbE';
+        $message = 'Thank you ! your order '.$order_id.'is placed successfully. You can track your order and find current status, please log in  Quick secure India account  https://bit.ly/3E7uCbE';
         //Define route 
+
         $route = "4";
         //Prepare you post parameters
         $postData = array(
@@ -160,4 +160,5 @@ class OtpController extends Controller
             }
         }
     }
+
 }

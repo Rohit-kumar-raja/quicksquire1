@@ -219,7 +219,8 @@ class CheckoutComponent extends Component
                 ];
                 $message = new OtpController();
                  $order->phone;
-                 $message->orderMassage($this->mobile, $order->id);
+                 $order_id='ORD00000'.$order->id;
+                 $message->orderMassage($this->mobile, $order_id);
                  try{
                     Mail::to($request->email)->send(new \App\Mail\Ordermail($details));
                  }catch(Exception $e){
