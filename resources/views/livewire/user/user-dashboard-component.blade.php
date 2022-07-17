@@ -180,7 +180,7 @@
                                 <td>{{ $transation_details->transation_id ?? '' }}</td>
                                 <td> {{ $order->traking_id }}
                                 </td>
-                                <td><a href="{{ $order->consigment_url ?? '' }}">{{ $order->consigment_url ?? '' }}
+                                <td><a href="{{ $order->consignment_url ?? '' }}">{{ $order->consignment_url ?? '' }}
                                     </a> </td>
                                 <td>{{ $order->consignment_name ?? '' }}</td>
 
