@@ -178,9 +178,10 @@
                                     @endif
                                 </td>
                                 <td>{{ $transation_details->transation_id ?? '' }}</td>
-                                <td> <a href="{{ $order->consigment_url ?? '' }}">{{ $order->traking_id }}</a>
+                                <td> {{ $order->traking_id }}
                                 </td>
-                                <td>{{ $order->consigment_url ?? '' }}</td>
+                                <td><a href="{{ $order->consigment_url ?? '' }}">{{ $order->consigment_url ?? '' }}
+                                    </a> </td>
                                 <td>{{ $order->consignment_name ?? '' }}</td>
 
                                 <td class="text-center">
