@@ -159,7 +159,7 @@
 
                                                             </td>
                                                             <td class="goods-page-price">
-                                                                <strong><span>₨</span>{{ 'Inclusive all taxes' ?? $item->price }}</strong>
+                                                                <strong><span>₨</span>{{  $item->price }}</strong>
                                                             </td>
                                                             <td class="goods-page-total">
                                                                 <strong><span>₨</span>{{ $item->price * $item->quantity }}</strong>
@@ -191,7 +191,7 @@
                                                             class="index">Rs{{ $order->subtotal }}</b>
                                                     </p>
                                                     <p class="summary-info"><span class="title">Tax</span> <b
-                                                            class="index">Rs{{ $order->tax }}</b> </p>
+                                                            class="index">{{ 'Inclusive all taxes' ?? $order->tax }}</b> </p>
                                                     <p class="summary-info"><span class="title">Shipping</span> <b
                                                             class="index">Free Shipping</b> </p>
 
