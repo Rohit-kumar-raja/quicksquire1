@@ -83,7 +83,7 @@
                         </table>
                         @if ($order->traking_id != '')
                             <p> Tranking Id : {{ $order->traking_id }}</p>
-                            <p> Consignment Name : {{ $order->consignment_name }}</p>
+                            <p> Consignment No : {{ $order->consignment_name }}</p>
                             <p> Consignment Url : <a href="{{ $order->consignment_url }}">{{ $order->consignment_url }}</a> </p>
                         @endif
 
