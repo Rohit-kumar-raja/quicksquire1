@@ -171,8 +171,8 @@
                                 <td>{{ $transation_details->status ?? '' }}</td>
                                 <td>{{ $transation_details->transation_id ?? '' }}</td>
                                 <td> <a href="{{ $order->consigment_url ?? '' }}">{{ $order->traking_id }}</a></td>
-                                <td>{{ $order->consignment_name }}</td>
-                                <td>{{ $order->consigment_url }}</td>
+                                <td>{{ $order->consigment_url ?? '' }}</td>
+                                <td>{{ $order->consignment_name ?? '' }}</td>
 
                                 <td class="text-center">
                                     <a href="{{ route('user.orderdetails', ['order_id' => $order->id]) }}"
