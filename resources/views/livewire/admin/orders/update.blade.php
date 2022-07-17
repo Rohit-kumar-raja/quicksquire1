@@ -33,16 +33,16 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="pincode" class=" control-label"> Consigment Name </label>
+                                    <label for="pincode" class=" control-label"> Consigment N0 </label>
                                     <input value="{{ $data->consignment_name ?? '' }}"
                                         placeholder="Enter Consigment Name" class="form-control" type="text"
                                         name="consignment_name" id="consignment_name">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="pincode" class=" control-label"> Consigment Website Url  </label>
-                                    <input value="{{ $data->consignment_name ?? '' }}"
+                                    <input value="{{ $data->consignment_url ?? '' }}"
                                         placeholder="Enter Consigment Website" class="form-control" type="text"
-                                        name="consignment_name" id="consignment_name">
+                                        name="consignment_url" id="consignment_url">
                                 </div>
 
 
