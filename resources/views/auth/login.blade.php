@@ -89,21 +89,21 @@
                                         <p>
                                             <label for="usernamesignup" class="uname" data-icon="u">Your
                                                 username</label>
-                                            <input id="usernamesignup" name="name" type="text"
+                                            <input required id="usernamesignup" name="name" type="text"
                                                 placeholder="mysuperusername690"  value="{{ session('name') }}" required
                                                 autofocus autocomplete="name" />
                                         </p>
                                         <p>
                                             <label for="phone" class="phone" data-icon="ph">
                                                 Phone number</label>
-                                            <input id="phone" name="phone" type="text" maxlength="10"
+                                            <input required id="phone" name="phone" type="text" maxlength="10"
                                                 placeholder="Enter 10 digit mobile valid mobile number"
                                                 value="{{ session('phone') }}"/>
                                         </p>
                                         <p>
                                             <label for="emailsignup" class="youmail" data-icon="e"> Your
                                                 email</label>
-                                            <input id="emailsignup" name="email" type="email"
+                                            <input required id="emailsignup" name="email" type="email"
                                                 placeholder="mysupermail@mail.com"  value="{{ session('email') }}" />
                                         </p>
                                         <p>
@@ -117,11 +117,11 @@
                                             <label for="passwordsignup_confirm" class="youpasswd"
                                                 data-icon="p">Please
                                                 confirm your password </label>
-                                            <input id="passwordsignup_confirmation" name="password_confirmation"
+                                            <input required id="passwordsignup_confirmation" name="password_confirmation"
                                                 type="password" minlength="8" placeholder="eg. X8df!90EO" />
                                         </p>
                                         <p class="signin button ">
-                                            <input type="submit" value="Signup" name="register" /></p>
+                                            <input required type="submit" value="Signup" name="register" /></p>
                                             <p class="join-us" style="text-align: right;">Already a member ?
                                             <a href="#tologin" class="to_reg"> Login </a>
                                         </p>
