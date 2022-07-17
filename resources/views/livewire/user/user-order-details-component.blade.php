@@ -84,7 +84,8 @@
                         @if ($order->traking_id != '')
                             <p> Tranking Id : {{ $order->traking_id }}</p>
                             <p> Consignment No : {{ $order->consignment_name }}</p>
-                            <p> Consignment Url : <a href="{{ $order->consignment_url }}">{{ $order->consignment_url }}</a> </p>
+                            <p> Consignment Url : <a
+                                    href="{{ $order->consignment_url }}">{{ $order->consignment_url }}</a> </p>
                         @endif
 
                     </div>
@@ -232,10 +233,10 @@
                                         <div class="row">
                                             <span class="col-4 mt-3 pt-2">
                                                 {{-- @if ($order->status == 'delivered') --}}
-                                                    <a class="btn-primary btn float-right"
-                                                     target="_blank"   href="{{ route('user.orders.finalbill', $order->id) }}"> <i
-                                                            class="fas fa-download"></i> Orignal Bil
-                                                    </a>
+                                                <a class="btn-primary btn float-right" target="_blank"
+                                                    href="{{ route('user.orders.finalbill', $order->id) }}"> <i
+                                                        class="fas fa-download"></i> Orignal Bil
+                                                </a>
                                                 {{-- @endif --}}
                                             </span>
                                             <span class="col-5"><a class="btn-primary print" onclick="print_pdf()"
@@ -375,7 +376,14 @@ $shipping = DB::table('shippings')
                         </tr>
                         <tr>
                             <th>Status</th>
-                            <td>{{ $order->transaction->status ?? 'faild' }}</td>
+                            <td>
+                                @if ($order->status == 'delivered')
+                                    Success
+                                @else
+                                    {{ $order->transaction->status ?? 'faild' }}
+                                @endif
+
+                            </td>
                         </tr>
                         <tr>
                             <th>Trasnsaction Date</th>
