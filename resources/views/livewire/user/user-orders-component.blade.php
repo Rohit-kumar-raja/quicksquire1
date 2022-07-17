@@ -28,7 +28,7 @@
                             <tr>
                                 @php
                                     $transation_details=DB::table('transactions')->where('order_id',$order->id)->first();
-                               @endphp
+                             @endphp
                                 <td>ODR00000{{ $order->id }}</td>
                                 <td>{{ $order->firstname }} {{ $order->lastname }}</td>
                                 <td>{{ $order->subtotal }}</td>
@@ -37,8 +37,8 @@
                                 <td>{{ $order->created_at }}</td>
                                 <td>{{ $transation_details->status ?? '' }}</td>
                                 <td>{{ $transation_details->transation_id ?? '' }}</td>
-                                <td> <a href="{{ $order->consigment_url ?? '' }}">{{ $order->traking_id }}</a></td>
-                                <td>{{ $order->consigment_url ?? '' }}</td>
+                                <td> <a href="{{ $order->consignment_url ?? '' }}">{{ $order->traking_id }}</a></td>
+                                <td>{{ $order->consignment_url ?? '' }}</td>
                                 <td>{{ $order->consignment_name ?? '' }}</td>
 
                                 <td class="text-center">
