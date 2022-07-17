@@ -233,7 +233,7 @@
                                         <div class="row">
                                             <span class="col-4 mt-3 pt-2">
                                                 {{-- @if ($order->status == 'delivered') --}}
-                                                <a class="btn-primary btn float-right" target="_blank"
+                                                <a class="btn-primary btn float-right"  id="orgbtn" target="_blank"
                                                     href="{{ route('user.orders.finalbill', $order->id) }}"> <i
                                                         class="fas fa-download"></i> Orignal Bil
                                                 </a>
@@ -417,6 +417,8 @@ $shipping = DB::table('shippings')
         document.getElementsByClassName('pull-right')[1].style.display = "none"
         document.getElementById('feedback').style.display = "none"
         document.getElementById('topcontrol').style.display = "none"
+        document.getElementById('orgbtn').style.display = "none"
+
         document.getElementsByClassName('nav_footer')[0].style.display="none";
 
 
