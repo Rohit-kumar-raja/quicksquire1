@@ -35,7 +35,13 @@
                                 <td>{{ $order->status }}</td>
                                 <td>{{ $order->mobile }}</td>
                                 <td>{{ $order->created_at }}</td>
-                                <td>{{ $transation_details->status ?? '' }}</td>
+                                <td>
+                                    @if ($order->status == 'delivered')
+                                        Success
+                                    @else
+                                        {{ $transation_details->status ?? '' }}
+                                    @endif
+                                </td>
                                 <td>{{ $transation_details->transation_id ?? '' }}</td>
                                 <td> <a href="{{ $order->consignment_url ?? '' }}">{{ $order->traking_id }}</a></td>
                                 <td>{{ $order->consignment_url ?? '' }}</td>
