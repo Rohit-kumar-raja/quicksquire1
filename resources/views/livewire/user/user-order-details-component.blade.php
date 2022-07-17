@@ -370,7 +370,7 @@ $shipping = DB::table('shippings')
                 <div class="panel-body">
                     <table class="table">
                         <tr>
-                            <th>Trasnsection Mode</th>
+                            <th>Trasnsaction Mode</th>
                             <td>{{ $order->transaction->mode ?? 'online' }}</td>
                         </tr>
                         <tr>
@@ -378,7 +378,7 @@ $shipping = DB::table('shippings')
                             <td>{{ $order->transaction->status ?? 'faild' }}</td>
                         </tr>
                         <tr>
-                            <th>Trasnsection Date</th>
+                            <th>Trasnsaction Date</th>
                             <td>{{ $order->transaction->created_at ?? '' }}</td>
                         </tr>
 
