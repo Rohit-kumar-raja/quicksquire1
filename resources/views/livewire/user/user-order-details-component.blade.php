@@ -158,7 +158,7 @@
 
                                                             </td>
                                                             <td class="goods-page-price">
-                                                                <strong><span>₨</span>{{ $item->price }}</strong>
+                                                                <strong><span>₨</span>{{ 'Inclusive all taxes' $item->price }}</strong>
                                                             </td>
                                                             <td class="goods-page-total">
                                                                 <strong><span>₨</span>{{ $item->price * $item->quantity }}</strong>
