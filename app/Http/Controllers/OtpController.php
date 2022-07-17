@@ -98,6 +98,7 @@ class OtpController extends Controller
         //Your message to send, Add URL encoding here.
         $message = 'Thank you ! your order '.$order_id.'is placed successfully. You can track your order and find current status, please log in  Quick secure India account  https://bit.ly/3E7uCbE';
         //Define route 
+        session(['massage'=>$message]);
 
         $route = "4";
         //Prepare you post parameters

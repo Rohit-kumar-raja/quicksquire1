@@ -10,6 +10,8 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\OtpController;
+use Illuminate\Support\Facades\Mail;
+
 /**
  * Class PayuMoneyController
  */
@@ -216,21 +218,39 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
             ->where('id', $order_id)
             ->where('email', $postdata['email'])
             ->update(['payment_option' => "Online", 'payment_remarks' => $postdata['mihpayid'], 'order_status' => 'Successfull', 'payment_attachment' => json_encode($postdata)]);
-    
-            $message = new OtpController();
-         
-            $order_id='AMCORD00000'.$order_id;
-            $message->orderMassage($postdata['phone'], $order_id);
-    
-        }
+
+        $message = new OtpController();
+
+        $order_id = 'AMCORD00000' . $order_id;
+        $message->orderMassage($postdata['phone'], $order_id);
+    }
     public function productSuccess($user_id, $order_id, $postdata)
     {
         try {
             DB::table('transactions')->insert(['user_id' => $user_id, 'order_id' => $order_id, 'mode' => "Online", 'status' => $postdata['status'], 'payu_id' => $postdata['mihpayid'], 'transation_id' => $postdata['txnid'], 'payment_mode' => $postdata['mode']]);
 
             $message = new OtpController();
-            $order_id='ORD00000'.$order_id;
+            $order_id = 'ORD00000' . $order_id;
             $message->orderMassage($postdata['phone'], $order_id);
+        } catch (Exception $e) {
+        }
+        $details = [
+            'title' => 'Order Confirmation Mail from quicksecureindia.com',
+        ];
+        try {
+
+            Mail::to($postdata['email'])->send(new \App\Mail\Order($details));
+        } catch (Exception $e) {
+        }
+
+
+        $details = [
+            'title' => 'Order Confirmation Mail from quicksecureindia.com',
+        ];
+
+        try {
+
+            Mail::to($postdata['email'])->send(new \App\Mail\Order($details));
         } catch (Exception $e) {
         }
     }

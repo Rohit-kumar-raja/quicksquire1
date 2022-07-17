@@ -222,7 +222,8 @@ class CheckoutComponent extends Component
                  $order_id='ORD00000'.$order->id;
                  $message->orderMassage($this->mobile, $order_id);
                  try{
-                    Mail::to($request->email)->send(new \App\Mail\Ordermail($details));
+                 
+                    Mail::to($request->email)->send(new \App\Mail\Order($details));
                  }catch(Exception $e){
                     
                  }
