@@ -232,12 +232,12 @@
                                     <div class="col-sm-4">
                                         <div class="row">
                                             <span class="col-4 mt-3 pt-2">
-                                                {{-- @if ($order->status == 'delivered') --}}
+                                                @if ($order->status == 'delivered')
                                                 <a class="btn-primary btn float-right"  id="orgbtn" target="_blank"
                                                     href="{{ route('user.orders.finalbill', $order->id) }}"> <i
                                                         class="fas fa-download"></i> Orignal Bil
                                                 </a>
-                                                {{-- @endif --}}
+                                                @endif
                                             </span>
                                             <span class="col-5"><a class="btn-primary print" onclick="print_pdf()"
                                                     href="#"><img style="width: 154px; "
