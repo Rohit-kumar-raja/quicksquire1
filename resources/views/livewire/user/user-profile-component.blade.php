@@ -16,7 +16,7 @@
                     <div class="col-md-8">
                         <p><b>Name: </b> {{$user->name}}</p>
                         <p><b>Email: </b> {{$user->email}}</p>
-                        <p><b>Phone: </b> {{$profile->mobile}}</p>
+                        <p><b>Phone: </b> {{$user->phone}}</p>
                         <hr>
                         <p><b>Line1: </b> {{$profile->line1}}</p>
                         <p><b>Line2: </b> {{$profile->line2}}</p>

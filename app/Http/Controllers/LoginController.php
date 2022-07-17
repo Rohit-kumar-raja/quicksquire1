@@ -44,8 +44,6 @@ class LoginController extends Controller
                     foreach ($product_wishlist_id as $pro) {
                         $wishlist_controller->add($pro->product_id);
                     }
-
-
                     return redirect()->route(RouteServiceProvider::HOME);
                 }
             } else {
@@ -64,17 +62,15 @@ class LoginController extends Controller
             if (is_numeric($request->email)) {
 
                 // for phone number with login
-                $user =  User::where('phone', $request->email)->where('status','1')->first();
-
+                $user =  User::where('phone', $request->email)->where('status', '1')->first();
             } else {
                 // for email id with login 
-                $user =  User::where('email', $request->email)->where('status','1')->first();
-
+                $user =  User::where('email', $request->email)->where('status', '1')->first();
             }
             if ($user != '') {
                 try {
                     $otp_send = new OtpController();
-                    session(['user_data'=> $user]);
+                    session(['user_data' => $user]);
                     $otp_send->optSend($user->phone);
                     $details = [
                         'title' => 'Mail from quicksecureindia.com',
@@ -96,10 +92,26 @@ class LoginController extends Controller
     {
         if (session('otp') == $request->otp) {
             Auth::login(session('user_data'));
-            return redirect('/');
-        }else{
-            return redirect()->route('login')->withErrors('Please Enter correct otp');
 
+
+            // insert the all product into the cart
+            try {
+                $product_id = DB::table('cart_product')->where('user_id', Auth::user()->id)->get();
+                $cart_controller = new CartController();
+                foreach ($product_id as $pro) {
+                    $cart_controller->store($pro->product_id);
+                }
+
+                $product_wishlist_id = DB::table('wishlist_product')->where('user_id', Auth::user()->id)->get();
+                $wishlist_controller = new ShopComponent();
+                foreach ($product_wishlist_id as $pro) {
+                    $wishlist_controller->add($pro->product_id);
+                }
+            } catch (Exception $e) {
+            }
+            return redirect('/');
+        } else {
+            return redirect()->route('login')->withErrors('Please Enter correct otp');
         }
     }
 }

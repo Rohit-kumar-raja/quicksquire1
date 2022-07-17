@@ -28,7 +28,7 @@
                         <div class="col-md-8">
                             <p><b>Name: </b> <input type="text" class="form-control" name="name" value="{{ $user->name}}" ></p>
                             <p><b>Email: </b> {{ $email }}</p>
-                            <p><b>Phone: </b> <input type="text" class="form-control" value="{{ $profile->mobile }}" name="mobile"></p>
+                            <p><b>Phone: </b> <input type="text" class="form-control" value="{{ $user->phone }}" name="mobile"></p>
                             <hr>
                             <p><b>Line1: </b> <input type="text" class="form-control" value="{{ $profile->line1 }}" name="line1"></p>
                             <p><b>Line2: </b> <input type="text" class="form-control" value="{{ $profile->line2 }}" name="line2"></p>

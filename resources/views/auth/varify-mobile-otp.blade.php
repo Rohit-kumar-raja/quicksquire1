@@ -70,10 +70,13 @@
                                             <label for="Otp" class="uname" data-icon="u">Enter Your
                                                 Otp
                                             </label>
-                                            <input id="Otp" name="otp" required="required" type="text" max="6"
-                                                placeholder="Enter 6 digit otp" required autofocus />
+                                            <input id="Otp" name="otp" required="required" type="text"
+                                                maxlength="6" placeholder="Enter 6 digit otp" required  />
+                                            <small class="text-success">Otp has been send your <i
+                                                    class="fas fa-mobile-phone"></i> Mobile number and <i
+                                                    class="fas fa-envelope"></i> Email address</small>
                                         </p>
-                                        <button type="submit"  class="btn btn-primary">Submit Otp</button>
+                                        <button type="submit" class="btn btn-primary">Submit Otp</button>
                                     </form>
                                 </div>
                             </div>
