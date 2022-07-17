@@ -160,17 +160,26 @@
                         @foreach ($orders as $order)
                             <tr>
                                 @php
-                                    $transation_details=DB::table('transactions')->where('order_id',$order->id)->first();
-                               @endphp
+                                    $transation_details = DB::table('transactions')
+                                        ->where('order_id', $order->id)
+                                        ->first();
+                                @endphp
                                 <td>ODR00000{{ $order->id }}</td>
                                 <td>{{ $order->firstname }} {{ $order->lastname }}</td>
                                 <td>{{ $order->subtotal }}</td>
                                 <td>{{ $order->status }}</td>
                                 <td>{{ $order->mobile }}</td>
                                 <td>{{ $order->created_at }}</td>
-                                <td>{{ $transation_details->status ?? '' }}</td>
+                                <td>
+                                    @if ($order->status == 'delivered')
+                                        Success
+                                    @else
+                                        {{ $transation_details->status ?? '' }}
+                                    @endif
+                                </td>
                                 <td>{{ $transation_details->transation_id ?? '' }}</td>
-                                <td> <a href="{{ $order->consigment_url ?? '' }}">{{ $order->traking_id }}</a></td>
+                                <td> <a href="{{ $order->consigment_url ?? '' }}">{{ $order->traking_id }}</a>
+                                </td>
                                 <td>{{ $order->consigment_url ?? '' }}</td>
                                 <td>{{ $order->consignment_name ?? '' }}</td>
 
