@@ -63,6 +63,7 @@ use App\Http\Controllers\OtpController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PayuMoneyController;
 use App\Http\Controllers\RentController;
@@ -153,6 +154,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/order/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
     Route::post('/user/order/cancel', [ProductDetailsController::class, 'cancelOrder'])->name('user.order.cancel');
+    // for orignal bill printing
+    Route::get('/user/orders/orignal/bill/{id}', [OrderController::class,'finalBill'])->name('user.orders.finalbill');
+
     Route::get('/user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
     Route::post('/user/review/add', [UserReviewComponent::class, 'addReview'])->name('user.review.add');
     Route::get('/user/profile', UserProfileComponent::class)->name('user.profile');
@@ -174,7 +178,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('amc/packages/details/buy/{id}', [PackageController::class, 'details'])->name('amc.package.details');
     Route::post('amc/packages/details/buy/', [PackageController::class, 'buy'])->name('amc.package.buy');
     Route::get('amc/packages/history', [PackageController::class, 'packagetHistoryForUser'])->name('amc.package.user.history');
-   
+
     Route::get('amc/packages/order/{id}', [PackageController::class, 'getOrderDetails'])->name('amc.package.user.order');
     Route::get('amc/packages/invoice/{id}', [PackageController::class, 'invoice'])->name('amc.package.user.invoice');
 

@@ -226,12 +226,26 @@
                                     </div>
                                 </div>
                                 {{-- <!-- END CONTENT --> --}}
-                                <div>
-                                    <span><a class="btn-primary print" onclick="print_pdf()" href="#"><img
-                                                style="width: 154px; margin-top: -15px;float: right;margin-right: 32px;"
-                                                src="{{ asset('assets/pages/img/icons/pdf.png') }}" alt="">
-                                        </a>
-                                    </span>
+                                <div class="row">
+                                    <div class="col-sm-8"></div>
+                                    <div class="col-sm-4">
+                                        <div class="row">
+                                            <span class="col-4 mt-3 pt-2">
+                                                {{-- @if ($order->status == 'delivered') --}}
+                                                    <a class="btn-primary btn float-right"
+                                                     target="_blank"   href="{{ route('user.orders.finalbill', $order->id) }}"> <i
+                                                            class="fas fa-download"></i> Orignal Bil
+                                                    </a>
+                                                {{-- @endif --}}
+                                            </span>
+                                            <span class="col-5"><a class="btn-primary print" onclick="print_pdf()"
+                                                    href="#"><img style="width: 154px; "
+                                                        src="{{ asset('assets/pages/img/icons/pdf.png') }}"
+                                                        alt="">
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             </table>
