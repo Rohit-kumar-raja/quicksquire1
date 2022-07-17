@@ -52,7 +52,7 @@
                                         <p>
                                             <label for="password" class="youpasswd" data-icon="p"> Your password
                                             </label>
-                                            <input id="password" name="password" required="required" type="password"
+                                            <input id="password" name="password" minlength="8" required="required" type="password"
                                                 placeholder="eg. X8df!90EO" required autocomplete="current-password" />
                                         </p>
                                         <p class="keeplogin">
