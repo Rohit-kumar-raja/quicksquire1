@@ -417,7 +417,7 @@ $shipping = DB::table('shippings')
         document.getElementsByClassName('pull-right')[1].style.display = "none"
         document.getElementById('feedback').style.display = "none"
         document.getElementById('topcontrol').style.display = "none"
-
+        document.getElementsByClassName('nav_footer')[0].style.display="none";
 
 
         print();
