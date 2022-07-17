@@ -90,21 +90,21 @@
                                             <label for="usernamesignup" class="uname" data-icon="u">Your
                                                 username</label>
                                             <input id="usernamesignup" name="name" type="text"
-                                                placeholder="mysuperusername690" :value="name" required
+                                                placeholder="mysuperusername690"  value="{{ session('name') }}" required
                                                 autofocus autocomplete="name" />
                                         </p>
                                         <p>
                                             <label for="phone" class="phone" data-icon="ph">
                                                 Phone number</label>
-                                            <input id="phone" name="phone" type="text" max="12"
+                                            <input id="phone" name="phone" type="text" maxlength="10"
                                                 placeholder="Enter 10 digit mobile valid mobile number"
-                                                :value="phone" />
+                                                value="{{ session('phone') }}"/>
                                         </p>
                                         <p>
                                             <label for="emailsignup" class="youmail" data-icon="e"> Your
                                                 email</label>
                                             <input id="emailsignup" name="email" type="email"
-                                                placeholder="mysupermail@mail.com" :value="email" />
+                                                placeholder="mysupermail@mail.com"  value="{{ session('email') }}" />
                                         </p>
                                         <p>
                                             <label for="passwordsignup" class="youpasswd" data-icon="p">Your

@@ -17,17 +17,29 @@ class OtpController extends Controller
 
     function register(Request $request)
     {
-        if ($request->password === $request->password_confirmation) {
-            session(['login_input' => $request->input()]);
-            $details = [
-                'title' => 'Mail from quicksecureindia.com',
-            ];
-            $this->optSend($request->phone);
-            Mail::to($request->email)->send(new \App\Mail\OtpSend($details));
 
-            return view('auth.varify-mobile-otp');
+
+        $uesr_phone = User::where('phone', $request->phone)->first();
+        if ($uesr_phone=='') {
+            $uesr_data = User::where('email', $request->email)->first();
+            if ($uesr_data == '') {
+                if ($request->password === $request->password_confirmation) {
+                    session(['login_input' => $request->input()]);
+                    $details = [
+                        'title' => 'Mail from quicksecureindia.com',
+                    ];
+                    $this->optSend($request->phone);
+                    Mail::to($request->email)->send(new \App\Mail\OtpSend($details));
+
+                    return view('auth.varify-mobile-otp');
+                } else {
+                    return redirect()->back()->withErrors('Password not Matched')->with($request->input());
+                }
+            } else {
+                return redirect()->back()->withErrors('Email address alredy Exits')->with($request->input());
+            }
         } else {
-            return redirect()->back()->withErrors('Password not Matched');
+            return redirect()->back()->withErrors('Phone number alredy Exits')->with($request->input());
         }
     }
     function optSend($mobileNumber)
@@ -84,21 +96,21 @@ class OtpController extends Controller
 
 
     }
-    function orderMassage($mobileNumber,$order_id)
+    function orderMassage($mobileNumber, $order_id)
     {
-  
+
         //Your authentication key
         $authKey = "19992Amzkw2mj0T624fe79bP15";
         //Multiple mobiles numbers separated by comma
-         $mobileNumber = $mobileNumber;
+        $mobileNumber = $mobileNumber;
         //Sender ID,While usi
         $senderId = "QCKSPT";
         $country = "91";
         $DLT_TE_ID = "1207164984377894053";
         //Your message to send, Add URL encoding here.
-        $message = 'Thank you ! your order '.$order_id.'is placed successfully. You can track your order and find current status, please log in  Quick secure India account  https://bit.ly/3E7uCbE';
+        $message = 'Thank you ! your order ' . $order_id . 'is placed successfully. You can track your order and find current status, please log in  Quick secure India account  https://bit.ly/3E7uCbE';
         //Define route 
-        session(['massage'=>$message]);
+        session(['massage' => $message]);
 
         $route = "4";
         //Prepare you post parameters
@@ -161,5 +173,4 @@ class OtpController extends Controller
             }
         }
     }
-
 }
