@@ -20,20 +20,25 @@ class OtpController extends Controller
 
 
         $uesr_phone = User::where('phone', $request->phone)->first();
-        if ($uesr_phone=='') {
+        if ($uesr_phone == '') {
             $uesr_data = User::where('email', $request->email)->first();
             if ($uesr_data == '') {
-                if ($request->password === $request->password_confirmation) {
-                    session(['login_input' => $request->input()]);
-                    $details = [
-                        'title' => 'Mail from quicksecureindia.com',
-                    ];
-                    $this->optSend($request->phone);
-                    Mail::to($request->email)->send(new \App\Mail\OtpSend($details));
+                if (strlen($request->password) >= 8) {
+                    if ($request->password === $request->password_confirmation) {
+                        session(['login_input' => $request->input()]);
+                        $details = [
+                            'title' => 'Mail from quicksecureindia.com',
+                        ];
+                        $this->optSend($request->phone);
+                        Mail::to($request->email)->send(new \App\Mail\OtpSend($details));
 
-                    return view('auth.varify-mobile-otp');
+                        return view('auth.varify-mobile-otp');
+                    } else {
+                        return redirect()->back()->withErrors('Password not Matched')->with($request->input());
+                    }
                 } else {
-                    return redirect()->back()->withErrors('Password not Matched')->with($request->input());
+                    return redirect()->back()->withErrors('Password must be 8 character or more')->with($request->input());
+
                 }
             } else {
                 return redirect()->back()->withErrors('Email address alredy Exits')->with($request->input());
